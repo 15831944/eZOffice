@@ -1,0 +1,17 @@
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZvso\bin\x64\Debug\eZvso.dll
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZvso\bin\x64\Debug\eZvso.pdb
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZvso\bin\x64\Debug\eZvso.xml
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZvso\bin\x64\Debug\eZvso.dll.manifest
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZvso\bin\x64\Debug\eZvso.vsto
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZvso\obj\x64\Debug\eZvso.Dialog_CircleArray.resources
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZvso\obj\x64\Debug\eZvso.eZvso.resources
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZvso\obj\x64\Debug\eZvso.Resources.resources
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZvso\obj\x64\Debug\eZvso.vbproj.GenerateResource.Cache
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZvso\obj\x64\Debug\eZvso.dll
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZvso\obj\x64\Debug\eZvso.xml
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZvso\obj\x64\Debug\eZvso.pdb
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZvso.dll
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZvso.pdb
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZvso.xml
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZvso.dll.manifest
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZvso.vsto

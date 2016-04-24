@@ -1,0 +1,205 @@
+﻿
+Sub 规范表格_AutoCAD_NET()
+    On Error Resume Next
+    If Selection.Tables.Count > 0 Then
+        '定位表格
+        Dim Tb As Table, rg As Range, app As Application
+        For Each Tb In Selection.Range.Tables
+            Set rg = Tb.Range
+            Set app = Tb.Application
+            '
+            app.ScreenUpdating = False
+            
+            '调整表格尺寸
+            With Tb
+                .AutoFitBehavior (wdAutoFitContent)
+                .AutoFitBehavior (wdAutoFitWindow)
+            End With
+                    
+            '清除表格中的超链接
+            Dim hps As Hyperlinks
+            Set hps = rg.Hyperlinks
+            Dim hpCount As Integer
+            hpCount = hps.Count
+            For i = 1 To hpCount
+                hps(1).Delete
+            Next
+            
+            '将手动换行符删除
+            With Tb.Range.Find
+                .ClearFormatting
+                .Replacement.ClearFormatting
+                .Text = "^l"
+                .Replacement.Text = ""
+                .Execute Replace:=wdReplaceAll
+            End With
+            
+            '删除表格中的乱码空格
+            With Tb.Range.Find
+                .ClearFormatting
+                .Replacement.ClearFormatting
+                .Text = " "
+                .Replacement.Text = " "
+                .Execute Replace:=wdReplaceAll
+            End With
+
+            '删除表格中的嵌入式图片
+            Dim inlineshps As InlineShapes, Count As Integer, inlineShp As InlineShape
+            Set inlineshps = Tb.Range.InlineShapes
+            Count = inlineshps.Count
+            For i = Count To 1 Step -1
+                Set inlineShp = inlineshps.Item(i)
+                inlineShp.Delete
+            Next
+            
+            '删除表格中的图片
+            Dim shps As ShapeRange, shp As Shape
+            Set shps = Tb.Range.ShapeRange
+            Count = shps.Count
+            For i = Count To 1 Step -1
+                Set shp = shps.Item(i)
+                shp.Delete
+            Next
+                        
+            '清除表格中的格式设置
+            rg.Select
+            Selection.ClearFormatting
+    
+            
+            '设置表格样式与表格中的段落样式
+            Tb.Style = "zengfy表格-上下总分型1"
+            rg.ParagraphFormat.Style = "表格内容置顶"
+
+        Next
+
+        '取消选择并刷新界面
+        Selection.Collapse
+        app.ScreenRefresh
+        'App.ScreenUpdating = True
+    End If
+End Sub
+	' -----------------------------------------------------------------------------------------------------------
+Sub 规范表格()
+    On Error Resume Next
+    If Selection.Tables.Count > 0 Then
+        '定位表格
+        Dim Tb As Table, rg As Range, app As Application
+        For Each Tb In Selection.Range.Tables
+            Set rg = Tb.Range
+            Set app = Tb.Application
+            '
+            app.ScreenUpdating = False
+            
+            '调整表格尺寸
+            With Tb
+                .AutoFitBehavior (wdAutoFitContent)
+                .AutoFitBehavior (wdAutoFitWindow)
+            End With
+                    
+            '清除表格中的超链接
+            Dim hps As Hyperlinks
+            Set hps = rg.Hyperlinks
+            Dim hpCount As Integer
+            hpCount = hps.Count
+            For i = 1 To hpCount
+                hps(1).Delete
+            Next
+            
+            '将手动换行符删除
+            With Tb.Range.Find
+                .ClearFormatting
+                .Replacement.ClearFormatting
+                .Text = "^l"
+                .Replacement.Text = ""
+                .Execute Replace:=wdReplaceAll
+            End With
+            
+            '删除表格中的乱码空格
+            With Tb.Range.Find
+                .ClearFormatting
+                .Replacement.ClearFormatting
+                .Text = " "
+                .Replacement.Text = " "
+                .Execute Replace:=wdReplaceAll
+            End With
+                        
+            '清除表格中的格式设置
+            rg.Select
+            Selection.ClearFormatting
+    
+            
+            '设置表格样式与表格中的段落样式
+            Tb.Style = "zengfy表格-上下总分型1"
+            rg.ParagraphFormat.Style = "表格内容置顶"
+
+        Next
+
+        '取消选择并刷新界面
+        Selection.Collapse
+        app.ScreenRefresh
+        'App.ScreenUpdating = True
+    End If
+
+End Sub
+	' -----------------------------------------------------------------------------------------------------------
+
+Sub ClearFormat()
+    Dim Sln As Selection, rg As Range
+    Set Sln = Selection
+    Set rg = Sln.Range
+
+    '删除乱码空格
+    With rg.Find
+        .ClearFormatting
+        .Replacement.ClearFormatting
+        .Text = " "
+        .Replacement.Text = " "
+        .Execute Replace:=wdReplaceAll
+    End With
+    
+    '将手动换行符替换为回车
+    With rg.Find
+        .ClearFormatting
+        .Replacement.ClearFormatting
+        .Text = "^l"
+        .Replacement.Text = "^p"
+        .Execute Replace:=wdReplaceAll
+    End With
+
+    Dim inlineShp As InlineShape, rgShp As Range
+    For Each inlineShp In rg.InlineShapes
+        inlineShp.Range.ParagraphFormat.Style = "图片"
+    Next
+
+End Sub
+	' -----------------------------------------------------------------------------------------------------------
+
+'---------------------------------------
+'此方法的要求是文本的排布格式要求：选择的段落格式必须是：第一段为网页标题，第二段为网址；第三段为网页标题，第四段为网址……，
+'而且其中不能有空行，也不能选择空行
+' ---------------------------------
+Sub 网址超链接()
+    On Error Resume Next
+    Dim rg As Range, doc As Document, Prs As Paragraphs
+    Set rg = Selection.Range
+    Set Prs = rg.Paragraphs
+    Set doc = ActiveDocument
+    '
+    Dim i As Integer
+    Dim rgText As Range, rgURL As Range
+    For i = Prs.Count To 1 Step -2
+        '索引标题段落
+        Set rgText = Prs.Item(i - 1).Range
+        '去掉末尾的回车符
+        rgText.MoveEnd unit:=wdCharacter, Count:=-1
+        
+        '索引网址段落并得到其文本
+        Set rgURL = Prs.Item(i).Range
+        doc.Hyperlinks.Add Anchor:=rgText, Address:=rgURL.Text
+        
+        '删除网址段落
+        rgURL.Select
+        Selection.Delete
+    Next
+End Sub
+
