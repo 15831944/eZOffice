@@ -14,3 +14,4 @@ D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZwd.pdb
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZwd.xml
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZwd.dll.manifest
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZwd.vsto
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZwd\obj\x64\Debug\eZwd.vbprojResolveAssemblyReference.cache

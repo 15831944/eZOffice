@@ -31,3 +31,4 @@ D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\eZx.dll
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\eZx.xml
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\eZx.pdb
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\eZx.vbprojResolveAssemblyReference.cache
