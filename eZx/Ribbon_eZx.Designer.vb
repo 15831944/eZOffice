@@ -1,4 +1,4 @@
-﻿Partial Class eZx
+﻿Partial Class Ribbon_eZx
     Inherits Microsoft.Office.Tools.Ribbon.RibbonBase
 
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -41,8 +41,9 @@
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim RibbonDialogLauncherImpl1 As Microsoft.Office.Tools.Ribbon.RibbonDialogLauncher = Me.Factory.CreateRibbonDialogLauncher
         Me.Tab1 = Me.Factory.CreateRibbonTab
-        Me.DataBase = Me.Factory.CreateRibbonGroup
+        Me.Group_DataBase = Me.Factory.CreateRibbonGroup
         Me.btn_DataRange = Me.Factory.CreateRibbonButton
         Me.btnConstructDatabase = Me.Factory.CreateRibbonButton
         Me.btnEditDatabase = Me.Factory.CreateRibbonButton
@@ -61,16 +62,22 @@
         Me.EditBox_p2 = Me.Factory.CreateRibbonEditBox
         Me.EditBox_p3 = Me.Factory.CreateRibbonEditBox
         Me.Group4 = Me.Factory.CreateRibbonGroup
+        Me.Tab2 = Me.Factory.CreateRibbonTab
+        Me.Group_Help = Me.Factory.CreateRibbonGroup
+        Me.btn_ExcelHelp = Me.Factory.CreateRibbonButton
+        Me.btn_OfficeHelp = Me.Factory.CreateRibbonButton
         Me.Tab1.SuspendLayout()
-        Me.DataBase.SuspendLayout()
+        Me.Group_DataBase.SuspendLayout()
         Me.Group1.SuspendLayout()
         Me.Group2.SuspendLayout()
         Me.Group3.SuspendLayout()
+        Me.Tab2.SuspendLayout()
+        Me.Group_Help.SuspendLayout()
+        Me.SuspendLayout()
         '
         'Tab1
         '
-        Me.Tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office
-        Me.Tab1.Groups.Add(Me.DataBase)
+        Me.Tab1.Groups.Add(Me.Group_DataBase)
         Me.Tab1.Groups.Add(Me.Group1)
         Me.Tab1.Groups.Add(Me.Group2)
         Me.Tab1.Groups.Add(Me.Group3)
@@ -78,13 +85,13 @@
         Me.Tab1.Label = "eZx"
         Me.Tab1.Name = "Tab1"
         '
-        'DataBase
+        'Group_DataBase
         '
-        Me.DataBase.Items.Add(Me.btn_DataRange)
-        Me.DataBase.Items.Add(Me.btnConstructDatabase)
-        Me.DataBase.Items.Add(Me.btnEditDatabase)
-        Me.DataBase.Label = "数据库"
-        Me.DataBase.Name = "DataBase"
+        Me.Group_DataBase.Items.Add(Me.btn_DataRange)
+        Me.Group_DataBase.Items.Add(Me.btnConstructDatabase)
+        Me.Group_DataBase.Items.Add(Me.btnEditDatabase)
+        Me.Group_DataBase.Label = "数据库"
+        Me.Group_DataBase.Name = "Group_DataBase"
         '
         'btn_DataRange
         '
@@ -124,7 +131,7 @@
         Me.btn_XYExchange.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge
         Me.btn_XYExchange.Label = "交换XY轴"
         Me.btn_XYExchange.Name = "btn_XYExchange"
-        Me.btn_XYExchange.OfficeImageId = "ChangeToProposeNewTime"
+        Me.btn_XYExchange.OfficeImageId = "TableSummarizeWithPivot"
         Me.btn_XYExchange.ScreenTip = "交换图表的X轴与Y轴"
         Me.btn_XYExchange.ShowImage = True
         Me.btn_XYExchange.SuperTip = "      对于当前选择的图表，将其中的每一条数据曲线的X数据与Y数据交换，以达到视图上的图表交换XY轴的效果。"
@@ -136,7 +143,7 @@
         Me.btn_ExtractDataFromChart.OfficeImageId = "ChartTypeXYScatterInsertGallery"
         Me.btn_ExtractDataFromChart.ScreenTip = "提取图表中的数据"
         Me.btn_ExtractDataFromChart.ShowImage = True
-        Me.btn_ExtractDataFromChart.SuperTip = "一般情况下，可以直接通过Excel来提取到Word中的图表中的数据。但是，如果将Excel中的Chart粘贴进Word，而且是以链接的形式粘贴的。在后期操作中，此" & _
+        Me.btn_ExtractDataFromChart.SuperTip = "一般情况下，可以直接通过Excel来提取到Word中的图表中的数据。但是，如果将Excel中的Chart粘贴进Word，而且是以链接的形式粘贴的。在后期操作中，此" &
     "Chart所链接的源Excel文件丢失，此时在Word中便不能直接提取到Excel中的数据了。"
         '
         'Group2
@@ -197,10 +204,10 @@
         Me.btnReshape.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge
         Me.btnReshape.Label = "表格转换"
         Me.btnReshape.Name = "btnReshape"
-        Me.btnReshape.OfficeImageId = "TableSummarizeWithPivot"
+        Me.btnReshape.OfficeImageId = "TaskMoveForwardFourWeeks"
         Me.btnReshape.ScreenTip = "将选择的表格重新排列为指定的形式"
         Me.btnReshape.ShowImage = True
-        Me.btnReshape.SuperTip = "  类似于Matlab中的 Reshape。" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "  请在P1中输入新的行数，P2中输入新的列数，在P3中指明是否要将每一列后面的空数据删除（如果数据为空或者为Fa" & _
+        Me.btnReshape.SuperTip = "  类似于Matlab中的 Reshape。" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "  请在P1中输入新的行数，P2中输入新的列数，在P3中指明是否要将每一列后面的空数据删除（如果数据为空或者为Fa" &
     "lse，则表示不删除结尾空数据）。" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "  在进行重排时，会先将所有的数据排成一列，然后再进行重排。"
         '
         'Group3
@@ -236,27 +243,60 @@
         Me.Group4.Label = "其他"
         Me.Group4.Name = "Group4"
         '
-        'eZx
+        'Tab2
         '
-        Me.Name = "eZx"
+        Me.Tab2.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office
+        Me.Tab2.ControlId.OfficeId = "TabDeveloper"
+        Me.Tab2.Groups.Add(Me.Group_Help)
+        Me.Tab2.Label = "TabDeveloper"
+        Me.Tab2.Name = "Tab2"
+        '
+        'Group_Help
+        '
+        Me.Group_Help.DialogLauncher = RibbonDialogLauncherImpl1
+        Me.Group_Help.Items.Add(Me.btn_ExcelHelp)
+        Me.Group_Help.Items.Add(Me.btn_OfficeHelp)
+        Me.Group_Help.Label = "帮助文档"
+        Me.Group_Help.Name = "Group_Help"
+        Me.Group_Help.Position = Me.Factory.RibbonPosition.AfterOfficeId("GroupXml")
+        '
+        'btn_ExcelHelp
+        '
+        Me.btn_ExcelHelp.Label = "Excel开发文档"
+        Me.btn_ExcelHelp.Name = "btn_ExcelHelp"
+        '
+        'btn_OfficeHelp
+        '
+        Me.btn_OfficeHelp.Label = "Office VBA"
+        Me.btn_OfficeHelp.Name = "btn_OfficeHelp"
+        '
+        'Ribbon_eZx
+        '
+        Me.Name = "Ribbon_eZx"
         Me.RibbonType = "Microsoft.Excel.Workbook"
         Me.Tabs.Add(Me.Tab1)
+        Me.Tabs.Add(Me.Tab2)
         Me.Tab1.ResumeLayout(False)
         Me.Tab1.PerformLayout()
-        Me.DataBase.ResumeLayout(False)
-        Me.DataBase.PerformLayout()
+        Me.Group_DataBase.ResumeLayout(False)
+        Me.Group_DataBase.PerformLayout()
         Me.Group1.ResumeLayout(False)
         Me.Group1.PerformLayout()
         Me.Group2.ResumeLayout(False)
         Me.Group2.PerformLayout()
         Me.Group3.ResumeLayout(False)
         Me.Group3.PerformLayout()
+        Me.Tab2.ResumeLayout(False)
+        Me.Tab2.PerformLayout()
+        Me.Group_Help.ResumeLayout(False)
+        Me.Group_Help.PerformLayout()
+        Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents Tab1 As Microsoft.Office.Tools.Ribbon.RibbonTab
     Friend WithEvents Group1 As Microsoft.Office.Tools.Ribbon.RibbonGroup
-    Friend WithEvents DataBase As Microsoft.Office.Tools.Ribbon.RibbonGroup
+    Friend WithEvents Group_DataBase As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents btn_XYExchange As Microsoft.Office.Tools.Ribbon.RibbonButton
     Friend WithEvents Group2 As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents btn_ExtractDataFromChart As Microsoft.Office.Tools.Ribbon.RibbonButton
@@ -274,14 +314,18 @@
     Friend WithEvents EditBox_p3 As Microsoft.Office.Tools.Ribbon.RibbonEditBox
     Friend WithEvents Group4 As Microsoft.Office.Tools.Ribbon.RibbonGroup
     Friend WithEvents btnEditDatabase As Microsoft.Office.Tools.Ribbon.RibbonButton
+    Friend WithEvents Tab2 As Microsoft.Office.Tools.Ribbon.RibbonTab
+    Friend WithEvents Group_Help As Microsoft.Office.Tools.Ribbon.RibbonGroup
+    Friend WithEvents btn_ExcelHelp As Microsoft.Office.Tools.Ribbon.RibbonButton
+    Friend WithEvents btn_OfficeHelp As Microsoft.Office.Tools.Ribbon.RibbonButton
 End Class
 
 Partial Class ThisRibbonCollection
 
     <System.Diagnostics.DebuggerNonUserCode()> _
-    Friend ReadOnly Property Ribbon_zfy() As eZx
+    Friend ReadOnly Property Ribbon_zfy() As Ribbon_eZx
         Get
-            Return Me.GetRibbon(Of eZx)()
+            Return Me.GetRibbon(Of Ribbon_eZx)()
         End Get
     End Property
 End Class

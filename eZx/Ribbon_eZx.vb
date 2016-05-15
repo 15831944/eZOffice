@@ -5,7 +5,7 @@ Imports System.IO
 Imports eZstd.eZexcelAPI
 Imports eZstd.eZexcelAPI.ExcelExtension
 
-Public Class eZx
+Public Class Ribbon_eZx
 
 #Region "  ---  Declarations & Definitions"
 
@@ -83,6 +83,7 @@ Public Class eZx
         Para3 = EditBox_p3.Text
         With Me
             ' .btnEditDatabase.Enabled = False
+
         End With
     End Sub
 
@@ -121,7 +122,7 @@ Public Class eZx
                 End If
             End If
         Catch ex As NullReferenceException
-            MessageBox.Show("当前工作表不符合数据库格式。", "Error", _
+            MessageBox.Show("当前工作表不符合数据库格式。", "Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.ActiveDatabaseSheet = Nothing
         End Try
@@ -159,7 +160,7 @@ Public Class eZx
     ''' </summary>
     ''' <param name="DataSheet">要进行匹配的Excel工作表</param>
     ''' <param name="DatasheetCollection">要进行搜索的数据库集合。</param>
-    Private Function CorrespondingInCollection(ByVal DataSheet As Worksheet, _
+    Private Function CorrespondingInCollection(ByVal DataSheet As Worksheet,
                      DatasheetCollection As List(Of eZDataSheet)) As eZDataSheet
         Dim dtSheet As eZDataSheet = Nothing
         For Each dbSheet As eZDataSheet In Me.F_DbSheets
@@ -309,7 +310,7 @@ Public Class eZx
         Dim rgData As Range = ExcelApp.Selection
         rgData = rgData.Areas.Item(1)
         Dim firstCell As Range  ' 有效区间中的左上角第一个单元
-        Dim bottomCell As range ' 有效区间中的左下角的那个单元
+        Dim bottomCell As Range ' 有效区间中的左下角的那个单元
         Dim rbcell As Range     ' 有效区间中的右下角的那个单元
         Dim SortedId As Integer, interval As Double
         Dim strInterval_Id() As String = EditBox_ReArrangeIntervalId.Text.Split(",")
@@ -346,7 +347,7 @@ Public Class eZx
                     startData = ExcelApp.WorksheetFunction.Min(rgIdColumn)
                     EditBox_ReArrangeStart.Text = startData
                 Catch ex2 As Exception
-                    MessageBox.Show("指定的数据列中的数据不能进行排序！" & vbCrLf & _
+                    MessageBox.Show("指定的数据列中的数据不能进行排序！" & vbCrLf &
                     ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Exit Sub
                 End Try
@@ -362,7 +363,7 @@ Public Class eZx
                     endData = ExcelApp.WorksheetFunction.Max(rgIdColumn)
                     EditBox_ReArrangeEnd.Text = endData
                 Catch ex2 As Exception
-                    MessageBox.Show("指定的数据列中的数据不能进行排序！" & vbCrLf & _
+                    MessageBox.Show("指定的数据列中的数据不能进行排序！" & vbCrLf &
                                 ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Exit Sub
                 End Try
@@ -371,7 +372,7 @@ Public Class eZx
 
         '
         ' 检查参数的正确性
-        If endData <= startData OrElse interval = 0 OrElse interval > (endData - startData) OrElse SortedId = 0 OrElse SortedId > rgData.columns.count Then
+        If endData <= startData OrElse interval = 0 OrElse interval > (endData - startData) OrElse SortedId = 0 OrElse SortedId > rgData.Columns.Count Then
             MessageBox.Show("指定的参数不正确！", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
@@ -391,7 +392,7 @@ Public Class eZx
             Next
         Catch ex As Exception
             Dim c As Range = rgData.Cells(r, SortedId)
-            MessageBox.Show("单元格 " & c.Address & " 的数据不符合规范，请检查。" & vbCrLf & _
+            MessageBox.Show("单元格 " & c.Address & " 的数据不符合规范，请检查。" & vbCrLf &
                             ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             c.Activate()
             Exit Sub
@@ -444,7 +445,7 @@ Public Class eZx
             End If
         End If
         '
-        Dim firstCell As Range, bottomCell As range, rbcell As Range     ' 有效区间中的右下角的那个单元
+        Dim firstCell As Range, bottomCell As Range, rbcell As Range     ' 有效区间中的右下角的那个单元
         Dim startRow As Integer
         With rgData
             rbcell = .RBCell
@@ -542,7 +543,7 @@ Public Class eZx
     ''' <param name="ValidDataCount">返回的向量中的有效数据的个数，如果DeleteNull的值为False，则其值与二维表格Table中的元素个数相同。</param>
     ''' <returns>一个向量，其中的元素个数与Table中的元素个数相同，但是只有 ValidDataCount 个有效数据</returns>
     ''' <remarks></remarks>
-    Private Function GetDataListFromTable(ByRef Table(,) As Object, ByVal DeleteNull As Boolean, _
+    Private Function GetDataListFromTable(ByRef Table(,) As Object, ByVal DeleteNull As Boolean,
                                           <System.Runtime.InteropServices.Out> ByRef ValidDataCount As UInteger) As Object()
         Dim Count As Integer = Table.Length
         Dim arrData(0 To Count - 1) As Object
@@ -626,6 +627,7 @@ Public Class eZx
             Para3 = strText
         End If
     End Sub
+
 
 #End Region
 

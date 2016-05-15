@@ -126,59 +126,59 @@ eZx
  ! 检验所有的字段，完成数据库的构造或者编辑
  </summary>
 </member>
-<member name="F:ExcelAddIn_zfy.eZx.F_DbSheets">
+<member name="F:ExcelAddIn_zfy.Ribbon_eZx.F_DbSheets">
  <summary>
  此Application中所有的数据库工作表
  </summary>
 </member>
-<member name="P:ExcelAddIn_zfy.eZx.ActiveDatabaseSheet">
+<member name="P:ExcelAddIn_zfy.Ribbon_eZx.ActiveDatabaseSheet">
  <summary> 此Application中的活动数据库。 </summary>
  <remarks>如果当前活动的Excel工作表是一个符合格式的数据库工作表，
  则此属性指向此对应的数据库对象，否则，返回Nothing。</remarks>
 </member>
-<member name="F:ExcelAddIn_zfy.eZx._ExcelApp">
+<member name="F:ExcelAddIn_zfy.Ribbon_eZx._ExcelApp">
  <summary>
  当前正在运行的Excel程序
  </summary>
  <remarks></remarks>
 </member>
-<member name="F:ExcelAddIn_zfy.eZx._tempWkbk">
+<member name="F:ExcelAddIn_zfy.Ribbon_eZx._tempWkbk">
  <summary>
  用来临时保存数据的工作簿
  </summary>
  <remarks>此工作簿用来保存各种临时数据，比如从图表中提取出来的数据情况</remarks>
 </member>
-<member name="F:ExcelAddIn_zfy.eZx.path_Tempwkbk">
+<member name="F:ExcelAddIn_zfy.Ribbon_eZx.path_Tempwkbk">
  <summary>
  用来临时保存数据的工作簿的文件路径
  </summary>
  <remarks>此工作簿位于桌面上的“tempData.xlsx”</remarks>
 </member>
-<member name="F:ExcelAddIn_zfy.eZx.Para1">
+<member name="F:ExcelAddIn_zfy.Ribbon_eZx.Para1">
  <summary> 供各项命令使用的第一个基本参数 </summary>
 </member>
-<member name="F:ExcelAddIn_zfy.eZx.Para2">
+<member name="F:ExcelAddIn_zfy.Ribbon_eZx.Para2">
  <summary> 供各项命令使用的第二个基本参数 </summary>
 </member>
-<member name="F:ExcelAddIn_zfy.eZx.Para3">
+<member name="F:ExcelAddIn_zfy.Ribbon_eZx.Para3">
  <summary> 供各项命令使用的第三个基本参数 </summary>
 </member>
-<member name="M:ExcelAddIn_zfy.eZx.btn_DataRange_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+<member name="M:ExcelAddIn_zfy.Ribbon_eZx.btn_DataRange_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
  <summary> 显示工作表中的UsedRange的范围 </summary>
 </member>
-<member name="M:ExcelAddIn_zfy.eZx.btnConstructDatabase_Click">
+<member name="M:ExcelAddIn_zfy.Ribbon_eZx.btnConstructDatabase_Click">
  <summary>
  准备构造一个数据库
  </summary>
  <remarks></remarks>
 </member>
-<member name="M:ExcelAddIn_zfy.eZx.ConstructDatabase">
+<member name="M:ExcelAddIn_zfy.Ribbon_eZx.ConstructDatabase">
  <summary>
  构造数据库
  </summary>
  <remarks></remarks>
 </member>
-<member name="M:ExcelAddIn_zfy.eZx.btnEditDatabase_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+<member name="M:ExcelAddIn_zfy.Ribbon_eZx.btnEditDatabase_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
  <summary>
  准备编辑数据库
  </summary>
@@ -186,14 +186,14 @@ eZx
  <param name="e"></param>
  <remarks></remarks>
 </member>
-<member name="M:ExcelAddIn_zfy.eZx.CorrespondingInCollection(Microsoft.Office.Interop.Excel.Worksheet,System.Collections.Generic.List{ExcelAddIn_zfy.eZDataSheet})">
+<member name="M:ExcelAddIn_zfy.Ribbon_eZx.CorrespondingInCollection(Microsoft.Office.Interop.Excel.Worksheet,System.Collections.Generic.List{ExcelAddIn_zfy.eZDataSheet})">
  <summary>
  找出某工作表在数据库集合中所对应的那一项，如果没有对应项，则返回Nothing
  </summary>
  <param name="DataSheet">要进行匹配的Excel工作表</param>
  <param name="DatasheetCollection">要进行搜索的数据库集合。</param>
 </member>
-<member name="M:ExcelAddIn_zfy.eZx.btn_XYExchange_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+<member name="M:ExcelAddIn_zfy.Ribbon_eZx.btn_XYExchange_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
  <summary>
  交换Excel中活动Chart中的每一条数据曲线的X轴与Y轴
  </summary>
@@ -201,7 +201,7 @@ eZx
  <param name="e"></param>
  <remarks></remarks>
 </member>
-<member name="M:ExcelAddIn_zfy.eZx.btn_ExtractDataFromChart_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+<member name="M:ExcelAddIn_zfy.Ribbon_eZx.btn_ExtractDataFromChart_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
  <summary>
  提取图表中的数据
  </summary>
@@ -209,20 +209,20 @@ eZx
  <param name="e"></param>
  <remarks></remarks>
 </member>
-<member name="M:ExcelAddIn_zfy.eZx.btnReArrange_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+<member name="M:ExcelAddIn_zfy.Ribbon_eZx.btnReArrange_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
  <summary> 进行数据的重新排列 </summary>
 </member>
-<member name="M:ExcelAddIn_zfy.eZx.btnShrink_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+<member name="M:ExcelAddIn_zfy.Ribbon_eZx.btnShrink_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
  <summary>
  消除空行
  </summary>
 </member>
-<member name="M:ExcelAddIn_zfy.eZx.DataReshape(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+<member name="M:ExcelAddIn_zfy.Ribbon_eZx.DataReshape(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
  <summary> 数据重排 </summary>
  <remarks>  请在P1中输入新的行数，P2中输入新的列数。 
  在进行重排时，全先将所有的数据排成一列，然后再进行重排。</remarks>
 </member>
-<member name="M:ExcelAddIn_zfy.eZx.GetDataListFromTable(System.Object[0:,0:]@,System.Boolean,System.UInt32@)">
+<member name="M:ExcelAddIn_zfy.Ribbon_eZx.GetDataListFromTable(System.Object[0:,0:]@,System.Boolean,System.UInt32@)">
  <summary>
  将Excel中的二维表格数据转换为一个向量
  </summary>
@@ -232,9 +232,14 @@ eZx
  <returns>一个向量，其中的元素个数与Table中的元素个数相同，但是只有 ValidDataCount 个有效数据</returns>
  <remarks></remarks>
 </member>
-<member name="M:ExcelAddIn_zfy.eZx.ExcelApp_SheetActivate">
+<member name="M:ExcelAddIn_zfy.Ribbon_eZx.ExcelApp_SheetActivate">
  <summary>
   激活一个新的工作表
+ </summary>
+</member>
+<member name="T:ExcelAddIn_zfy.HelpLocation">
+ <summary>
+ 帮助文档的位置
  </summary>
 </member>
 <member name="T:ExcelAddIn_zfy.ThisRibbonCollection">

@@ -67,6 +67,7 @@
         Me.Group4.SuspendLayout()
         Me.Group3.SuspendLayout()
         Me.Group5.SuspendLayout()
+        Me.SuspendLayout()
         '
         'Group2
         '
@@ -132,7 +133,6 @@
         '
         'Tab1
         '
-        Me.Tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office
         Me.Tab1.Groups.Add(Me.group1)
         Me.Tab1.Groups.Add(Me.Group2)
         Me.Tab1.Groups.Add(Me.Group4)
@@ -157,7 +157,7 @@
         Me.btnDeleteRow.OfficeImageId = "EquationMatrixInsertRowBefore"
         Me.btnDeleteRow.ScreenTip = "删除表格中的特征行"
         Me.btnDeleteRow.ShowImage = True
-        Me.btnDeleteRow.SuperTip = " 如果选择的区域中，某一行包含指定的标志字符，则将此行删除。" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " 如果选择了一个表格中的多行，则在这些行中进行检索； " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " 如果选择了表格中的某一个单元格，则在这" & _
+        Me.btnDeleteRow.SuperTip = " 如果选择的区域中，某一行包含指定的标志字符，则将此行删除。" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " 如果选择了一个表格中的多行，则在这些行中进行检索； " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " 如果选择了表格中的某一个单元格，则在这" &
     "一个表格的所有行中进行检索；" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " 这如果选择了多个表格，则在多个表格中进行检索。"
         '
         'Group3
@@ -175,7 +175,7 @@
         Me.Button_SetHyperlinks.OfficeImageId = "EditHyperlink"
         Me.Button_SetHyperlinks.ScreenTip = "设置网址链接"
         Me.Button_SetHyperlinks.ShowImage = True
-        Me.Button_SetHyperlinks.SuperTip = "    此方法的要求是文本的排布格式要求：选择的段落格式必须是：第一段为网页标题，第二段为网址；第三段为网页标题，第四段为网址……，而且其中不能有空行，也不能选择" & _
+        Me.Button_SetHyperlinks.SuperTip = "    此方法的要求是文本的排布格式要求：选择的段落格式必须是：第一段为网页标题，第二段为网址；第三段为网页标题，第四段为网址……，而且其中不能有空行，也不能选择" &
     "空行。"
         '
         'Button_ClearTextFormat
@@ -246,6 +246,7 @@
         Me.Group3.PerformLayout()
         Me.Group5.ResumeLayout(False)
         Me.Group5.PerformLayout()
+        Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents Group2 As Microsoft.Office.Tools.Ribbon.RibbonGroup

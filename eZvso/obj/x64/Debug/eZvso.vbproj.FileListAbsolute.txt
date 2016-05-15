@@ -15,3 +15,4 @@ D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZvso.pdb
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZvso.xml
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZvso.dll.manifest
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZvso.vsto
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZvso\obj\x64\Debug\eZvso.vbprojResolveAssemblyReference.cache

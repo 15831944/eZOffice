@@ -25,10 +25,11 @@ D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZx.xml
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZx.dll.manifest
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZx.vsto
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.Form_ConstructDatabase.resources
-D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.eZx.resources
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.Resources.resources
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\eZx.vbproj.GenerateResource.Cache
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\eZx.dll
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\eZx.xml
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\eZx.pdb
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\eZx.vbprojResolveAssemblyReference.cache
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.Ribbon_eZx.resources
+D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.HelpLocation.resources
