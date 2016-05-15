@@ -178,17 +178,23 @@
     </Reference>
     <Reference Include="Microsoft.Office.Tools, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Office.Tools.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.VisualStudio.Tools.Applications.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Tools.Applications.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
     </Reference>
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -201,11 +207,13 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Office.Tools.Excel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Office.Tools.Excel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Tools.Common.v4.0.Utilities, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <!-- Visual Basic supports importing namespaces (equivalent to "using" statements in C#). -->
@@ -241,10 +249,20 @@
     <Compile Include="Database\Form_ConstructDatabase.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="eZx.Designer.vb">
-      <DependentUpon>eZx.vb</DependentUpon>
+    <Compile Include="HelpDo\HelpDoc.vb">
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="eZx.vb">
+    <Compile Include="HelpDo\HelpLocation.Designer.vb">
+      <DependentUpon>HelpLocation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HelpDo\HelpLocation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelpDo\HelpLocationSettings.vb" />
+    <Compile Include="Ribbon_eZx.Designer.vb">
+      <DependentUpon>Ribbon_eZx.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon_eZx.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ThisAddIn.vb">
@@ -253,8 +271,11 @@
     <EmbeddedResource Include="Database\Form_ConstructDatabase.resx">
       <DependentUpon>Form_ConstructDatabase.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="eZx.resx">
-      <DependentUpon>eZx.vb</DependentUpon>
+    <EmbeddedResource Include="HelpDo\HelpLocation.resx">
+      <DependentUpon>HelpLocation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon_eZx.resx">
+      <DependentUpon>Ribbon_eZx.vb</DependentUpon>
     </EmbeddedResource>
     <None Include="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.vb</DependentUpon>

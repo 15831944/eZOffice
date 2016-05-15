@@ -54,10 +54,10 @@
         Me.Tab1.SuspendLayout()
         Me.Group_Drawing.SuspendLayout()
         Me.Group_Master.SuspendLayout()
+        Me.SuspendLayout()
         '
         'Tab1
         '
-        Me.Tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office
         Me.Tab1.Groups.Add(Me.Group_Drawing)
         Me.Tab1.Groups.Add(Me.Group_Master)
         Me.Tab1.Label = "eZvso"
@@ -80,7 +80,7 @@
         Me.btnPaste.Name = "btnPaste"
         Me.btnPaste.OfficeImageId = "Paste"
         Me.btnPaste.ShowImage = True
-        Me.btnPaste.SuperTip = "    即是通过""开发工具>组合>添加到组""命令实现。" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "    当前选择必须包含要添加的形状和要在其中添加这些形状的组合。组合必须为首要选择或选择中的唯一一个组" & _
+        Me.btnPaste.SuperTip = "    即是通过""开发工具>组合>添加到组""命令实现。" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "    当前选择必须包含要添加的形状和要在其中添加这些形状的组合。组合必须为首要选择或选择中的唯一一个组" &
     "合。"""
         '
         'btnArrayCircle
@@ -148,6 +148,7 @@
         Me.Group_Drawing.PerformLayout()
         Me.Group_Master.ResumeLayout(False)
         Me.Group_Master.PerformLayout()
+        Me.ResumeLayout(False)
 
     End Sub
 

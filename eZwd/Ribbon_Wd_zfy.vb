@@ -58,6 +58,7 @@ Public Class Ribbon_Wd_zfy
         For Each st In doc.Styles
             If st.Type = WdStyleType.wdStyleTypeTable Then
                 listTableStyle.Add(st.NameLocal)
+
             End If
         Next
         For Each strTableStyle As String In listTableStyle
