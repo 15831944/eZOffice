@@ -2,6 +2,7 @@
 Imports Microsoft.Office.Interop.Excel
 Imports Microsoft.Office.Interop
 Imports System.IO
+Imports eZexcelAPI
 Imports eZstd.eZexcelAPI
 Imports eZstd.eZexcelAPI.ExcelExtension
 
@@ -66,12 +67,12 @@ Public Class Ribbon_eZx
     ''' <remarks>此工作簿位于桌面上的“tempData.xlsx”</remarks>
     Private path_Tempwkbk = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory, Environment.SpecialFolderOption.None), "tempData.xlsx")
 
-    ''' <summary> 供各项命令使用的第一个基本参数 </summary>
-    Private Para1 As Object
+    ''' <summary> 供各项命令使用的第一个基本参数，此字段值会由TextChange事件而自动修改。 </summary>
+    Private Para1 As String
     ''' <summary> 供各项命令使用的第二个基本参数 </summary>
-    Private Para2 As Object
+    Private Para2 As String
     ''' <summary> 供各项命令使用的第三个基本参数 </summary>
-    Private Para3 As Object
+    Private Para3 As String
 #End Region
 
 #End Region
@@ -95,6 +96,14 @@ Public Class Ribbon_eZx
         With rg
             .Select()
             ' .Value = .Value '这一操作会将单元格中的公式转化为对应的值，而且，将#DIV/0!、#VALUE!等错误转换为Integer.MinValue
+        End With
+    End Sub
+
+    ''' <summary> 显示工作表中的UsedRange的范围 </summary>
+    Private Sub ButtonValue_Click(sender As Object, e As RibbonControlEventArgs) Handles ButtonValue.Click
+        Dim rg As Excel.Range = ExcelApp.Selection
+        With rg
+            .Value = .Value '这一操作会将单元格中的公式转化为对应的值，而且，将#DIV/0!、#VALUE!等错误转换为Integer.MinValue
         End With
     End Sub
 
@@ -297,13 +306,13 @@ Public Class Ribbon_eZx
             MessageBox.Show("没有找到要进行数据提取的图表")
         End If
     End Sub
+
 #End Region
 
 #Region "  ---  数据处理 ---"
 
     ''' <summary> 进行数据的重新排列 </summary>
     Private Sub btnReArrange_Click(sender As Object, e As RibbonControlEventArgs) Handles btnReArrange.Click
-
 
         ' ---------------------------- 确定Range的有效范围 ------------------------------------------
         Dim sht As Worksheet = ExcelApp.ActiveSheet
@@ -319,7 +328,7 @@ Public Class Ribbon_eZx
         Dim startRow As Integer
         '
         With rgData
-            rbcell = .RBCell
+            rbcell = .Ex_CornerCell(CornerIndex.BottomRight)
             bottomCell = .Cells(.Rows.Count, SortedId)
             firstCell = .Cells(1, 1)
             If bottomCell.Value Is Nothing Then
@@ -433,23 +442,29 @@ Public Class Ribbon_eZx
         rgData = rgData.Areas.Item(1)
         Dim colsCount As Integer = rgData.Columns.Count
         Dim sht As Worksheet = rgData.Worksheet
-        '
-        Dim SortedId As Integer
-        Dim strInterval_Id() As String = EditBox_ReArrangeIntervalId.Text.Split(",")
+
+        ' 确定要以选择的区域中的哪一列作为排序列
+        Dim sortedId As Integer
         If colsCount = 1 Then
-            SortedId = 1
+            sortedId = 1
         Else
-            Integer.TryParse(strInterval_Id(1), SortedId)
-            If SortedId = 0 OrElse SortedId > colsCount Then
-                MessageBox.Show("指定的数据列的值超出选择的区域范围", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If Integer.TryParse(Para1, sortedId) Then
+                If sortedId = 0 OrElse sortedId > colsCount Then
+                    MessageBox.Show("指定的数据列的值超出选择的区域范围", "出错", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+            Else
+                MessageBox.Show("参数 P1 不能转为整数值", "出错", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
             End If
         End If
+
         '
         Dim firstCell As Range, bottomCell As Range, rbcell As Range     ' 有效区间中的右下角的那个单元
         Dim startRow As Integer
         With rgData
-            rbcell = .RBCell
-            bottomCell = .Cells(.Rows.Count, SortedId)
+            rbcell = .Ex_CornerCell(CornerIndex.BottomRight)
+            bottomCell = .Cells(.Rows.Count, sortedId)
             firstCell = .Cells(1, 1)
             If bottomCell.Value Is Nothing Then
                 bottomCell = bottomCell.End(XlDirection.xlUp)
@@ -469,11 +484,11 @@ Public Class Ribbon_eZx
         '
         Dim Value(,) As Object = rgData.Value
 
-        '
+        ' 
         Dim v As Object
         Dim DataRows As Integer = 0  ' 当前数据行
         For r As Integer = 1 To rowsCount
-            v = Value(r, SortedId)
+            v = Value(r, sortedId)
             If (v IsNot Nothing) AndAlso String.Compare("", v.ToString.Trim) <> 0 Then
                 For c As Integer = 0 To colsCount - 1
                     arrData(DataRows, c) = Value(r, c + 1)
@@ -481,6 +496,7 @@ Public Class Ribbon_eZx
                 DataRows += 1
             End If
         Next
+
         ' 将处理完成后的结果放置回Excel单元格中
         Dim rgResult As Range = sht.Range(firstCell, firstCell.Offset(DataRows - 1, colsCount - 1))
         Dim arrResult(0 To DataRows - 1, 0 To colsCount - 1) As Object  ' 剔除无用的数据，而保留非空行
@@ -582,9 +598,106 @@ Public Class Ribbon_eZx
         Return arrData
 
     End Function
+
+    Private Sub ButtonTranspose_Click(sender As Object, e As RibbonControlEventArgs) Handles ButtonTranspose.Click
+
+        ' ---------------------------- 确定Range的有效范围 ------------------------------------------
+        Dim app As Application = ExcelApp
+        Dim sht As Worksheet = ExcelApp.ActiveSheet
+        Dim rgData As Range = ExcelApp.Selection
+        '
+        Dim tspValues = New List(Of Object)
+        Dim tspRg = New List(Of Range)  ' 用来记录每一个小Area在转置后的范围，用来精确赋值
+        Dim tspUnionRange As Range  '用来记录记录每一个小Area在转置并Union后的范围，用来作界面选择
+        For Each rgArea As Range In rgData.Areas
+
+            ' 提取每一个小区域的转置后的数值
+            If rgArea.Cells.Count = 1 Then
+                tspValues.Add(rgArea.Value())
+            Else
+                ' 如果 Area 中只有一个单元格，则 Transpose 会将这个单元格中的 Nothing 转换为 0.0
+                tspValues.Add(app.WorksheetFunction.Transpose(rgArea))
+            End If
+            '
+            Dim tRg As Range = rgArea.Ex_Transpose()
+            tspRg.Add(tRg)
+            '
+            If tspUnionRange Is Nothing Then
+                tspUnionRange = tRg
+            Else
+                ' 注意每一次Union并不是一定都会增加一个Area
+                tspUnionRange = app.Union(tspUnionRange, tRg)
+            End If
+        Next
+
+        '
+        rgData.Clear()
+
+        ' 对转置后的区域进行赋值并选中
+        For i As Integer = 0 To tspRg.Count - 1
+            tspRg.Item(i).Value() = tspValues.Item(i)
+        Next
+
+        ' 对转置后的区域进行赋值并选中
+        tspUnionRange.Select()
+    End Sub
+
+    ''' <summary> 保持Range 区域的左上角不变，对整个区域进行行列转转置 </summary>
+    ''' <param name="range"></param>
+    ''' <returns></returns>
+    Private Function Transpose(range As Range) As Range
+        Dim sht = range.Worksheet
+        Dim app As Application = sht.Application
+        Dim transposedRange As Range
+        For Each rgArea As Range In range.Areas
+            Dim tRg As Range = rgArea.Ex_Transpose()
+            If transposedRange Is Nothing Then
+                transposedRange = tRg
+            Else
+                transposedRange = app.Union(transposedRange, tRg)
+            End If
+        Next
+        Return transposedRange
+    End Function
+
 #End Region
 
-#Region "  ---  其他"
+#Region "  ---  测试与其他"
+
+    Private Sub ButtonTest_Click(sender As Object, e As RibbonControlEventArgs) Handles ButtonTest.Click
+        Dim app As Application = ExcelApp
+        Dim wkbk As Workbook = app.ActiveWorkbook
+        Dim sht As Worksheet = wkbk.ActiveSheet
+
+        sht.Cells(1, 1).Value = "时间"
+        sht.Columns.Item(1).NumberFormatLocal = "yyyy/m/d"
+        sht.Cells.EntireColumn.AutoFit()
+        '
+        Dim firstRow As Range = sht.UsedRange.Rows.Item(1)
+        Dim shrinkFirstRow As Range = (firstRow).Ex_ShrinkeVectorAndCheckNull()
+
+        ' 要进行删除的左列与右列的列号
+        Dim r As Integer = firstRow.Ex_CornerCell(CornerIndex.UpRight).Column
+        Dim l As Integer = shrinkFirstRow.Ex_CornerCell(CornerIndex.UpRight).Column + 1
+        Dim deletedRight As String = ExcelFunction.ConvertColumnNumberToString(r)
+        Dim deletedLeft As String = ExcelFunction.ConvertColumnNumberToString(l)
+
+        '
+        Dim s As String
+        If r = l Then
+            s = deletedLeft.ToString()
+
+        ElseIf r > l Then
+            s = deletedLeft & ":" & deletedRight
+        End If
+
+        If Not String.IsNullOrEmpty(s) Then
+            Dim deletedColumns As Range = sht.Columns.Item(s)
+            '
+            deletedColumns.Delete()
+        End If
+        sht.UsedRange.Select()
+    End Sub
 
 #End Region
 
