@@ -167,11 +167,11 @@
   <ItemGroup>
     <Reference Include="eZexcelAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\eZstd\bin\eZexcelAPI.exe</HintPath>
+      <HintPath>F:\Software\Programming\Tests_Examples\eZstd\bin\eZexcelAPI.dll</HintPath>
     </Reference>
-    <Reference Include="eZstd, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="eZUserControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\eZstd\bin\eZstd.exe</HintPath>
+      <HintPath>F:\Software\Programming\Tests_Examples\eZstd\bin\eZUserControls.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -304,9 +304,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\binary.png" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

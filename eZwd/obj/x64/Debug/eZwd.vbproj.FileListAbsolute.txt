@@ -15,14 +15,15 @@ D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZwd.xml
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZwd.dll.manifest
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\bin\eZwd.vsto
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZwd\obj\x64\Debug\eZwd.vbprojResolveAssemblyReference.cache
-F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\x64\Debug\WordAddIn_zfy.Ribbon_Wd_zfy.resources
-F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\x64\Debug\WordAddIn_zfy.Resources.resources
-F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\x64\Debug\eZwd.vbproj.GenerateResource.Cache
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZwd.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZwd.pdb
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZwd.xml
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZwd.dll.manifest
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZwd.vsto
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\x64\Debug\eZwd.vbprojResolveAssemblyReference.cache
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\x64\Debug\WordAddIn_zfy.Ribbon_Wd_zfy.resources
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\x64\Debug\WordAddIn_zfy.Resources.resources
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\x64\Debug\eZwd.vbproj.GenerateResource.Cache
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\x64\Debug\eZwd.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\x64\Debug\eZwd.xml
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\x64\Debug\eZwd.pdb

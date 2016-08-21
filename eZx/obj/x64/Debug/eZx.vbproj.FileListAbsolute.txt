@@ -33,17 +33,17 @@ D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\eZx.vbprojResolveAssemblyReference.cache
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.Ribbon_eZx.resources
 D:\Program Files (x86)\Document\Microsoft Office 2016\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.HelpLocation.resources
-F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.Form_ConstructDatabase.resources
-F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.HelpLocation.resources
-F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.Ribbon_eZx.resources
-F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.Resources.resources
-F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\eZx.vbproj.GenerateResource.Cache
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZx.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZx.pdb
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZx.xml
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZx.dll.manifest
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZx.vsto
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\eZx.vbprojResolveAssemblyReference.cache
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.Form_ConstructDatabase.resources
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.HelpLocation.resources
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.Ribbon_eZx.resources
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\ExcelAddIn_zfy.Resources.resources
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\eZx.vbproj.GenerateResource.Cache
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\eZx.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\eZx.xml
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\eZx.pdb
-F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\x64\Debug\eZx.vbprojResolveAssemblyReference.cache

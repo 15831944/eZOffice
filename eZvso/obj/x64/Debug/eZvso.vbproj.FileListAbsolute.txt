@@ -21,6 +21,7 @@ F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZvso.pdb
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZvso.xml
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZvso.dll.manifest
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZvso.vsto
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\x64\Debug\eZvso.vbprojResolveAssemblyReference.cache
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\x64\Debug\eZvso.Dialog_CircleArray.resources
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\x64\Debug\eZvso.eZvso.resources
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\x64\Debug\eZvso.Resources.resources
