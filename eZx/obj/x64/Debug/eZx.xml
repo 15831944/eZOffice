@@ -155,7 +155,7 @@ eZx
  <remarks>此工作簿位于桌面上的“tempData.xlsx”</remarks>
 </member>
 <member name="F:ExcelAddIn_zfy.Ribbon_eZx.Para1">
- <summary> 供各项命令使用的第一个基本参数 </summary>
+ <summary> 供各项命令使用的第一个基本参数，此字段值会由TextChange事件而自动修改。 </summary>
 </member>
 <member name="F:ExcelAddIn_zfy.Ribbon_eZx.Para2">
  <summary> 供各项命令使用的第二个基本参数 </summary>
@@ -164,6 +164,9 @@ eZx
  <summary> 供各项命令使用的第三个基本参数 </summary>
 </member>
 <member name="M:ExcelAddIn_zfy.Ribbon_eZx.btn_DataRange_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+ <summary> 显示工作表中的UsedRange的范围 </summary>
+</member>
+<member name="M:ExcelAddIn_zfy.Ribbon_eZx.ButtonValue_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
  <summary> 显示工作表中的UsedRange的范围 </summary>
 </member>
 <member name="M:ExcelAddIn_zfy.Ribbon_eZx.btnConstructDatabase_Click">
@@ -231,6 +234,11 @@ eZx
  <param name="ValidDataCount">返回的向量中的有效数据的个数，如果DeleteNull的值为False，则其值与二维表格Table中的元素个数相同。</param>
  <returns>一个向量，其中的元素个数与Table中的元素个数相同，但是只有 ValidDataCount 个有效数据</returns>
  <remarks></remarks>
+</member>
+<member name="M:ExcelAddIn_zfy.Ribbon_eZx.Transpose(Microsoft.Office.Interop.Excel.Range)">
+ <summary> 保持Range 区域的左上角不变，对整个区域进行行列转转置 </summary>
+ <param name="range"></param>
+ <returns></returns>
 </member>
 <member name="M:ExcelAddIn_zfy.Ribbon_eZx.ExcelApp_SheetActivate">
  <summary>
@@ -319,6 +327,11 @@ eZx
 <summary>
   Overrides the current thread's CurrentUICulture property for all
   resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:ExcelAddIn_zfy.My.Resources.Resources.binary">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
 </members>

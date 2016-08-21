@@ -28,7 +28,7 @@ Partial Class Form_ConstructDatabase
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ComboBox_FieldType = New System.Windows.Forms.ComboBox()
         Me.ComboBox_CommonDataType = New System.Windows.Forms.ComboBox()
-        Me.eZDataGridView1 = New eZstd.UserControls.eZDataGridView()
+        Me.eZDataGridView1 = New eZstd.UserControl.eZDataGridView()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
@@ -218,7 +218,7 @@ Partial Class Form_ConstructDatabase
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents ComboBox_FieldType As System.Windows.Forms.ComboBox
     Friend WithEvents ComboBox_CommonDataType As System.Windows.Forms.ComboBox
-    Friend WithEvents eZDataGridView1 As eZstd.UserControls.eZDataGridView
+    Friend WithEvents eZDataGridView1 As eZstd.UserControl.eZDataGridView
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
     Friend WithEvents LineShape1 As Microsoft.VisualBasic.PowerPacks.LineShape
