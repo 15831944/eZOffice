@@ -1,170 +1,189 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <doc>
-<assembly>
-<name>
-eZwd
-</name>
-</assembly>
-<members>
-<member name="F:WordAddIn_zfy.Ribbon_Wd_zfy.Doc">
- <summary>
- 当前正在运行的Word程序中的活动Word文档
- </summary>
- <remarks></remarks>
-</member>
-<member name="F:WordAddIn_zfy.Ribbon_Wd_zfy.F_TableStyle">
- <summary>
- 进行表格规范化时所使用的表格样式
- </summary>
- <remarks>
- 注意：在为内容指定样式（比如为段落指定段落样式或者为表格指定表格样式）时，
- 如果指定的样式不存在或者为段落指定了表格样式等时，程序会继续正常执行，也不会跳过后面的语句，
- 只是就相当于没有执行这一行。</remarks>
-</member>
-<member name="M:WordAddIn_zfy.Ribbon_Wd_zfy.ListStyles(Microsoft.Office.Interop.Word.Document,Microsoft.Office.Tools.Ribbon.RibbonGallery)">
- <summary>
- 列出文档中所有的表格样式
- </summary>
- <param name="doc"></param>
- <param name="Gallary"></param>
- <remarks></remarks>
-</member>
-<member name="M:WordAddIn_zfy.Ribbon_Wd_zfy.ExtractDataFromWordChart(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
- <summary>
- 提取Word中的图表中的数据
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
- <remarks>如果将Excel中的Chart粘贴进Word，而且是以链接的形式粘贴的。在后期操作中，此Chart所链接的源Excel文件丢失，此时在Word中便不能直接提取到Excel中的数据了。</remarks>
-</member>
-<member name="M:WordAddIn_zfy.Ribbon_Wd_zfy.btnDeleteRow_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
- <summary>
- 删除表格中的特征行
- </summary>
- <remarks>如果选择的区域中，某一行包含指定的标志字符，则将此行删除。
- 如果选择了一个表格中的多行，则在这些行中进行检索；
- 如果选择了表格中的某一个单元格，则在这一个表格的所有行中进行检索；
- 这如果选择了多个表格，则在多个表格中进行检索。</remarks>
-</member>
-<member name="M:WordAddIn_zfy.Ribbon_Wd_zfy.DeleteRow(Microsoft.Office.Interop.Word.Rows,System.String,System.UInt16)">
- <summary>
- 从指定的集合中删除某些条目
- </summary>
- <param name="Rows">Rows集合</param>
- <param name="VerifiedString">用来进行判断的字符串</param>
- <param name="IdCol"></param>
- <returns>此次一共删除了多少行</returns>
- <remarks></remarks>
-</member>
-<member name="M:WordAddIn_zfy.Ribbon_Wd_zfy.AddBoadersForInlineshapes(System.String)">
- <summary>
- 嵌入式图片加边框
- </summary>
- <param name="ParagraphStyle">此图片所在段落的段落样式</param>
- <remarks></remarks>
-</member>
-<member name="M:WordAddIn_zfy.Ribbon_Wd_zfy.TableFormat(System.String,System.String,System.Boolean)">
- <summary>
- 规范表格，而且删除表格中的嵌入式图片
- </summary>
- <param name="TableStyle">要应用的表格样式</param>
- <param name="ParagraphFormat">表格中的段落样式</param>
- <param name="blnDeleteShapes">是否要删除表格中的图片，包括嵌入式或非嵌入式图片。</param>
- <remarks></remarks>
-</member>
-<member name="M:WordAddIn_zfy.Ribbon_Wd_zfy.SetHyperLink">
- <summary>
- 设置超链接
- </summary>
- <remarks>此方法的要求是文本的排布格式要求：选择的段落格式必须是：
- 第一段为网页标题，第二段为网址；第三段为网页标题，第四段为网址……，
- 而且其中不能有空行，也不能选择空行</remarks>
-</member>
-<member name="M:WordAddIn_zfy.Ribbon_Wd_zfy.ClearTextFormat(System.String)">
- <summary>
- 清理文本的格式
- </summary>
- <param name="ParagraphStyle"></param>
- <remarks>具体过程有：删除乱码空格、将手动换行符替换为回车、设置嵌入式图片的段落样式</remarks>
-</member>
-<member name="T:WordAddIn_zfy.ThisRibbonCollection">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisRibbonCollection.#ctor(Microsoft.Office.Tools.Ribbon.RibbonFactory)">
-
-</member>
-<member name="T:WordAddIn_zfy.ThisAddIn">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.#ctor(Microsoft.Office.Tools.Word.ApplicationFactory,System.IServiceProvider)">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.Initialize">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.FinishInitialization">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.InitializeDataBindings">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.InitializeCachedData">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.InitializeData">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.BindToData">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.StartCaching(System.String)">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.StopCaching(System.String)">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.IsCached(System.String)">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.BeginInitialization">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.EndInitialization">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.InitializeControls">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.InitializeComponents">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.NeedsFill(System.String)">
-
-</member>
-<member name="M:WordAddIn_zfy.ThisAddIn.OnShutdown">
-
-</member>
-<member name="T:WordAddIn_zfy.Globals">
-
-</member>
-<member name="M:WordAddIn_zfy.Globals.#ctor">
-
-</member>
-<member name="T:WordAddIn_zfy.My.Resources.Resources">
-<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
-</member>
-<member name="P:WordAddIn_zfy.My.Resources.Resources.ResourceManager">
-<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member>
-<member name="P:WordAddIn_zfy.My.Resources.Resources.Culture">
-<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member>
-</members>
+    <assembly>
+        <name>eZwd</name>
+    </assembly>
+    <members>
+        <member name="T:eZwd.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:eZwd.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:eZwd.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="F:eZwd.Ribbon_eZwd._activeDoc">
+            <summary> 当前正在运行的Word程序中的活动Word文档
+            </summary> <remarks></remarks>
+        </member>
+        <member name="F:eZwd.Ribbon_eZwd.F_TableStyle">
+            <summary>
+            进行表格规范化时所使用的表格样式
+            </summary>
+            <remarks>
+            注意：在为内容指定样式（比如为段落指定段落样式或者为表格指定表格样式）时，
+            如果指定的样式不存在或者为段落指定了表格样式等时，程序会继续正常执行，也不会跳过后面的语句，
+            只是就相当于没有执行这一行。</remarks>
+        </member>
+        <member name="M:eZwd.Ribbon_eZwd.ListStyles(Microsoft.Office.Interop.Word.Document,Microsoft.Office.Tools.Ribbon.RibbonGallery)">
+            <summary>
+            列出文档中所有的表格样式
+            </summary>
+            <param name="doc"></param>
+            <param name="gallary"></param>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZwd.Ribbon_eZwd.ExtractDataFromWordChart(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+            <summary>
+            提取Word中的图表中的数据
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+            <remarks>如果将Excel中的Chart粘贴进Word，而且是以链接的形式粘贴的。在后期操作中，此Chart所链接的源Excel文件丢失，此时在Word中便不能直接提取到Excel中的数据了。</remarks>
+        </member>
+        <member name="M:eZwd.Ribbon_eZwd.btnDeleteRow_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+            <summary>
+            删除表格中的特征行
+            </summary>
+            <remarks>如果选择的区域中，某一行包含指定的标志字符，则将此行删除。
+            如果选择了一个表格中的多行，则在这些行中进行检索；
+            如果选择了表格中的某一个单元格，则在这一个表格的所有行中进行检索；
+            这如果选择了多个表格，则在多个表格中进行检索。</remarks>
+        </member>
+        <member name="M:eZwd.Ribbon_eZwd.DeleteRow(Microsoft.Office.Interop.Word.Rows,System.String,System.UInt16)">
+            <summary>
+            从指定的集合中删除某些条目
+            </summary>
+            <param name="Rows">Rows集合</param>
+            <param name="VerifiedString">用来进行判断的字符串</param>
+            <param name="IdCol"></param>
+            <returns>此次一共删除了多少行</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZwd.Ribbon_eZwd.AddBoadersForInlineshapes(System.String)">
+            <summary>
+            嵌入式图片加边框
+            </summary>
+            <param name="ParagraphStyle">此图片所在段落的段落样式</param>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZwd.Ribbon_eZwd.TableFormat(System.String,System.String,System.Boolean)">
+            <summary>
+            规范表格，而且删除表格中的嵌入式图片
+            </summary>
+            <param name="TableStyle">要应用的表格样式</param>
+            <param name="ParagraphFormat">表格中的段落样式</param>
+            <param name="blnDeleteShapes">是否要删除表格中的图片，包括嵌入式或非嵌入式图片。</param>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZwd.Ribbon_eZwd.SetHyperLink">
+            <summary>
+            设置超链接
+            </summary>
+            <remarks>此方法的要求是文本的排布格式要求：选择的段落格式必须是：
+            第一段为网页标题，第二段为网址；第三段为网页标题，第四段为网址……，
+            而且其中不能有空行，也不能选择空行</remarks>
+        </member>
+        <member name="M:eZwd.Ribbon_eZwd.ClearTextFormat(System.String)">
+            <summary>
+            清理文本的格式
+            </summary>
+            <param name="ParagraphStyle"></param>
+            <remarks>具体过程有：删除乱码空格、将手动换行符替换为回车、设置嵌入式图片的段落样式</remarks>
+        </member>
+        <member name="F:eZwd.Ribbon_eZwd.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:eZwd.Ribbon_eZwd.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:eZwd.Ribbon_eZwd.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:eZwd.ThisRibbonCollection">
+            
+        </member>
+        <member name="M:eZwd.ThisRibbonCollection.#ctor(Microsoft.Office.Tools.Ribbon.RibbonFactory)">
+            
+        </member>
+        <member name="T:eZwd.ThisAddIn">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.InternalStartup">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:eZwd.ThisAddIn.#ctor(Microsoft.Office.Tools.Word.ApplicationFactory,System.IServiceProvider)">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.Initialize">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.FinishInitialization">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.InitializeDataBindings">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.InitializeCachedData">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.InitializeData">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.BindToData">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.StartCaching(System.String)">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.StopCaching(System.String)">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.IsCached(System.String)">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.BeginInitialization">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.EndInitialization">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.InitializeControls">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.InitializeComponents">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.NeedsFill(System.String)">
+            
+        </member>
+        <member name="M:eZwd.ThisAddIn.OnShutdown">
+            
+        </member>
+        <member name="T:eZwd.Globals">
+            
+        </member>
+        <member name="M:eZwd.Globals.#ctor">
+            
+        </member>
+    </members>
 </doc>
