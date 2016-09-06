@@ -107,10 +107,12 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="eZexcelAPI">
+    <Reference Include="eZexcelAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\eZstd\bin\eZexcelAPI.exe</HintPath>
     </Reference>
-    <Reference Include="eZstd">
+    <Reference Include="eZstd, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\eZstd\bin\eZstd.exe</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
@@ -172,12 +174,14 @@
   <ItemGroup>
     <Compile Include="Database\DataField.cs" />
     <Compile Include="Database\eZDataSheet.cs" />
+    <Compile Include="Database\eZDataType.cs" />
     <Compile Include="Database\Form_ConstructDatabase.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Database\Form_ConstructDatabase.Designer.cs">
       <DependentUpon>Form_ConstructDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExternalCommandTest\ExternalCommandTest.cs" />
     <Compile Include="HelpDoc\Ribbon_eZx_HelpDoc.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -238,6 +242,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\binary.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DynamicDebug.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eZx_AddinManager\eZx_AddinManager.csproj">
+      <Project>{83bd8213-3263-4e73-9a9f-d7891bc73e62}</Project>
+      <Name>eZx_AddinManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -6,7 +6,7 @@
     <members>
         <member name="T:eZx.Database.DataField">
             <summary>
-            数据表中每一个字段的信息
+            数据表中每一个字段的信息，包括字段名称，数据类型，在Excel工作表中的列号等
             </summary>
         </member>
         <member name="P:eZx.Database.DataField.ColumnIndex">
@@ -22,22 +22,25 @@
         <member name="P:eZx.Database.DataField.NullAllowed">
             <summary> 是否允许空值，如果为False，则会自动将其设置为其默认值 </summary>
         </member>
-        <member name="M:eZx.Database.DataField.#ctor(System.String,System.UInt16,eZx.Database.DataField.eZDataType,System.Boolean)">
+        <member name="M:eZx.Database.DataField.#ctor(System.String,System.UInt16,eZx.Database.eZDataType,System.Boolean)">
             <summary>构造函数</summary>
-             <param name="name">字段名称</param>
-             <param name="ColumnIndex">此字段在数据库中的列号下标，比如第一列(A列)的数据的ColumnIndex为1。
+             <param name="fieldName">字段名称</param>
+             <param name="columnIndex">此字段在数据库中的列号下标，比如第一列(A列)的数据的ColumnIndex为1。
              在Excel 2010中，最大的列号为16384=2^14。 </param>
              <param name="dataType">此列的数据类型</param>
              <param name="nullAllowed">是否允许有空值</param>
              <remarks></remarks>
         </member>
-        <member name="M:eZx.Database.DataField.IsCompatible(System.String,eZx.Database.DataField.eZDataType)">
+        <member name="M:eZx.Database.DataField.IsCompatible(System.String,eZx.Database.eZDataType)">
             <summary> 检查指定的数据是否符合指定的数据类型 </summary>
-            <param name="CheckedData"></param>
+            <param name="data"> 要进行检测的任意字符 </param>
             <param name="ezType"></param>
             <returns></returns>
         </member>
-        <member name="P:eZx.Database.eZDataSheet.WorkSheet">
+        <member name="T:eZx.Database.DataSheet">
+            <summary> 数据库中的某一张数据表 </summary>
+        </member>
+        <member name="P:eZx.Database.DataSheet.WorkSheet">
             <summary>
             代表此数据库的工作表对象
             </summary>
@@ -45,16 +48,16 @@
             <returns></returns>
             <remarks></remarks>
         </member>
-        <member name="F:eZx.Database.eZDataSheet.F_IsFormated">
+        <member name="F:eZx.Database.DataSheet.F_IsFormated">
             <summary>
             此工作表是否符合数据库的格式规范
             </summary>
         </member>
-        <member name="P:eZx.Database.eZDataSheet.FieldType">
+        <member name="P:eZx.Database.DataSheet.FieldType">
             <summary> 此字段名称本身的数据类型。
              一般情况下，一个字段的名称只要是一个字符就可以了，但是它也可以代表具体的含义，比如在具体某一天的日期“2016/2/6” </summary>
         </member>
-        <member name="M:eZx.Database.eZDataSheet.#ctor(Microsoft.Office.Interop.Excel.Worksheet,System.ComponentModel.BindingList{eZx.Database.DataField},eZx.Database.DataField.eZDataType)">
+        <member name="M:eZx.Database.DataSheet.#ctor(Microsoft.Office.Interop.Excel.Worksheet,System.ComponentModel.BindingList{eZx.Database.DataField},eZx.Database.eZDataType)">
             <summary>
             构造函数
             </summary>
@@ -64,22 +67,25 @@
             但是它也可以代表具体的含义，比如在具体某一天的日期“2016/2/6” </param>
             <remarks></remarks>
         </member>
-        <member name="F:eZx.Database.Form_ConstructDatabase.IsConstructingMode">
+        <member name="T:eZx.Database.eZDataType">
+            <summary> Excel中可以辨别的数据类型，用来进行字段名或者某字段下的数据的类别判断 </summary>
+        </member>
+        <member name="F:eZx.Database.Form_ConstructDatabase._isConstructingMode">
             <summary>
             当前窗口是否处于“构造数据库”的模式，如果为False，则为“编辑数据库”的模式
             </summary>
         </member>
-        <member name="F:eZx.Database.Form_ConstructDatabase.F_DataValue">
+        <member name="F:eZx.Database.Form_ConstructDatabase._dataValue">
             <summary>
             Worksheet.UsedRange.Value所返回的值，此二维数组中，左上角的第一个元素的下标值为(1,1)
             </summary>
             <remarks>此二维数组中包含了字段信息以及每一个字段中的数据</remarks>
         </member>
-        <member name="F:eZx.Database.Form_ConstructDatabase.F_FieldType">
+        <member name="F:eZx.Database.Form_ConstructDatabase._fieldType">
             <summary> 此字段名称本身的数据类型。
              一般情况下，一个字段的名称只要是一个字符就可以了，但是它也可以代表具体的含义，比如在具体某一天的日期“2016/2/6” </summary>
         </member>
-        <member name="M:eZx.Database.Form_ConstructDatabase.#ctor(Microsoft.Office.Interop.Excel.Worksheet,System.Boolean,eZx.Database.eZDataSheet)">
+        <member name="M:eZx.Database.Form_ConstructDatabase.#ctor(Microsoft.Office.Interop.Excel.Worksheet,System.Boolean,eZx.Database.DataSheet)">
              <summary> 构造函数 </summary>
              <param name="Sheet"></param>
              <param name="ConstructingMode">当前窗口是否处于“构造数据库”的模式，如果为False，则为“编辑数据库”的模式</param>
@@ -92,43 +98,45 @@
             </summary>
             <remarks></remarks>
         </member>
-        <member name="M:eZx.Database.Form_ConstructDatabase.EditDataBase(eZx.Database.eZDataSheet)">
+        <member name="M:eZx.Database.Form_ConstructDatabase.EditDataBase(eZx.Database.DataSheet)">
             <summary>
             编辑数据库
             </summary>
             <remarks></remarks>
         </member>
-        <member name="M:eZx.Database.Form_ConstructDatabase.ValidateField(eZx.Database.DataField,System.Object[0:,0:]@)">
+        <member name="M:eZx.Database.Form_ConstructDatabase.CheckAllFields">
+            <summary>
+            ! 检验所有的字段，完成数据库的构造或者编辑
+            </summary>
+        </member>
+        <member name="M:eZx.Database.Form_ConstructDatabase.ValidateOneField(eZx.Database.DataField,System.Object[0:,0:]@,System.UInt32@)">
             <summary>
             同时检验一个字段的名称的数据类型，以及此字段的此列数据的数据类型
             </summary>
-            <param name="Field">某一个字段</param>
-            <param name="Value">整个数据表的数据（包含字段），数组中的第一个元素的下标为1</param>
+            <param name="field">某一个字段</param>
+            <param name="value">整个数据表的数据（包含字段），数组中的第一个元素的下标为1</param>
+            <param name="errorRow">如果校验成功，则返回0，否则返回不符合数据格式的那一行的行号。字段名本身的行号为1，此字段的第一个数据的行号为2。</param>
             <returns></returns>
             <remarks></remarks>
         </member>
-        <member name="M:eZx.Database.Form_ConstructDatabase.ValidateFieldDataType(eZx.Database.DataField,System.Object[0:,0:])">
+        <member name="M:eZx.Database.Form_ConstructDatabase.ValidateFieldValueDataType(eZx.Database.DataField,System.Object[0:,0:],System.UInt32@)">
             <summary>
             检验某一字段的一列数据的数据类型
             </summary>
-            <param name="Field">字段信息</param>
-            <param name="Value">整个数据表的数据（包含字段），数组中的第一个元素的下标为1</param>
+            <param name="field">字段信息</param>
+            <param name="value">整个数据表的数据（包含字段），数组中的第一个元素的下标为1</param>
+            <param name="errorRow">如果校验成功，则返回0，否则返回不符合数据格式的那一行的行号。字段名本身的行号为1，此字段的第一个数据的行号为2。</param>
             <returns></returns>
         </member>
         <member name="M:eZx.Database.Form_ConstructDatabase.ValidateFieldType(eZx.Database.DataField)">
             <summary>
             检查某一字段的名称本身的数据类型
             </summary>
-            <param name="Field"></param>
+            <param name="field"></param>
             <returns></returns>
         </member>
         <member name="M:eZx.Database.Form_ConstructDatabase.eZDataGridView1_CellContentClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
             <summary> 点击表格控件中的单元格中的对象 </summary>
-        </member>
-        <member name="M:eZx.Database.Form_ConstructDatabase.CheckAllFields(System.Object,System.EventArgs)">
-            <summary>
-            ! 检验所有的字段，完成数据库的构造或者编辑
-            </summary>
         </member>
         <member name="F:eZx.Ribbon_eZx.F_DbSheets">
             <summary>
@@ -167,6 +175,9 @@
         <member name="F:eZx.Ribbon_eZx.Para3">
             <summary> 供各项命令使用的第三个基本参数 </summary>
         </member>
+        <member name="M:eZx.Ribbon_eZx.Ribbon_zfy_Load(System.Object,Microsoft.Office.Tools.Ribbon.RibbonUIEventArgs)">
+            <summary> 构造函数 </summary>
+        </member>
         <member name="M:eZx.Ribbon_eZx.btn_DataRange_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
             <summary> 显示工作表中的UsedRange的范围 </summary>
         </member>
@@ -193,7 +204,7 @@
             <param name="e"></param>
             <remarks></remarks>
         </member>
-        <member name="M:eZx.Ribbon_eZx.CorrespondingInCollection(Microsoft.Office.Interop.Excel.Worksheet,System.Collections.Generic.List{eZx.Database.eZDataSheet})">
+        <member name="M:eZx.Ribbon_eZx.CorrespondingInCollection(Microsoft.Office.Interop.Excel.Worksheet,System.Collections.Generic.List{eZx.Database.DataSheet})">
             <summary>
             找出某工作表在数据库集合中所对应的那一项，如果没有对应项，则返回Nothing
             </summary>
@@ -288,6 +299,11 @@
             </summary>
         </member>
         <member name="P:eZx.Properties.Resources.binary">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:eZx.Properties.Resources.DynamicDebug">
             <summary>
               Looks up a localized resource of type System.Drawing.Bitmap.
             </summary>

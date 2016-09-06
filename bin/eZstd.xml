@@ -2775,36 +2775,49 @@
             <param name="lParam"></param>
             <returns></returns>
         </member>
-        <member name="T:eZstd.Data.ExcelDBHelper">
+        <member name="T:eZstd.Data.BinarySerializer">
+            <summary>
+            在.NET中，我们可以将对象序列化从而保存对象的状态到内存或者磁盘文件中，或者分布式应用程序中用于系统通信，，这样就有可能做出一个“对象数据库”了。
+            一般来说，二进制序列化的效率要高，所获得的字节数最小。
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZstd.Data.BinarySerializer.EnCode(System.IO.Stream,System.Object)">
+            <summary>
+            将任意一个声明为Serializable的类或者其List等集合中的数据，以二进制的格式保存到对应的流文件中。
+            </summary>
+            <param name="fs">推荐使用FileStream对象。此方法中不会对Stream对象进行Close。</param>
+            <param name="Data">要进行保存的可序列化对象</param>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZstd.Data.BinarySerializer.DeCode(System.IO.Stream)">
+            <summary>
+            从二进制流文件中，将其中的二进制数据反序列化为对应的类或集合对象。
+            </summary>
+            <param name="fs">推荐使用FileStream对象。此方法中不会对Stream对象进行Close。</param>
+            <returns>此二进制流文件所对应的可序列化对象</returns>
+            <remarks></remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:eZstd.Data.XmlList0`1" -->
+        <member name="F:eZstd.Data.XmlList0`1._sourceList">
+            <summary> 集合内部维护的 IList 集合</summary>
+        </member>
+        <member name="M:eZstd.Data.XmlList0`1.#ctor(System.Collections.Generic.IList{`0})">
+            <summary> 构造函数（不推荐，因为通过此方法构造出来的 XmlList 内部维护的IList集合
+            与这里的输入参数 wrapped 集合代表同一个地址） </summary>
+            <param name="wrapped">在外部继续对此集合元素的增加、插入、移除会同步到 SourceList 属性中，
+            因为这二者引用的是内存中同一个集合的地址。</param>
+        </member>
+        <member name="M:eZstd.Data.XmlList0`1.Clone">
+            <summary> 将内部维护的集合进行复制 </summary>
+        </member>
+        <member name="T:eZstd.Data.ExcelDbHelper">
             <summary>
             利用ADO.NET连接Excel数据库，并执行相应的操作：
             创建表格，读取数据，写入数据，获取工作簿中的所有工作表名称。
             </summary>
-            <remarks></remarks>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.CreateNewSheet(System.Data.OleDb.OleDbConnection,System.String,System.String[])">
-            <summary>
-            根据指定的字段名创建一个全新的Excel工作表，但是不向其中添加任何数据。
-            </summary>
-            <param name="conn"></param>
-            <param name="sheetName"> 要创建的工作表的名称，不能带后缀$ </param>
-            <param name="fields_valueTypes"> 工作表中的每一个字段，以及字段所对应的数据类型。如果不赋值，则只创建出一个工作表，而不创建任何字段。 </param>
-            <remarks>在Excel中创建工作表的语句为： "CREATE TABLE Sheet1 ( [Field1] VarChar,[Field2] VarChar)" </remarks>
-        </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.CreateNewSheet(System.Data.OleDb.OleDbConnection,System.Data.DataTable)">
-            <summary>
-            根据指定的DataTable 创建一个全新的 Excel 工作表，而不添加任何数据。
-            </summary>
-            <param name="conn"></param>
-            <param name="tableSource"> 工作表名称即 tableSource.TableName；工作表中每一个字段的名称即tableSource中每一列的列名 </param>
-        </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.ExecuteNoneQuery(System.Data.OleDb.OleDbConnection,System.String)">
-            <summary> 对Excel数据库执行非查询SQL语句 </summary>
-            <param name="conn"></param>
-            <param name="sql"> 用来执行的非查询sql语句</param>
-            <remarks></remarks>
-        </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.ConnectToExcel(System.String,System.Byte)">
+        <member name="M:eZstd.Data.ExcelDbHelper.ConnectToExcel(System.String,System.Byte)">
             <summary>
             创建对Excel工作簿的连接
             </summary>
@@ -2816,7 +2829,7 @@
             <returns>一个OleDataBase的Connection连接，此连接还没有Open。</returns>
             <remarks></remarks>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.IsExcelDataSource(System.String)">
+        <member name="M:eZstd.Data.ExcelDbHelper.IsExcelDataSource(System.String)">
             <summary>
             验证连接的数据源是否是Excel数据库
             </summary>
@@ -2824,7 +2837,7 @@
             <returns>如果是Excel数据库，则返回True，否则返回False。</returns>
             <remarks></remarks>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.GetSheetsName(System.Data.OleDb.OleDbConnection)">
+        <member name="M:eZstd.Data.ExcelDbHelper.GetSheetsName(System.Data.OleDb.OleDbConnection)">
             <summary>
             从对于Excel的数据连接中获取Excel工作簿中的所有工作表（不包含Excel中的命名区域NamedRange）
             </summary>
@@ -2832,7 +2845,7 @@
             <returns>集合中所有工作表的名称都带有后缀 $ 。如果此连接不是连接到Excel数据库，则返回Nothing</returns>
             <remarks></remarks>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.GetFieldNames(System.Data.OleDb.OleDbConnection,System.String)">
+        <member name="M:eZstd.Data.ExcelDbHelper.GetFieldNames(System.Data.OleDb.OleDbConnection,System.String)">
             <summary>
             获取指定工作表中所有字段的名称，包括主键
             </summary>
@@ -2840,7 +2853,7 @@
             <param name="tableName"> 要在哪一个工作表中提取字段信息，表名的格式为“Sheet1$”</param>
             <remarks></remarks>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.GetFieldDataType(System.Data.OleDb.OleDbConnection,System.String)">
+        <member name="M:eZstd.Data.ExcelDbHelper.GetFieldDataType(System.Data.OleDb.OleDbConnection,System.String)">
             <summary>
             获取指定工作表中所有字段的数据类型。
             </summary>
@@ -2848,7 +2861,7 @@
             <param name="tableName"> 要在哪一个工作表中提取字段信息，表名的格式为“Sheet1$”</param>
             <remarks>Excel中字段的数据类型是以数字来表示的，其中：时间=7；</remarks>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.GetDataFromSheet(System.Data.OleDb.OleDbConnection,System.String)">
+        <member name="M:eZstd.Data.ExcelDbHelper.GetDataFromSheet(System.Data.OleDb.OleDbConnection,System.String)">
             <summary>
             读取Excel整张工作表中的所有字段的数据
             </summary>
@@ -2857,7 +2870,7 @@
             <returns></returns>
             <remarks></remarks>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.GetFieldDataFromExcel(System.Data.OleDb.OleDbConnection,System.String,System.String)">
+        <member name="M:eZstd.Data.ExcelDbHelper.GetFieldDataFromExcel(System.Data.OleDb.OleDbConnection,System.String,System.String)">
             <summary>
             读取Excel工作表中的某一个字段数据
             </summary>
@@ -2867,7 +2880,7 @@
             <returns></returns>
             <remarks></remarks>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.GetFieldDataFromExcel``1(System.Data.OleDb.OleDbConnection,System.String,System.String)">
+        <member name="M:eZstd.Data.ExcelDbHelper.GetFieldDataFromExcel``1(System.Data.OleDb.OleDbConnection,System.String,System.String)">
             <summary>
             读取Excel工作表中的某一个字段数据
             </summary>
@@ -2878,7 +2891,7 @@
             <returns></returns>
             <remarks></remarks>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.GetFieldDataFromExcel(System.Data.OleDb.OleDbConnection,System.String,System.String[])">
+        <member name="M:eZstd.Data.ExcelDbHelper.GetFieldDataFromExcel(System.Data.OleDb.OleDbConnection,System.String,System.String[])">
             <summary>
             读取Excel工作簿中的多个字段的数据
             </summary>
@@ -2888,13 +2901,13 @@
             <returns></returns>
             <remarks></remarks>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.GetDataSet(System.Data.OleDb.OleDbConnection,System.String)">
+        <member name="M:eZstd.Data.ExcelDbHelper.GetDataSet(System.Data.OleDb.OleDbConnection,System.String)">
             <summary> 执行有参SQL语句，返回DataTable </summary>
             <param name="conn"></param>
             <param name="safeSql">数据查询语句，比如“ Selete * From [Sheet1$] ”</param>
             <returns> DataAdapter.Fill得到的DataSet中的第一个DataTable </returns>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.InsertDataTable(System.Data.OleDb.OleDbConnection,System.Data.DataTable,System.String)">
+        <member name="M:eZstd.Data.ExcelDbHelper.InsertDataTable(System.Data.OleDb.OleDbConnection,System.Data.DataTable,System.String)">
             <summary>
             将一个全新的 DataTable 对象写入 Excel 数据库中
             </summary>
@@ -2903,7 +2916,7 @@
             请手动确保工作表Sheet中有与DataTable中每一列同名的字段，而且其数据类型是兼容的。 </param>
             <param name="sheetName"> 要进行插入的Excel工作表的名称，其格式为“Sheet1$”。请确保此工作表已经存在，而且已经包含与 tableSource 的列名相对应的字段 </param>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.InsertToSheet(System.Data.OleDb.OleDbConnection,System.String,System.String,System.Object)">
+        <member name="M:eZstd.Data.ExcelDbHelper.InsertToSheet(System.Data.OleDb.OleDbConnection,System.String,System.String,System.Object)">
             <summary>
             向Excel工作表中插入一条数据
             </summary>
@@ -2913,21 +2926,43 @@
             <param name="Value">实际插入的数据</param>
             <remarks></remarks>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.ConstructFieldNames(System.Collections.Generic.IList{System.String})">
+        <member name="M:eZstd.Data.ExcelDbHelper.CreateNewSheet(System.Data.OleDb.OleDbConnection,System.String,System.String[])">
+            <summary>
+            根据指定的字段名创建一个全新的Excel工作表，但是不向其中添加任何数据。
+            </summary>
+            <param name="conn"></param>
+            <param name="sheetName"> 要创建的工作表的名称，不能带后缀$ </param>
+            <param name="fields_valueTypes"> 工作表中的每一个字段，以及字段所对应的数据类型。如果不赋值，则只创建出一个工作表，而不创建任何字段。 </param>
+            <remarks>在Excel中创建工作表的语句为： "CREATE TABLE Sheet1 ( [Field1] VarChar,[Field2] VarChar)" </remarks>
+        </member>
+        <member name="M:eZstd.Data.ExcelDbHelper.CreateNewSheet(System.Data.OleDb.OleDbConnection,System.Data.DataTable)">
+            <summary>
+            根据指定的DataTable 创建一个全新的 Excel 工作表，而不添加任何数据。
+            </summary>
+            <param name="conn"></param>
+            <param name="tableSource"> 工作表名称即 tableSource.TableName；工作表中每一个字段的名称即tableSource中每一列的列名 </param>
+        </member>
+        <member name="M:eZstd.Data.ExcelDbHelper.ExecuteNoneQuery(System.Data.OleDb.OleDbConnection,System.String)">
+            <summary> 对Excel数据库执行非查询SQL语句 </summary>
+            <param name="conn"></param>
+            <param name="sql"> 用来执行的非查询sql语句</param>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZstd.Data.ExcelDbHelper.ConstructFieldNames(System.Collections.Generic.IList{System.String})">
             <summary>
             将要提取的字段名称转换为SQL语句中的字段名称字符
             </summary>
             <param name="FieldNames"></param>
             <returns></returns>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.ConstructDbValue(System.Collections.Generic.IList{System.Object},System.Text.StringBuilder@)">
+        <member name="M:eZstd.Data.ExcelDbHelper.ConstructDbValue(System.Collections.Generic.IList{System.Object},System.Text.StringBuilder@)">
             <summary>
             将要提取的字段名称转换为SQL语句中的字段名称字符
             </summary>
             <param name="values"></param>
             <param name="sb"></param>
         </member>
-        <member name="M:eZstd.Data.ExcelDBHelper.ConvertExcelDataType(System.Type)">
+        <member name="M:eZstd.Data.ExcelDbHelper.ConvertExcelDataType(System.Type)">
             <summary>
             Create Table时，为字段名匹配字段类型
             </summary>
@@ -3003,21 +3038,266 @@
             <param name="label">视图的标题</param>
             <returns></returns>
         </member>
+        <member name="T:eZstd.Data.SqlDataSetHelper">
+            <summary>
+            以数据集DataSet为基础的三层架构的数据库通用方法
+            </summary>
+        </member>
+        <member name="F:eZstd.Data.SqlDataSetHelper.ConnectString">
+            private static string ConnectString = "server=(local)\\sqlexpress;database=Book;user=sa;pwd=1234";//数据库连接字符串
+        </member>
+        <member name="M:eZstd.Data.SqlDataSetHelper.GetDataSetByTableName(System.String)">
+            <summary>
+            根据表名获取数据集的表
+            </summary>
+            <param name="table"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Data.SqlDataSetHelper.GetDataSetBySql(System.String)">
+            <summary>
+            根据Sql语句获取数据集对象
+            </summary>
+            <param name="sql"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Data.SqlDataSetHelper.GetDataReaderByID(System.Int32)">
+            <summary>
+            根据id值获取DataReader对象
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Data.SqlDataSetHelper.UpdateDataTable(System.String)">
+            <summary>
+            更新数据
+            </summary>
+            <param name="sql"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Data.SqlDataSetHelper.UpdateDataSet(System.Data.DataSet,System.String)">
+            <summary>
+            根据数据集和sql语句更新数据库
+            </summary>
+            <param name="ds"></param>
+            <param name="sql"></param>
+        </member>
+        <member name="T:eZstd.Data.SqlModelHelper">
+            <summary>
+            以数据实体为基础的三层架构的数据库通用方法
+            </summary>
+        </member>
+        <member name="M:eZstd.Data.SqlModelHelper.ExecuteCommand(System.String)">
+            <summary>
+            执行无参SQL语句
+            </summary>
+        </member>
+        <member name="M:eZstd.Data.SqlModelHelper.ExecuteCommand(System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            执行带参SQL语句
+            </summary>
+        </member>
+        <member name="M:eZstd.Data.SqlModelHelper.GetScalar(System.String)">
+            <summary>
+            执行无参SQL语句，并返回执行记录数
+            </summary>
+        </member>
+        <member name="M:eZstd.Data.SqlModelHelper.GetScalar(System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            执行有参SQL语句，并返回执行记录数
+            </summary>
+        </member>
+        <member name="M:eZstd.Data.SqlModelHelper.GetReader(System.String)">
+            <summary>
+            执行无参SQL语句，并返回SqlDataReader
+            </summary>
+        </member>
+        <member name="M:eZstd.Data.SqlModelHelper.GetReader(System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            执行有参SQL语句，并返回SqlDataReader
+            </summary>
+        </member>
+        <member name="M:eZstd.Data.SqlModelHelper.GetDataSet(System.String)">
+            <summary>
+            执行有参SQL语句，返回DataTable
+            </summary>
+            <param name="safeSql"></param>
+            <returns></returns>
+        </member>
+        <member name="T:eZstd.Data.StringSerializer">
+            <summary>
+            将任意一个有 Serializable标记的类以二进制转换器将类中所有数据与字符串间的相互序列化。
+            即可以将类中的数据（包括数组）序列化为字符，还可以将序列化的字符反序列化为一个类。
+            </summary>
+        </member>
+        <member name="M:eZstd.Data.StringSerializer.Encode64(System.Object)">
+            <summary>
+            Encode arbitrary .NET serialisable object
+            into binary data encodes as base64 string.
+            </summary>
+        </member>
+        <member name="M:eZstd.Data.StringSerializer.Decode64(System.String)">
+            <summary>
+            Decode arbitrary .NET serialisable object
+            from binary data encoded as base64 string.
+            </summary>
+        </member>
+        <member name="T:eZstd.Data.StringSerializer.ZengfyLinkBinder">
+            <summary>
+            为了解决SerializationException，方法之一是确保此assembly放置在与acad.exe 或 revit.exe相同的文件夹中，
+            另一个方法就是实现一个像这样的类。
+            </summary>
+            <remarks>
+             Resolve System.Runtime.Serialization.SerializationException, Message =
+            "Unable to find assembly 'StoreData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'."
+            One solution is to ensure that assembly resides in same directory as acad.exe or revit.exe,
+            the other is to implement a class such as this, cf.
+            http://www.codeproject.com/soap/Serialization_Samples.asp
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:eZstd.Data.XmlList`1" -->
+        <member name="M:eZstd.Data.XmlList`1.#ctor">
+            <summary> 构造函数 </summary>
+        </member>
+        <member name="M:eZstd.Dll.AssemblyHelper.DynamicDebugClass(System.String,System.String,System.Object[])">
+            <summary>
+            将一个程序集插件进行动态加载，并可以在不关闭主程序的情况下进行调试。
+            类似于Autodesk Revit中的插件 AddinManager 所起的作用。
+            </summary>
+            <param name="dllPath">dll或者exe文件的绝对路径</param>
+            <param name="classFullName">实例对象所属的类的完全限定名</param>
+            <param name="constructorArgs">构造函数的输入实参</param>
+            <returns></returns>
+            <remarks>将此程序集作为动态插件加载到某程序中去后（比如将某Excel或者CAD的插件功能加载到对应的程序进程中），
+            可以在不关闭对应的主程序的情况下，对插件dll进行调试，然后在主程序中重新调用调试更新后的插件功能。</remarks>
+        </member>
         <member name="T:eZstd.Drawing.ColorUtils">
             <summary>
             对颜色进行处理
             </summary>
             <remarks></remarks>
         </member>
-        <member name="M:eZstd.Drawing.ColorUtils.ColorInterp(System.Object,System.Object,System.Object)">
+        <member name="M:eZstd.Drawing.ColorUtils.ColorToValue(System.Drawing.Color)">
+            <summary>
+            将一个RGB颜色转换为对应的数值。
+            颜色的数值与RGB参量的换算关系为：Color属性值=R + 256*G + 256^2*B
+            </summary>
+            <param name="c"></param>
+            <returns>返回值为[0,16777215]之间的任意整数</returns>
+        </member>
+        <member name="M:eZstd.Drawing.ColorUtils.ValueToColor(System.Double)">
+            <summary>
+            将一个[0,16777215]之间的数值转换为对应的RGB颜色。
+            颜色的数值与RGB参量的换算关系为：Color属性值=R + 256*G + 256^2*B
+            </summary>
+            <param name="value">value的范围为[0,16777215]之间的任意数值</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Drawing.ColorUtils.ColorInterp(System.Double,System.Double,System.Double)">
             <summary>
             RGB 颜色插值
             </summary>
-            <param name="c1">颜色1所对应的数值</param>
-            <param name="c2">颜色2所对应的数值</param>
+            <param name="c1">颜色1所对应的数值，其值为[0,16777215]之间的任意整数</param>
+            <param name="c2">颜色2所对应的数值，其值为[0,16777215]之间的任意整数</param>
             <param name="x">x的值位于[0,1]的闭区间内，当其值为0时，它代表颜色c1，当其值为1时，它代表颜色c2</param>
             <returns>插值后的RGB颜色所对应的数值</returns>
-            <remarks>返回的整数值与RGB参量的换算关系为：Color属性值=R + 256*G + 256^2*B</remarks>
+            <remarks>颜色的数值与RGB参量的换算关系为：Color属性值=R + 256*G + 256^2*B</remarks>
+        </member>
+        <member name="M:eZstd.Drawing.ColorUtils.ColorInterp(System.Drawing.Color,System.Drawing.Color,System.Double)">
+            <summary>
+            RGB 颜色插值
+            </summary>
+            <param name="c1"></param>
+            <param name="c2"></param>
+            <param name="x">x的值位于[0,1]的闭区间内，当其值为0时，它代表颜色c1，当其值为1时，它代表颜色c2</param>
+            <returns>插值后的RGB颜色</returns>
+        </member>
+        <member name="M:eZstd.Drawing.ColorUtils.ClassicalExpand(System.Int32)">
+            <summary> 根据经典的有限元插值色系作为基准来进行颜色的插值扩展 </summary>
+            <param name="colorsCount">目标颜色集的个数</param>
+            <returns>数组中元素的个数为colorsCount </returns>
+        </member>
+        <member name="M:eZstd.Drawing.ColorUtils.ColorExpand(System.Drawing.Color[],System.Int32)">
+            <summary> 根据多个基准色平均插值出指定数量的渐变颜色集 </summary>
+            <param name="baseColors">用来进行插值的基准色</param>
+            <param name="colorsCount">目标颜色集的数量</param>
+            <returns>数组中元素的个数为colorsCount</returns>
+        </member>
+        <member name="T:eZstd.Drawing.DrawShapesTest">
+            <summary>
+            与 GDI+ 绘图相关的测试
+            </summary>
+        </member>
+        <member name="M:eZstd.Drawing.DrawShapesTest.MetafileCallback(System.Drawing.Imaging.EmfPlusRecordType,System.Int32,System.Int32,System.IntPtr,System.Drawing.Imaging.PlayRecordCallback)">
+            <summary>
+            Provides a callback method for the EnumerateMetafile method.
+            </summary>
+            <param name="recordType">Member of the EmfPlusRecordType enumeration that specifies the type of metafile record.</param>
+            <param name="flags">Set of flags that specify attributes of the record.</param>
+            <param name="dataSize">Number of bytes in the record data.</param>
+            <param name="data">Pointer to a buffer that contains the record data.</param>
+            <param name="callbackData">Not used.</param>
+            <returns></returns>
+        </member>
+        <member name="F:eZstd.Drawing.DrawShapesTest.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:eZstd.Drawing.DrawShapesTest.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:eZstd.Drawing.DrawShapesTest.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:eZstd.Drawing.TransformUtils.GetAxisTransform(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single@,System.Single@)">
+            <summary>
+            在单一轴上进行模型与屏幕之间的变换
+            </summary>
+            <param name="s1">屏幕上的端点1</param>
+            <param name="s2">屏幕上的端点2</param>
+            <param name="m1">s1 在模型中对应的端点1</param>
+            <param name="m2">s2 在模型中对应的端点2</param>
+            <param name="mp">模型中的任意一个点</param>
+            <param name="sp">模型中的点 mp 在屏幕中对应的位置点</param>
+            <param name="ratio">从模型到屏幕的缩放比例</param>
+            <remarks>
+            应用举例：
+            // 转换坐标系：对 Y 方向进行变换
+              float sp; float ratio;
+              GetAxisTransform(
+              s1: _daShaft.Top, s2: _daShaft.Top + _daShaft.Height,
+              m1: elevations.Max, m2: elevations.Min,
+              mp: 0f, sp: out sp, ratio: out ratio);
+            
+            // 将得到的结果应用到仿射矩阵中
+              Matrix mY = new Matrix();
+              mY.Translate(_daShaft.Left, sp);
+              mY.Scale(1, ratio);
+              gr.Transform = mY;  // 将变换应用到绘图面板中
+            </remarks>
+        </member>
+        <member name="F:eZstd.Form1.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:eZstd.Form1.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:eZstd.Form1.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
         </member>
         <member name="T:eZstd.Miscellaneous.AssemblyCompiler">
             <summary> 动态编译程序集。在程序运行的过程中动态地编译出一个程序集 .dll 或者 .exe。 </summary>
@@ -3111,59 +3391,13 @@
             <param name="message">报错信息提示</param>
             <param name="title"> 报错对话框的标题 </param>
         </member>
-        <member name="T:eZstd.Miscellaneous.StringSerializer">
+        <member name="M:eZstd.Miscellaneous.DebugUtils.GetDebugMessage(System.Exception,System.String)">
             <summary>
-            将任意一个有 Serializable标记的类以二进制转换器将类中所有数据与字符串间的相互序列化。
-            即可以将类中的数据（包括数组）序列化为字符，还可以将序列化的字符反序列化为一个类。
+            在调试阶段，为每一种报错显示对应的报错信息及出错位置。
             </summary>
-        </member>
-        <member name="M:eZstd.Miscellaneous.StringSerializer.Encode64(System.Object)">
-            <summary>
-            Encode arbitrary .NET serialisable object
-            into binary data encodes as base64 string.
-            </summary>
-        </member>
-        <member name="M:eZstd.Miscellaneous.StringSerializer.Decode64(System.String)">
-            <summary>
-            Decode arbitrary .NET serialisable object
-            from binary data encoded as base64 string.
-            </summary>
-        </member>
-        <member name="T:eZstd.Miscellaneous.StringSerializer.ZengfyLinkBinder">
-            <summary>
-            为了解决SerializationException，方法之一是确保此assembly放置在与acad.exe 或 revit.exe相同的文件夹中，
-            另一个方法就是实现一个像这样的类。
-            </summary>
-            <remarks>
-             Resolve System.Runtime.Serialization.SerializationException, Message =
-            "Unable to find assembly 'StoreData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'."
-            One solution is to ensure that assembly resides in same directory as acad.exe or revit.exe,
-            the other is to implement a class such as this, cf.
-            http://www.codeproject.com/soap/Serialization_Samples.asp
-            </remarks>
-        </member>
-        <member name="T:eZstd.Miscellaneous.BinarySerializer">
-            <summary>
-            在.NET中，我们可以将对象序列化从而保存对象的状态到内存或者磁盘文件中，或者分布式应用程序中用于系统通信，，这样就有可能做出一个“对象数据库”了。
-            一般来说，二进制序列化的效率要高，所获得的字节数最小。
-            </summary>
-            <remarks></remarks>
-        </member>
-        <member name="M:eZstd.Miscellaneous.BinarySerializer.EnCode(System.IO.Stream,System.Object)">
-            <summary>
-            将任意一个声明为Serializable的类或者其List等集合中的数据，以二进制的格式保存到对应的流文件中。
-            </summary>
-            <param name="fs">推荐使用FileStream对象。此方法中不会对Stream对象进行Close。</param>
-            <param name="Data">要进行保存的可序列化对象</param>
-            <remarks></remarks>
-        </member>
-        <member name="M:eZstd.Miscellaneous.BinarySerializer.DeCode(System.IO.Stream)">
-            <summary>
-            从二进制流文件中，将其中的二进制数据反序列化为对应的类或集合对象。
-            </summary>
-            <param name="fs">推荐使用FileStream对象。此方法中不会对Stream对象进行Close。</param>
-            <returns>此二进制流文件所对应的可序列化对象</returns>
-            <remarks></remarks>
+            <param name="ex"> Catch 块中的 Exception 对象</param>
+            <param name="message">报错信息提示</param>
+            <returns></returns>
         </member>
         <member name="T:eZstd.Miscellaneous.Utils">
             <summary>
@@ -3177,6 +3411,295 @@
             </summary>
             <param name="typeIn"></param>
             <returns></returns>
+        </member>
+        <member name="T:eZstd.DateTimeHelper">
+            <summary>
+            与时间数据相关的操作，比如日期与字符、整数之间的相互转换等。
+            </summary>
+        </member>
+        <member name="M:eZstd.DateTimeHelper.Time2Int(System.DateTime)">
+            <summary> 将精确到分钟的时间数据保存为对应的32位整数 </summary>
+            <param name="dt">精确度为分钟，更精细的数据将被忽略。
+            由于32位数值的限制，能够识别的最大日期为4770年11月24日(23时59分)。即（2^20-1）所对应的日期。</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.DateTimeHelper.Int2Time(System.Int32)">
+            <summary>
+            将由 Time2Int 函数生成的整数值再转换回日期数据。返回的最大日期为4770年11月24日(23时59分) ，精度为分钟。
+            </summary>
+            <param name="intValue">输入的整数值并没有明显的物理含义，
+            请确保这个值是通过<see cref="M:eZstd.DateTimeHelper.Time2Int(System.DateTime)"/>函数生成的。否则给出的结果不可预知，因为其中涉及到复杂的位运算操作。</param>
+            <returns>返回的最大日期为4770年11月24日(23时59分) </returns>
+        </member>
+        <member name="M:eZstd.DateTimeHelper.String2Date(System.String)">
+            <summary>
+            将字符转换为日期。除了.NET能够识别的日期格式外，
+            还增加了20160406（ 即 2016/04/06），以及 201604061330（即 2016/04/06 13:30）
+            </summary>
+            <param name="text">要转换为日期的字符。</param>
+            <returns> 字符所对应的日期。如果不能转换为日期，则返回Null</returns>
+        </member>
+        <member name="M:eZstd.ExtensionMethods.AddRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            将某集合中的元素添加到另一个集合中去
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection"></param>
+            <param name="items"></param>
+        </member>
+        <member name="M:eZstd.ExtensionMethods.Clone``1(``0)">
+            <summary>
+            Strong-typed object cloning for objects that implement <see cref="T:System.ICloneable"/>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.ExtensionMethods.IndexOf``2(``0,``1)">
+            <summary>
+            从集合中搜索指定项的下标位置（第一个元素的下标值为0），如果没有匹配项，则返回-1。
+            </summary>
+            <typeparam name="TCol"></typeparam>
+            <param name="collection"> 匹配的数据源集合 </param>
+            <typeparam name="TVal"></typeparam>
+            <param name="value"> 要进行匹配的值 </param>
+            <returns> 从集合中搜索指定项的下标位置（第一个元素的下标值为0），如果没有匹配项，则返回-1。 </returns>
+        </member>
+        <member name="T:eZstd.UserControls.eZDataGridViewUIAdd">
+            <summary> 通过设计界面中的弹出菜单，来执行表格中记录行的插入、增加或删除等操作 </summary>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridViewUIAdd.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridViewUIAdd.InsertRow(System.Object,System.EventArgs)">
+            <summary>
+            插入一行
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridViewUIAdd.RemoveOneRow(System.Object,System.EventArgs)">
+            <summary>
+            移除一行
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridViewUIAdd.RemoveMultipleRows(System.Object,System.EventArgs)">
+            <summary>
+            移除多行
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+            <remarks></remarks>
+        </member>
+        <member name="T:eZstd.UserControls.NumberChanging">
+            <summary>
+            用户控件，用来增加或减少指定的时间跨度值。
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZstd.UserControls.NumberChanging.#ctor">
+            <summary> 构造函数 </summary>
+        </member>
+        <member name="P:eZstd.UserControls.NumberChanging.ValueNumber">
+            <summary> 控件中所对应的数值，即日期文本框上显示的用来进行日期值增减的跨度。
+            正值表示增加时间跨度，负值表示送去时间跨度。 </summary>
+        </member>
+        <member name="P:eZstd.UserControls.NumberChanging.Unit">
+            <summary> 时间跨度的单位 </summary>
+        </member>
+        <member name="P:eZstd.UserControls.NumberChanging.IntegerOnly">
+            <summary> 是否只允许整数 </summary>
+        </member>
+        <member name="M:eZstd.UserControls.NumberChanging.AddTimeSpan(System.DateTime)">
+            <summary> 根据当前控件中所对应的时间跨度来进行时间的增减 </summary>
+        </member>
+        <member name="M:eZstd.UserControls.NumberChanging.MinusTimeSpan(System.DateTime)">
+            <summary> 根据当前控件中所对应的时间跨度来进行时间的增减 </summary>
+        </member>
+        <member name="M:eZstd.UserControls.NumberChanging.ModifyTimeSpan(System.DateTime,System.Boolean)">
+            <summary> 根据当前控件中所对应的时间跨度来进行时间的增减 </summary>
+            <param name="originTime"></param>
+            <param name="add">如果为true，则增加时间跨度，如果为false，则减去时间跨度。</param>
+            <returns></returns>
+        </member>
+        <member name="T:eZstd.UserControls.TextBoxNum">
+            <summary> 自定义控件：只能输入数值的文本框。
+            当文本框中的数值发生变化时，会触发 ValueNumberChanged 事件，可以通过此事件中的 double 类型的参数来获取最新的数值。
+            </summary>
+        </member>
+        <member name="E:eZstd.UserControls.TextBoxNum.ValueNumberChanged">
+            <summary> double 类型的参数即表示文本框中所代表的最新的数值。 </summary>
+        </member>
+        <member name="P:eZstd.UserControls.TextBoxNum.ValueNumber">
+            <summary> 文本框中所对应的数值 </summary>
+        </member>
+        <member name="P:eZstd.UserControls.TextBoxNum.IntegerOnly">
+            <summary> 文本框中是否只允许输入整数 </summary>
+        </member>
+        <member name="P:eZstd.UserControls.TextBoxNum.PositiveOnly">
+            <summary> 文本框中是否只允许输入正值（包括0） </summary>
+        </member>
+        <member name="F:eZstd.UserControls.TextBoxNum._textPattern">
+            <summary> 正则表达式的匹配模式 </summary>
+        </member>
+        <member name="M:eZstd.UserControls.TextBoxNum.#ctor">
+            <summary> 构造函数 </summary>
+        </member>
+        <member name="M:eZstd.UserControls.TextBoxNum.ConstructRegexPattern">
+            <summary> 根据是否只允许正数或者整数来设置对应的匹配选项 </summary>
+        </member>
+        <member name="T:eZstd.UserControls.TimeSpan2.TimeSpanUnit">
+            <summary> 时间跨度的单位 </summary>
+        </member>
+        <member name="M:eZstd.UserControls.TimeSpan2.GetTimeFromTimeSpan(System.DateTime,System.Double,eZstd.UserControls.TimeSpan2.TimeSpanUnit)">
+            <summary> 根据当前指定的时间跨度来对当前时间的增减 </summary>
+            <param name="originTime">初始时间</param>
+            <param name="spanValue">时间跨度的数值。正值表示增加时间跨度，负值表示送去时间跨度。</param>
+            <param name="spanUnit">时间跨度的单位</param>
+            <returns></returns>
+        </member>
+        <member name="T:eZstd.UserControls.eZDataGridView">
+            <summary>
+            自定义控件：DataGridView，向其中增加了：插入行、删除行、显示行号等功能.
+            此控件不支持表格内容的复制粘贴，如果要用此功能，请用其派生类<see cref="T:eZstd.UserControls.eZDataGridViewPaste"/> 
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="P:eZstd.UserControls.eZDataGridView.ShowRowNumber">
+            <summary> 是否显示表格的行号 </summary>
+        </member>
+        <member name="P:eZstd.UserControls.eZDataGridView.KeyDelete">
+            <summary> 是否响应键盘的 delete 键，以在按下此键时将选择的单元格的内容删除 </summary>
+        </member>
+        <member name="P:eZstd.UserControls.eZDataGridView.SupportPaste">
+            <summary> 是否响应键盘的 Ctrl+ V 键，以在按下此组合键时将剪切板中的内容粘贴到表格中 </summary>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridView.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridView.myDataGridView_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary> 键盘按键按下 </summary>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridView.myDataGridView_RowsNumberChanged(System.Object,System.Object)">
+            <summary>
+            行数改变时的事件：显示行号
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridView.RowsResizable(System.Object,System.Windows.Forms.DataGridViewRowsAddedEventArgs)">
+            <summary> 设置新添加的一行的Resizable属性为False </summary>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridView.DeleteSelectedValue(System.Windows.Forms.KeyEventArgs)">
+            <summary> 如果按下 Delete 键，则将选择的单元格的内容删除 </summary>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridView.PasteFromClipBoard(System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            如下按下Ctrl+V，则将表格中的数据粘贴到DataGridView控件中
+            </summary>
+            <remarks>DataGridView表格的索引：行号：表头为-1，第一行为0，列号：表示行编号的列为-1，第一个数据列的列号为0.
+            DataGridView.Rows.Count与DataGridView.Columns.Count均只计算数据区域，而不包含表头与列头。</remarks>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridView.PasteFromTable(System.Int32,System.Int32)">
+            <summary> 将表格中的数据粘贴到DataGridView控件中（通过先添加全部行，再为添加的行赋值的方式） </summary>
+            <param name="startRow">粘贴的起始单元格的行位置</param>
+            <param name="startCol">粘贴的起始单元格的列位置</param>
+            <remarks>DataGridView表格的索引：行号：表头为-1，第一行为0，列号：表示行编号的列为-1，第一个数据列的列号为0.
+            DataGridView.Rows.Count与DataGridView.Columns.Count均只计算数据区域，而不包含表头与列头。总行数包括最后一行空数据行。</remarks>
+        </member>
+        <member name="T:eZstd.UserControls.eZDataGridViewPaste">
+            <summary>
+            支持复制粘贴功能的表格控件
+            </summary>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridViewPaste.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridViewPaste.PasteFromClipBoard(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            如下按下Ctrl+V，则将表格中的数据粘贴到DataGridView控件中
+            </summary>
+            <remarks>DataGridView表格的索引：行号：表头为-1，第一行为0，列号：表示行编号的列为-1，第一个数据列的列号为0.
+            DataGridView.Rows.Count与DataGridView.Columns.Count均只计算数据区域，而不包含表头与列头。</remarks>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridViewPaste.PasteFromTable(System.Int32,System.Int32)">
+            <summary> 将表格中的数据粘贴到DataGridView控件中（通过先添加全部行，再为添加的行赋值的方式） </summary>
+            <param name="startRow">粘贴的起始单元格的行位置</param>
+            <param name="startCol">粘贴的起始单元格的列位置</param>
+            <remarks>DataGridView表格的索引：行号：表头为-1，第一行为0，列号：表示行编号的列为-1，第一个数据列的列号为0.
+            DataGridView.Rows.Count与DataGridView.Columns.Count均只计算数据区域，而不包含表头与列头。总行数包括最后一行空数据行。</remarks>
+        </member>
+        <member name="T:eZstd.UserControls.ListControlValue`1">
+            <summary>
+            用来作为ListControl类的.Add方法中的Item参数的类。通过指定ListControl类的DisplayMember属性，来设置列表框中显示的文本。
+            </summary>
+            <remarks>
+            保存数据时：
+             With ListBoxWorksheetsName
+                  .DisplayMember = LstbxDisplayAndItem.DisplayMember
+                  .ValueMember = LstbxDisplayAndItem.ValueMember
+                  .DataSource = arrSheetsName   '  Dim arrSheetsName(0 To sheetsCount - 1) As LstbxDisplayAndItem
+             End With
+            提取数据时：
+             Try
+                 Me.F_shtMonitorData = DirectCast(Me.ListBoxWorksheetsName.SelectedValue, Worksheet)
+             Catch ex As Exception
+                 Me.F_shtMonitorData = Nothing
+             End Try
+            或者是：
+             Dim lst As LstbxDisplayAndItem = Me.ComboBoxOpenedWorkbook.SelectedItem
+             Try
+                Dim Wkbk As Workbook = DirectCast(lst.Value, Workbook)
+             Catch ex ...
+            </remarks>
+            <typeparam name="Tval">Value属性所对应的类型</typeparam>
+        </member>
+        <member name="F:eZstd.UserControls.ListControlValue`1.DisplayMember">
+            <summary>
+            在列表框中进行显示的文本
+            </summary>
+            <remarks>此常数的值代表此类中代表要在列表框中显示的文本的属性名，即"DisplayedText"</remarks>
+        </member>
+        <member name="F:eZstd.UserControls.ListControlValue`1.ValueMember">
+            <summary>
+            列表框中每一项对应的值（任何类型的值）
+            </summary>
+            <remarks>此常数的值代表此类中代表列表框中的每一项绑定的数据的属性名，即"Value"</remarks>
+        </member>
+        <member name="M:eZstd.UserControls.ListControlValue`1.#ctor(System.String,`0)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="DisplayedText">用来显示在列表的UI界面中的文本</param>
+            <param name="Value">列表项对应的值</param>
+            <remarks></remarks>
+        </member>
+        <member name="T:eZstd.UserControls.ListControlValue`1.NothingInListBox">
+            <summary>
+            列表框中用来表示“什么也没有”。
+            1、在声明时：listControl控件.Items.Add(New LstbxDisplayAndItem(" 无", NothingInListBox.None))
+            2、在选择列表项时：listControl控件.SelectedValue = NothingInListBox.None
+            3、在读取列表中的数据时，作出判断：If Not LstbxItem.Value.Equals(NothingInListBox.None) Then ...
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="F:eZstd.UserControls.ListControlValue`1.NothingInListBox.None">
+            <summary>
+            什么也没有选择
+            </summary>
+            <remarks></remarks>
         </member>
         <member name="T:eZstd.Windows.HideMethodReturnedProc">
             <summary>
@@ -4282,245 +4805,26 @@
         <member name="P:eZstd.MatrixPack.SingularValueDecomposition.Diagonal">
             <summary>Return the one-dimensional array of singular values.</summary>		
         </member>
-        <member name="T:eZstd.UserControl.eZDataGridView">
+        <member name="T:OldW.DllActivator.IDllActivator">
             <summary>
-            自定义控件：DataGridView，向其中增加了：插入行、删除行、显示行号等功能.
-            此控件不支持表格内容的复制粘贴，如果要用此功能，请用其派生类<see cref="T:eZstd.UserControl.eZDataGridViewPaste"/> 
+            用于在IExternalCommand.Execute方法中，将整个项目的所有dll加载到进程中。
+            以避免出现在后面出现无法加载文件或者程序集的问题。
+            此接口是专门为AddinManager在调试时设计的，在最终软件发布之前，此接口以及所有与之相关的类以及调用方法都可以删除。
             </summary>
-            <remarks></remarks>
-        </member>
-        <member name="M:eZstd.UserControl.eZDataGridView.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:eZstd.UserControl.eZDataGridView.myDataGridView_RowsNumberChanged(System.Object,System.Object)">
-            <summary>
-            行数改变时的事件：显示行号
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-            <remarks></remarks>
-        </member>
-        <member name="M:eZstd.UserControl.eZDataGridView.RowsResizable(System.Object,System.Windows.Forms.DataGridViewRowsAddedEventArgs)">
-            <summary>
-            设置新添加的一行的Resizable属性为False
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-            <remarks></remarks>
-        </member>
-        <member name="M:eZstd.UserControl.eZDataGridView.InsertRow(System.Object,System.EventArgs)">
-            <summary>
-            插入一行
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-            <remarks></remarks>
-        </member>
-        <member name="M:eZstd.UserControl.eZDataGridView.RemoveOneRow(System.Object,System.EventArgs)">
-            <summary>
-            移除一行
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-            <remarks></remarks>
-        </member>
-        <member name="M:eZstd.UserControl.eZDataGridView.RemoveMultipleRows(System.Object,System.EventArgs)">
-            <summary>
-            移除多行
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-            <remarks></remarks>
-        </member>
-        <member name="M:eZstd.UserControl.eZDataGridView.myDataGridView_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
-            <summary>
-            如下按下 Delete ，则将表格中的选中的单元格中的数据清除 </summary>
-        </member>
-        <member name="T:eZstd.UserControl.eZDataGridViewPaste">
-            <summary>
-            支持复制粘贴功能的表格控件
-            </summary>
-        </member>
-        <member name="M:eZstd.UserControl.eZDataGridViewPaste.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:eZstd.UserControl.eZDataGridViewPaste.myDataGridView_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
-            <summary>
-            如下按下Ctrl+V，则将表格中的数据粘贴到DataGridView控件中
-            </summary>
-            <remarks>DataGridView表格的索引：行号：表头为-1，第一行为0，列号：表示行编号的列为-1，第一个数据列的列号为0.
-            DataGridView.Rows.Count与DataGridView.Columns.Count均只计算数据区域，而不包含表头与列头。</remarks>
-        </member>
-        <member name="M:eZstd.UserControl.eZDataGridViewPaste.PasteFromTable(System.Int32,System.Int32)">
-            <summary> 将表格中的数据粘贴到DataGridView控件中（通过先添加全部行，再为添加的行赋值的方式） </summary>
-            <param name="startRow">粘贴的起始单元格的行位置</param>
-            <param name="startCol">粘贴的起始单元格的列位置</param>
-            <remarks>DataGridView表格的索引：行号：表头为-1，第一行为0，列号：表示行编号的列为-1，第一个数据列的列号为0.
-            DataGridView.Rows.Count与DataGridView.Columns.Count均只计算数据区域，而不包含表头与列头。总行数包括最后一行空数据行。</remarks>
-        </member>
-        <member name="T:eZstd.UserControl.ListControlValue`1">
-            <summary>
-            用来作为ListControl类的.Add方法中的Item参数的类。通过指定ListControl类的DisplayMember属性，来设置列表框中显示的文本。
-            </summary>
-            <remarks>
-            保存数据时：
-             With ListBoxWorksheetsName
-                  .DisplayMember = LstbxDisplayAndItem.DisplayMember
-                  .ValueMember = LstbxDisplayAndItem.ValueMember
-                  .DataSource = arrSheetsName   '  Dim arrSheetsName(0 To sheetsCount - 1) As LstbxDisplayAndItem
-             End With
-            提取数据时：
-             Try
-                 Me.F_shtMonitorData = DirectCast(Me.ListBoxWorksheetsName.SelectedValue, Worksheet)
-             Catch ex As Exception
-                 Me.F_shtMonitorData = Nothing
-             End Try
-            或者是：
-             Dim lst As LstbxDisplayAndItem = Me.ComboBoxOpenedWorkbook.SelectedItem
-             Try
-                Dim Wkbk As Workbook = DirectCast(lst.Value, Workbook)
-             Catch ex ...
+            <remarks>在每一次调用Execute方法的开关，都可以用如下代码来将对应项目的所有引用激活。
+            DllActivator.DllActivator_Projects dat = new DllActivator.DllActivator_Projects();
+            dat.ActivateReferences();
             </remarks>
-            <typeparam name="Tval">Value属性所对应的类型</typeparam>
         </member>
-        <member name="F:eZstd.UserControl.ListControlValue`1.DisplayMember">
+        <member name="M:OldW.DllActivator.IDllActivator.ActivateReferences">
+            <summary> 激活本DLL所引用的那些DLLs </summary>
+        </member>
+        <member name="T:OldW.DllActivator.DllActivator_std">
+            <summary> 用于 OldW Revit 插件中多个dll之前的AddinManager调试 </summary>
+        </member>
+        <member name="M:OldW.DllActivator.DllActivator_std.ActivateReferences">
             <summary>
-            在列表框中进行显示的文本
-            </summary>
-            <remarks>此常数的值代表此类中代表要在列表框中显示的文本的属性名，即"DisplayedText"</remarks>
-        </member>
-        <member name="F:eZstd.UserControl.ListControlValue`1.ValueMember">
-            <summary>
-            列表框中每一项对应的值（任何类型的值）
-            </summary>
-            <remarks>此常数的值代表此类中代表列表框中的每一项绑定的数据的属性名，即"Value"</remarks>
-        </member>
-        <member name="M:eZstd.UserControl.ListControlValue`1.#ctor(System.String,`0)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="DisplayedText">用来显示在列表的UI界面中的文本</param>
-            <param name="Value">列表项对应的值</param>
-            <remarks></remarks>
-        </member>
-        <member name="T:eZstd.UserControl.ListControlValue`1.NothingInListBox">
-            <summary>
-            列表框中用来表示“什么也没有”。
-            1、在声明时：listControl控件.Items.Add(New LstbxDisplayAndItem(" 无", NothingInListBox.None))
-            2、在选择列表项时：listControl控件.SelectedValue = NothingInListBox.None
-            3、在读取列表中的数据时，作出判断：If Not LstbxItem.Value.Equals(NothingInListBox.None) Then ...
-            </summary>
-            <remarks></remarks>
-        </member>
-        <member name="F:eZstd.UserControl.ListControlValue`1.NothingInListBox.None">
-            <summary>
-            什么也没有选择
-            </summary>
-            <remarks></remarks>
-        </member>
-        <member name="T:stdOldW.DAL.SqlDataSetHelper">
-            <summary>
-            以数据集DataSet为基础的三层架构的数据库通用方法
-            </summary>
-        </member>
-        <member name="F:stdOldW.DAL.SqlDataSetHelper.ConnectString">
-            private static string ConnectString = "server=(local)\\sqlexpress;database=Book;user=sa;pwd=1234";//数据库连接字符串
-        </member>
-        <member name="M:stdOldW.DAL.SqlDataSetHelper.GetDataSetByTableName(System.String)">
-            <summary>
-            根据表名获取数据集的表
-            </summary>
-            <param name="table"></param>
-            <returns></returns>
-        </member>
-        <member name="M:stdOldW.DAL.SqlDataSetHelper.GetDataSetBySql(System.String)">
-            <summary>
-            根据Sql语句获取数据集对象
-            </summary>
-            <param name="sql"></param>
-            <returns></returns>
-        </member>
-        <member name="M:stdOldW.DAL.SqlDataSetHelper.GetDataReaderByID(System.Int32)">
-            <summary>
-            根据id值获取DataReader对象
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:stdOldW.DAL.SqlDataSetHelper.UpdateDataTable(System.String)">
-            <summary>
-            更新数据
-            </summary>
-            <param name="sql"></param>
-            <returns></returns>
-        </member>
-        <member name="M:stdOldW.DAL.SqlDataSetHelper.UpdateDataSet(System.Data.DataSet,System.String)">
-            <summary>
-            根据数据集和sql语句更新数据库
-            </summary>
-            <param name="ds"></param>
-            <param name="sql"></param>
-        </member>
-        <member name="T:stdOldW.DAL.SqlModelHelper">
-            <summary>
-            以数据实体为基础的三层架构的数据库通用方法
-            </summary>
-        </member>
-        <member name="M:stdOldW.DAL.SqlModelHelper.ExecuteCommand(System.String)">
-            <summary>
-            执行无参SQL语句
-            </summary>
-        </member>
-        <member name="M:stdOldW.DAL.SqlModelHelper.ExecuteCommand(System.String,System.Data.SqlClient.SqlParameter[])">
-            <summary>
-            执行带参SQL语句
-            </summary>
-        </member>
-        <member name="M:stdOldW.DAL.SqlModelHelper.GetScalar(System.String)">
-            <summary>
-            执行无参SQL语句，并返回执行记录数
-            </summary>
-        </member>
-        <member name="M:stdOldW.DAL.SqlModelHelper.GetScalar(System.String,System.Data.SqlClient.SqlParameter[])">
-            <summary>
-            执行有参SQL语句，并返回执行记录数
-            </summary>
-        </member>
-        <member name="M:stdOldW.DAL.SqlModelHelper.GetReader(System.String)">
-            <summary>
-            执行无参SQL语句，并返回SqlDataReader
-            </summary>
-        </member>
-        <member name="M:stdOldW.DAL.SqlModelHelper.GetReader(System.String,System.Data.SqlClient.SqlParameter[])">
-            <summary>
-            执行有参SQL语句，并返回SqlDataReader
-            </summary>
-        </member>
-        <member name="M:stdOldW.DAL.SqlModelHelper.GetDataSet(System.String)">
-            <summary>
-            执行有参SQL语句，返回DataTable
-            </summary>
-            <param name="safeSql"></param>
-            <returns></returns>
-        </member>
-        <member name="T:My.Resources.Resources">
-            <summary>
-              一个强类型的资源类，用于查找本地化的字符串等。
-            </summary>
-        </member>
-        <member name="P:My.Resources.Resources.ResourceManager">
-            <summary>
-              返回此类使用的缓存的 ResourceManager 实例。
-            </summary>
-        </member>
-        <member name="P:My.Resources.Resources.Culture">
-            <summary>
-              使用此强类型资源类，为所有资源查找
-              重写当前线程的 CurrentUICulture 属性。
+            激活本DLL所引用的那些DLLs
             </summary>
         </member>
         <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">

@@ -4,7 +4,8 @@ using Office = Microsoft.Office.Core;
 
 namespace eZx.Database
 {
-    public class eZDataSheet
+    /// <summary> 数据库中的某一张数据表 </summary>
+    public class DataSheet
     {
         #region   ---  Declarations & Definitions
 
@@ -28,7 +29,7 @@ namespace eZx.Database
 
         ///<summary> 此字段名称本身的数据类型。
         /// 一般情况下，一个字段的名称只要是一个字符就可以了，但是它也可以代表具体的含义，比如在具体某一天的日期“2016/2/6” </summary>
-        public DataField.eZDataType FieldType { get; set; }
+        public eZDataType FieldType { get; set; }
 
         #endregion
 
@@ -48,8 +49,8 @@ namespace eZx.Database
         /// <param name="FieldType">字段名称本身的数据类型, 一般情况下，一个字段的名称只要是一个字符就可以了，
         /// 但是它也可以代表具体的含义，比如在具体某一天的日期“2016/2/6” </param>
         /// <remarks></remarks>
-        public eZDataSheet(Worksheet WkSheet, BindingList<DataField> List_FieldInfo,
-            DataField.eZDataType FieldType = DataField.eZDataType.字符)
+        public DataSheet(Worksheet WkSheet, BindingList<DataField> List_FieldInfo,
+            eZDataType FieldType = eZDataType.字符)
         {
             this.WorkSheet = WkSheet;
             this.Fields = List_FieldInfo;

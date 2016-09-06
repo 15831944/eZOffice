@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using eZexcelAPI;
+using eZexcelAPI.Entities;
+using eZstd.Dll;
+using eZstd.Miscellaneous;
 using eZx.Database;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Tools.Ribbon;
@@ -21,18 +23,18 @@ namespace eZx
         /// <summary>
         /// 此Application中所有的数据库工作表
         /// </summary>
-        private List<eZDataSheet> F_DbSheets = new List<eZDataSheet>();
+        private List<DataSheet> F_DbSheets = new List<DataSheet>();
 
         #endregion
 
         #region   ---  Properties
 
-        private eZDataSheet F_ActiveDataSheet;
+        private DataSheet F_ActiveDataSheet;
 
         /// <summary> 此Application中的活动数据库。 </summary>
         /// <remarks>如果当前活动的Excel工作表是一个符合格式的数据库工作表，
         /// 则此属性指向此对应的数据库对象，否则，返回Nothing。</remarks>
-        public eZDataSheet ActiveDatabaseSheet
+        public DataSheet ActiveDatabaseSheet
         {
             get { return this.F_ActiveDataSheet; }
             set
@@ -72,6 +74,7 @@ namespace eZx
         /// </summary>
         /// <remarks>此工作簿位于桌面上的“tempData.xlsx”</remarks>
         private Char path_Tempwkbk;
+
         // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
 
         /// <summary> 供各项命令使用的第一个基本参数，此字段值会由TextChange事件而自动修改。 </summary>
@@ -87,6 +90,7 @@ namespace eZx
 
         #endregion
 
+        /// <summary> 构造函数 </summary>
         public void Ribbon_zfy_Load(Object sender, RibbonUIEventArgs e)
         {
             ExcelApp = Globals.ThisAddIn.Application;
@@ -94,8 +98,6 @@ namespace eZx
             Para1 = EditBox_p1.Text;
             Para2 = EditBox_p2.Text;
             Para3 = EditBox_p3.Text;
-            Ribbon_eZx with_1 = this;
-            // .btnEditDatabase.Enabled = False
         }
 
         #region   ---  数据库 ---
@@ -124,7 +126,7 @@ namespace eZx
             // -------------------------- 对当前工作表的信息进行处理 --------------------------
             // 此工作表是否曾经是一个数据库
             Worksheet sht = ExcelApp.ActiveSheet;
-            eZDataSheet CorrespondingDatasheet = CorrespondingInCollection(sht, this.F_DbSheets);
+            DataSheet CorrespondingDatasheet = CorrespondingInCollection(sht, this.F_DbSheets);
             try
             {
                 if (CorrespondingDatasheet != null)
@@ -157,9 +159,9 @@ namespace eZx
         /// 构造数据库
         /// </summary>
         /// <remarks></remarks>
-        private eZDataSheet ConstructDatabase()
+        private DataSheet ConstructDatabase()
         {
-            eZDataSheet dtSheet = default(eZDataSheet);
+            DataSheet dtSheet = default(DataSheet);
             //
             Form_ConstructDatabase frm = new Form_ConstructDatabase(ExcelApp.ActiveSheet, true);
             dtSheet = frm.ShowDialog();
@@ -175,7 +177,7 @@ namespace eZx
         /// <remarks></remarks>
         public void btnEditDatabase_Click(object sender, RibbonControlEventArgs e)
         {
-            eZDataSheet dtSheet;
+            DataSheet dtSheet;
             //
             Form_ConstructDatabase frm = new Form_ConstructDatabase(ExcelApp.ActiveSheet, false,
                 this.ActiveDatabaseSheet);
@@ -188,10 +190,10 @@ namespace eZx
         /// </summary>
         /// <param name="DataSheet">要进行匹配的Excel工作表</param>
         /// <param name="DatasheetCollection">要进行搜索的数据库集合。</param>
-        private eZDataSheet CorrespondingInCollection(Worksheet DataSheet, List<eZDataSheet> DatasheetCollection)
+        private DataSheet CorrespondingInCollection(Worksheet DataSheet, List<DataSheet> DatasheetCollection)
         {
-            eZDataSheet dtSheet = null;
-            foreach (eZDataSheet dbSheet in this.F_DbSheets)
+            DataSheet dtSheet = null;
+            foreach (DataSheet dbSheet in this.F_DbSheets)
             {
                 if (ExcelFunction.SheetCompare(dbSheet.WorkSheet, DataSheet))
                 {
@@ -893,9 +895,21 @@ namespace eZx
 
         #endregion
 
-        private void buttonWelcome_Click(object sender, RibbonControlEventArgs e)
+        #region   ---  动态调试 ---
+
+        private void buttonDebugWithoutQuit_Click(object sender, RibbonControlEventArgs e)
         {
-            MessageBox.Show("欢迎使用 eZx 插件 \n\r" + DateTime.Now.ToString("yy-MM-dd hh:mm"));
+            string dllPath = @"F:\ProgrammingCases\GitHubProjects\eZstd\bin\eZexcelAPI.exe";
+            string dynamicDebugClassFullName = "eZexcelAPI.Debug.DynamicDebug";
+            Application app = Globals.ThisAddIn.Application;
+
+            // 开始调试
+            object instance = AssemblyHelper.DynamicDebugClass(
+                dllPath, dynamicDebugClassFullName, new object[] { app });
         }
+
+        #endregion
+
+
     }
 }

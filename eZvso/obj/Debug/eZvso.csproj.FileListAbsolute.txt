@@ -20,3 +20,4 @@ F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.Properties.Res
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.csproj.GenerateResource.Cache
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.pdb
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.csprojResolveAssemblyReference.cache

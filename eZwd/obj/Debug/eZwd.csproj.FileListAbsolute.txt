@@ -19,3 +19,4 @@ F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.Ribbon_eZwd.reso
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.csproj.GenerateResource.Cache
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.pdb
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.csprojResolveAssemblyReference.cache

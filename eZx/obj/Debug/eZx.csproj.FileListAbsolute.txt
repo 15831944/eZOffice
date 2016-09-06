@@ -44,3 +44,4 @@ F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.csproj.GenerateRes
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.pdb
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.Database.Form_ConstructDatabase.resources
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.csprojResolveAssemblyReference.cache
