@@ -4,66 +4,66 @@
         <name>eZexcelAPI</name>
     </assembly>
     <members>
-        <member name="T:eZexcelAPI.CellAddress">
+        <member name="T:eZexcelAPI.Entities.CellAddress">
             <summary>
             指定的单元格在Excel的Worksheet中的位置。左上角第一个单元格的行号值为1，列号值为1。
             可以通过判断其行号或者列号是否为0来判断此类实例是否有赋值。
             </summary>
             <remarks></remarks>
         </member>
-        <member name="F:eZexcelAPI.CellAddress.RowNum">
+        <member name="F:eZexcelAPI.Entities.CellAddress.RowNum">
             <summary>
             单元格在Excel的Worksheet中的行号，左上角第一个单元格的行号值为1。
             在64位的Office 2010中，一个worksheet中共有1048576行，即2^20行。
             </summary>
         </member>
-        <member name="F:eZexcelAPI.CellAddress.ColNum">
+        <member name="F:eZexcelAPI.Entities.CellAddress.ColNum">
             <summary>
             单元格在Excel的Worksheet中的列号，左上角第一个单元格的列号值为1。
             在64位的Office 2010中，一个worksheet中共有16384列（列号为XFD），即2^14列。
             </summary>
         </member>
-        <member name="M:eZexcelAPI.CellAddress.#ctor(System.UInt32,System.UInt16)">
+        <member name="M:eZexcelAPI.Entities.CellAddress.#ctor(System.UInt32,System.UInt16)">
             <summary>
             构造函数
             </summary>
             <param name="RowNum_">指定的单元格在Excel的Worksheet中的行号，左上角第一个单元格的行号值为1。</param>
             <param name="ColNum_">指定的单元格在Excel的Worksheet中的列号，左上角第一个单元格的列号值为1。</param>
         </member>
-        <member name="T:eZexcelAPI.CornerIndex">
+        <member name="T:eZexcelAPI.Entities.CornerIndex">
             <summary> 一个 Range 所对应的矩形区域的四个角点 </summary>
         </member>
-        <member name="M:eZexcelAPI.ExcelApplication.#ctor(Microsoft.Office.Interop.Excel.Application,System.Boolean)">
+        <member name="M:eZexcelAPI.Entities.ExcelApplication.#ctor(Microsoft.Office.Interop.Excel.Application,System.Boolean)">
             <summary> 以隐藏的方式在后台开启一个新的Excel程序，并在其中打开指定的Excel工作簿 </summary>
             <param name="excelApp"> 要打开的工作簿的绝对路径 </param>
             <param name="visible"> 新创建的Excel程序是否要可见 </param>
         </member>
-        <member name="M:eZexcelAPI.ExcelApplication.#ctor(System.String,System.Boolean,System.Boolean)">
+        <member name="M:eZexcelAPI.Entities.ExcelApplication.#ctor(System.String,System.Boolean,System.Boolean)">
             <summary> 以隐藏的方式在后台开启一个新的Excel程序，并在其中打开指定的Excel工作簿 </summary>
             <param name="workbookPath"> 要打开的工作簿的绝对路径 </param>
             <param name="readOnly"> 是否要以只读的方式打开工作簿 </param>
             <param name="visible"> 新创建的Excel程序是否要可见 </param>
         </member>
-        <member name="M:eZexcelAPI.ExcelApplication.#ctor(System.String,System.String,System.Boolean,System.Boolean)">
+        <member name="M:eZexcelAPI.Entities.ExcelApplication.#ctor(System.String,System.String,System.Boolean,System.Boolean)">
             <summary> 以隐藏的方式在后台开启一个新的Excel程序，并在其中打开指定的Excel工作簿 </summary>
             <param name="workbookPath"> 要打开的工作簿的绝对路径 </param>
             <param name="sheetName"> 指定要打开的工作表的名称 </param>
             <param name="readOnly"> 是否要以只读的方式打开工作簿 </param>
             <param name="visible"> 新创建的Excel程序是否要可见 </param>
         </member>
-        <member name="M:eZexcelAPI.ExcelApplication.#ctor(System.String,System.Int32,System.Boolean,System.Boolean)">
+        <member name="M:eZexcelAPI.Entities.ExcelApplication.#ctor(System.String,System.Int32,System.Boolean,System.Boolean)">
             <summary> 以隐藏的方式在后台开启一个新的Excel程序，并在其中打开指定的Excel工作簿 </summary>
             <param name="workbookPath"> 要打开的工作簿的绝对路径 </param>
             <param name="sheetIndex"> 指定要打开的工作表的在集合中的下标，第一个工作表的下标为1 </param>
             <param name="readOnly"> 是否要以只读的方式打开工作簿 </param>
             <param name="visible"> 新创建的Excel程序是否要可见 </param>
         </member>
-        <member name="M:eZexcelAPI.ExcelApplication.SafeQuit(System.Boolean)">
+        <member name="M:eZexcelAPI.Entities.ExcelApplication.SafeQuit(System.Boolean)">
             <summary> 关闭 Excel Application 以及其中的所有工作簿，确保不留下残余进程 </summary>
             <param name="saveChanges"> 在关闭 Application 中的工作簿时，是否要保存对工作簿的修改 </param>
             <returns> 如果关闭成功，则返回true，如果关闭不完全成功，则返回false。 </returns>
         </member>
-        <member name="M:eZexcelAPI.ExcelFunction.ConvertColumnNumberToString(System.Int32)">
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.ConvertColumnNumberToString(System.Int32)">
             <summary>
             将Excel表中的列的数值编号转换为对应的字符
             </summary>
@@ -71,7 +71,7 @@
             <returns>以字母序号的形式返回指定列的列号</returns>
             <remarks>1对应A；26对应Z；27对应AA</remarks>
         </member>
-        <member name="M:eZexcelAPI.ExcelFunction.ConvertColumnStringToNumber(System.String)">
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.ConvertColumnStringToNumber(System.String)">
             <summary>
             将Excel表中的字符编号转换为对应的数值
             </summary>
@@ -79,37 +79,60 @@
             <returns>以整数的形式返回指定列的数值编号，A列对应数值1</returns>
             <remarks></remarks>
         </member>
-        <member name="M:eZexcelAPI.ExcelFunction.GetBottomRightCell(Microsoft.Office.Interop.Excel.Range)">
-            <summary>
-            获取指定Range范围中的右下角的那一个单元格
-            </summary>
-            <param name="RangeForSearch">要进行搜索的Range区域</param>
-            <returns>指定Range区域中的左下角的单元格</returns>
-            <remarks></remarks>
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.GetRangeValue``1(System.Object)">
+            <summary> 从Range.Value所得到的数组转换为下标值为0的二维数组 </summary>
+            <typeparam name="T"></typeparam>
+            <param name="rgValue">通过Range.Value提取出来的单元格的数据集合</param>
+            <returns>与输入的集合相同大小的二维数组，其中第一个元素的下标为0 </returns>
         </member>
-        <member name="M:eZexcelAPI.ExcelFunction.ConvertRangeDataToVector``1(Microsoft.Office.Interop.Excel.Range)">
-            <summary>
-            将Excel的Range对象的数据转换为指定数据类型的一维向量,
-            Range.Value返回一个二维的表格，此函数将其数据按列行拼接为一维数组。
-            （即按(0,0),(0,1),(1,0),(1,1),(2,0)...的顺序排列）
-            </summary>
-            <param name="rg">用于提取数据的Range对象</param>
-            <returns>返回一个指定类型的一维向量，如“Single()”</returns>
-            <remarks>直接用Range.Value来返回的数据，其类型只能是Object，
-            而其中的数据是一个元素类型为Object的二维数据（即使此Range对象只有一行或者一列）。
-            所以要进行显式的转换，将其转换为指定类型的向量或者二维数组，以便于后面的数据操作。</remarks>
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.GetRangeValue``1(System.Object,System.Boolean,System.Int32)">
+            <summary> 从Range.Value所得到的数组中提取指定的某一行或某一列的数据 </summary>
+            <typeparam name="T"></typeparam>
+            <param name="rgValue">通过Range.Value提取出来的单元格的数据集合</param>
+            <param name="isRow">如果是要提取一行值，则为true，否则是提取一列值</param>
+            <param name="Index">要提取的行或列的下标，第一行的下标为0</param>
+            <returns>返回一个行向量或者列向量，即返回的二维数组中只有一行值或者一列值。其中第一个元素的下标为0 </returns>
         </member>
-        <member name="M:eZexcelAPI.ExcelFunction.ConvertRangeDataToMatrix``1(Microsoft.Office.Interop.Excel.Range)">
-            <summary>
-            将Excel的Range对象的数据转换为指定数据类型的二维数组
-            </summary>
-            <param name="rg">用于提取数据的Range对象</param>
-            <returns>返回一个指定类型的二维数组，如“Single(,)”</returns>
-            <remarks>直接用Range.Value来返回的数据，其类型只能是Object，
-            而其中的数据是一个元素类型为Object的二维数据（即使此Range对象只有一行或者一列）。
-            所以要进行显式的转换，将其转换为指定类型的向量或者二维数组，以便于后面的数据操作。</remarks>
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.GetRangeValue``1(System.Object,System.Boolean,System.Int32[])">
+            <summary> 从Range.Value所得到的数组中提取指定的多行或多列的数据 </summary>
+            <typeparam name="T"></typeparam>
+            <param name="rgValue">通过Range.Value提取出来的单元格的数据集合</param>
+            <param name="isRow">如果是要提取多个行值，则为true，否则是提取多个列值</param>
+            <param name="Indices">要提取的行或列的下标，第一行的下标为0</param>
+            <returns>返回多个行向量或者列向量，其中第一个元素的下标为0 </returns>
         </member>
-        <member name="M:eZexcelAPI.ExcelFunction.SheetCompare(Microsoft.Office.Interop.Excel.Worksheet,Microsoft.Office.Interop.Excel.Worksheet)">
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.GetRangeValue``1(System.Object,System.Int32[],System.Int32[])">
+            <summary> 从Range.Value所得到的数组中提取指定行与列的新集合 </summary>
+            <typeparam name="T"></typeparam>
+            <param name="rgValue">通过Range.Value提取出来的单元格的数据集合</param>
+            <param name="rowIndices">要提取的行的下标，第一行的下标为0</param>
+            <param name="columnIndices">要提取的列的下标，第一列的下标为0</param>
+            <returns>提取到的子数组，数组中第一个元素的下标为0。</returns>
+        </member>
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.ConvertRangeValueToArray(System.Object,System.Object[0:,0:]@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary> 从Range.Value所得到的数组（或者单一值）转换为一个二维数组 </summary>
+            <param name="rgValue"></param>
+            <param name="convertedArray">转换后的数组，其中第一个元素的下标值并不一定是0，而是lowerBound</param>
+            <param name="lowerBound">转换后的数组中第一个元素的下标值</param>
+            <param name="rowsCount">二维数组中的行数</param>
+            <param name="columnsCount">二维数组中的列数</param>
+        </member>
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.GetRangeValue2D``1(System.Object[0:,0:],System.Int32,System.Int32[],System.Int32[])">
+            <summary> 从Range.Value所得到的数组中提取指定行与列的新集合 </summary>
+            <typeparam name="T"></typeparam>
+            <param name="serchingObjects">从Range.Value得到的数组，其中第一个元素的下标值并不一定是0，而是lowerBound</param>
+            <param name="lowerbound"></param>
+            <param name="rowIndices">要提取的行的下标，第一行的下标为0</param>
+            <param name="columnIndices">要提取的列的下标，第一列的下标为0</param>
+            <returns>提取到的子数组，数组中第一个元素的下标为0。</returns>
+        </member>
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.ConvertExcelValue``1(System.Object)">
+            <summary> 将Excel中的单元格中的值转换为其他类型的值 </summary>
+            <typeparam name="T">目标类型</typeparam>
+            <param name="v"></param>
+            <returns>转换后的值</returns>
+        </member>
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.SheetCompare(Microsoft.Office.Interop.Excel.Worksheet,Microsoft.Office.Interop.Excel.Worksheet)">
             <summary>
             比较两个工作表是否相同。
             判断的标准：先判断工作表的名称是否相同，如果相同，再判断工作表所属的工作簿的路径是否相同，
@@ -120,7 +143,7 @@
             <returns></returns>
             <remarks>不用 blnSheetsMatched = sheet1.Equals(sheet2)，是因为这种方法并不能正确地返回True。</remarks>
         </member>
-        <member name="M:eZexcelAPI.ExcelFunction.MatchOpenedWkbk(System.String,Microsoft.Office.Interop.Excel.Application,System.Boolean@,System.Boolean,System.Boolean)">
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.MatchOpenedWkbk(System.String,Microsoft.Office.Interop.Excel.Application,System.Boolean@,System.Boolean,System.Boolean)">
             <summary>
             检测工作簿是否已经在指定的Application程序中打开。
             如果最后此工作簿在程序中被打开（已经打开或者后期打开），则返回对应的Workbook对象，否则返回Nothing。
@@ -134,7 +157,7 @@
             <returns></returns>
             <remarks></remarks>
         </member>
-        <member name="M:eZexcelAPI.ExcelFunction.MatchWorksheet(Microsoft.Office.Interop.Excel.Workbook,System.String)">
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.MatchWorksheet(Microsoft.Office.Interop.Excel.Workbook,System.String)">
             <summary>
             检测指定工作簿内是否有指定的工作表，如果存在，则返回对应的工作表对象，否则返回Nothing
             </summary>
@@ -143,7 +166,7 @@
             <returns></returns>
             <remarks></remarks>
         </member>
-        <member name="M:eZexcelAPI.ExcelFunction.setPositionInChart(Microsoft.Office.Interop.Excel.Shape,Microsoft.Office.Interop.Excel.Axis,System.Double,System.Double)">
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.setPositionInChart(Microsoft.Office.Interop.Excel.Shape,Microsoft.Office.Interop.Excel.Axis,System.Double,System.Double)">
             <summary>
             将任意形状以指定的值定位在Chart的某一坐标轴中。
             </summary>
@@ -155,7 +178,7 @@
             如果其值为100，则表示此形状的右端（或下端）定位在设置的位置处。</param>
             <remarks></remarks>
         </member>
-        <member name="M:eZexcelAPI.ExcelFunction.setPositionInChart(Microsoft.Office.Interop.Excel.Axis,Microsoft.Office.Interop.Excel.Shape[],System.Double[],System.Double[])">
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.setPositionInChart(Microsoft.Office.Interop.Excel.Axis,Microsoft.Office.Interop.Excel.Shape[],System.Double[],System.Double[])">
             <summary>
             将一组形状以指定的值定位在Chart的某一坐标轴中。
             </summary>
@@ -167,7 +190,7 @@
             如果其值为100，则表示此形状的右端（或下端）定位在设置的位置处。</param>
             <remarks></remarks>
         </member>
-        <member name="M:eZexcelAPI.ExcelFunction.GetPositionInChartByValue(Microsoft.Office.Interop.Excel.Axis,System.Double)">
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.GetPositionInChartByValue(Microsoft.Office.Interop.Excel.Axis,System.Double)">
             <summary>
             根据在坐标轴中的值，来返回这个值在Chart中的几何位置
             </summary>
@@ -177,7 +200,7 @@
             如果Ax是一个竖向Y轴，则返回的是坐标轴Ax中的值Value在Chart中的Top值。</returns>
             <remarks></remarks>
         </member>
-        <member name="M:eZexcelAPI.ExcelFunction.GetPositionInChartByValue(Microsoft.Office.Interop.Excel.Axis,System.Double[])">
+        <member name="M:eZexcelAPI.Entities.ExcelFunction.GetPositionInChartByValue(Microsoft.Office.Interop.Excel.Axis,System.Double[])">
             <summary>
             根据一组形状在某一坐标轴中的值，来返回这些值在Chart中的几何位置
             </summary>
@@ -187,13 +210,13 @@
             如果Ax是一个竖向Y轴，则返回的是坐标轴Ax中的值Value在Chart中的Top值。</returns>
             <remarks></remarks>
         </member>
-        <member name="F:eZexcelAPI.ExcelExtension.MaxmumRowInExcel">
+        <member name="F:eZexcelAPI.Entities.ExcelExtension.MaxmumRowInExcel">
             <summary> Excel的工作表中，最大的行号。在Excel 2016 中，这个值为2^20 </summary>
         </member>
-        <member name="F:eZexcelAPI.ExcelExtension.MaxmumColumnInExcel">
+        <member name="F:eZexcelAPI.Entities.ExcelExtension.MaxmumColumnInExcel">
             <summary> Excel的工作表中，最大的列号。在Excel 2016 中，这个值为2^14 </summary>
         </member>
-        <member name="M:eZexcelAPI.ExcelExtension.Ex_CornerCell(Microsoft.Office.Interop.Excel.Range,eZexcelAPI.CornerIndex)">
+        <member name="M:eZexcelAPI.Entities.ExcelExtension.Ex_CornerCell(Microsoft.Office.Interop.Excel.Range,eZexcelAPI.Entities.CornerIndex)">
             <summary>
             返回Range对象范围中的最右下角点的那个单元格对象
             </summary>
@@ -201,7 +224,7 @@
             <param name="Corner">要返回哪一个角落的单元格</param>
             <returns></returns>
         </member>
-        <member name="M:eZexcelAPI.ExcelExtension.Ex_ShrinkeRange(Microsoft.Office.Interop.Excel.Range)">
+        <member name="M:eZexcelAPI.Entities.ExcelExtension.Ex_ShrinkeRange(Microsoft.Office.Interop.Excel.Range)">
             <summary>
             收缩Range.Areas.Item(1)的单元格范围。
             在选择一个单元格范围时，有时为了界面操作简单，往往会选择一整列或者一整行，但是并不是要对基本所有的单元格进行操作，
@@ -210,14 +233,14 @@
             <param name="rg">此函数只考虑 rg 所对应的行或列的数量，并不会对 rg 中的单元格的值是否为空进行判断。</param>
             <remarks></remarks>
         </member>
-        <member name="M:eZexcelAPI.ExcelExtension.Ex_ShrinkeVectorAndCheckNull(Microsoft.Office.Interop.Excel.Range)">
+        <member name="M:eZexcelAPI.Entities.ExcelExtension.Ex_ShrinkeVectorAndCheckNull(Microsoft.Office.Interop.Excel.Range)">
             <summary>
             收缩任意一行或者一列，使其最后一个单元格的值不为空
             </summary>
             <param name="rg">确保此 rg 只包含一行/列（不一定是一整行/列）。</param>
             <remarks></remarks>
         </member>
-        <member name="M:eZexcelAPI.ExcelExtension.Ex_Transpose(Microsoft.Office.Interop.Excel.Range)">
+        <member name="M:eZexcelAPI.Entities.ExcelExtension.Ex_Transpose(Microsoft.Office.Interop.Excel.Range)">
             <summary> 将指定Range的第一个Area的矩形区域进行转置 </summary>
             <param name="rg"></param>
             <returns></returns>

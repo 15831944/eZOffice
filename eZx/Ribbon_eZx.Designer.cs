@@ -34,36 +34,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon_eZx));
             Microsoft.Office.Tools.Ribbon.RibbonDialogLauncher ribbonDialogLauncherImpl1 = this.Factory.CreateRibbonDialogLauncher();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon_eZx));
             this.Tab1 = this.Factory.CreateRibbonTab();
             this.Group_DataBase = this.Factory.CreateRibbonGroup();
-            this.btn_DataRange = this.Factory.CreateRibbonButton();
-            this.ButtonValue = this.Factory.CreateRibbonButton();
-            this.btnConstructDatabase = this.Factory.CreateRibbonButton();
-            this.btnEditDatabase = this.Factory.CreateRibbonButton();
             this.Group1 = this.Factory.CreateRibbonGroup();
-            this.btn_XYExchange = this.Factory.CreateRibbonButton();
-            this.btn_ExtractDataFromChart = this.Factory.CreateRibbonButton();
             this.Group2 = this.Factory.CreateRibbonGroup();
-            this.btnReArrange = this.Factory.CreateRibbonButton();
             this.EditBox_ReArrangeStart = this.Factory.CreateRibbonEditBox();
             this.EditBox_ReArrangeEnd = this.Factory.CreateRibbonEditBox();
             this.EditBox_ReArrangeIntervalId = this.Factory.CreateRibbonEditBox();
-            this.btnShrink = this.Factory.CreateRibbonButton();
-            this.btnReshape = this.Factory.CreateRibbonButton();
-            this.ButtonTranspose = this.Factory.CreateRibbonButton();
             this.Group3 = this.Factory.CreateRibbonGroup();
             this.EditBox_p1 = this.Factory.CreateRibbonEditBox();
             this.EditBox_p2 = this.Factory.CreateRibbonEditBox();
             this.EditBox_p3 = this.Factory.CreateRibbonEditBox();
             this.Group4 = this.Factory.CreateRibbonGroup();
-            this.ButtonTest = this.Factory.CreateRibbonButton();
-            this.buttonWelcome = this.Factory.CreateRibbonButton();
             this.Tab2 = this.Factory.CreateRibbonTab();
             this.Group_Help = this.Factory.CreateRibbonGroup();
+            this.btn_DataRange = this.Factory.CreateRibbonButton();
+            this.ButtonValue = this.Factory.CreateRibbonButton();
+            this.btnConstructDatabase = this.Factory.CreateRibbonButton();
+            this.btnEditDatabase = this.Factory.CreateRibbonButton();
+            this.btn_XYExchange = this.Factory.CreateRibbonButton();
+            this.btn_ExtractDataFromChart = this.Factory.CreateRibbonButton();
+            this.btnReArrange = this.Factory.CreateRibbonButton();
+            this.btnShrink = this.Factory.CreateRibbonButton();
+            this.btnReshape = this.Factory.CreateRibbonButton();
+            this.ButtonTranspose = this.Factory.CreateRibbonButton();
+            this.buttonDebugWithoutQuit = this.Factory.CreateRibbonButton();
+            this.ButtonTest = this.Factory.CreateRibbonButton();
             this.btn_ExcelHelp = this.Factory.CreateRibbonButton();
             this.btn_OfficeHelp = this.Factory.CreateRibbonButton();
+            this.group5 = this.Factory.CreateRibbonGroup();
             this.Tab1.SuspendLayout();
             this.Group_DataBase.SuspendLayout();
             this.Group1.SuspendLayout();
@@ -72,6 +73,7 @@
             this.Group4.SuspendLayout();
             this.Tab2.SuspendLayout();
             this.Group_Help.SuspendLayout();
+            this.group5.SuspendLayout();
             this.SuspendLayout();
             // 
             // Tab1
@@ -80,6 +82,7 @@
             this.Tab1.Groups.Add(this.Group1);
             this.Tab1.Groups.Add(this.Group2);
             this.Tab1.Groups.Add(this.Group3);
+            this.Tab1.Groups.Add(this.group5);
             this.Tab1.Groups.Add(this.Group4);
             this.Tab1.Label = "eZx";
             this.Tab1.Name = "Tab1";
@@ -92,6 +95,102 @@
             this.Group_DataBase.Items.Add(this.btnEditDatabase);
             this.Group_DataBase.Label = "数据库";
             this.Group_DataBase.Name = "Group_DataBase";
+            // 
+            // Group1
+            // 
+            this.Group1.Items.Add(this.btn_XYExchange);
+            this.Group1.Items.Add(this.btn_ExtractDataFromChart);
+            this.Group1.Label = "图表";
+            this.Group1.Name = "Group1";
+            // 
+            // Group2
+            // 
+            this.Group2.Items.Add(this.btnReArrange);
+            this.Group2.Items.Add(this.EditBox_ReArrangeStart);
+            this.Group2.Items.Add(this.EditBox_ReArrangeEnd);
+            this.Group2.Items.Add(this.EditBox_ReArrangeIntervalId);
+            this.Group2.Items.Add(this.btnShrink);
+            this.Group2.Items.Add(this.btnReshape);
+            this.Group2.Items.Add(this.ButtonTranspose);
+            this.Group2.Label = "数据处理";
+            this.Group2.Name = "Group2";
+            // 
+            // EditBox_ReArrangeStart
+            // 
+            this.EditBox_ReArrangeStart.Label = "Start";
+            this.EditBox_ReArrangeStart.Name = "EditBox_ReArrangeStart";
+            this.EditBox_ReArrangeStart.SuperTip = "可以为数值或者日期格式";
+            this.EditBox_ReArrangeStart.Text = null;
+            // 
+            // EditBox_ReArrangeEnd
+            // 
+            this.EditBox_ReArrangeEnd.Label = "End";
+            this.EditBox_ReArrangeEnd.Name = "EditBox_ReArrangeEnd";
+            this.EditBox_ReArrangeEnd.SuperTip = "可以为数值或者日期格式";
+            this.EditBox_ReArrangeEnd.Text = null;
+            // 
+            // EditBox_ReArrangeIntervalId
+            // 
+            this.EditBox_ReArrangeIntervalId.Label = "Interval,Id";
+            this.EditBox_ReArrangeIntervalId.Name = "EditBox_ReArrangeIntervalId";
+            this.EditBox_ReArrangeIntervalId.ScreenTip = "递进步长与用来进行排序的那一列的序号";
+            this.EditBox_ReArrangeIntervalId.SuperTip = "    第一个数值为递进步长，第二个数值为排序数据列，二者用\",\"进行分隔。如果是要按选择的单元格区间的第一列来作为进行排序的数据列，则其值为1。";
+            this.EditBox_ReArrangeIntervalId.Text = "1,1";
+            // 
+            // Group3
+            // 
+            this.Group3.Items.Add(this.EditBox_p1);
+            this.Group3.Items.Add(this.EditBox_p2);
+            this.Group3.Items.Add(this.EditBox_p3);
+            this.Group3.Label = "基本参数";
+            this.Group3.Name = "Group3";
+            // 
+            // EditBox_p1
+            // 
+            this.EditBox_p1.Label = "P1";
+            this.EditBox_p1.Name = "EditBox_p1";
+            this.EditBox_p1.Text = "2";
+            this.EditBox_p1.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.EditBox_p1_TextChanged);
+            // 
+            // EditBox_p2
+            // 
+            this.EditBox_p2.Label = "P2";
+            this.EditBox_p2.Name = "EditBox_p2";
+            this.EditBox_p2.ScreenTip = "其他命令的基本参数";
+            this.EditBox_p2.SuperTip = "文本框中的数据类型为Object";
+            this.EditBox_p2.Text = "4";
+            this.EditBox_p2.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.EditBox_p2_TextChanged);
+            // 
+            // EditBox_p3
+            // 
+            this.EditBox_p3.Label = "P3";
+            this.EditBox_p3.Name = "EditBox_p3";
+            this.EditBox_p3.Text = "False";
+            this.EditBox_p3.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.EditBox_p3_TextChanged);
+            // 
+            // Group4
+            // 
+            this.Group4.Items.Add(this.ButtonTest);
+            this.Group4.Label = "其他";
+            this.Group4.Name = "Group4";
+            // 
+            // Tab2
+            // 
+            this.Tab2.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
+            this.Tab2.ControlId.OfficeId = "TabDeveloper";
+            this.Tab2.Groups.Add(this.Group_Help);
+            this.Tab2.Label = "TabDeveloper";
+            this.Tab2.Name = "Tab2";
+            // 
+            // Group_Help
+            // 
+            this.Group_Help.DialogLauncher = ribbonDialogLauncherImpl1;
+            this.Group_Help.Items.Add(this.btn_ExcelHelp);
+            this.Group_Help.Items.Add(this.btn_OfficeHelp);
+            this.Group_Help.Label = "帮助文档";
+            this.Group_Help.Name = "Group_Help";
+            this.Group_Help.Position = this.Factory.RibbonPosition.AfterOfficeId("GroupXml");
+            this.Group_Help.DialogLauncherClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Group_Help_DialogLauncherClick);
             // 
             // btn_DataRange
             // 
@@ -133,13 +232,6 @@
             this.btnEditDatabase.ShowImage = true;
             this.btnEditDatabase.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnEditDatabase_Click);
             // 
-            // Group1
-            // 
-            this.Group1.Items.Add(this.btn_XYExchange);
-            this.Group1.Items.Add(this.btn_ExtractDataFromChart);
-            this.Group1.Label = "图表";
-            this.Group1.Name = "Group1";
-            // 
             // btn_XYExchange
             // 
             this.btn_XYExchange.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -162,18 +254,6 @@
     "Chart所链接的源Excel文件丢失，此时在Word中便不能直接提取到Excel中的数据了。";
             this.btn_ExtractDataFromChart.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_ExtractDataFromChart_Click);
             // 
-            // Group2
-            // 
-            this.Group2.Items.Add(this.btnReArrange);
-            this.Group2.Items.Add(this.EditBox_ReArrangeStart);
-            this.Group2.Items.Add(this.EditBox_ReArrangeEnd);
-            this.Group2.Items.Add(this.EditBox_ReArrangeIntervalId);
-            this.Group2.Items.Add(this.btnShrink);
-            this.Group2.Items.Add(this.btnReshape);
-            this.Group2.Items.Add(this.ButtonTranspose);
-            this.Group2.Label = "数据处理";
-            this.Group2.Name = "Group2";
-            // 
             // btnReArrange
             // 
             this.btnReArrange.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -184,28 +264,6 @@
             this.btnReArrange.ShowImage = true;
             this.btnReArrange.SuperTip = "用来进行排序的那一列数据只能为数值或者日期\r\n如果控制列中的数据不是按递增或者递减的规律排列的，则程序会先将其按大小进行排序。";
             this.btnReArrange.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnReArrange_Click);
-            // 
-            // EditBox_ReArrangeStart
-            // 
-            this.EditBox_ReArrangeStart.Label = "Start";
-            this.EditBox_ReArrangeStart.Name = "EditBox_ReArrangeStart";
-            this.EditBox_ReArrangeStart.SuperTip = "可以为数值或者日期格式";
-            this.EditBox_ReArrangeStart.Text = null;
-            // 
-            // EditBox_ReArrangeEnd
-            // 
-            this.EditBox_ReArrangeEnd.Label = "End";
-            this.EditBox_ReArrangeEnd.Name = "EditBox_ReArrangeEnd";
-            this.EditBox_ReArrangeEnd.SuperTip = "可以为数值或者日期格式";
-            this.EditBox_ReArrangeEnd.Text = null;
-            // 
-            // EditBox_ReArrangeIntervalId
-            // 
-            this.EditBox_ReArrangeIntervalId.Label = "Interval,Id";
-            this.EditBox_ReArrangeIntervalId.Name = "EditBox_ReArrangeIntervalId";
-            this.EditBox_ReArrangeIntervalId.ScreenTip = "递进步长与用来进行排序的那一列的序号";
-            this.EditBox_ReArrangeIntervalId.SuperTip = "    第一个数值为递进步长，第二个数值为排序数据列，二者用\",\"进行分隔。如果是要按选择的单元格区间的第一列来作为进行排序的数据列，则其值为1。";
-            this.EditBox_ReArrangeIntervalId.Text = "1,1";
             // 
             // btnShrink
             // 
@@ -242,43 +300,16 @@
             this.ButtonTranspose.SuperTip = "此命令可以将用户同时选择的多个不相交的小区域分别进行原位转置。";
             this.ButtonTranspose.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ButtonTranspose_Click);
             // 
-            // Group3
+            // buttonDebugWithoutQuit
             // 
-            this.Group3.Items.Add(this.EditBox_p1);
-            this.Group3.Items.Add(this.EditBox_p2);
-            this.Group3.Items.Add(this.EditBox_p3);
-            this.Group3.Label = "基本参数";
-            this.Group3.Name = "Group3";
-            // 
-            // EditBox_p1
-            // 
-            this.EditBox_p1.Label = "P1";
-            this.EditBox_p1.Name = "EditBox_p1";
-            this.EditBox_p1.Text = "2";
-            this.EditBox_p1.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.EditBox_p1_TextChanged);
-            // 
-            // EditBox_p2
-            // 
-            this.EditBox_p2.Label = "P2";
-            this.EditBox_p2.Name = "EditBox_p2";
-            this.EditBox_p2.ScreenTip = "其他命令的基本参数";
-            this.EditBox_p2.SuperTip = "文本框中的数据类型为Object";
-            this.EditBox_p2.Text = "4";
-            this.EditBox_p2.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.EditBox_p2_TextChanged);
-            // 
-            // EditBox_p3
-            // 
-            this.EditBox_p3.Label = "P3";
-            this.EditBox_p3.Name = "EditBox_p3";
-            this.EditBox_p3.Text = "False";
-            this.EditBox_p3.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.EditBox_p3_TextChanged);
-            // 
-            // Group4
-            // 
-            this.Group4.Items.Add(this.ButtonTest);
-            this.Group4.Items.Add(this.buttonWelcome);
-            this.Group4.Label = "其他";
-            this.Group4.Name = "Group4";
+            this.buttonDebugWithoutQuit.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.buttonDebugWithoutQuit.Image = global::eZx.Properties.Resources.DynamicDebug;
+            this.buttonDebugWithoutQuit.Label = "动态调试";
+            this.buttonDebugWithoutQuit.Name = "buttonDebugWithoutQuit";
+            this.buttonDebugWithoutQuit.ScreenTip = "在不关闭Excel的情况下进行调试。";
+            this.buttonDebugWithoutQuit.ShowImage = true;
+            this.buttonDebugWithoutQuit.SuperTip = "对于”eZexcelAPI.DynamicDebug“类，直接进行调试。在调试的过程中，可以修改此类所在的dll，然后对其重新进行编译，编译后还是可以直接调试。";
+            this.buttonDebugWithoutQuit.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonDebugWithoutQuit_Click);
             // 
             // ButtonTest
             // 
@@ -288,30 +319,6 @@
             this.ButtonTest.ShowImage = true;
             this.ButtonTest.SuperTip = "在执行此命令之前请自行查看源代码以确认其功能";
             this.ButtonTest.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ButtonTest_Click);
-            // 
-            // buttonWelcome
-            // 
-            this.buttonWelcome.Label = "欢迎";
-            this.buttonWelcome.Name = "buttonWelcome";
-            this.buttonWelcome.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonWelcome_Click);
-            // 
-            // Tab2
-            // 
-            this.Tab2.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
-            this.Tab2.ControlId.OfficeId = "TabDeveloper";
-            this.Tab2.Groups.Add(this.Group_Help);
-            this.Tab2.Label = "TabDeveloper";
-            this.Tab2.Name = "Tab2";
-            // 
-            // Group_Help
-            // 
-            this.Group_Help.DialogLauncher = ribbonDialogLauncherImpl1;
-            this.Group_Help.Items.Add(this.btn_ExcelHelp);
-            this.Group_Help.Items.Add(this.btn_OfficeHelp);
-            this.Group_Help.Label = "帮助文档";
-            this.Group_Help.Name = "Group_Help";
-            this.Group_Help.Position = this.Factory.RibbonPosition.AfterOfficeId("GroupXml");
-            this.Group_Help.DialogLauncherClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Group_Help_DialogLauncherClick);
             // 
             // btn_ExcelHelp
             // 
@@ -324,6 +331,12 @@
             this.btn_OfficeHelp.Label = "Office VBA";
             this.btn_OfficeHelp.Name = "btn_OfficeHelp";
             this.btn_OfficeHelp.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_OfficeHelp_Click);
+            // 
+            // group5
+            // 
+            this.group5.Items.Add(this.buttonDebugWithoutQuit);
+            this.group5.Label = "调试";
+            this.group5.Name = "group5";
             // 
             // Ribbon_eZx
             // 
@@ -348,6 +361,8 @@
             this.Tab2.PerformLayout();
             this.Group_Help.ResumeLayout(false);
             this.Group_Help.PerformLayout();
+            this.group5.ResumeLayout(false);
+            this.group5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -382,7 +397,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ButtonTest;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ButtonValue;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ButtonTranspose;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonWelcome;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonDebugWithoutQuit;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group5;
     }
 
     partial class ThisRibbonCollection
