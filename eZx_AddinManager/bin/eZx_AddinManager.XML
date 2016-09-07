@@ -134,31 +134,31 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="M:eZx.AssemblyInfo.AssemblyInfoDllManager.GetInfosFromFile">
+        <member name="M:eZx.AddinManager.AssemblyInfoDllManager.GetInfosFromFile">
             <summary> 将 Settings 配置文件中的字符进行反序列化 </summary>
             <returns></returns>
-            <remarks>不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
+            <remarks>对于CAD.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
             但是在调用ExternalCommand时还是会出bug，通常的报错为：没有为该对象定义无参数的构造函数。 </remarks>
         </member>
-        <member name="M:eZx.AssemblyInfo.AssemblyInfoFileManager.GetInfosFromFile">
+        <member name="M:eZx.AddinManager.AssemblyInfoFileManager.GetInfosFromFile">
             <summary> 将外部 二进制文件 中的字符进行反序列化 </summary>
-            <remarks>不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
+            <remarks>对于CAD.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
             但是在调用ExternalCommand时还是会出bug，通常的报错为：没有为该对象定义无参数的构造函数。 </remarks>
         </member>
-        <member name="T:eZx.AssemblyInfo.AssemblyInfos">
+        <member name="T:eZx.AddinManager.AssemblyInfos">
             <summary> 将 AddinManager中的程序信与外部命令信息提取为可以进行序列化的信息 </summary>
         </member>
-        <member name="P:eZx.AssemblyInfo.AssemblyInfoSettings.AssemblyInfoSerial">
+        <member name="P:eZx.AddinManager.AssemblyInfoSettings.AssemblyInfoSerial">
             <summary> 将 AddinManager 中的程序集信息序列化后的字符 </summary>
         </member>
-        <member name="T:eZx.AssemblyInfo.BinarySerializer">
+        <member name="T:eZx.AddinManager.BinarySerializer">
             <summary>
             在.NET中，我们可以将对象序列化从而保存对象的状态到内存或者磁盘文件中，或者分布式应用程序中用于系统通信，，这样就有可能做出一个“对象数据库”了。
             一般来说，二进制序列化的效率要高，所获得的字节数最小。
             </summary>
             <remarks></remarks>
         </member>
-        <member name="M:eZx.AssemblyInfo.BinarySerializer.EnCode(System.IO.Stream,System.Object)">
+        <member name="M:eZx.AddinManager.BinarySerializer.EnCode(System.IO.Stream,System.Object)">
             <summary>
             将任意一个声明为Serializable的类或者其List等集合中的数据，以二进制的格式保存到对应的流文件中。
             </summary>
@@ -166,7 +166,7 @@
             <param name="Data">要进行保存的可序列化对象</param>
             <remarks></remarks>
         </member>
-        <member name="M:eZx.AssemblyInfo.BinarySerializer.DeCode(System.IO.Stream)">
+        <member name="M:eZx.AddinManager.BinarySerializer.DeCode(System.IO.Stream)">
             <summary>
             从二进制流文件中，将其中的二进制数据反序列化为对应的类或集合对象。
             </summary>
@@ -174,25 +174,25 @@
             <returns>此二进制流文件所对应的可序列化对象</returns>
             <remarks></remarks>
         </member>
-        <member name="T:eZx.AssemblyInfo.StringSerializer">
+        <member name="T:eZx.AddinManager.StringSerializer">
             <summary>
             将任意一个有 Serializable标记的类以二进制转换器将类中所有数据与字符串间的相互序列化。
             即可以将类中的数据（包括数组）序列化为字符，还可以将序列化的字符反序列化为一个类。
             </summary>
         </member>
-        <member name="M:eZx.AssemblyInfo.StringSerializer.Encode64(System.Object)">
+        <member name="M:eZx.AddinManager.StringSerializer.Encode64(System.Object)">
             <summary>
             Encode arbitrary .NET serialisable object
             into binary data encodes as base64 string.
             </summary>
         </member>
-        <member name="M:eZx.AssemblyInfo.StringSerializer.Decode64(System.String)">
+        <member name="M:eZx.AddinManager.StringSerializer.Decode64(System.String)">
             <summary>
             Decode arbitrary .NET serialisable object
             from binary data encoded as base64 string.
             </summary>
         </member>
-        <member name="T:eZx.AssemblyInfo.StringSerializer.ZengfyLinkBinder">
+        <member name="T:eZx.AddinManager.StringSerializer.ZengfyLinkBinder">
             <summary>
             为了解决SerializationException，方法之一是确保此assembly放置在与acad.exe 或 revit.exe相同的文件夹中，
             另一个方法就是实现一个像这样的类。

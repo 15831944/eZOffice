@@ -37,11 +37,11 @@ F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZx.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZx.pdb
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZx.dll.manifest
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZx.vsto
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.csprojResolveAssemblyReference.cache
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.Database.Form_ConstructDatabase.resources
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.HelpLocation.resources
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.Properties.Resources.resources
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.Ribbon_eZx.resources
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.csproj.GenerateResource.Cache
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.pdb
-F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.Database.Form_ConstructDatabase.resources
-F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.csprojResolveAssemblyReference.cache

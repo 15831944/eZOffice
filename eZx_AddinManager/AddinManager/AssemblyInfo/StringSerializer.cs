@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
-namespace eZx.AssemblyInfo
+namespace eZx.AddinManager
 {
     /// <summary>
     /// 将任意一个有 Serializable标记的类以二进制转换器将类中所有数据与字符串间的相互序列化。
