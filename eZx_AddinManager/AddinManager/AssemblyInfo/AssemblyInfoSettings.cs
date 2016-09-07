@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using System.Configuration;
-namespace eZx.AssemblyInfo
+namespace eZx.AddinManager
 {
     class AssemblyInfoSettings : ApplicationSettingsBase
     {

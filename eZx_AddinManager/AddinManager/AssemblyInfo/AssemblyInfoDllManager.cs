@@ -5,42 +5,33 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using eZx.AddinManager;
-using eZx.AssemblyInfo;
 using eZx.ExternalCommand;
 
-namespace eZx.AssemblyInfo
+namespace eZx.AddinManager
 {
-    internal class AssemblyInfoFileManager
+    internal class AssemblyInfoDllManager
     {
-        private static readonly string _addinManagerDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName;
-        public static string AddinManagerDirectory
-        {
-            get { return _addinManagerDirectory; }
-        }
-
-        private const string SerializedFileName = "LoadedAssemblies.am";
 
         #region ---   从文件反序列化
 
-        /// <summary> 将外部 二进制文件 中的字符进行反序列化 </summary>
-        /// <remarks>不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
+        /// <summary> 将 Settings 配置文件中的字符进行反序列化 </summary>
+        /// <returns></returns>
+        /// <remarks>对于CAD.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
         /// 但是在调用ExternalCommand时还是会出bug，通常的报错为：没有为该对象定义无参数的构造函数。 </remarks>
         public static Dictionary<AddinManagerAssembly, List<MethodInfo>> GetInfosFromFile()
         {
-            Dictionary<AddinManagerAssembly, List<MethodInfo>> nodesInfo;
-            nodesInfo = new Dictionary<AddinManagerAssembly, List<MethodInfo>>(new AssemblyComparer());
+            Dictionary<AddinManagerAssembly, List<MethodInfo>> nodesInfo
+                = new Dictionary<AddinManagerAssembly, List<MethodInfo>>(new AssemblyComparer());
 
-            string infoPath = Path.Combine(AddinManagerDirectory, SerializedFileName);
-            if (File.Exists(infoPath))
+            // 提取配置文件中的数据
+            AssemblyInfoSettings s = new AssemblyInfoSettings();
+            if (!string.IsNullOrEmpty(s.AssemblyInfoSerial))
             {
-                FileStream fs = new FileStream(infoPath, FileMode.Open, FileAccess.Read);
-                AssemblyInfos infos = BinarySerializer.DeCode(fs) as AssemblyInfos;
+                // 提取字符
+                AssemblyInfos amInfos = StringSerializer.Decode64(s.AssemblyInfoSerial) as AssemblyInfos;
 
                 // 提取数据
-                nodesInfo = DeserializeAssemblies(infos);
-                //
-                fs.Close();
-                fs.Dispose();
+                nodesInfo = DeserializeAssemblies(amInfos);
             }
 
             return nodesInfo;
@@ -65,7 +56,15 @@ namespace eZx.AssemblyInfo
                         {
                             Assembly ass = m[0].DeclaringType.Assembly;
                             AddinManagerAssembly amAssembly = new AddinManagerAssembly(assemblyPath, ass);
-                            nodesInfo.Add(amAssembly, m);
+                            if (nodesInfo.ContainsKey(amAssembly))
+                            {
+                                nodesInfo[amAssembly] = m;
+                            }
+                            else
+                            {
+                                nodesInfo.Add(amAssembly, m);
+                            }
+
                         }
                     }
                 }
@@ -80,22 +79,20 @@ namespace eZx.AssemblyInfo
         public static void SaveAssemblyInfosToFile(
             Dictionary<AddinManagerAssembly, List<MethodInfo>> nodesInfo)
         {
+            // 转换为可序列化的数据
             List<string> assemblyPaths = nodesInfo.Select(r => r.Key.Path).ToList();
             AssemblyInfos amInfos = new AssemblyInfos() { AssemblyPaths = assemblyPaths.ToArray() };
 
             // 序列化
-
-            string infoPath = Path.Combine(AddinManagerDirectory, SerializedFileName);
+            string amInfosString = StringSerializer.Encode64(amInfos);
 
             // 保存到物理存储中
-            FileStream fs = new FileStream(infoPath, FileMode.Create, FileAccess.Write);
-            BinarySerializer.EnCode(fs, amInfos);
-
-            //
-            fs.Close();
-            fs.Dispose();
+            AssemblyInfoSettings s = new AssemblyInfoSettings();
+            s.AssemblyInfoSerial = amInfosString;
+            s.Save();
         }
-        
+
+
         #endregion
 
     }

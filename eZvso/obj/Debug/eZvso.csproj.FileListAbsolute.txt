@@ -14,10 +14,10 @@ F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZvso.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZvso.pdb
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZvso.dll.manifest
 F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZvso.vsto
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.csprojResolveAssemblyReference.cache
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.Dialog_CircleArray.resources
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.Ribbon_eZvso.resources
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.Properties.Resources.resources
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.csproj.GenerateResource.Cache
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.pdb
-F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.csprojResolveAssemblyReference.cache
