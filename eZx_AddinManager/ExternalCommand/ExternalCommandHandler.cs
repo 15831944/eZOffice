@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 using Application = Microsoft.Office.Interop.Excel.Application;
 
@@ -35,7 +36,7 @@ namespace eZx.ExternalCommand
             var classes = ass.GetTypes();
             foreach (Type cls in classes)
             {
-                if (cls.GetInterfaces().Any(r => r == typeof (IExternalCommand))) // 说明这个类实现了 CAD 的命令接口
+                if (cls.GetInterfaces().Any(r => r == typeof(IExternalCommand))) // 说明这个类实现了 CAD 的命令接口
                 {
                     // 寻找此类中所实现的那个 Execute 方法
                     Type[] paraTypes = new Type[3]
@@ -43,7 +44,7 @@ namespace eZx.ExternalCommand
                     //
                     MethodInfo m = cls.GetMethod("Execute", paraTypes);
                     //
-                    if (m != null)
+                    if (m != null && m.IsPublic)
                     {
                         ecClasses.Add(m);
                     }
@@ -95,7 +96,7 @@ namespace eZx.ExternalCommand
             _currentExternalCommand = externalCommand;
         }
 
-        /// <summary> 执行 CAD 的外部命令 </summary>
+        /// <summary> 执行 Excel 的外部命令 </summary>
         /// <param name="externalCommand">此命令必须是实现了 IExternalCommand.Execute </param>
         private static void InvokeCommand(MethodInfo externalCommand, Application excelApp)
         {
@@ -121,11 +122,11 @@ namespace eZx.ExternalCommand
 
             //
             // 注意如果要提取 ref 或 out 类型的参数的结果，则必须将对应的参数全部放置在一个 parameters 数组中
-            object[] parameters = new object[] {excelApp, "", errorObj};
+            object[] parameters = new object[] { excelApp, "", errorObj };
             try
             {
                 // 执行操作
-                res = (ExternalCommandResult) externalCommand.Invoke(obj: ins, parameters: parameters);
+                res = (ExternalCommandResult)externalCommand.Invoke(obj: ins, parameters: parameters);
 
                 // 提取 ref 类型 或者 out 类型的 参数
                 errorMessage = parameters[1] as string;
@@ -135,12 +136,12 @@ namespace eZx.ExternalCommand
             {
                 if (string.IsNullOrEmpty(errorMessage))
                 {
-                    errorMessage = ex.Message;
+                    errorMessage = GetDebugMessage(ex); // ex.Message;
                 }
                 else
                 {
                     errorMessage = errorMessage + "\n\r--------------------------------------------\n\r"
-                                   + ex.Message;
+                                   + GetDebugMessage(ex); // ex.Message;
                 }
                 errorObj = new object();
                 res = ExternalCommandResult.Failed;
@@ -150,21 +151,41 @@ namespace eZx.ExternalCommand
             switch (res)
             {
                 case ExternalCommandResult.Failed:
-                {
-                    MessageBox.Show(errorMessage);
-                    break;
-                }
+                    {
+                        MessageBox.Show(errorMessage);
+                        break;
+                    }
                 case ExternalCommandResult.Cancelled:
-                {
-                    break;
-                }
+                    {
+                        break;
+                    }
                 case ExternalCommandResult.Succeeded:
-                {
-                    break;
-                }
+                    {
+                        break;
+                    }
             }
         }
 
         #endregion
+
+        /// <summary> 在调试阶段，为每一种报错显示对应的报错信息及出错位置。 </summary>
+        private static string GetDebugMessage(Exception ex)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(ex.Message);
+
+            // 一直向下提取InnerException
+            Exception exInner = ex.InnerException;
+            Exception exStack = ex;
+            while (exInner != null)
+            {
+                exStack = exInner;
+                sb.AppendLine(exInner.Message);
+                exInner = exInner.InnerException;
+            }
+            // 最底层的出错位置
+            sb.AppendLine("\r\n" + exStack.StackTrace);
+            return sb.ToString();
+        }
     }
 }

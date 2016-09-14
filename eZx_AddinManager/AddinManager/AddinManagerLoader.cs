@@ -1,49 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using eZx.AddinManager;
-using eZx.AddinManager;
 using eZx.ExternalCommand;
+using eZx_AddinManager;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Tools.Ribbon;
 
-namespace eZx_AddinManager
+namespace eZx.AddinManager
 {
-    internal partial class AddinManagerLoader
+    internal class AddinManagerLoader
     {
-        private void AddinManagerLoader_Load(object sender, RibbonUIEventArgs e)
-        {
+        #region ---   插件的加载与卸载
 
+        public static void InstallAddinManager(Application excelApp)
+        {
+            try
+            {
+                // 将上次插件卸载时保存的程序集数据加载进来
+                form_AddinManager frm = form_AddinManager.GetUniqueForm(excelApp);
+                var nodesInfo = AssemblyInfoDllManager.GetInfosFromFile();
+                frm.RefreshTreeView(nodesInfo);
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("AddinManager 插件加载时出错： \n\r" + ex.Message + "\n\r" + ex.StackTrace);
+            }
         }
 
-        private bool _addinManagerFirstLoaded = true;
-        private void buttonAddinManager_Click(object sender, RibbonControlEventArgs e)
+        public static void UninstallAddinManager(Application excelApp)
         {
-            Application excelApp = Globals.ThisAddIn.Application;
-            form_AddinManager frm = form_AddinManager.GetUniqueForm(excelApp);
-            if (_addinManagerFirstLoaded)
+            try
             {
-                //// 将上次插件卸载时保存的程序集数据加载进来
-
-                //var nodesInfo = AssemblyInfoDllManager.GetInfosFromFile();
-                //frm.RefreshTreeView(nodesInfo);
-
+                form_AddinManager frm = form_AddinManager.GetUniqueForm(excelApp);
+                var nodesInfo = frm.NodesInfo;
                 //
-                _addinManagerFirstLoaded = false;
+                // 将窗口中加载的程序集数据保存下来
+                AssemblyInfoDllManager.SaveAssemblyInfosToFile(nodesInfo);
             }
-            else
+            catch (Exception ex)
             {
+                Debug.Print("AddinManager 插件关闭时出错： \n\r" + ex.Message + "\n\r" + ex.StackTrace);
             }
+        }
+        #endregion
+
+        #region ---   点击调试按钮
+
+        public static void ShowAddinManager(Application excelApp)
+        {
+            form_AddinManager frm = form_AddinManager.GetUniqueForm(excelApp);
             frm.Show(null);
         }
 
-
-        private void buttonLastCommand_Click(object sender, RibbonControlEventArgs e)
+        public static void LastExternalCommand(Application excelApp)
         {
-            Application excelApp = Globals.ThisAddIn.Application;
             ExternalCommandHandler.InvokeCurrentExternalCommand(excelApp);
         }
 
+        #endregion
     }
 }

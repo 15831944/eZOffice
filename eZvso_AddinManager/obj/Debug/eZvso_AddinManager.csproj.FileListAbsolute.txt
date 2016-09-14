@@ -1,0 +1,14 @@
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso_AddinManager\bin\Debug\eZvso_AddinManager.dll
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso_AddinManager\bin\Debug\eZvso_AddinManager.pdb
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso_AddinManager\bin\Debug\eZvso_AddinManager.dll.manifest
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso_AddinManager\bin\Debug\eZvso_AddinManager.vsto
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso_AddinManager\obj\Debug\eZvso_AddinManager.csprojResolveAssemblyReference.cache
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso_AddinManager\obj\Debug\eZvso_AddinManager.AddinManagerLoaderRibbon.resources
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso_AddinManager\obj\Debug\eZvso.AddinManager.form_AddinManager.resources
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso_AddinManager\obj\Debug\eZvso_AddinManager.Properties.Resources.resources
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso_AddinManager\obj\Debug\eZvso_AddinManager.csproj.GenerateResource.Cache
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso_AddinManager\obj\Debug\eZvso_AddinManager.dll
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso_AddinManager\obj\Debug\eZvso_AddinManager.pdb
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso_AddinManager\bin\Debug\eZvso_AddinManager.XML
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso_AddinManager\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso_AddinManager\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml

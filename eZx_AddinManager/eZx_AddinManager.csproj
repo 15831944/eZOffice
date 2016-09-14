@@ -25,7 +25,7 @@
     <ProjectGuid>{83BD8213-3263-4E73-9A9F-D7891BC73E62}</ProjectGuid>
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
-    <RootNamespace>eZx</RootNamespace>
+    <RootNamespace>eZx_AddinManager</RootNamespace>
     <AssemblyName>eZx_AddinManager</AssemblyName>
     <LoadBehavior>3</LoadBehavior>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -163,13 +163,14 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="AddinManager\AddinManagerLoader.cs">
+    <Compile Include="AddinManagerLoaderRibbon.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="AddinManager\AddinManagerLoader.Designer.cs">
-      <DependentUpon>AddinManagerLoader.cs</DependentUpon>
+    <Compile Include="AddinManagerLoaderRibbon.Designer.cs">
+      <DependentUpon>AddinManagerLoaderRibbon.cs</DependentUpon>
     </Compile>
     <Compile Include="AddinManager\AddinManagerAssembly.cs" />
+    <Compile Include="AddinManager\AddinManagerLoader.cs" />
     <Compile Include="AddinManager\form_AddinManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,8 +188,8 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <EmbeddedResource Include="AddinManager\AddinManagerLoader.resx">
-      <DependentUpon>AddinManagerLoader.cs</DependentUpon>
+    <EmbeddedResource Include="AddinManagerLoaderRibbon.resx">
+      <DependentUpon>AddinManagerLoaderRibbon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddinManager\form_AddinManager.resx">
       <DependentUpon>form_AddinManager.cs</DependentUpon>
@@ -229,6 +230,9 @@
   <ItemGroup>
     <None Include="Resources\LastExternalCommand.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddinManager.ico" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -237,10 +241,11 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>eZx_AddinManager_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>BC27CA02166691DC11F15C4D5DBB1DF28DB49374</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>B1E60B9FC04406179624EAEBED0C3CB6FB31D5A5</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using eZexcelAPI.Entities;
+using eZx_API.Entities;
 using eZstd.Dll;
 using eZstd.Miscellaneous;
 using eZx.Database;
@@ -894,22 +894,5 @@ namespace eZx
         }
 
         #endregion
-
-        #region   ---  动态调试 ---
-
-        private void buttonDebugWithoutQuit_Click(object sender, RibbonControlEventArgs e)
-        {
-            string dllPath = @"F:\ProgrammingCases\GitHubProjects\eZstd\bin\eZexcelAPI.exe";
-            string dynamicDebugClassFullName = "eZexcelAPI.Debug.DynamicDebug";
-            Application app = Globals.ThisAddIn.Application;
-
-            // 开始调试
-            object instance = AssemblyHelper.DynamicDebugClass(
-                dllPath, dynamicDebugClassFullName, new object[] { app });
-        }
-
-        #endregion
-
-
     }
 }

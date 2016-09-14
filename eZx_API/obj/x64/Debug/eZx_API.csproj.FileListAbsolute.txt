@@ -1,0 +1,8 @@
+F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZx_API.dll
+F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZx_API.pdb
+F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZexcelAPI.xml
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZx_API\obj\x64\Debug\eZx_API.csprojResolveAssemblyReference.cache
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZx_API\obj\x64\Debug\eZx_API.Properties.Resources.resources
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZx_API\obj\x64\Debug\eZx_API.csproj.GenerateResource.Cache
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZx_API\obj\x64\Debug\eZx_API.dll
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZx_API\obj\x64\Debug\eZx_API.pdb
