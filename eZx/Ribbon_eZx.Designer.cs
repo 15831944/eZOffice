@@ -152,6 +152,7 @@
             // 
             // btn_ExtractDataFromChart
             // 
+            this.btn_ExtractDataFromChart.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.btn_ExtractDataFromChart.Label = "提取数据";
             this.btn_ExtractDataFromChart.Name = "btn_ExtractDataFromChart";
             this.btn_ExtractDataFromChart.OfficeImageId = "ChartTypeXYScatterInsertGallery";

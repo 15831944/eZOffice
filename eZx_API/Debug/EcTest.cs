@@ -12,7 +12,7 @@ namespace eZx_API.Debug
 {
     class EcTest : IExternalCommand
     {
-        public  ExternalCommandResult Execute(Application excelApp, ref string errorMessage, ref object errorObj)
+        public  ExternalCommandResult Execute(Application excelApp, ref string errorMessage, ref Range errorRange)
         {
             Range rg = excelApp.Selection as Range;
             if (rg != null)

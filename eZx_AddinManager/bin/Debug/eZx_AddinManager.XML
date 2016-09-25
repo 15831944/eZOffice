@@ -267,11 +267,11 @@
         <member name="T:eZx.ExternalCommand.IExternalCommand">
             <summary> 用来进行AddinManager快速调试的接口。实现此接口的类必须有一个无参数的构造函数 </summary>
         </member>
-        <member name="M:eZx.ExternalCommand.IExternalCommand.Execute(Microsoft.Office.Interop.Excel.Application,System.String@,System.Object@)">
+        <member name="M:eZx.ExternalCommand.IExternalCommand.Execute(Microsoft.Office.Interop.Excel.Application,System.String@,Microsoft.Office.Interop.Excel.Range@)">
             <summary> Excel AddinManger 快速调试插件 </summary>
             <param name="excelApp">Excel当前程序</param>
             <param name="errorMessage">当返回值为<see cref="F:eZx.ExternalCommand.ExternalCommandResult.Failed"/>时，这个属性代表给出的报错信息。</param>
-            <param name="errorObj">当返回值为<see cref="F:eZx.ExternalCommand.ExternalCommandResult.Failed"/>时，这个属性代表与出错内容相关的任何对象。</param>
+            <param name="errorRange">当返回值为<see cref="F:eZx.ExternalCommand.ExternalCommandResult.Failed"/>时，这个属性代表与出错内容相关的任何对象。</param>
             <returns></returns>
         </member>
     </members>

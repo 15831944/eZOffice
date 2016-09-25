@@ -72,11 +72,11 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\eZx_AddinManager.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\eZx_AddinManager.XML</DocumentationFile>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
