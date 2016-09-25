@@ -279,8 +279,7 @@ namespace eZx.AddinManager
         }
 
 
+
         #endregion
-
-
     }
 }

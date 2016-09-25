@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using eZexcelAPI.Entities;
-using eZstd.Dll;
+using eZx_API.Entities;
 using eZstd.Miscellaneous;
 using eZx.Database;
+using eZx.RibbonHandler;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Tools.Ribbon;
 using Microsoft.VisualBasic;
@@ -61,13 +61,13 @@ namespace eZx
         /// 当前正在运行的Excel程序
         /// </summary>
         /// <remarks></remarks>
-        private Application ExcelApp;
+        private Application _app;
 
         /// <summary>
         /// 用来临时保存数据的工作簿
         /// </summary>
         /// <remarks>此工作簿用来保存各种临时数据，比如从图表中提取出来的数据情况</remarks>
-        private Workbook tempWkbk;
+        private Workbook _tempWkbk;
 
         /// <summary>
         /// 用来临时保存数据的工作簿的文件路径
@@ -93,8 +93,8 @@ namespace eZx
         /// <summary> 构造函数 </summary>
         public void Ribbon_zfy_Load(Object sender, RibbonUIEventArgs e)
         {
-            ExcelApp = Globals.ThisAddIn.Application;
-            ExcelApp.SheetActivate += this.ExcelApp_SheetActivate;
+            _app = Globals.ThisAddIn.Application;
+            _app.SheetActivate += this.ExcelApp_SheetActivate;
             Para1 = EditBox_p1.Text;
             Para2 = EditBox_p2.Text;
             Para3 = EditBox_p3.Text;
@@ -105,7 +105,7 @@ namespace eZx
         /// <summary> 显示工作表中的UsedRange的范围 </summary>
         public void btn_DataRange_Click(object sender, RibbonControlEventArgs e)
         {
-            Range rg = ExcelApp.ActiveSheet.UsedRange;
+            Range rg = _app.ActiveSheet.UsedRange;
             rg.Select();
             // .Value = .Value '这一操作会将单元格中的公式转化为对应的值，而且，将#DIV/0!、#VALUE!等错误转换为Integer.MinValue
         }
@@ -113,7 +113,7 @@ namespace eZx
         /// <summary> 显示工作表中的UsedRange的范围 </summary>
         public void ButtonValue_Click(object sender, RibbonControlEventArgs e)
         {
-            Range rg = ExcelApp.Selection;
+            Range rg = _app.Selection;
             rg.Value = rg.Value; //这一操作会将单元格中的公式转化为对应的值，而且，将#DIV/0!、#VALUE!等错误转换为Integer.MinValue
         }
 
@@ -125,7 +125,7 @@ namespace eZx
         {
             // -------------------------- 对当前工作表的信息进行处理 --------------------------
             // 此工作表是否曾经是一个数据库
-            Worksheet sht = ExcelApp.ActiveSheet;
+            Worksheet sht = _app.ActiveSheet;
             DataSheet CorrespondingDatasheet = CorrespondingInCollection(sht, this.F_DbSheets);
             try
             {
@@ -163,7 +163,7 @@ namespace eZx
         {
             DataSheet dtSheet = default(DataSheet);
             //
-            Form_ConstructDatabase frm = new Form_ConstructDatabase(ExcelApp.ActiveSheet, true);
+            Form_ConstructDatabase frm = new Form_ConstructDatabase(_app.ActiveSheet, true);
             dtSheet = frm.ShowDialog();
             //
             return dtSheet;
@@ -179,7 +179,7 @@ namespace eZx
         {
             DataSheet dtSheet;
             //
-            Form_ConstructDatabase frm = new Form_ConstructDatabase(ExcelApp.ActiveSheet, false,
+            Form_ConstructDatabase frm = new Form_ConstructDatabase(_app.ActiveSheet, false,
                 this.ActiveDatabaseSheet);
             dtSheet = frm.ShowDialog();
             //
@@ -208,91 +208,10 @@ namespace eZx
 
         #region   ---  图表 ---
 
-        /// <summary>
-        /// 交换Excel中活动Chart中的每一条数据曲线的X轴与Y轴
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// <remarks></remarks>
-        // VBConversions Note: Former VB static variables moved to class level because they aren't supported in C#.
-        private Chart btn_XYExchange_Click_LastChart = default(Chart);
-
-        private List<object> btn_XYExchange_Click_LastX = default(List<object>);
-        private List<object> btn_XYExchange_Click_LastY = default(List<object>);
-        private int btn_XYExchange_Click_NextExchangeTime = 0;
-
         public void btn_XYExchange_Click(object sender, RibbonControlEventArgs e)
         {
-            Chart ThisChart = ExcelApp.ActiveChart; //当前进行操作的Chart对象
-            //
-            // static Chart LastChart = default(Chart); VBConversions Note: Static variable moved to class level and renamed btn_XYExchange_Click_LastChart. Local static variables are not supported in C#. // 上一次进行了“交换XY轴”操作的Chart对象（而不是指上一次激活的Chart对象）
-            // static List<object> LastX = default(List<object>); VBConversions Note: Static variable moved to class level and renamed btn_XYExchange_Click_LastX. Local static variables are not supported in C#.
-            // static List<object> LastY = default(List<object>); VBConversions Note: Static variable moved to class level and renamed btn_XYExchange_Click_LastY. Local static variables are not supported in C#.
-            // static int NextExchangeTime = 0; VBConversions Note: Static variable moved to class level and renamed btn_XYExchange_Click_NextExchangeTime. Local static variables are not supported in C#. // 对于同一个图表，所进行的交换次数，第一次交换时其值为1。
-            //
-            if (ThisChart != null)
-            {
-                Series sr = default(Series);
-                SeriesCollection src = default(SeriesCollection);
-                src = ThisChart.SeriesCollection();
-                if (!ThisChart.Equals(btn_XYExchange_Click_LastChart)) //说明是要对一个新的Chart进行操作
-                {
-                    //
-                    btn_XYExchange_Click_LastX = new List<object>();
-                    btn_XYExchange_Click_LastY = new List<object>();
-                    dynamic X = default(dynamic);
-                    object Y = null;
-                    foreach (Series tempLoopVar_sr in src)
-                    {
-                        sr = tempLoopVar_sr;
-                        X = sr.XValues;
-                        Y = sr.Values;
-                        //
-                        btn_XYExchange_Click_LastX.Add(X);
-                        btn_XYExchange_Click_LastY.Add(Y);
-                        //
-                        if (X.Length > 0)
-                        {
-                            sr.XValues = Y;
-                            sr.Values = X;
-                        }
-                    }
-                    btn_XYExchange_Click_NextExchangeTime = 2;
-                }
-                else // 说明还是对原来的那个Chart进行操作
-                {
-                    //此时交换数据时, 使用上一次保存的数据, 而不是直接将现有的Chart中的X与Y交换,
-                    //这是因为 : 当X轴为文字，而Y轴为数值时，在交换XY轴后，新的Y轴数据都会变成0，而原来的文字信息在Chart中就不存在了。
-                    dynamic X = default(dynamic);
-                    object Y = null;
-                    for (var i = 1; i <= src.Count; i++)
-                    {
-                        sr = src.Item(i);
-                        X = btn_XYExchange_Click_LastX[Convert.ToInt32(i - 1)];
-                        Y = btn_XYExchange_Click_LastY[Convert.ToInt32(i - 1)];
-                        if (X.Length > 0)
-                        {
-                            if (btn_XYExchange_Click_NextExchangeTime % 2 == 0) // 在偶数次交换时，X与Y列使用其原来的数据
-                            {
-                                sr.XValues = X;
-                                sr.Values = Y;
-                            }
-                            else
-                            {
-                                sr.XValues = Y;
-                                sr.Values = X;
-                            }
-                        }
-                    }
-                    btn_XYExchange_Click_NextExchangeTime++;
-                }
-                // 将此次操作的Chart中的数据保存起来
-                btn_XYExchange_Click_LastChart = ThisChart;
-            }
-            else
-            {
-                MessageBox.Show("没有找到要进行XY轴交换的图表");
-            }
+            var ch = ChartHandler.GetUniqueInstance(_app.ActiveChart);
+            ch.XYExchange();
         }
 
         /// <summary>
@@ -303,68 +222,8 @@ namespace eZx
         /// <remarks></remarks>
         public void btn_ExtractDataFromChart_Click(object sender, RibbonControlEventArgs e)
         {
-            Chart cht = ExcelApp.ActiveChart;
-            //对Chart中的数据进行提取
-            if (cht != null)
-            {
-                // 打开记录数据的临时工作簿
-                if (tempWkbk == null)
-                {
-                    if (File.Exists(path_Tempwkbk.ToString()))
-                    {
-                        tempWkbk = (Workbook)Interaction.GetObject(path_Tempwkbk.ToString(), null);
-                        tempWkbk.BeforeClose += tempWkbk_BeforeClose;
-                    }
-                    else
-                    {
-                        tempWkbk = ExcelApp.Workbooks.Add();
-                        tempWkbk.BeforeClose += tempWkbk_BeforeClose;
-                        tempWkbk.SaveAs(path_Tempwkbk);
-                    }
-                }
-                // 设置写入数据的工作表
-                Worksheet sht = tempWkbk.Worksheets[1]; // 用工作簿中的第一个工作表来存放数据。
-                //
-                SeriesCollection seriesColl = cht.SeriesCollection();
-                Series Chartseries = default(Series);
-                //开始提取数据
-                short col = (short)1;
-                dynamic X = default(dynamic); // 这里只能将X与Y的数据类型定义为Object，不能是Object()或者Object(,)
-                object Y = null;
-                string Title = "";
-                // 这里不能用For Each Chartseries in SeriesCollection来引用seriesCollection集合中的元素。
-                for (var i = 1; i <= seriesColl.Count; i++)
-                {
-                    // 在VB.NET中，seriesCollection集合中的第一个元素的下标值为1。
-                    Chartseries = seriesColl.Item(i);
-                    X = Chartseries.XValues;
-                    Y = Chartseries.Values;
-                    Title = Chartseries.Name;
-                    // 将数据存入Excel表中
-                    int PointsCount = Convert.ToInt32(X.Length);
-                    if (PointsCount > 0)
-                    {
-                        sht.Cells[1, col].Value = Title;
-                        sht.Range[sht.Cells[2, col], sht.Cells[PointsCount + 1, col]].Value =
-                            ExcelApp.WorksheetFunction.Transpose(X);
-                        sht.Range[sht.Cells[2, col + 1], sht.Cells[PointsCount + 1, col + 1]].Value =
-                            ExcelApp.WorksheetFunction.Transpose(Y);
-                        col = (short)(col + 3);
-                    }
-                }
-                tempWkbk.Save();
-                tempWkbk.Application.Windows[tempWkbk.Name].Visible = true;
-                tempWkbk.Application.Windows[tempWkbk.Name].Activate();
-                tempWkbk.Application.Visible = true;
-                if (tempWkbk.Application.WindowState == XlWindowState.xlMinimized)
-                {
-                    tempWkbk.Application.WindowState = XlWindowState.xlNormal;
-                }
-            }
-            else
-            {
-                MessageBox.Show("没有找到要进行数据提取的图表");
-            }
+            var ch = ChartHandler.GetUniqueInstance(_app.ActiveChart);
+            ch.ExtractDataFromChart();
         }
 
         #endregion
@@ -375,8 +234,8 @@ namespace eZx
         public void btnReArrange_Click(object sender, RibbonControlEventArgs e)
         {
             // ---------------------------- 确定Range的有效范围 ------------------------------------------
-            Worksheet sht = ExcelApp.ActiveSheet;
-            Range rgData = ExcelApp.Selection;
+            Worksheet sht = _app.ActiveSheet;
+            Range rgData = _app.Selection;
             rgData = rgData.Areas[1];
             Range firstCell = default(Range); // 有效区间中的左上角第一个单元
             Range bottomCell = default(Range); // 有效区间中的左下角的那个单元
@@ -420,7 +279,7 @@ namespace eZx
                 {
                     try
                     {
-                        startData = Convert.ToDouble(ExcelApp.WorksheetFunction.Min(rgIdColumn));
+                        startData = Convert.ToDouble(_app.WorksheetFunction.Min(rgIdColumn));
                         EditBox_ReArrangeStart.Text = Convert.ToString(startData);
                     }
                     catch (Exception)
@@ -445,7 +304,7 @@ namespace eZx
                 {
                     try
                     {
-                        endData = Convert.ToDouble(ExcelApp.WorksheetFunction.Max(rgIdColumn));
+                        endData = Convert.ToDouble(_app.WorksheetFunction.Max(rgIdColumn));
                         EditBox_ReArrangeEnd.Text = Convert.ToString(endData);
                     }
                     catch (Exception)
@@ -527,7 +386,7 @@ namespace eZx
         /// </summary>
         public void btnShrink_Click(object sender, RibbonControlEventArgs e)
         {
-            Range rgData = ExcelApp.Selection;
+            Range rgData = _app.Selection;
             rgData = rgData.Areas[1];
             int colsCount = rgData.Columns.Count;
             Worksheet sht = rgData.Worksheet;
@@ -615,7 +474,7 @@ namespace eZx
         /// 在进行重排时，全先将所有的数据排成一列，然后再进行重排。</remarks>
         public void DataReshape(object sender, RibbonControlEventArgs e)
         {
-            Range rg = ExcelApp.Selection;
+            Range rg = _app.Selection;
             Range startCell = rg.Cells[1, 1];
             object[,] Value = rg.Areas[1].Value;
             //
@@ -722,9 +581,9 @@ namespace eZx
         public void ButtonTranspose_Click(object sender, RibbonControlEventArgs e)
         {
             // ---------------------------- 确定Range的有效范围 ------------------------------------------
-            Application app = ExcelApp;
-            Worksheet sht = ExcelApp.ActiveSheet;
-            Range rgData = ExcelApp.Selection;
+            Application app = _app;
+            Worksheet sht = _app.ActiveSheet;
+            Range rgData = _app.Selection;
             //
             var tspValues = new List<object>();
             var tspRg = new List<Range>(); // 用来记录每一个小Area在转置后的范围，用来精确赋值
@@ -798,7 +657,7 @@ namespace eZx
 
         public void ButtonTest_Click(object sender, RibbonControlEventArgs e)
         {
-            Application app = ExcelApp;
+            Application app = _app;
             Workbook wkbk = app.ActiveWorkbook;
             Worksheet sht = wkbk.ActiveSheet;
             //
@@ -844,14 +703,8 @@ namespace eZx
         /// </summary>
         private void ExcelApp_SheetActivate(object sender)
         {
-            Worksheet sheet = ExcelApp.ActiveSheet;
+            Worksheet sheet = _app.ActiveSheet;
             this.ActiveDatabaseSheet = CorrespondingInCollection(sheet, this.F_DbSheets);
-        }
-
-        private void tempWkbk_BeforeClose(ref bool Cancel)
-        {
-            this.tempWkbk = null;
-            this.tempWkbk.BeforeClose += this.tempWkbk_BeforeClose;
         }
 
         public void EditBox_p1_TextChanged(object sender, RibbonControlEventArgs e)
@@ -894,22 +747,5 @@ namespace eZx
         }
 
         #endregion
-
-        #region   ---  动态调试 ---
-
-        private void buttonDebugWithoutQuit_Click(object sender, RibbonControlEventArgs e)
-        {
-            string dllPath = @"F:\ProgrammingCases\GitHubProjects\eZstd\bin\eZexcelAPI.exe";
-            string dynamicDebugClassFullName = "eZexcelAPI.Debug.DynamicDebug";
-            Application app = Globals.ThisAddIn.Application;
-
-            // 开始调试
-            object instance = AssemblyHelper.DynamicDebugClass(
-                dllPath, dynamicDebugClassFullName, new object[] { app });
-        }
-
-        #endregion
-
-
     }
 }

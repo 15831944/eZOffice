@@ -23,7 +23,6 @@ namespace eZwd
 {
     public partial class Ribbon_eZwd
     {
-
         #region   ---  Properties
 
         #endregion

@@ -148,13 +148,13 @@
             <remarks>如果当前活动的Excel工作表是一个符合格式的数据库工作表，
             则此属性指向此对应的数据库对象，否则，返回Nothing。</remarks>
         </member>
-        <member name="F:eZx.Ribbon_eZx.ExcelApp">
+        <member name="F:eZx.Ribbon_eZx._app">
             <summary>
             当前正在运行的Excel程序
             </summary>
             <remarks></remarks>
         </member>
-        <member name="F:eZx.Ribbon_eZx.tempWkbk">
+        <member name="F:eZx.Ribbon_eZx._tempWkbk">
             <summary>
             用来临时保存数据的工作簿
             </summary>
@@ -210,14 +210,6 @@
             </summary>
             <param name="DataSheet">要进行匹配的Excel工作表</param>
             <param name="DatasheetCollection">要进行搜索的数据库集合。</param>
-        </member>
-        <member name="F:eZx.Ribbon_eZx.btn_XYExchange_Click_LastChart">
-            <summary>
-            交换Excel中活动Chart中的每一条数据曲线的X轴与Y轴
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-            <remarks></remarks>
         </member>
         <member name="M:eZx.Ribbon_eZx.btn_ExtractDataFromChart_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
             <summary>
@@ -307,6 +299,41 @@
             <summary>
               Looks up a localized resource of type System.Drawing.Bitmap.
             </summary>
+        </member>
+        <member name="T:eZx.RibbonHandler.ChartHandler">
+            <summary>
+            与图表相关的操作
+            </summary>
+        </member>
+        <member name="M:eZx.RibbonHandler.ChartHandler.GetUniqueInstance(Microsoft.Office.Interop.Excel.Chart)">
+            <summary> 获取一个唯一的实例对象 </summary>
+            <param name="chart"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZx.RibbonHandler.ChartHandler.#ctor(Microsoft.Office.Interop.Excel.Chart)">
+            <summary> 构造函数 </summary>
+            <param name="chart"></param>
+        </member>
+        <member name="M:eZx.RibbonHandler.ChartHandler.XYExchange">
+            <summary>
+            交换Excel中活动Chart中的每一条数据曲线的X轴与Y轴
+            </summary>
+        </member>
+        <member name="F:eZx.RibbonHandler.ChartHandler._tempWkbk">
+            <summary>
+            用来临时保存数据的工作簿
+            </summary>
+            <remarks>此工作簿用来保存各种临时数据，比如从图表中提取出来的数据情况</remarks>
+        </member>
+        <member name="F:eZx.RibbonHandler.ChartHandler._path_desktop">
+            <summary>
+            用来临时保存数据的工作簿的文件路径
+            </summary>
+            <remarks>此工作簿位于桌面上的“tempData.xlsx”</remarks>
+        </member>
+        <member name="M:eZx.RibbonHandler.ChartHandler.ExtractDataFromChart">
+            <summary> 提取图表中的数据 </summary>
+            <remarks></remarks>
         </member>
         <member name="T:eZx.ThisRibbonCollection">
             
