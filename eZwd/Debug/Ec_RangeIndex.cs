@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using eZwd.ExternalCommand;
-using Microsoft.Office.Interop.Word;
 using Application = Microsoft.Office.Interop.Word.Application;
-using eZwd.Functions;
 
 namespace eZwd.Debug
 {
-    class EcTest : IExternalCommand
+    /// <summary> 查看选择的区域的Range的范围 </summary>
+    class Ec_RangeIndex : IExternalCommand
     {
         public ExternalCommandResult Execute(Microsoft.Office.Interop.Word.Application wdApp, ref string errorMessage, ref object errorObj)
         {
@@ -31,10 +30,8 @@ namespace eZwd.Debug
         // 开始具体的调试操作
         private static void DoSomething(Application wdApp)
         {
-            //var sele = wdApp.Selection;
-            MessageBox.Show(@"啥也没做啊");
-
-            //StaticFunction.PdfReformat(wdApp);
+            var sel = wdApp.Selection;
+            MessageBox.Show($"start: {sel.Start} \r\nend: {sel.End}");
         }
     }
 }
