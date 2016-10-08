@@ -21,7 +21,7 @@ namespace eZx.Debug
             }
             catch (Exception ex)
             {
-                errorMessage = ex.Message;
+                errorMessage = ex.Message + ex.StackTrace;
                 return ExternalCommandResult.Failed;
             }
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using eZwd.Functions;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Word;
 using Microsoft.Office.Tools.Ribbon;
@@ -21,7 +22,7 @@ using Style = Microsoft.Office.Interop.Word.Style;
 
 namespace eZwd
 {
-    public partial class Ribbon_eZwd
+    internal partial class Ribbon_eZwd
     {
         #region   ---  Properties
 
@@ -123,7 +124,18 @@ namespace eZwd
         //清理文本格式
         public void Button_ClearTextFormat_Click(object sender, RibbonControlEventArgs e)
         {
-            ClearTextFormat();
+            Application wdApp = Globals.ThisAddIn.Application;
+            StaticFunction.ClearTextFormat(wdApp,pictureParagraphStyle: "图片");
+        }
+
+        /// <summary>
+        /// 将多个段落转换为一个段落
+        /// </summary>
+        /// <remarks>比如将从PDF中粘贴过来的多段文字转换为一个段落。具体操作为：将选择区域的文字中的换行符转换为空格</remarks>
+        public void buttonPdfReformat_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application wdApp = Globals.ThisAddIn.Application;
+            StaticFunction.PdfReformat(wdApp);
         }
 
         #endregion
@@ -677,43 +689,7 @@ namespace eZwd
                 Selection.Delete();
             }
         }
-
-        /// <summary>
-        /// 清理文本的格式
-        /// </summary>
-        /// <param name="ParagraphStyle"></param>
-        /// <remarks>具体过程有：删除乱码空格、将手动换行符替换为回车、设置嵌入式图片的段落样式</remarks>
-        private void ClearTextFormat(string ParagraphStyle = "图片")
-        {
-            //On Error Resume Next VBConversions Warning: On Error Resume Next not supported in C#
-            var Selection = _app.Selection;
-            Selection Sln = default(Selection);
-            Range rg = default(Range);
-            Sln = Selection;
-            rg = Sln.Range;
-
-            //删除乱码空格
-            rg.Find.ClearFormatting();
-            rg.Find.Replacement.ClearFormatting();
-            rg.Find.Text = " ";
-            rg.Find.Replacement.Text = " ";
-            rg.Find.Execute(Replace: WdReplace.wdReplaceAll);
-
-            //将手动换行符替换为回车
-            rg.Find.ClearFormatting();
-            rg.Find.Replacement.ClearFormatting();
-            rg.Find.Text = "^l";
-            rg.Find.Replacement.Text = "^p";
-            rg.Find.Execute(Replace: WdReplace.wdReplaceAll);
-
-            InlineShape inlineShp = default(InlineShape);
-            Range rgShp;
-            foreach (InlineShape tempLoopVar_inlineShp in rg.InlineShapes)
-            {
-                inlineShp = tempLoopVar_inlineShp;
-                inlineShp.Range.ParagraphFormat.set_Style(ParagraphStyle);
-            }
-        }
+        
 
         #endregion
     }

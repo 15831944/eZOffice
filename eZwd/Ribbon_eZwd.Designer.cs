@@ -64,12 +64,15 @@ namespace eZwd
             this.Button_DeleteSapce = this.Factory.CreateRibbonButton();
             this.Button_AddSpace = this.Factory.CreateRibbonButton();
             this.EditBox_SpaceCount = this.Factory.CreateRibbonEditBox();
+            this.group6 = this.Factory.CreateRibbonGroup();
+            this.buttonPdfReformat = this.Factory.CreateRibbonButton();
             this.Group2.SuspendLayout();
             this.group1.SuspendLayout();
             this.Tab1.SuspendLayout();
             this.Group4.SuspendLayout();
             this.Group3.SuspendLayout();
             this.Group5.SuspendLayout();
+            this.group6.SuspendLayout();
             this.SuspendLayout();
             // 
             // Group2
@@ -142,6 +145,7 @@ namespace eZwd
             this.Tab1.Groups.Add(this.group1);
             this.Tab1.Groups.Add(this.Group2);
             this.Tab1.Groups.Add(this.Group4);
+            this.Tab1.Groups.Add(this.group6);
             this.Tab1.Groups.Add(this.Group3);
             this.Tab1.Groups.Add(this.Group5);
             this.Tab1.Label = "eZwd";
@@ -171,7 +175,7 @@ namespace eZwd
             // 
             this.Group3.Items.Add(this.Button_SetHyperlinks);
             this.Group3.Items.Add(this.Button_ClearTextFormat);
-            this.Group3.Items.Add(this.btn_ExtractDataFromWordChart);
+            this.Group3.Items.Add(this.buttonPdfReformat);
             this.Group3.Label = "文档处理";
             this.Group3.Name = "Group3";
             // 
@@ -241,6 +245,22 @@ namespace eZwd
             this.EditBox_SpaceCount.SuperTip = "要在代码行中增加或者删除的空白字符数。";
             this.EditBox_SpaceCount.Text = "4";
             // 
+            // group6
+            // 
+            this.group6.Items.Add(this.btn_ExtractDataFromWordChart);
+            this.group6.Label = "图表";
+            this.group6.Name = "group6";
+            // 
+            // buttonPdfReformat
+            // 
+            this.buttonPdfReformat.Label = "段落重排";
+            this.buttonPdfReformat.Name = "buttonPdfReformat";
+            this.buttonPdfReformat.OfficeImageId = "InsertBuildingBlock";
+            this.buttonPdfReformat.ScreenTip = "将多个段落转换为一个段落";
+            this.buttonPdfReformat.ShowImage = true;
+            this.buttonPdfReformat.SuperTip = "比如将从PDF中粘贴过来的多段文字转换为一个段落。具体操作为：将选择区域的文字中的换行符转换为空格";
+            this.buttonPdfReformat.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonPdfReformat_Click);
+            // 
             // Ribbon_eZwd
             // 
             this.Name = "Ribbon_eZwd";
@@ -259,6 +279,8 @@ namespace eZwd
             this.Group3.PerformLayout();
             this.Group5.ResumeLayout(false);
             this.Group5.PerformLayout();
+            this.group6.ResumeLayout(false);
+            this.group6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -284,7 +306,8 @@ namespace eZwd
         internal Microsoft.Office.Tools.Ribbon.RibbonButton Button_DeleteSapce;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton Button_AddSpace;
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox EditBox_SpaceCount;
-
+        internal RibbonGroup group6;
+        internal RibbonButton buttonPdfReformat;
     }
 
     partial class ThisRibbonCollection
