@@ -44,34 +44,52 @@ namespace eZvso
         private void InitializeComponent()
         {
             this.Tab1 = this.Factory.CreateRibbonTab();
+            this.Group_Transform = this.Factory.CreateRibbonGroup();
+            this.Group_Master = this.Factory.CreateRibbonGroup();
             this.Group_Drawing = this.Factory.CreateRibbonGroup();
             this.btnPaste = this.Factory.CreateRibbonButton();
             this.btnArrayCircle = this.Factory.CreateRibbonButton();
             this.btnArray = this.Factory.CreateRibbonButton();
             this.btnMove = this.Factory.CreateRibbonButton();
             this.btnArea = this.Factory.CreateRibbonButton();
-            this.Group_Master = this.Factory.CreateRibbonGroup();
+            this.button_FunctionCurve = this.Factory.CreateRibbonButton();
+            this.button_FitCurve = this.Factory.CreateRibbonButton();
             this.btnMasterBase = this.Factory.CreateRibbonSplitButton();
             this.btnLocPin = this.Factory.CreateRibbonButton();
             this.Tab1.SuspendLayout();
-            this.Group_Drawing.SuspendLayout();
+            this.Group_Transform.SuspendLayout();
             this.Group_Master.SuspendLayout();
+            this.Group_Drawing.SuspendLayout();
             this.SuspendLayout();
             // 
             // Tab1
             // 
+            this.Tab1.Groups.Add(this.Group_Transform);
             this.Tab1.Groups.Add(this.Group_Drawing);
             this.Tab1.Groups.Add(this.Group_Master);
             this.Tab1.Label = "eZvso";
             this.Tab1.Name = "Tab1";
             // 
+            // Group_Transform
+            // 
+            this.Group_Transform.Items.Add(this.btnPaste);
+            this.Group_Transform.Items.Add(this.btnArrayCircle);
+            this.Group_Transform.Items.Add(this.btnArray);
+            this.Group_Transform.Items.Add(this.btnMove);
+            this.Group_Transform.Items.Add(this.btnArea);
+            this.Group_Transform.Label = "操作";
+            this.Group_Transform.Name = "Group_Transform";
+            // 
+            // Group_Master
+            // 
+            this.Group_Master.Items.Add(this.btnMasterBase);
+            this.Group_Master.Label = "主控形状编辑";
+            this.Group_Master.Name = "Group_Master";
+            // 
             // Group_Drawing
             // 
-            this.Group_Drawing.Items.Add(this.btnPaste);
-            this.Group_Drawing.Items.Add(this.btnArrayCircle);
-            this.Group_Drawing.Items.Add(this.btnArray);
-            this.Group_Drawing.Items.Add(this.btnMove);
-            this.Group_Drawing.Items.Add(this.btnArea);
+            this.Group_Drawing.Items.Add(this.button_FunctionCurve);
+            this.Group_Drawing.Items.Add(this.button_FitCurve);
             this.Group_Drawing.Label = "绘图";
             this.Group_Drawing.Name = "Group_Drawing";
             // 
@@ -123,11 +141,21 @@ namespace eZvso
             this.btnArea.Tag = "6";
             this.btnArea.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnMove_Click);
             // 
-            // Group_Master
+            // button_FunctionCurve
             // 
-            this.Group_Master.Items.Add(this.btnMasterBase);
-            this.Group_Master.Label = "主控形状编辑";
-            this.Group_Master.Name = "Group_Master";
+            this.button_FunctionCurve.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.button_FunctionCurve.Image = global::eZvso.Properties.Resources.Curve;
+            this.button_FunctionCurve.Label = "函数曲线";
+            this.button_FunctionCurve.Name = "button_FunctionCurve";
+            this.button_FunctionCurve.ShowImage = true;
+            this.button_FunctionCurve.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button_FunctionCurve_Click);
+            // 
+            // button_FitCurve
+            // 
+            this.button_FitCurve.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.button_FitCurve.Label = "平滑曲线";
+            this.button_FitCurve.Name = "button_FitCurve";
+            this.button_FitCurve.ShowImage = true;
             // 
             // btnMasterBase
             // 
@@ -154,10 +182,12 @@ namespace eZvso
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.Ribbon_eZvso_Load);
             this.Tab1.ResumeLayout(false);
             this.Tab1.PerformLayout();
-            this.Group_Drawing.ResumeLayout(false);
-            this.Group_Drawing.PerformLayout();
+            this.Group_Transform.ResumeLayout(false);
+            this.Group_Transform.PerformLayout();
             this.Group_Master.ResumeLayout(false);
             this.Group_Master.PerformLayout();
+            this.Group_Drawing.ResumeLayout(false);
+            this.Group_Drawing.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -167,13 +197,16 @@ namespace eZvso
         internal Microsoft.Office.Tools.Ribbon.RibbonTab Tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup Group_Master;
         internal Microsoft.Office.Tools.Ribbon.RibbonSplitButton btnMasterBase;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup Group_Drawing;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup Group_Transform;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnPaste;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnMove;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnArray;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnArea;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnArrayCircle;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnLocPin;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup Group_Drawing;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button_FunctionCurve;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button_FitCurve;
     }
 
     partial class ThisRibbonCollection

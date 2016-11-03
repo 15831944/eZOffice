@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using eZwd.Functions;
+using eZwd.RibbonHandlers;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Word;
 using Microsoft.Office.Tools.Ribbon;
@@ -105,7 +105,8 @@ namespace eZwd
         //为图片添加边框
         public void Btn_AddBoarder_Click(object sender, RibbonControlEventArgs e)
         {
-            AddBoadersForInlineshapes();
+            Application wdApp = Globals.ThisAddIn.Application;
+            StaticFunction.AddBoadersForInlineshapes(wdApp, pictureParagraphStyle: "图片");
         }
 
         //规范表格格式
@@ -118,7 +119,8 @@ namespace eZwd
         //设置超链接
         public void Button1_Click(object sender, RibbonControlEventArgs e)
         {
-            SetHyperLink();
+            Application wdApp = Globals.ThisAddIn.Application;
+            StaticFunction.SetHyperLink(wdApp);
         }
 
         //清理文本格式
@@ -466,80 +468,6 @@ namespace eZwd
         #region   ---  子方法
 
         /// <summary>
-        /// 嵌入式图片加边框
-        /// </summary>
-        /// <param name="ParagraphStyle">此图片所在段落的段落样式</param>
-        /// <remarks></remarks>
-        public void AddBoadersForInlineshapes(string ParagraphStyle = "图片")
-        {
-            Selection selection = _app.Selection;
-            int picCount;
-            //选中区域中嵌入式图片的张数
-            picCount = selection.InlineShapes.Count;
-            if (picCount == 0)
-            {
-                MessageBox.Show("没有发现嵌入式图片", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                _app.ScreenUpdating = false;
-                //
-                InlineShape Pic = default(InlineShape);
-                foreach (InlineShape tempLoopVar_Pic in selection.Range.InlineShapes)
-                {
-                    Pic = tempLoopVar_Pic;
-                    //显示出图片的边框来，不然下面的设置边框线宽就会报错
-                    //用下面的Enable语句将图片的四个边框同时显示出来
-                    Pic.Borders.Enable = 1; // true;
-                    //To remove all the borders from an object, set the Enable property to False.
-                    //也可以用pic.Borders(wdBorderLeft).visible = True将图片的四条边依次显示出来。
-                    //而对于一般的图片（即jpg等图片，而不是像AutocAD、Visio等嵌入式的对象），
-                    //只要设置了任意一条边的visible为true，则四条边都会同时显示出来。
-                    Range rg = default(Range);
-                    rg = Pic.Range;
-                    try
-                    {
-                        // rg.ParagraphFormat.Style = ParagraphStyle; 
-                        rg.ParagraphFormat.set_Style(ParagraphStyle); // 这张图所在段落的样式为"图片"
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("请先向文档中添加样式\"图片\"", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    //对于表格中的图片，如果单元格中仅仅只有这一张图片的话，下面的添加边框的代码会失效。
-                    //此时要先在单元格的图片后面插入一个字符，然后添加边框，最后将字符删除。
-                    rg.Collapse(Direction: WdCollapseDirection.wdCollapseEnd);
-                    rg.InsertAfter(" ");
-                    //下面设置图片边框的线宽；这一定要在图片有边框时才可用，不然会报错。
-                    dynamic with_1 = Pic;
-                    with_1.Select();
-                    Border BorderSide = default(Border);
-                    foreach (Border tempLoopVar_BorderSide in with_1.Borders)
-                    {
-                        BorderSide = tempLoopVar_BorderSide;
-                        dynamic with_2 = BorderSide;
-                        with_2.LineStyle = WdLineStyle.wdLineStyleSingle; //边框线型wdLineStyleNone表示无边框
-                        with_2.LineWidth = WdLineWidth.wdLineWidth025pt; // 边框线宽
-                        with_2.Color = WdColor.wdColorBlack; // 边框颜色
-                    } //下一个边框
-
-                    //设置图片的大小
-                    with_1.ScaleHeight = 100;
-                    with_1.ScaleWidth = 100;
-                    rg.Collapse(WdCollapseDirection.wdCollapseStart);
-                    rg.Delete(Unit: WdUnits.wdCharacter, Count: 1);
-                } //下一张图片
-
-                //
-                selection.Collapse();
-                selection.MoveRight();
-                _app.ScreenRefresh();
-            }
-            _app.ScreenUpdating = true;
-        }
-
-        /// <summary>
         /// 规范表格，而且删除表格中的嵌入式图片
         /// </summary>
         /// <param name="TableStyle">要应用的表格样式</param>
@@ -654,43 +582,7 @@ namespace eZwd
                 return;
             }
         }
-
-        /// <summary>
-        /// 设置超链接
-        /// </summary>
-        /// <remarks>此方法的要求是文本的排布格式要求：选择的段落格式必须是：
-        /// 第一段为网页标题，第二段为网址；第三段为网页标题，第四段为网址……，
-        /// 而且其中不能有空行，也不能选择空行</remarks>
-        public void SetHyperLink()
-        {
-            //On Error Resume Next VBConversions Warning: On Error Resume Next not supported in C#
-            var Selection = _app.Selection;
-            Range rg = default(Range);
-            Paragraphs Prs = default(Paragraphs);
-            rg = Selection.Range;
-            Prs = rg.Paragraphs;
-            //
-            int i = 0;
-            Range rgText = default(Range);
-            Range rgURL = default(Range);
-            for (i = Prs.Count; i >= 1; i -= 2)
-            {
-                //索引标题段落
-                rgText = Prs[i - 1].Range;
-                //去掉末尾的回车符
-                rgText.MoveEnd(Unit: WdUnits.wdCharacter, Count: -1);
-
-                //索引网址段落并得到其文本
-                rgURL = Prs[i].Range;
-                _activeDoc.Hyperlinks.Add(Anchor: rgText, Address: rgURL.Text);
-
-                //删除网址段落
-                rgURL.Select();
-                Selection.Delete();
-            }
-        }
         
-
         #endregion
     }
 }

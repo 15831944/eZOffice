@@ -1,0 +1,14 @@
+直至Visio 2016，在Shape、Page与Master类中，都有且只有如下十个Draw方法，用来绘制不同类型的曲线，而且在这三个类中，对应的十个Draw方法的用法与含义是完全相同的，唯一的区别在于是在Page、Master还是在Shape内部绘制曲线。
+注意：对于几何尺寸，都是按内部单位英寸（inch）来计算的。
+
+方法	说明
+DrawArc­ByThreePoints 	创建一个形状，其路径由作为参数进行传递的三个点定义的弧组成。
+DrawBezier 	创建一个形状，其路径由提供的贝赛尔控制点序列定义。
+DrawCircularArc 	创建一个轨迹是圆弧的新建形状，该圆弧由它的弧心、半径以及起角和终角定义。
+DrawLine 	将线条添加到组合形状的 Shapes 集合。
+DrawNURBS 	创建一个新建形状，其路径由单个 NURBS段组成。
+DrawOval 	将椭圆添加到组合形状的 Shapes 集合。
+DrawPolyline 	创建一个形状，其路径为沿着一组给定点的折线。
+DrawQuarterArc 	创建一个新建形状，其路径由作为参数传入的两个点和标志定义的椭圆弧组成。
+DrawRectangle 	将矩形添加到页面、主控形状或组的 Shapes 集合。
+DrawSpline 	创建一个新建形状，其路径沿着给定的点序列。

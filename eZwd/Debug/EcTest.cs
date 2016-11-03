@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using eZwd.ExternalCommand;
 using Microsoft.Office.Interop.Word;
 using Application = Microsoft.Office.Interop.Word.Application;
-using eZwd.Functions;
+using eZwd.RibbonHandlers;
 
 namespace eZwd.Debug
 {

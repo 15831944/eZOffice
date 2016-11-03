@@ -7,23 +7,38 @@
         <member name="T:eZwd.Debug.Ec_RangeIndex">
             <summary> 查看选择的区域的Range的范围 </summary>
         </member>
-        <member name="T:eZwd.Functions.StaticFunction">
+        <member name="T:eZwd.RibbonHandlers.StaticFunction">
             <summary> 一些结构性的静态方法 </summary>
         </member>
-        <member name="M:eZwd.Functions.StaticFunction.PdfReformat(Microsoft.Office.Interop.Word.Application)">
+        <member name="M:eZwd.RibbonHandlers.StaticFunction.PdfReformat(Microsoft.Office.Interop.Word.Application)">
             <summary>
             将多个段落转换为一个段落
             </summary>
             <param name="wdApp"></param>
             <remarks>比如将从PDF中粘贴过来的多段文字转换为一个段落。具体操作为：将选择区域的文字中的换行符转换为空格</remarks>
         </member>
-        <member name="M:eZwd.Functions.StaticFunction.ClearTextFormat(Microsoft.Office.Interop.Word.Application,System.String)">
+        <member name="M:eZwd.RibbonHandlers.StaticFunction.SetHyperLink(Microsoft.Office.Interop.Word.Application)">
+            <summary> 设置超链接 </summary>
+            <param name="wdApp"></param>
+            <remarks>此方法的要求是文本的排布格式要求：选择的段落格式必须是：
+            第一段为网页标题，第二段为网址；第三段为网页标题，第四段为网址……，
+            而且其中不能有空行，也不能选择空行</remarks>
+        </member>
+        <member name="M:eZwd.RibbonHandlers.StaticFunction.ClearTextFormat(Microsoft.Office.Interop.Word.Application,System.String)">
             <summary>
             清理文本的格式
             </summary>
             <param name="wdApp"></param>
             <param name="pictureParagraphStyle">图片所在段落的段落样式</param>
             <remarks>具体过程有：删除乱码空格、将手动换行符替换为回车、设置嵌入式图片的段落样式</remarks>
+        </member>
+        <member name="M:eZwd.RibbonHandlers.StaticFunction.AddBoadersForInlineshapes(Microsoft.Office.Interop.Word.Application,System.String)">
+            <summary>
+            嵌入式图片加边框
+            </summary>
+            <param name="wdApp"></param>
+            <param name="pictureParagraphStyle">此图片所在段落的段落样式</param>
+            <remarks></remarks>
         </member>
         <member name="T:eZwd.Properties.Resources">
             <summary>
@@ -95,13 +110,6 @@
             <returns>此次一共删除了多少行</returns>
             <remarks></remarks>
         </member>
-        <member name="M:eZwd.Ribbon_eZwd.AddBoadersForInlineshapes(System.String)">
-            <summary>
-            嵌入式图片加边框
-            </summary>
-            <param name="ParagraphStyle">此图片所在段落的段落样式</param>
-            <remarks></remarks>
-        </member>
         <member name="M:eZwd.Ribbon_eZwd.TableFormat(System.String,System.String,System.Boolean)">
             <summary>
             规范表格，而且删除表格中的嵌入式图片
@@ -110,14 +118,6 @@
             <param name="ParagraphFormat">表格中的段落样式</param>
             <param name="blnDeleteShapes">是否要删除表格中的图片，包括嵌入式或非嵌入式图片。</param>
             <remarks></remarks>
-        </member>
-        <member name="M:eZwd.Ribbon_eZwd.SetHyperLink">
-            <summary>
-            设置超链接
-            </summary>
-            <remarks>此方法的要求是文本的排布格式要求：选择的段落格式必须是：
-            第一段为网页标题，第二段为网址；第三段为网页标题，第四段为网址……，
-            而且其中不能有空行，也不能选择空行</remarks>
         </member>
         <member name="F:eZwd.Ribbon_eZwd.components">
             <summary>

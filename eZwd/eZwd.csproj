@@ -173,7 +173,7 @@
   <ItemGroup>
     <Compile Include="Debug\EcTest.cs" />
     <Compile Include="Debug\Ec_RangeIndex.cs" />
-    <Compile Include="Functions\StaticFunction.cs" />
+    <Compile Include="RibbonHandlers\StaticFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
