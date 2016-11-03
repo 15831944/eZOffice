@@ -3356,43 +3356,43 @@
               gr.Transform = mY;  // 将变换应用到绘图面板中
             </remarks>
         </member>
-        <member name="F:eZstd.Form1.components">
+        <member name="F:eZstd.Test.Form1.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:eZstd.Form1.Dispose(System.Boolean)">
+        <member name="M:eZstd.Test.Form1.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:eZstd.Form1.InitializeComponent">
+        <member name="M:eZstd.Test.Form1.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="T:eZstd.DateTimeHelper">
+        <member name="T:eZstd.Miscellaneous.DateTimeHelper">
             <summary>
             与时间数据相关的操作，比如日期与字符、整数之间的相互转换等。
             </summary>
         </member>
-        <member name="M:eZstd.DateTimeHelper.Time2Int(System.DateTime)">
+        <member name="M:eZstd.Miscellaneous.DateTimeHelper.Time2Int(System.DateTime)">
             <summary> 将精确到分钟的时间数据保存为对应的32位整数 </summary>
             <param name="dt">精确度为分钟，更精细的数据将被忽略。
             由于32位数值的限制，能够识别的最大日期为4770年11月24日(23时59分)。即（2^20-1）所对应的日期。</param>
             <returns></returns>
         </member>
-        <member name="M:eZstd.DateTimeHelper.Int2Time(System.Int32)">
+        <member name="M:eZstd.Miscellaneous.DateTimeHelper.Int2Time(System.Int32)">
             <summary>
             将由 Time2Int 函数生成的整数值再转换回日期数据。返回的最大日期为4770年11月24日(23时59分) ，精度为分钟。
             </summary>
             <param name="intValue">输入的整数值并没有明显的物理含义，
-            请确保这个值是通过<see cref="M:eZstd.DateTimeHelper.Time2Int(System.DateTime)"/>函数生成的。否则给出的结果不可预知，因为其中涉及到复杂的位运算操作。</param>
+            请确保这个值是通过<see cref="M:eZstd.Miscellaneous.DateTimeHelper.Time2Int(System.DateTime)"/>函数生成的。否则给出的结果不可预知，因为其中涉及到复杂的位运算操作。</param>
             <returns>返回的最大日期为4770年11月24日(23时59分) </returns>
         </member>
-        <member name="M:eZstd.DateTimeHelper.String2Date(System.String)">
+        <member name="M:eZstd.Miscellaneous.DateTimeHelper.String2Date(System.String)">
             <summary>
             将字符转换为日期。除了.NET能够识别的日期格式外，
             还增加了20160406（ 即 2016/04/06），以及 201604061330（即 2016/04/06 13:30）
@@ -3464,6 +3464,32 @@
             <param name="array2D">一个二维表格</param>
             <returns></returns>
         </member>
+        <member name="M:eZstd.Miscellaneous.ExtensionMethods.AddRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            将某集合中的元素添加到另一个集合中去
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection"></param>
+            <param name="items"></param>
+        </member>
+        <member name="M:eZstd.Miscellaneous.ExtensionMethods.Clone``1(``0)">
+            <summary>
+            Strong-typed object cloning for objects that implement <see cref="T:System.ICloneable"/>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Miscellaneous.ExtensionMethods.IndexOf``2(``0,``1)">
+            <summary>
+            从集合中搜索指定项的下标位置（第一个元素的下标值为0），如果没有匹配项，则返回-1。
+            </summary>
+            <typeparam name="TCol"></typeparam>
+            <param name="collection"> 匹配的数据源集合 </param>
+            <typeparam name="TVal"></typeparam>
+            <param name="value"> 要进行匹配的值 </param>
+            <returns> 从集合中搜索指定项的下标位置（第一个元素的下标值为0），如果没有匹配项，则返回-1。 </returns>
+        </member>
         <member name="T:eZstd.Miscellaneous.Utils">
             <summary>
             提供一些基础性的操作工具
@@ -3476,32 +3502,6 @@
             </summary>
             <param name="typeIn"></param>
             <returns></returns>
-        </member>
-        <member name="M:eZstd.ExtensionMethods.AddRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            将某集合中的元素添加到另一个集合中去
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="collection"></param>
-            <param name="items"></param>
-        </member>
-        <member name="M:eZstd.ExtensionMethods.Clone``1(``0)">
-            <summary>
-            Strong-typed object cloning for objects that implement <see cref="T:System.ICloneable"/>
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="M:eZstd.ExtensionMethods.IndexOf``2(``0,``1)">
-            <summary>
-            从集合中搜索指定项的下标位置（第一个元素的下标值为0），如果没有匹配项，则返回-1。
-            </summary>
-            <typeparam name="TCol"></typeparam>
-            <param name="collection"> 匹配的数据源集合 </param>
-            <typeparam name="TVal"></typeparam>
-            <param name="value"> 要进行匹配的值 </param>
-            <returns> 从集合中搜索指定项的下标位置（第一个元素的下标值为0），如果没有匹配项，则返回-1。 </returns>
         </member>
         <member name="T:eZstd.UserControls.eZDataGridViewUIAdd">
             <summary> 通过设计界面中的弹出菜单，来执行表格中记录行的插入、增加或删除等操作 </summary>
@@ -3618,6 +3618,14 @@
         <member name="P:eZstd.UserControls.eZDataGridView.SupportPaste">
             <summary> 是否响应键盘的 Ctrl+ V 键，以在按下此组合键时将剪切板中的内容粘贴到表格中 </summary>
         </member>
+        <member name="F:eZstd.UserControls.eZDataGridView._manipulateRowsBeenSet">
+            <summary>
+             <see cref="P:eZstd.UserControls.eZDataGridView.ManipulateRows"/> 属性只能被设置一次，当多次设置时，忽略后面的设置操作
+             </summary>
+        </member>
+        <member name="P:eZstd.UserControls.eZDataGridView.ManipulateRows">
+            <summary> 在表格中右键时，弹出菜单，以进行数据行的删除、插入等操作 </summary>
+        </member>
         <member name="M:eZstd.UserControls.eZDataGridView.#ctor">
             <summary>
             构造函数
@@ -3640,6 +3648,33 @@
         </member>
         <member name="M:eZstd.UserControls.eZDataGridView.DeleteSelectedValue(System.Windows.Forms.KeyEventArgs)">
             <summary> 如果按下 Delete 键，则将选择的单元格的内容删除 </summary>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridView.InitializeUIMenu">
+            <summary> 激活与右键菜单相关的控件，以及与数据行插入、删除相关的事件 </summary>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridView.InsertRow(System.Object,System.EventArgs)">
+            <summary>
+            插入一行
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridView.RemoveOneRow(System.Object,System.EventArgs)">
+            <summary>
+            移除一行
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZstd.UserControls.eZDataGridView.RemoveMultipleRows(System.Object,System.EventArgs)">
+            <summary>
+            移除多行
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+            <remarks></remarks>
         </member>
         <member name="M:eZstd.UserControls.eZDataGridView.PasteFromClipBoard(System.Windows.Forms.KeyEventArgs)">
             <summary>
@@ -4843,7 +4878,7 @@
         <member name="P:eZstd.MatrixPack.SingularValueDecomposition.Diagonal">
             <summary>Return the one-dimensional array of singular values.</summary>		
         </member>
-        <member name="T:OldW.DllActivator.IDllActivator">
+        <member name="T:DllActivator.IDllActivator_std">
             <summary>
             用于在IExternalCommand.Execute方法中，将整个项目的所有dll加载到进程中。
             以避免出现在后面出现无法加载文件或者程序集的问题。
@@ -4854,15 +4889,45 @@
             dat.ActivateReferences();
             </remarks>
         </member>
-        <member name="M:OldW.DllActivator.IDllActivator.ActivateReferences">
+        <member name="M:DllActivator.IDllActivator_std.ActivateReferences">
             <summary> 激活本DLL所引用的那些DLLs </summary>
         </member>
-        <member name="T:OldW.DllActivator.DllActivator_std">
+        <member name="T:DllActivator.DllActivator_std">
             <summary> 用于 OldW Revit 插件中多个dll之前的AddinManager调试 </summary>
         </member>
-        <member name="M:OldW.DllActivator.DllActivator_std.ActivateReferences">
+        <member name="M:DllActivator.DllActivator_std.ActivateReferences">
             <summary>
             激活本DLL所引用的那些DLLs
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
             </summary>
         </member>
     </members>

@@ -38,6 +38,7 @@ namespace eZvso.ExternalCommand
             {
                 if (cls.GetInterfaces().Any(r => r == typeof(IExternalCommand))) // 说明这个类实现了 CAD 的命令接口
                 {
+
                     // 寻找此类中所实现的那个 Execute 方法
                     Type[] paraTypes = new Type[3]
                     {typeof (Application), typeof (string).MakeByRefType(), typeof (object).MakeByRefType()};
@@ -152,7 +153,7 @@ namespace eZvso.ExternalCommand
             {
                 case ExternalCommandResult.Failed:
                     {
-                        MessageBox.Show(errorMessage, @"外部命令执行出错",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        MessageBox.Show(errorMessage, @"外部命令执行出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     }
                 case ExternalCommandResult.Cancelled:

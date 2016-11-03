@@ -21,3 +21,4 @@ F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.csproj.Generat
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.pdb
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.csprojResolveAssemblyReference.cache
+F:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.CurveMaker.frm_CurveParameter.resources

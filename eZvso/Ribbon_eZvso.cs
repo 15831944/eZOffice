@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using eZvso.CurveMaker;
 using Microsoft.Office.Interop.Visio;
 using Microsoft.Office.Tools.Ribbon;
 using Application = Microsoft.Office.Interop.Visio.Application;
@@ -62,7 +63,7 @@ namespace eZvso
         /// </summary>
         public void btnMove_Click(object sender, RibbonControlEventArgs e)
         {
-            RibbonButton btn = (RibbonButton) sender;
+            RibbonButton btn = (RibbonButton)sender;
             _app.Addons[short.Parse(Convert.ToString(btn.Tag))].Run(""); //5 表示平移，6表示形状的面积与周长，7表示阵列
             //如果要执行阵列命令，也可以用：    App.DoCmd(1354)  ' VisUICmds 常量中的 visCmdToolsArrayShapesAddOn  命令
         }
@@ -119,15 +120,15 @@ namespace eZvso
                             MessageBoxIcon.Error);
                         return;
                     }
-                    double OriginalCenterX = baseX - Width*WidthScale + Width*0.5; // 图形的中心点在页面中的绝对X坐标
-                    double OriginalCenterY = baseY - Height*HeightScale + Height*0.5; // 图形的中心点在页面中的绝对Y坐标
+                    double OriginalCenterX = baseX - Width * WidthScale + Width * 0.5; // 图形的中心点在页面中的绝对X坐标
+                    double OriginalCenterY = baseY - Height * HeightScale + Height * 0.5; // 图形的中心点在页面中的绝对Y坐标
                     double r = Math.Sqrt(Math.Pow(baseX - OriginalCenterX, 2) + Math.Pow(baseY - OriginalCenterY, 2));
                     // ------------------------ 开始复制形状  ----------------------
                     Shape NewShape = default(Shape);
                     _app.ShowChanges = false;
                     for (UInt16 i = 1; i <= n - 1; i++)
                     {
-                        double deltaA = Convert.ToDouble(angle/n*i/180*Math.PI); // 单位为弧度
+                        double deltaA = Convert.ToDouble(angle / n * i / 180 * Math.PI); // 单位为弧度
                         NewShape = shp.Duplicate();
                         //将形状移动回原位
                         NewShape.Cells["PinX"].ResultIU = baseX;
@@ -136,9 +137,9 @@ namespace eZvso
                         {
                             if (r > 0) // 此时新图形与原图形在同一个位置，不用作任何的移动，而且下面的alpha角算出来为无穷，因为分母r为0.
                             {
-                                double alpha = Math.Asin((OriginalCenterY - baseY)/r);
-                                double NewCenterX = baseX + r*Math.Cos(deltaA + alpha); // 注意三角函数计算时的单位为弧度
-                                double NewCenterY = baseY + r*Math.Sin(deltaA + alpha);
+                                double alpha = Math.Asin((OriginalCenterY - baseY) / r);
+                                double NewCenterX = baseX + r * Math.Cos(deltaA + alpha); // 注意三角函数计算时的单位为弧度
+                                double NewCenterY = baseY + r * Math.Sin(deltaA + alpha);
                                 //新形状的中心点在页面中的绝对坐标值
                                 NewShape.Cells["PinX"].ResultIU = NewCenterX - OriginalCenterX + baseX;
                                 NewShape.Cells["PinY"].ResultIU = NewCenterY - OriginalCenterY + baseY;
@@ -147,10 +148,10 @@ namespace eZvso
                         else
                         {
                             NewShape.Cells["Angle"].Result[VisUnitCodes.visDegrees] = OrigionalAngle +
-                                                                                      deltaA/Math.PI*180;
+                                                                                      deltaA / Math.PI * 180;
                         }
                     }
-                    
+
                     _app.ShowChanges = true;
                 }
             }
@@ -196,5 +197,11 @@ namespace eZvso
         }
 
         #endregion
+
+        private void button_FunctionCurve_Click(object sender, RibbonControlEventArgs e)
+        {
+            frm_CurveParameter f =  frm_CurveParameter.GetUniqueInstance(Globals.ThisAddIn.Application);
+            f.ShowDialog();
+        }
     }
 }

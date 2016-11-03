@@ -4,6 +4,80 @@
         <name>eZvso</name>
     </assembly>
     <members>
+        <member name="M:eZvso.CurveMaker.Drawer.DrawSplineOnPage(Microsoft.Office.Interop.Visio.Page,System.Collections.Generic.List{eZvso.CurveMaker.LocationPoint},System.Double)">
+            <summary>
+            绘制一般的样条曲线
+            </summary>
+            <param name="vsoPage"></param>
+            <param name="points"></param>
+            <param name="tolerance">How closely the path of the new shape must approximate the given points.
+            The error from the points to the path of the resulting shape is roughly within tolerance. 
+            When the number of points is large, the actual error may sometimes exceed the prescribed tolerance.</param>
+        </member>
+        <member name="M:eZvso.CurveMaker.Drawer.DrawPolylineOnPage(Microsoft.Office.Interop.Visio.Page,System.Collections.Generic.List{eZvso.CurveMaker.LocationPoint})">
+            <summary>
+            绘制一般的样条曲线
+            </summary>
+            <param name="vsoPage"></param>
+            <param name="points"></param>
+        </member>
+        <member name="M:eZvso.CurveMaker.Drawer.DrawBezierOnPage(Microsoft.Office.Interop.Visio.Page,System.Collections.Generic.List{eZvso.CurveMaker.LocationPoint},System.Int32)">
+            <summary> 绘制一条 贝塞尔曲线  </summary>
+        </member>
+        <member name="M:eZvso.CurveMaker.Drawer.FitSmoothTest(Microsoft.Office.Interop.Visio.Application)">
+            <summary> 绘制一个 NURBS 曲线 </summary>
+            <param name="vsoApp"></param>
+        </member>
+        <member name="M:eZvso.CurveMaker.Drawer.DrawNURBSTest(Microsoft.Office.Interop.Visio.Application)">
+            <summary> 绘制一个 NURBS 曲线 </summary>
+        </member>
+        <member name="M:eZvso.CurveMaker.Drawer.DrawSplineTest(Microsoft.Office.Interop.Visio.Application)">
+            <summary> 绘制一个 Spline </summary>
+        </member>
+        <member name="M:eZvso.CurveMaker.Drawer.DrawBezier_Example(Microsoft.Office.Interop.Visio.Application)">
+            <summary> 绘制一条 贝塞尔曲线  </summary>
+        </member>
+        <member name="M:eZvso.CurveMaker.frm_CurveParameter.GetUniqueInstance(Microsoft.Office.Interop.Visio.Application)">
+            <summary> 全局唯一的一个窗口实例 </summary>
+            <param name="vsoApp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZvso.CurveMaker.frm_CurveParameter.#ctor(Microsoft.Office.Interop.Visio.Application)">
+            <summary> 构造函数 </summary>
+        </member>
+        <member name="M:eZvso.CurveMaker.frm_CurveParameter.OnKeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary> 按下 ESC 时关闭窗口 </summary>
+        </member>
+        <member name="F:eZvso.CurveMaker.frm_CurveParameter.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:eZvso.CurveMaker.frm_CurveParameter.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:eZvso.CurveMaker.frm_CurveParameter.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:eZvso.CurveMaker.LocationPoint">
+            <summary>
+            用来绘制曲线的坐标点，其单位为Visio的内部单位英寸 1 inch = 25.4 mm
+            </summary>
+        </member>
+        <member name="M:eZvso.CurveMaker.LocationPoint.ToSafeArray(System.Collections.Generic.IList{eZvso.CurveMaker.LocationPoint})">
+            <summary>
+            将坐标点集合转换为一维数组，以用作 Draw方法的 xyArray 参数
+            </summary>
+            <returns>数组中每两个连续的元素组成一个点的x、y坐标值</returns>
+            <remarks>and weights arrays should be of type SAFEARRAY of 8-byte floating point values passed by  reference (VT_R8|VT_ARRAY|VT_BYREF).
+             This is how Microsoft Visual Basic passes arrays to Automation objects.</remarks>
+        </member>
         <member name="F:eZvso.Ribbon_eZvso.MasterInEdit">
             <summary>
             当前正在进行编辑的Master对象（不是指Master所对应的实例形状）
@@ -83,6 +157,11 @@
             <summary>
               Overrides the current thread's CurrentUICulture property for all
               resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:eZvso.Properties.Resources.Curve">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
             </summary>
         </member>
         <member name="T:eZvso.ThisAddIn">

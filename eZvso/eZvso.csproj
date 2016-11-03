@@ -107,6 +107,10 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="eZstd, Version=2.0.0.0, Culture=neutral, PublicKeyToken=1050b0febcfcb8d2, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\eZstd\bin\eZstd.dll</HintPath>
+    </Reference>
     <Reference Include="eZvso_AddinManager">
       <HintPath>..\eZvso_AddinManager\bin\Debug\eZvso_AddinManager.dll</HintPath>
     </Reference>
@@ -163,13 +167,24 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="Debug\EcTest.cs" />
+    <Content Include="CurveMaker\instructions.txt" />
+    <Compile Include="CurveMaker\Drawer.cs" />
+    <Compile Include="CurveMaker\frm_CurveParameter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CurveMaker\frm_CurveParameter.Designer.cs">
+      <DependentUpon>frm_CurveParameter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CurveMaker\LocationPoint.cs" />
+    <Compile Include="Debug\EcTest_CurveForm.cs" />
+    <Compile Include="Debug\EcTest_Curve.cs" />
     <Compile Include="Dialog_CircleArray.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialog_CircleArray.Designer.cs">
       <DependentUpon>Dialog_CircleArray.cs</DependentUpon>
     </Compile>
+    <Compile Include="DllActivator_eZvso.cs" />
     <Compile Include="Ribbon_eZvso.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -179,6 +194,9 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <EmbeddedResource Include="CurveMaker\frm_CurveParameter.resx">
+      <DependentUpon>frm_CurveParameter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialog_CircleArray.resx">
       <DependentUpon>Dialog_CircleArray.cs</DependentUpon>
     </EmbeddedResource>
@@ -193,6 +211,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="eZvso_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
@@ -213,6 +232,9 @@
       <DependentUpon>ThisAddIn.Designer.xml</DependentUpon>
     </Compile>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Curve.png" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
+using eZstd.UserControls;
+using eZvso.CurveMaker;
 using eZvso.ExternalCommand;
 using Microsoft.Office.Interop.Visio;
 using Application = Microsoft.Office.Interop.Visio.Application;
 
 namespace eZvso.Debug
 {
-    class EcTest : IExternalCommand
+    public class EcTest_CurveForm : IExternalCommand
     {
         public ExternalCommandResult Execute(Application visioApp, ref string errorMessage, ref object errorObj)
         {
+            //
             try
             {
                 DoSomething(visioApp);
@@ -28,8 +31,9 @@ namespace eZvso.Debug
             Document doc = vsoApp.ActiveDocument;
             if (doc != null)
             {
-                MessageBox.Show(doc.Pages.ItemU[1].Name);
-                // throw new NullReferenceException(doc.Pages.ItemU[1].Name);
+                frm_CurveParameter f = frm_CurveParameter.GetUniqueInstance(vsoApp);
+                //  Form1 f = new Form1();
+                f.ShowDialog();
             }
         }
     }
