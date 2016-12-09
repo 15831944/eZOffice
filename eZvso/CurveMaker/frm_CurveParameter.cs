@@ -19,7 +19,7 @@ namespace eZvso.CurveMaker
     {
         private readonly Application _vsoApp;
 
-        #region    ---   构造函数
+        #region    ---   构造函数与窗口的打开、关闭
 
         private static frm_CurveParameter _uniqueInstance;
         /// <summary> 全局唯一的一个窗口实例 </summary>
@@ -36,6 +36,8 @@ namespace eZvso.CurveMaker
         {
             InitializeComponent();
             this.KeyPreview = true;
+            this.FormClosing += OnFormClosing;
+            this.KeyDown += OnKeyDown;
             //
             _vsoApp = vsoApp;
             //
@@ -48,6 +50,21 @@ namespace eZvso.CurveMaker
             ConstructDatagridview(dataGridView1 as eZDataGridView);
             // 事件绑定
             radioButton_spline.CheckedChanged += RadioButtonSplineOnCheckedChanged;
+        }
+
+        /// <summary> 按下 ESC 时关闭窗口 </summary>
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Close();
+            }
+        }
+
+        private void OnFormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
         }
 
         #endregion
@@ -89,14 +106,7 @@ namespace eZvso.CurveMaker
 
         #region    ---   事件处理
 
-        /// <summary> 按下 ESC 时关闭窗口 </summary>
-        private void OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                Close();
-            }
-        }
+
 
         private void RadioButtonSplineOnCheckedChanged(object sender, EventArgs eventArgs)
         {
@@ -120,21 +130,26 @@ namespace eZvso.CurveMaker
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            if (radioButton_spline.Checked && _points.Count > 0)
+            if (radioButton_spline.Checked && _points.Count > 1)
             {
                 // 距离容差越大，生成的曲线与控制点的偏差越大，曲线越光滑
                 double tol = textBoxTolerance.ValueNumber;
                 Drawer.DrawSplineOnPage(_vsoApp.ActivePage, _points.ToList(), tol);
             }
-            else if (radioButton_polyline.Checked && _points.Count > 0)
+            else if (radioButton_polyline.Checked && _points.Count > 1)
             {
-                Drawer.DrawBezierOnPage(_vsoApp.ActivePage, _points.ToList(), 2);
-                // Drawer.DrawPolylineOnPage(_vsoApp.ActivePage, _points.ToList());
+                Drawer.DrawPolylineOnPage(_vsoApp.ActivePage, _points.ToList());
             }
-            else if (radioButton_nurbs.Checked && _points.Count > 0)
+            else if (radioButton_bezier.Checked && _points.Count > 1)
+            {
+                int degree = (int)textBox_degree.ValueNumber;
+                Drawer.DrawBezierOnPage(_vsoApp.ActivePage, _points.ToList(), degree: degree);
+            }
+            else if (radioButton_nurbs.Checked && _points.Count > 1)
             {
 
             }
+
         }
         #endregion
 

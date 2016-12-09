@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Office.Interop.Excel;
 
-namespace eZx.ExternalCommand
+namespace eZx.AddinManager
 {
     public enum ExternalCommandResult
     {

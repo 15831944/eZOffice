@@ -207,6 +207,7 @@ namespace eZvso.CurveMaker
             this.textBox_degree.Name = "textBox_degree";
             this.textBox_degree.Size = new System.Drawing.Size(100, 21);
             this.textBox_degree.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.textBox_degree, "贝塞尔曲线或者 Nurbs 曲线的阶次数。");
             // 
             // radioButton_bezier
             // 
@@ -234,7 +235,6 @@ namespace eZvso.CurveMaker
             this.Name = "frm_CurveParameter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "曲线绘制";
-            this.KeyDown += OnKeyDown;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

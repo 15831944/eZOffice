@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using eZx.AddinManager;
-using eZx.ExternalCommand;
 using eZx_AddinManager;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Tools.Ribbon;
@@ -21,7 +20,7 @@ namespace eZx.AddinManager
             {
                 // 将上次插件卸载时保存的程序集数据加载进来
                 form_AddinManager frm = form_AddinManager.GetUniqueForm(excelApp);
-                var nodesInfo = AssemblyInfoDllManager.GetInfosFromFile();
+                var nodesInfo = AssemblyInfoDllManager.GetInfosFromSettings();
                 frm.RefreshTreeView(nodesInfo);
             }
             catch (Exception ex)
@@ -38,7 +37,7 @@ namespace eZx.AddinManager
                 var nodesInfo = frm.NodesInfo;
                 //
                 // 将窗口中加载的程序集数据保存下来
-                AssemblyInfoDllManager.SaveAssemblyInfosToFile(nodesInfo);
+                AssemblyInfoDllManager.SaveAssemblyInfosToSettings(nodesInfo);
             }
             catch (Exception ex)
             {
@@ -57,7 +56,7 @@ namespace eZx.AddinManager
 
         public static void LastExternalCommand(Application excelApp)
         {
-            ExternalCommandHandler.InvokeCurrentExternalCommand(excelApp);
+            ExCommandExecutor.InvokeCurrentExternalCommand(excelApp);
         }
 
         #endregion

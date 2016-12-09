@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -8,57 +7,12 @@ using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
 using Application = Microsoft.Office.Interop.Excel.Application;
 
-namespace eZx.ExternalCommand
+namespace eZx.AddinManager
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public static class ExternalCommandHandler
+    internal static class ExCommandExecutor
     {
-        #region ---   外部命令的的加载与方法的提取
 
-        /// <summary> 将程序集文件加载到内存，并且提取出其中的 CAD 外部命令 </summary>
-        /// <param name="assemblyPath"></param>
-        /// <returns></returns>
-        public static List<MethodInfo> LoadExternalCommandsFromAssembly(string assemblyPath)
-        {
-            //先将插件拷贝到内存缓冲。一般情况下，当加载的文件大小大于2^32 byte (即4.2 GB），就会出现OutOfMemoryException，在实际测试中的极限值为630MB。
-            byte[] buff = File.ReadAllBytes(assemblyPath);
-
-            //不能直接通过LoadFrom或者LoadFile，而必须先将插件拷贝到内存，然后再从内存中Load
-            Assembly asm = Assembly.Load(buff);
-
-            return GetExternalCommandClass(asm);
-        }
-
-        private static List<MethodInfo> GetExternalCommandClass(Assembly ass)
-        {
-            List<MethodInfo> ecClasses = new List<MethodInfo>();
-            var classes = ass.GetTypes();
-            foreach (Type cls in classes)
-            {
-                if (cls.GetInterfaces().Any(r => r == typeof(IExternalCommand))) // 说明这个类实现了 CAD 的命令接口
-                {
-                    // 寻找此类中所实现的那个 Execute 方法
-                    Type[] paraTypes = new Type[3]
-                    {typeof (Application), typeof (string).MakeByRefType(), typeof (Range).MakeByRefType()};
-                    //
-                    MethodInfo m = cls.GetMethod("Execute", paraTypes);
-                    //
-                    if (m != null && m.IsPublic)
-                    {
-                        ecClasses.Add(m);
-                    }
-                }
-            }
-            return ecClasses;
-        }
-
-        #endregion
-
-        #region ---   外部命令的执行
-
-        private static MethodInfo _currentExternalCommand;
+        private static IExternalCommand _currentExternalCommand;
         private static string _currentExternalCommandAssemblyPath;
 
         /// <summary> 执行当前（即上次执行过的那个）外部命令 </summary>
@@ -76,33 +30,23 @@ namespace eZx.ExternalCommand
         /// <param name="externalCommand">此命令必须是实现了 IExternalCommand.Execute </param>
         /// <param name="excelApp">作为Execute()方法的输入参数的对象，表示当前的Excel Application </param>
         /// <remarks>出于调试的即时更新的考虑，这里在每一次调试外部命令时，都对最新的dll进行重新加载。</remarks>
-        public static void InvokeExternalCommand(string assemblyPath, MethodInfo externalCommand, Application excelApp)
+        public static void InvokeExternalCommand(string assemblyPath, IExternalCommand externalCommand, Application excelApp)
         {
-            //
-            Type tyOld = externalCommand.DeclaringType;
-            string typeName = tyOld.FullName;
 
-            // 重新加载最新的程序集
-            List<MethodInfo> methods = LoadExternalCommandsFromAssembly(assemblyPath);
-
-            //
-            var newMethods = methods.Where(r => r.DeclaringType.FullName == typeName).ToArray();
-            if (newMethods.Any())
-            {
-                InvokeCommand(newMethods[0], excelApp);
-            }
-
+            ExCommandExecutor.RunActiveCommand(externalCommand, assemblyPath, excelApp);
             //
             _currentExternalCommandAssemblyPath = assemblyPath;
             _currentExternalCommand = externalCommand;
+
         }
 
+
         /// <summary> 执行 Excel 的外部命令 </summary>
-        /// <param name="externalCommand">此命令必须是实现了 IExternalCommand.Execute </param>
-        private static void InvokeCommand(MethodInfo externalCommand, Application excelApp)
+        /// <param name="externalCommandMethod">此命令必须是实现了 IExternalCommand.Execute </param>
+        private static void InvokeCommand(MethodInfo externalCommandMethod, Application excelApp)
         {
             // 创建一个实例对象
-            Type tp = externalCommand.DeclaringType;
+            Type tp = externalCommandMethod.DeclaringType;
             object ins = tp.Assembly.CreateInstance(tp.FullName);
 
             //// 构造一个实例，在此构造函数中即可以设计对应的插件功能了
@@ -127,7 +71,7 @@ namespace eZx.ExternalCommand
             try
             {
                 // 执行操作
-                res = (ExternalCommandResult)externalCommand.Invoke(obj: ins, parameters: parameters);
+                res = (ExternalCommandResult)externalCommandMethod.Invoke(obj: ins, parameters: parameters);
 
                 // 提取 ref 类型 或者 out 类型的 参数
                 errorMessage = parameters[1] as string;
@@ -158,7 +102,7 @@ namespace eZx.ExternalCommand
                     {
                         MessageBox.Show(errorMessage, @"外部命令执行出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         // 选择出错的单元格
-                        if (errorRange != null )
+                        if (errorRange != null)
                         {
                             errorRange.Select();
                         }
@@ -176,7 +120,97 @@ namespace eZx.ExternalCommand
             }
         }
 
-        #endregion
+        // AddInManager.AIM
+        public static ExternalCommandResult RunActiveCommand(IExternalCommand externalCommand, string assemblyPath, Application excelApp)
+        {
+            string errorMessage = "";
+            Range errorRange = null;
+
+            AssemLoader assemLoader = new AssemLoader();
+            ExternalCommandResult result;
+            try
+            {
+                assemLoader.HookAssemblyResolve();
+                // 重新加载最新的程序集
+                Assembly assembly = assemLoader.LoadAddinsToTempFolder(assemblyPath, false);
+                if (null == assembly)
+                {
+                    result = ExternalCommandResult.Failed;
+                }
+                else
+                {
+                    if (externalCommand == null)
+                    {
+                        result = ExternalCommandResult.Failed;
+                    }
+                    else
+                    {
+                        // result = externalCommand.Execute(excelApp, ref errorMessage, ref errorRange);
+                        result = Execute(externalCommand, excelApp, ref errorMessage, ref errorRange);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result = ExternalCommandResult.Failed;
+            }
+            finally
+            {
+                assemLoader.UnhookAssemblyResolve();
+                assemLoader.CopyGeneratedFilesBack();
+            }
+            return result;
+        }
+
+
+        private static ExternalCommandResult Execute(IExternalCommand exCommand, Application excelApp, ref string errorMessage,
+            ref Range errorRange)
+        {
+            ExternalCommandResult res = ExternalCommandResult.Failed;
+            try
+            {
+                // 执行操作
+                res = exCommand.Execute(excelApp: excelApp, errorMessage: ref errorMessage, errorRange: ref errorRange);
+            }
+            catch (Exception ex)
+            {
+                if (string.IsNullOrEmpty(errorMessage))
+                {
+                    errorMessage = GetDebugMessage(ex); // ex.Message;
+                }
+                else
+                {
+                    errorMessage = errorMessage + "\n\r--------------------------------------------\n\r"
+                                   + GetDebugMessage(ex); // ex.Message;
+                }
+                res = ExternalCommandResult.Failed;
+            }
+
+            // 对命令的结果进行处理
+            switch (res)
+            {
+                case ExternalCommandResult.Failed:
+                    {
+                        MessageBox.Show(errorMessage, @"外部命令执行出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // 选择出错的单元格
+                        if (errorRange != null)
+                        {
+                            errorRange.Select();
+                        }
+                        break;
+                    }
+                case ExternalCommandResult.Cancelled:
+                    {
+                        // 由于没有在Excel中没有事务或者回滚，所以直接结束就可以了。
+                        break;
+                    }
+                case ExternalCommandResult.Succeeded:
+                    {
+                        break;
+                    }
+            }
+            return res;
+        }
 
         /// <summary> 在调试阶段，为每一种报错显示对应的报错信息及出错位置。 </summary>
         private static string GetDebugMessage(Exception ex)

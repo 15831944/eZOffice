@@ -131,6 +131,42 @@
             <remarks>在比较的过程中，会先对GetHashCode的返回值进行比较，如果返回的HashCode是相同的，则再进行 Equals 比较；
             如果返回的HashCode值不同，则直接认为Equals为false。</remarks>
         </member>
+        <member name="T:eZx.AddinManager.AssemLoader">
+            <summary> 将程序集及其引用项加载到进程中 </summary>
+        </member>
+        <member name="M:eZx.AddinManager.AssemLoader.#ctor">
+            <summary> 构造函数 </summary>
+        </member>
+        <member name="M:eZx.AddinManager.AssemLoader.LoadAddin(System.String)">
+            <summary> 将程序集加载到程序中 </summary>
+            <param name="filePath">程序集的文件路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZx.AddinManager.AssemLoader.IsRevitAPIReferenced(System.Reflection.Assembly)">
+            <summary>
+            检查 RevitAPI.dll 是否被引用
+            </summary>
+            <param name="assembly"></param>
+            <returns></returns>
+        </member>
+        <member name="T:eZx.AddinManager.FileUtils">
+            <summary> Revit AddinManager 中用来进行文件处理的类，用来参考，并不具有通用性 </summary>
+        </member>
+        <member name="M:eZx.AddinManager.FileUtils.CopyFileToFolder(System.String,System.String,System.Boolean,System.Collections.Generic.List{System.IO.FileInfo})">
+            <summary>
+            
+            </summary>
+            <param name="sourceFilePath"></param>
+            <param name="destFolder"></param>
+            <param name="onlyCopyRelated"></param>
+            <param name="allCopiedFiles">方法结束后，此 List中包含有所有复制到的文件 </param>
+            <returns></returns>
+        </member>
+        <member name="M:eZx.AddinManager.FileUtils.GetFolderSize(System.String)">
+            <summary> 返回文件夹内所有文件的总大小，单位为 MB  </summary>
+            <param name="folderPath"></param>
+            <returns> 文件夹内所有文件的总大小，单位为 MB </returns>
+        </member>
         <member name="M:eZx.AddinManager.form_AddinManager.#ctor">
             <summary> 构造函数 </summary>
         </member>
@@ -140,7 +176,7 @@
         <member name="P:eZx.AddinManager.form_AddinManager.NodesInfo">
             <summary> 与 TreeView 同步的节点数据 </summary>
         </member>
-        <member name="M:eZx.AddinManager.form_AddinManager.AddMethodsInOneAssembly(System.String,System.Collections.Generic.List{System.Reflection.MethodInfo})">
+        <member name="M:eZx.AddinManager.form_AddinManager.AddMethodsInOneAssembly(System.String,System.Collections.Generic.List{eZx.AddinManager.IExternalCommand})">
             <summary> 将从一个 Assembly 中加载进来的所有有效的外部命令同步到 _nodesInfo 中 </summary>
             <param name="methods"></param>
         </member>
@@ -165,11 +201,17 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="M:eZx.AddinManager.AssemblyInfoDllManager.GetInfosFromFile">
+        <member name="T:eZx.AddinManager.AssemblyInfoDllManager">
+            <summary> 通过Dll中的Settings来进行程序集信息的存储与提取 </summary>
+        </member>
+        <member name="M:eZx.AddinManager.AssemblyInfoDllManager.GetInfosFromSettings">
             <summary> 将 Settings 配置文件中的字符进行反序列化 </summary>
             <returns></returns>
             <remarks>对于CAD.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
             但是在调用ExternalCommand时还是会出bug，通常的报错为：没有为该对象定义无参数的构造函数。 </remarks>
+        </member>
+        <member name="T:eZx.AddinManager.AssemblyInfoFileManager">
+            <summary> 通过 外部文本文件 来进行程序集信息的存储与提取 </summary>
         </member>
         <member name="M:eZx.AddinManager.AssemblyInfoFileManager.GetInfosFromFile">
             <summary> 将外部 二进制文件 中的字符进行反序列化 </summary>
@@ -236,42 +278,45 @@
             http://www.codeproject.com/soap/Serialization_Samples.asp
             </remarks>
         </member>
-        <member name="T:eZx.ExternalCommand.ExternalCommandHandler">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:eZx.ExternalCommand.ExternalCommandHandler.LoadExternalCommandsFromAssembly(System.String)">
-            <summary> 将程序集文件加载到内存，并且提取出其中的 CAD 外部命令 </summary>
-            <param name="assemblyPath"></param>
-            <returns></returns>
-        </member>
-        <member name="M:eZx.ExternalCommand.ExternalCommandHandler.InvokeCurrentExternalCommand(Microsoft.Office.Interop.Excel.Application)">
+        <member name="M:eZx.AddinManager.ExCommandExecutor.InvokeCurrentExternalCommand(Microsoft.Office.Interop.Excel.Application)">
             <summary> 执行当前（即上次执行过的那个）外部命令 </summary>
             <param name="excelApp">作为Execute()方法的输入参数的对象，表示当前的Excel Application </param>
         </member>
-        <member name="M:eZx.ExternalCommand.ExternalCommandHandler.InvokeExternalCommand(System.String,System.Reflection.MethodInfo,Microsoft.Office.Interop.Excel.Application)">
+        <member name="M:eZx.AddinManager.ExCommandExecutor.InvokeExternalCommand(System.String,eZx.AddinManager.IExternalCommand,Microsoft.Office.Interop.Excel.Application)">
             <summary> 执行 CAD 的外部命令 </summary>
             <param name="assemblyPath">外部命令所对应的dll的绝对路径</param>
             <param name="externalCommand">此命令必须是实现了 IExternalCommand.Execute </param>
             <param name="excelApp">作为Execute()方法的输入参数的对象，表示当前的Excel Application </param>
             <remarks>出于调试的即时更新的考虑，这里在每一次调试外部命令时，都对最新的dll进行重新加载。</remarks>
         </member>
-        <member name="M:eZx.ExternalCommand.ExternalCommandHandler.InvokeCommand(System.Reflection.MethodInfo,Microsoft.Office.Interop.Excel.Application)">
+        <member name="M:eZx.AddinManager.ExCommandExecutor.InvokeCommand(System.Reflection.MethodInfo,Microsoft.Office.Interop.Excel.Application)">
             <summary> 执行 Excel 的外部命令 </summary>
-            <param name="externalCommand">此命令必须是实现了 IExternalCommand.Execute </param>
+            <param name="externalCommandMethod">此命令必须是实现了 IExternalCommand.Execute </param>
         </member>
-        <member name="M:eZx.ExternalCommand.ExternalCommandHandler.GetDebugMessage(System.Exception)">
+        <member name="M:eZx.AddinManager.ExCommandExecutor.GetDebugMessage(System.Exception)">
             <summary> 在调试阶段，为每一种报错显示对应的报错信息及出错位置。 </summary>
         </member>
-        <member name="T:eZx.ExternalCommand.IExternalCommand">
+        <member name="T:eZx.AddinManager.ExCommandFinder">
+            <summary> 将指定程序集中的 IExternalCommand 类提取出来 </summary>
+        </member>
+        <member name="M:eZx.AddinManager.ExCommandFinder.RetriveExternalCommandsFromAssembly(System.String)">
+            <summary> 将程序集文件加载到内存，并且提取出其中的 CAD 外部命令 </summary>
+            <param name="assemblyPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZx.AddinManager.ExCommandFinder.loadReferences(System.Reflection.Assembly,System.String)">
+            <summary> 添加程序集的引用项 </summary>
+            <param name="asm"></param>
+            <param name="assemblyPath"></param>
+        </member>
+        <member name="T:eZx.AddinManager.IExternalCommand">
             <summary> 用来进行AddinManager快速调试的接口。实现此接口的类必须有一个无参数的构造函数 </summary>
         </member>
-        <member name="M:eZx.ExternalCommand.IExternalCommand.Execute(Microsoft.Office.Interop.Excel.Application,System.String@,Microsoft.Office.Interop.Excel.Range@)">
+        <member name="M:eZx.AddinManager.IExternalCommand.Execute(Microsoft.Office.Interop.Excel.Application,System.String@,Microsoft.Office.Interop.Excel.Range@)">
             <summary> Excel AddinManger 快速调试插件 </summary>
             <param name="excelApp">Excel当前程序</param>
-            <param name="errorMessage">当返回值为<see cref="F:eZx.ExternalCommand.ExternalCommandResult.Failed"/>时，这个属性代表给出的报错信息。</param>
-            <param name="errorRange">当返回值为<see cref="F:eZx.ExternalCommand.ExternalCommandResult.Failed"/>时，这个属性代表与出错内容相关的任何对象。</param>
+            <param name="errorMessage">当返回值为<see cref="F:eZx.AddinManager.ExternalCommandResult.Failed"/>时，这个属性代表给出的报错信息。</param>
+            <param name="errorRange">当返回值为<see cref="F:eZx.AddinManager.ExternalCommandResult.Failed"/>时，这个属性代表与出错内容相关的任何对象。</param>
             <returns></returns>
         </member>
     </members>

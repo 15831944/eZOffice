@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Forms;
-using eZx.ExternalCommand;
 using Application = Microsoft.Office.Interop.Excel.Application;
 
 namespace eZx.AddinManager
@@ -39,7 +38,7 @@ namespace eZx.AddinManager
             this.KeyPreview = true;
             this.Disposed += OnDisposed;
             //
-            _nodesInfo = new Dictionary<AddinManagerAssembly, List<MethodInfo>>(new AssemblyComparer());
+            _nodesInfo = new Dictionary<AddinManagerAssembly, List<IExternalCommand>>(new AssemblyComparer());
             //
             treeView1.NodeMouseDoubleClick += TreeView1OnNodeMouseDoubleClick;
         }
@@ -74,10 +73,10 @@ namespace eZx.AddinManager
         #region ---   TreeView 的刷新 与 _nodesInfo同步
 
         /// <summary> 与 TreeView 同步的节点数据 </summary>
-        private Dictionary<AddinManagerAssembly, List<MethodInfo>> _nodesInfo;
+        private Dictionary<AddinManagerAssembly, List<IExternalCommand>> _nodesInfo;
 
         /// <summary> 与 TreeView 同步的节点数据 </summary>
-        internal Dictionary<AddinManagerAssembly, List<MethodInfo>> NodesInfo
+        internal Dictionary<AddinManagerAssembly, List<IExternalCommand>> NodesInfo
         {
             get
             {
@@ -85,7 +84,7 @@ namespace eZx.AddinManager
             }
         }
 
-        internal void RefreshTreeView(Dictionary<AddinManagerAssembly, List<MethodInfo>> nodesInfo)
+        internal void RefreshTreeView(Dictionary<AddinManagerAssembly, List<IExternalCommand>> nodesInfo)
         {
 
             if (nodesInfo != null)
@@ -100,15 +99,15 @@ namespace eZx.AddinManager
                 foreach (var ndInfo in nodesInfo)
                 {
                     AddinManagerAssembly asm = ndInfo.Key;
-                    List<MethodInfo> methods = ndInfo.Value;
+                    List<IExternalCommand> methods = ndInfo.Value;
                     // 添加新的程序集
                     TreeNode tnAss = new TreeNode(asm.Assembly.ManifestModule.ScopeName);
                     tnAss.Tag = asm;
                     treeView1.Nodes.Add(tnAss);
                     // 添加此程序集中所有的外部命令
-                    foreach (MethodInfo m in methods)
+                    foreach (IExternalCommand m in methods)
                     {
-                        TreeNode tnMethod = new TreeNode(m.DeclaringType.FullName);
+                        TreeNode tnMethod = new TreeNode(m.GetType().FullName);
                         tnMethod.Tag = m;
                         tnAss.Nodes.Add(tnMethod);
                     }
@@ -124,14 +123,14 @@ namespace eZx.AddinManager
 
         /// <summary> 将从一个 Assembly 中加载进来的所有有效的外部命令同步到 _nodesInfo 中 </summary>
         /// <param name="methods"></param>
-        private void AddMethodsInOneAssembly(string assemblyPath, List<MethodInfo> methods)
+        private void AddMethodsInOneAssembly(string assemblyPath, List<IExternalCommand> methods)
         {
             AddinManagerAssembly asm;
             if (methods.Any())
             {
-                asm = new AddinManagerAssembly(assemblyPath, methods.First().DeclaringType.Assembly);
+                asm = new AddinManagerAssembly(assemblyPath, methods.First().GetType().Assembly);
                 //
-                List<MethodInfo> mds = new List<MethodInfo>();
+                List<IExternalCommand> mds = new List<IExternalCommand>();
                 foreach (var m in methods)
                 {
                     mds.Add(m);
@@ -168,7 +167,7 @@ namespace eZx.AddinManager
             //
             AddinManagerAssembly asm = ndMethod.Parent.Tag as AddinManagerAssembly;
 
-            MethodInfo mtd = ndMethod.Tag as MethodInfo;
+            IExternalCommand mtd = ndMethod.Tag as IExternalCommand;
             //
             _nodesInfo[asm].Remove(mtd);
         }
@@ -188,7 +187,7 @@ namespace eZx.AddinManager
                 {
                     if (string.IsNullOrEmpty(dllPath)) { continue; }
                     //
-                    var methods = ExternalCommandHandler.LoadExternalCommandsFromAssembly(dllPath);
+                    var methods = ExCommandFinder.RetriveExternalCommandsFromAssembly(dllPath);
                     if (methods.Any())
                     {
                         // 更新 Dictionary
@@ -271,15 +270,13 @@ namespace eZx.AddinManager
 
         private void RunExternalCommand(TreeNode ndMethod)
         {
-            MethodInfo mtd = ndMethod.Tag as MethodInfo;
+            var mtd = ndMethod.Tag as IExternalCommand;
             AddinManagerAssembly asm = ndMethod.Parent.Tag as AddinManagerAssembly;
             //
             string assemblyPath = asm.Path;
-            ExternalCommandHandler.InvokeExternalCommand(assemblyPath, mtd, _excelApplication);
+            ExCommandExecutor.InvokeExternalCommand(assemblyPath, mtd, _excelApplication);
         }
-
-
-
+        
         #endregion
     }
 }

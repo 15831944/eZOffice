@@ -201,7 +201,7 @@ namespace eZvso
         private void button_FunctionCurve_Click(object sender, RibbonControlEventArgs e)
         {
             frm_CurveParameter f =  frm_CurveParameter.GetUniqueInstance(Globals.ThisAddIn.Application);
-            f.ShowDialog();
+            f.Show(null);
         }
     }
 }

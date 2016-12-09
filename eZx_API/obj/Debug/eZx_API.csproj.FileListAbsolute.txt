@@ -6,3 +6,14 @@ F:\ProgrammingCases\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.Properties
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.csproj.GenerateResource.Cache
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.pdb
+F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZx_API.dll
+F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZx_API.pdb
+F:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZexcelAPI.xml
+E:\GitHubProjects\eZOffice\bin\eZx_API.dll
+E:\GitHubProjects\eZOffice\bin\eZx_API.pdb
+E:\GitHubProjects\eZOffice\bin\eZexcelAPI.xml
+E:\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.csprojResolveAssemblyReference.cache
+E:\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.Properties.Resources.resources
+E:\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.csproj.GenerateResource.Cache
+E:\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.dll
+E:\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.pdb

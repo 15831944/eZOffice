@@ -169,21 +169,27 @@
     <Compile Include="AddinManagerLoaderRibbon.Designer.cs">
       <DependentUpon>AddinManagerLoaderRibbon.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddinManager\AddinManagerAssembly.cs" />
+    <Compile Include="AssemblyInfo\AddinManagerAssembly.cs" />
     <Compile Include="AddinManager\AddinManagerLoader.cs" />
+    <Compile Include="RevitAddinManager AssemblyLoader\AssemblyLoader.cs" />
+    <Compile Include="RevitAddinManager AssemblyLoader\AssemblySelectorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RevitAddinManager AssemblyLoader\FileUtils.cs" />
     <Compile Include="AddinManager\form_AddinManager.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AddinManager\form_AddinManager.Designer.cs">
       <DependentUpon>form_AddinManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddinManager\AssemblyInfo\AssemblyInfoDllManager.cs" />
-    <Compile Include="AddinManager\AssemblyInfo\AssemblyInfoFileManager.cs" />
-    <Compile Include="AddinManager\AssemblyInfo\AssemblyInfos.cs" />
-    <Compile Include="AddinManager\AssemblyInfo\AssemblyInfoSettings.cs" />
-    <Compile Include="AddinManager\AssemblyInfo\BinarySerializer.cs" />
-    <Compile Include="AddinManager\AssemblyInfo\StringSerializer.cs" />
-    <Compile Include="ExternalCommand\ExternalCommandHandler.cs" />
+    <Compile Include="AssemblyInfo\AssemblyInfoDllManager.cs" />
+    <Compile Include="AssemblyInfo\AssemblyInfoFileManager.cs" />
+    <Compile Include="AssemblyInfo\AssemblyInfos.cs" />
+    <Compile Include="AssemblyInfo\AssemblyInfoSettings.cs" />
+    <Compile Include="AssemblyInfo\BinarySerializer.cs" />
+    <Compile Include="AssemblyInfo\StringSerializer.cs" />
+    <Compile Include="ExternalCommand\ExCommandExecutor.cs" />
+    <Compile Include="ExternalCommand\ExCommandFinder.cs" />
     <Compile Include="ExternalCommand\IExternalCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -245,7 +251,7 @@
     </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>B1E60B9FC04406179624EAEBED0C3CB6FB31D5A5</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>042DFC3A508230B003C89DBC794098871CE94955</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
