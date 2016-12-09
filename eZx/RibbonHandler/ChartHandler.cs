@@ -7,9 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using eZstd.MarshalReflection;
-using eZx.ExternalCommand;
 using Microsoft.Office.Interop.Excel;
-using Microsoft.VisualBasic;
 using Application = Microsoft.Office.Interop.Excel.Application;
 
 namespace eZx.RibbonHandler
@@ -154,7 +152,7 @@ namespace eZx.RibbonHandler
                 {
                     if (File.Exists(_path_desktop))
                     {
-                        _tempWkbk = (Workbook)Interaction.GetObjectFromFile(_path_desktop);
+                        _tempWkbk = Interaction.GetObjectFromFile<Workbook>(_path_desktop);
                         // _tempWkbk = (Workbook)Interaction.GetObject(_path_desktop, null);
                     }
                     else

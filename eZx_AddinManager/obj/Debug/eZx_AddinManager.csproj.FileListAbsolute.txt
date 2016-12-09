@@ -19,3 +19,17 @@ F:\ProgrammingCases\GitHubProjects\eZOffice\eZx_AddinManager\bin\Debug\eZx_Addin
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx_AddinManager\bin\Debug\eZx_AddinManager.vsto
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx_AddinManager\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx_AddinManager\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+E:\GitHubProjects\eZOffice\eZx_AddinManager\bin\Debug\eZx_AddinManager.XML
+E:\GitHubProjects\eZOffice\eZx_AddinManager\bin\Debug\eZx_AddinManager.dll
+E:\GitHubProjects\eZOffice\eZx_AddinManager\bin\Debug\eZx_AddinManager.pdb
+E:\GitHubProjects\eZOffice\eZx_AddinManager\bin\Debug\eZx_AddinManager.dll.manifest
+E:\GitHubProjects\eZOffice\eZx_AddinManager\bin\Debug\eZx_AddinManager.vsto
+E:\GitHubProjects\eZOffice\eZx_AddinManager\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+E:\GitHubProjects\eZOffice\eZx_AddinManager\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+E:\GitHubProjects\eZOffice\eZx_AddinManager\obj\Debug\eZx_AddinManager.csprojResolveAssemblyReference.cache
+E:\GitHubProjects\eZOffice\eZx_AddinManager\obj\Debug\eZx_AddinManager.AddinManagerLoaderRibbon.resources
+E:\GitHubProjects\eZOffice\eZx_AddinManager\obj\Debug\eZx.AddinManager.form_AddinManager.resources
+E:\GitHubProjects\eZOffice\eZx_AddinManager\obj\Debug\eZx_AddinManager.Properties.Resources.resources
+E:\GitHubProjects\eZOffice\eZx_AddinManager\obj\Debug\eZx_AddinManager.csproj.GenerateResource.Cache
+E:\GitHubProjects\eZOffice\eZx_AddinManager\obj\Debug\eZx_AddinManager.dll
+E:\GitHubProjects\eZOffice\eZx_AddinManager\obj\Debug\eZx_AddinManager.pdb

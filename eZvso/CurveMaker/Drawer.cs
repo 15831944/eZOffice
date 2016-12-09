@@ -53,6 +53,8 @@ namespace eZvso.CurveMaker
                                 @"表示生成的最终曲线中的贝塞尔曲线段的段数");
                 return;
             }
+
+            // 如果输入参数符合要求，则开始绘图
             DrawBezier_Example(vsoPage.Application);
         }
 

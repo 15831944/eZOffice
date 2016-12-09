@@ -45,3 +45,16 @@ F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.Ribbon_eZx.resourc
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.csproj.GenerateResource.Cache
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.dll
 F:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.pdb
+E:\GitHubProjects\eZOffice\bin\eZx.XML
+E:\GitHubProjects\eZOffice\bin\eZx.dll
+E:\GitHubProjects\eZOffice\bin\eZx.pdb
+E:\GitHubProjects\eZOffice\bin\eZx.dll.manifest
+E:\GitHubProjects\eZOffice\bin\eZx.vsto
+E:\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.csprojResolveAssemblyReference.cache
+E:\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.Database.Form_ConstructDatabase.resources
+E:\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.HelpLocation.resources
+E:\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.Properties.Resources.resources
+E:\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.Ribbon_eZx.resources
+E:\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.csproj.GenerateResource.Cache
+E:\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.dll
+E:\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.pdb

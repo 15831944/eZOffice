@@ -35,7 +35,7 @@ namespace eZx
             }
             else
             {
-                MessageBox.Show("指定的帮助文档不存在，请重新设置帮助文档路径。", "出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"指定的帮助文档不存在，请重新设置帮助文档路径。", "出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -53,12 +53,12 @@ namespace eZx
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("指定的帮助文档无法打开。", "出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(@"指定的帮助文档无法打开。", "出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("指定的帮助文档不存在，请重新设置帮助文档路径。", "出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"指定的帮助文档不存在，请重新设置帮助文档路径。", "出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -107,13 +107,13 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="eZstd, Version=2.0.0.0, Culture=neutral, PublicKeyToken=1050b0febcfcb8d2, processorArchitecture=MSIL">
+    <Reference Include="eZstd, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\eZstd\bin\eZstd.exe</HintPath>
+      <HintPath>..\..\eZstd\bin\eZstd.dll</HintPath>
     </Reference>
-    <Reference Include="eZx_AddinManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="eZx_API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\eZx_AddinManager\bin\Debug\eZx_AddinManager.dll</HintPath>
+      <HintPath>..\bin\eZx_API.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -223,6 +223,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RibbonHandler\ChartHandler.cs" />
+    <Compile Include="RibbonHandler\SpeedMode.cs" />
     <Compile Include="Ribbon_eZx.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -245,12 +246,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DynamicDebug.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\eZx_API\eZx_API.csproj">
-      <Project>{60bf7d52-330a-4ed2-9632-4efb8fb6f231}</Project>
-      <Name>eZx_API</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

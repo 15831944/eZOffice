@@ -3185,14 +3185,15 @@
             <param name="progId">比如 Excel.Application 或 Word.Application。</param>
             <returns></returns>
         </member>
-        <member name="M:eZstd.MarshalReflection.Interaction.GetObjectFromFile(System.String)">
+        <member name="M:eZstd.MarshalReflection.Interaction.GetObjectFromFile``1(System.String)">
             <summary>
             打开某文件（不管是否已经打开）所对应的COM对象。
             </summary>
-            <param name="monikerName">某个文件的名称，比如“C:\\tempData.xlsx”。
+            <typeparam name="TObj">如果输入的是Excel的文件名，则对应的返回类型为 Workbook；</typeparam>
+            <param name="monikerName">某个文件的名称，比如“C:\tempData.xlsx”。
             注意，当此文件已经被打开时，则此方法会直接返回打开了的那个文件所在的COM对象；
             而如果此文件还未打开，则此方法会将此文件打开，然后再返回对应的COM对象。</param>
-            <returns></returns>
+            <returns>如果打开不成功，则返回 null</returns>
         </member>
         <member name="T:eZstd.MarshalReflection.AssemblyCompiler">
             <summary> 动态编译程序集。在程序运行的过程中动态地编译出一个程序集 .dll 或者 .exe。 </summary>
@@ -3355,6 +3356,122 @@
               mY.Scale(1, ratio);
               gr.Transform = mY;  // 将变换应用到绘图面板中
             </remarks>
+        </member>
+        <member name="T:eZstd.Mathematics.ArrayConstructor">
+            <summary> 通过不同的方式构造数组 </summary>
+        </member>
+        <member name="M:eZstd.Mathematics.ArrayConstructor.FromRangeAri(System.Double,System.Double,System.UInt32)">
+            <summary>
+            返回均匀分布的等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <param name="count">返回的数组中的元素个数，其值至少为1</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Mathematics.ArrayConstructor.FromRangeAri(System.Double,System.Double,System.Double)">
+            <summary>
+            返回均匀分布的等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
+            </summary>
+            <param name="start">返回的数组中必定包含这个值</param>
+            <param name="end">返回的数组中的最后一个元素的值必定小于等于此参数的值</param>
+            <param name="step"> step的值不能太小，避免导致数组元素过多</param>
+            <returns>返回的数组中的最后一个元素的值必定小于等于<paramref name="end" />的值</returns>
+        </member>
+        <member name="M:eZstd.Mathematics.ArrayConstructor.FromRangeAri(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            返回均匀分布的“整数”等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
+            </summary>
+            <param name="start">返回的数组中必定包含这个值</param>
+            <param name="end">返回的数组中的最后一个元素的值必定小于等于此参数的值</param>
+            <param name="step"> step的值不能太小，避免导致数组元素过多</param>
+            <returns>返回的数组中的最后一个元素的值必定小于等于<paramref name="end" />的值</returns>
+        </member>
+        <member name="M:eZstd.Mathematics.ArrayConstructor.FromStepAri(System.Double,System.UInt32,System.Double)">
+            <summary>
+            返回均匀分布的等差序列（Arithmetical series）
+            </summary>
+            <param name="start"></param>
+            <param name="step"> </param>
+            <param name="count">数组中的元素个数</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Mathematics.ArrayConstructor.FromStepGeo(System.Double,System.UInt32,System.Double)">
+            <summary>
+            返回等比序列（Geometric series），数组中的元素值不会跳出[start,end]闭区间。
+            </summary>
+            <param name="start"></param>
+            <param name="count"> </param>
+            <param name="bias">每一个元素值是上一个元素值的 bias 倍</param>
+            <returns></returns>
+            <remarks>等比数列的通项公式是：An=A1*q^(n-1)</remarks>
+        </member>
+        <member name="F:eZstd.Mathematics.ArrayConstructor.DistributeMode.Linear">
+            <summary>
+            线性均匀分布
+            </summary>
+        </member>
+        <member name="F:eZstd.Mathematics.ArrayConstructor.DistributeMode.Exponential">
+            <summary>
+            指数分布
+            </summary>
+        </member>
+        <member name="T:eZstd.Mathematics.SpeedMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:eZstd.Mathematics.SpeedMode._xValues">
+            <summary> X轴序列值 </summary>
+        </member>
+        <member name="F:eZstd.Mathematics.SpeedMode._yValues">
+            <summary> Y轴序列值 </summary>
+        </member>
+        <member name="P:eZstd.Mathematics.SpeedMode.Length">
+            <summary> 原始曲线的数据点个数，其值至少为2 </summary>
+        </member>
+        <member name="P:eZstd.Mathematics.SpeedMode.Result">
+            <summary> 缩减后的结果 </summary>
+        </member>
+        <member name="P:eZstd.Mathematics.SpeedMode.FilteredIds">
+            <summary> 在执行Shrink后，剩下来的点在初始数组中的下标 </summary>
+        </member>
+        <member name="M:eZstd.Mathematics.SpeedMode.#ctor(System.Double[],System.Double[])">
+            <summary> 构造函数 </summary>
+            <param name="xValues">数组中的元素个数至少为2个</param>
+            <param name="yValues">数组中的元素个数必须与<paramref name="xValues"/>中的元素相等 </param>
+        </member>
+        <member name="M:eZstd.Mathematics.SpeedMode.GetX">
+            <summary> 在执行Shrink后，剩下来的点的X坐标 </summary>
+        </member>
+        <member name="M:eZstd.Mathematics.SpeedMode.GetY">
+            <summary> 在执行Shrink后，剩下来的点的Y坐标 </summary>
+        </member>
+        <member name="M:eZstd.Mathematics.SpeedMode.ShrinkByIdAverage(System.Int32)">
+            <summary> 根据指定的元素个数进行均一化缩减，而不考虑具体的元素值 </summary>
+            <param name="count">计划要缩减到的目标个数</param>
+            <remarks>不考虑数组中元素的值，只根据每个元素的下标进行平均化的缩减</remarks>
+        </member>
+        <member name="M:eZstd.Mathematics.SpeedMode.CheckCount(System.Int32)">
+            <summary> 对新的点数进行检测，以排除一些特殊的情况。如果返回的值为true，则还要继续缩减，此时的count值的范围为 [3,<see cref="P:eZstd.Mathematics.SpeedMode.Length"/>)。 </summary>
+            <param name="count"></param>
+            <returns>如果为 false，则表示不用再继续讨论如何缩减了。
+            如果为true，则还需要继续计算，此时的count值的范围为 [3,<see cref="P:eZstd.Mathematics.SpeedMode.Length"/>) </returns>
+        </member>
+        <member name="T:eZstd.Mathematics.SpeedMode.ShrinkResult">
+            <summary> 进行缩减计算后的结果 </summary>
+        </member>
+        <member name="F:eZstd.Mathematics.SpeedMode.ShrinkResult.NotStarted">
+            <summary> 还未开始进行过任何缩减计算 </summary>
+        </member>
+        <member name="F:eZstd.Mathematics.SpeedMode.ShrinkResult.NotFinished">
+            <summary> 计算还未完成，此时待计算的count值的范围为 [3,<see cref="P:eZstd.Mathematics.SpeedMode.Length"/>)，而<see cref="P:eZstd.Mathematics.SpeedMode.Length"/>的值大于3。 </summary>
+        </member>
+        <member name="F:eZstd.Mathematics.SpeedMode.ShrinkResult.Succeed">
+            <summary> 计算完成 </summary>
+        </member>
+        <member name="F:eZstd.Mathematics.SpeedMode.ShrinkResult.NewCountOutOfRange">
+            <summary> 指定的缩减值在[1,<see cref="P:eZstd.Mathematics.SpeedMode.Length"/>]之外 </summary>
         </member>
         <member name="F:eZstd.Test.Form1.components">
             <summary>
@@ -3535,6 +3652,44 @@
             <param name="e"></param>
             <remarks></remarks>
         </member>
+        <member name="T:eZstd.UserControls.Example_eZDataGridView">
+            <summary>
+             表格 eZDataGridView 的应用模板：全手动创建每一个数据列
+            </summary>
+        </member>
+        <member name="F:eZstd.UserControls.Example_eZDataGridView._persons">
+            <summary> 与 DataGridView 进行绑定的数据源 </summary>
+        </member>
+        <member name="M:eZstd.UserControls.Example_eZDataGridView.EZdgvOnCurrentCellDirtyStateChanged(System.Object,System.EventArgs)">
+            <summary>
+            在表格中Checkbox的值发生改变时立即作出响应.
+            如果你想要在用户点击复选框单元格时立即响应，你可以处理CellContentClick 事件，但是此事件会在单元格的值更新之前触发。
+            </summary>
+        </member>
+        <member name="T:eZstd.UserControls.Example_eZDataGridView.Person">
+            <summary> DataGridView中每一行数据所对应的类 </summary>
+        </member>
+        <member name="M:eZstd.UserControls.Example_eZDataGridView.Person.#ctor(System.Int32)">
+            <summary> 这里Id值的设计并不严谨，只是为了说明如果在表格中应用只读属性 </summary>
+            <param name="id"></param>
+        </member>
+        <member name="F:eZstd.UserControls.Example_eZDataGridView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:eZstd.UserControls.Example_eZDataGridView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:eZstd.UserControls.Example_eZDataGridView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="T:eZstd.UserControls.NumberChanging">
             <summary>
             用户控件，用来增加或减少指定的时间跨度值。
@@ -3619,9 +3774,7 @@
             <summary> 是否响应键盘的 Ctrl+ V 键，以在按下此组合键时将剪切板中的内容粘贴到表格中 </summary>
         </member>
         <member name="F:eZstd.UserControls.eZDataGridView._manipulateRowsBeenSet">
-            <summary>
-             <see cref="P:eZstd.UserControls.eZDataGridView.ManipulateRows"/> 属性只能被设置一次，当多次设置时，忽略后面的设置操作
-             </summary>
+            <summary>  <see cref="P:eZstd.UserControls.eZDataGridView.ManipulateRows"/> 属性只能被设置一次，当多次设置时，忽略后面的设置操作  </summary>
         </member>
         <member name="P:eZstd.UserControls.eZDataGridView.ManipulateRows">
             <summary> 在表格中右键时，弹出菜单，以进行数据行的删除、插入等操作 </summary>

@@ -274,6 +274,12 @@
             帮助文档的位置
             </summary>
         </member>
+        <member name="P:eZx.HelpLocationSettings.OfficeHelp">
+            <summary> Office 开发帮助文档的文件夹的绝对路径 </summary>
+        </member>
+        <member name="P:eZx.HelpLocationSettings.ExcelHelp">
+            <summary> Excel 开发帮助文档的绝对路径 </summary>
+        </member>
         <member name="T:eZx.Properties.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.

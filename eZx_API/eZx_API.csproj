@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>..\..\bin\</OutputPath>
+    <OutputPath>..\bin\</OutputPath>
     <DocumentationFile>eZexcelAPI.xml</DocumentationFile>
     <NOWARN>1591,660,661</NOWARN>
   </PropertyGroup>
@@ -43,7 +43,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -74,9 +74,9 @@
     <AssemblyOriginatorKeyFile>zengfyExcelDevelopmentSDK.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="eZstd, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="eZstd, Version=2.0.0.0, Culture=neutral, PublicKeyToken=1050b0febcfcb8d2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\eZstd\bin\eZstd.exe</HintPath>
+      <HintPath>..\..\eZstd\bin\eZstd.dll</HintPath>
     </Reference>
     <Reference Include="eZx_AddinManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -138,6 +138,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="zengfyExcelDevelopmentSDK.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="eZxAddins\" />
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
