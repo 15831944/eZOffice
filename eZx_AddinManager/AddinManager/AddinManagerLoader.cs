@@ -10,6 +10,7 @@ using Microsoft.Office.Tools.Ribbon;
 
 namespace eZx.AddinManager
 {
+    /// <summary> AddinManager插件 的窗口加载、命令执行 </summary>
     internal class AddinManagerLoader
     {
         #region ---   插件的加载与卸载

@@ -31,3 +31,5 @@ E:\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.Ribbon_eZwd.resources
 E:\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.csproj.GenerateResource.Cache
 E:\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.dll
 E:\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.pdb
+E:\GitHubProjects\eZOffice\bin\eZwd.dll.CodeAnalysisLog.xml
+E:\GitHubProjects\eZOffice\bin\eZwd.dll.lastcodeanalysissucceeded

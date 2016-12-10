@@ -14,7 +14,7 @@ namespace eZx.AddinManager
     }
 
     /// <summary> 用来进行AddinManager快速调试的接口。实现此接口的类必须有一个无参数的构造函数 </summary>
-    public interface IExternalCommand
+    public interface IExcexExCommand
     {
         /// <summary> Excel AddinManger 快速调试插件 </summary>
         /// <param name="excelApp">Excel当前程序</param>
