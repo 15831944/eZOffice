@@ -7,87 +7,32 @@ using System.Windows.Forms;
 
 namespace eZx.AddinManager
 {
+    /// <summary> 选择程序集文件的窗口 </summary>
+    /// <remarks>此类是完全从 Revit AddinManager中移植过来并稍微修改的</remarks>
     public class AssemblySelectorForm : Form
     {
+        #region ---   Fields
         private string m_assemName;
-
         private bool m_found;
-
         public string m_resultPath;
-
         private IContainer components;
-
         private Button okButton;
-
         private Button cancelButton;
-
         private TextBox assemPathTextBox;
-
         private Button browseButton;
-
         private Label missingAssemDescripLabel;
-
         private TextBox assemNameTextBox;
-
         private Label selectAssemLabel;
+        #endregion
 
+        #region ---   构造函数与初始化
+        /// <summary> 构造函数 </summary>
+        /// <param name="assemName"></param>
         public AssemblySelectorForm(string assemName)
         {
             this.InitializeComponent();
             this.m_assemName = assemName;
             this.assemNameTextBox.Text = assemName;
-        }
-
-        private void AssemblySelectorForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (!this.m_found)
-            {
-                this.ShowWarning();
-            }
-        }
-
-        private void browseButton_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "Assembly files (*.dll;*.exe,*.mcl)|*.dll;*.exe;*.mcl|All files|*.*||";
-                string str = this.m_assemName.Substring(0, this.m_assemName.IndexOf(','));
-                openFileDialog.FileName = str + ".*";
-                if (openFileDialog.ShowDialog() != DialogResult.OK)
-                {
-                    this.ShowWarning();
-                }
-                this.assemPathTextBox.Text = openFileDialog.FileName;
-            }
-        }
-
-        private void okButton_Click(object sender, EventArgs e)
-        {
-            if (File.Exists(this.assemPathTextBox.Text))
-            {
-                this.m_resultPath = this.assemPathTextBox.Text;
-                this.m_found = true;
-            }
-            else
-            {
-                this.ShowWarning();
-            }
-            base.Close();
-        }
-
-        private void ShowWarning()
-        {
-            string text = new StringBuilder("The dependent assembly can't be loaded: \"").Append(this.m_assemName).AppendFormat("\".", new object[0]).ToString();
-            MessageBox.Show(text, "Add-in Manager Internal", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && this.components != null)
-            {
-                this.components.Dispose();
-            }
-            base.Dispose(disposing);
         }
 
         private void InitializeComponent()
@@ -170,6 +115,60 @@ namespace eZx.AddinManager
             base.FormClosing += new FormClosingEventHandler(this.AssemblySelectorForm_FormClosing);
             base.ResumeLayout(false);
             base.PerformLayout();
+        }
+
+        private void AssemblySelectorForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!this.m_found)
+            {
+                this.ShowWarning();
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && this.components != null)
+            {
+                this.components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #endregion
+
+        private void browseButton_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Assembly files (*.dll;*.exe,*.mcl)|*.dll;*.exe;*.mcl|All files|*.*||";
+                string str = this.m_assemName.Substring(0, this.m_assemName.IndexOf(','));
+                openFileDialog.FileName = str + ".*";
+                if (openFileDialog.ShowDialog() != DialogResult.OK)
+                {
+                    this.ShowWarning();
+                }
+                this.assemPathTextBox.Text = openFileDialog.FileName;
+            }
+        }
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(this.assemPathTextBox.Text))
+            {
+                this.m_resultPath = this.assemPathTextBox.Text;
+                this.m_found = true;
+            }
+            else
+            {
+                this.ShowWarning();
+            }
+            base.Close();
+        }
+
+        private void ShowWarning()
+        {
+            string text = new StringBuilder("The dependent assembly can't be loaded: \"").Append(this.m_assemName).AppendFormat("\".", new object[0]).ToString();
+            MessageBox.Show(text, "Add-in Manager Internal", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
     }
 }

@@ -9,7 +9,7 @@ using Application = Microsoft.Office.Interop.Excel.Application;
 
 namespace eZx_API.Debug
 {
-    class EcTest3 : IExternalCommand
+    class EcTest3 : IExcexExCommand
     {
         public ExternalCommandResult Execute(Application excelApp, ref string errorMessage, ref Range errorRange)
         {
@@ -52,7 +52,7 @@ namespace eZx_API.Debug
             var asss = AppDomain.CurrentDomain.GetAssemblies();
             DebugUtils.ShowEnumerable(asss);
             
-            DebugUtils.show3();
+            DebugUtils.show5();
 
             MessageBox.Show("a 200");
         }

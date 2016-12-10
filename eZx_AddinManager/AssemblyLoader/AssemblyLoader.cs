@@ -10,6 +10,7 @@ using System.Windows.Forms;
 namespace eZx.AddinManager
 {
     /// <summary> 将程序集及其引用项加载到进程中 </summary>
+    /// <remarks>此类是完全从 Revit AddinManager中移植过来并稍微修改的</remarks>
     public class AssemLoader
     {
         #region ---   Fields & Properties
@@ -86,7 +87,7 @@ namespace eZx.AddinManager
             }
         }
 
-        #region ---   LoadAddinsToTempFolder 将程序集拷贝到新的临时文件夹中
+        #region ---  !!! LoadAddinsToTempFolder 将程序集拷贝到新的临时文件夹中
 
         public Assembly LoadAddinsToTempFolder(string originalFilePath, bool parsingOnly)
         {
@@ -149,12 +150,13 @@ namespace eZx.AddinManager
                 Monitor.Enter(this);
 
                 // 方法一：Revit中的实现方法
-                result = Assembly.LoadFile(filePath);
+                result = Assembly.LoadFile(filePath); // LoadFile方法不会加载此程序集引用的其他程序集，也就是不会加载程序的依赖项。
 
+                // 方法二：zengfy 的实现方法，实验中证明不能替换上面的方法一
+                // byte[] buff = File.ReadAllBytes(filePath);  //先将插件拷贝到内存缓冲。一般情况下，当加载的文件大小大于2^32 byte (即4.2 GB），就会出现OutOfMemoryException，在实际测试中的极限值为630MB。
+                // result = Assembly.Load(buff); //不能直接通过LoadFrom或者LoadFile，而必须先将插件拷贝到内存，然后再从内存中Load
 
-                // 方法二：zengfy 的实现方法
-                //byte[] buff = File.ReadAllBytes(filePath);  //先将插件拷贝到内存缓冲。一般情况下，当加载的文件大小大于2^32 byte (即4.2 GB），就会出现OutOfMemoryException，在实际测试中的极限值为630MB。
-                //result = Assembly.Load(buff); //不能直接通过LoadFrom或者LoadFile，而必须先将插件拷贝到内存，然后再从内存中Load
+                // MessageBox.Show(result.FullName);
             }
             finally
             {

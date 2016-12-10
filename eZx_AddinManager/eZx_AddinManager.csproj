@@ -171,11 +171,11 @@
     </Compile>
     <Compile Include="AssemblyInfo\AddinManagerAssembly.cs" />
     <Compile Include="AddinManager\AddinManagerLoader.cs" />
-    <Compile Include="RevitAddinManager AssemblyLoader\AssemblyLoader.cs" />
-    <Compile Include="RevitAddinManager AssemblyLoader\AssemblySelectorForm.cs">
+    <Compile Include="AssemblyLoader\AssemblyLoader.cs" />
+    <Compile Include="AssemblyLoader\AssemblySelectorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RevitAddinManager AssemblyLoader\FileUtils.cs" />
+    <Compile Include="AssemblyLoader\FileUtils.cs" />
     <Compile Include="AddinManager\form_AddinManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,7 +190,7 @@
     <Compile Include="AssemblyInfo\StringSerializer.cs" />
     <Compile Include="ExternalCommand\ExCommandExecutor.cs" />
     <Compile Include="ExternalCommand\ExCommandFinder.cs" />
-    <Compile Include="ExternalCommand\IExternalCommand.cs" />
+    <Compile Include="ExternalCommand\IExcexExCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -210,7 +210,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="eZx_AddinManager_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

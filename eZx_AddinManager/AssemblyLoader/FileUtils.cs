@@ -24,7 +24,9 @@ namespace eZx.AddinManager
 
         public static string CreateTempFolder(string prefix)
         {
+            // 临时文件夹，用以复制临时程序集
             DirectoryInfo directoryInfo1 = new DirectoryInfo(Path.Combine(Path.GetTempPath(), TempFolderName));
+
             if (!directoryInfo1.Exists)
                 directoryInfo1.Create();
             foreach (DirectoryInfo directoryInfo2 in directoryInfo1.GetDirectories())

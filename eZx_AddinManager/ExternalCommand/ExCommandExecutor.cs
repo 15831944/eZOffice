@@ -11,8 +11,7 @@ namespace eZx.AddinManager
 {
     internal static class ExCommandExecutor
     {
-
-        private static IExternalCommand _currentExternalCommand;
+        private static IExcexExCommand _currentExternalCommand;
         private static string _currentExternalCommandAssemblyPath;
 
         /// <summary> 执行当前（即上次执行过的那个）外部命令 </summary>
@@ -30,7 +29,7 @@ namespace eZx.AddinManager
         /// <param name="externalCommand">此命令必须是实现了 IExternalCommand.Execute </param>
         /// <param name="excelApp">作为Execute()方法的输入参数的对象，表示当前的Excel Application </param>
         /// <remarks>出于调试的即时更新的考虑，这里在每一次调试外部命令时，都对最新的dll进行重新加载。</remarks>
-        public static void InvokeExternalCommand(string assemblyPath, IExternalCommand externalCommand, Application excelApp)
+        public static void InvokeExternalCommand(string assemblyPath, IExcexExCommand externalCommand, Application excelApp)
         {
 
             ExCommandExecutor.RunActiveCommand(externalCommand, assemblyPath, excelApp);
@@ -120,8 +119,13 @@ namespace eZx.AddinManager
             }
         }
 
-        // AddInManager.AIM
-        public static ExternalCommandResult RunActiveCommand(IExternalCommand externalCommand, string assemblyPath, Application excelApp)
+        // 参考 Revit AddInManager.AIM 类
+        /// <summary> 执行外部命令 </summary>
+        /// <param name="addinItem">注意这里的 addinItem 实例是刷新前的程序集中对应的类，
+        /// 这里只能用来提取其 FullName 字符串，而不能直接用来执行， 因为虽然它确实可以执行，但是执行的是重新编译前的那个方法。</param>
+        /// <param name="assemblyPath"></param>
+        /// <param name="excelApp"></param>
+        private static ExternalCommandResult RunActiveCommand(IExcexExCommand addinItem, string assemblyPath, Application excelApp)
         {
             string errorMessage = "";
             Range errorRange = null;
@@ -135,18 +139,23 @@ namespace eZx.AddinManager
                 Assembly assembly = assemLoader.LoadAddinsToTempFolder(assemblyPath, false);
                 if (null == assembly)
                 {
+                    MessageBox.Show(@"未能加载程序集", @"出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     result = ExternalCommandResult.Failed;
                 }
                 else
                 {
-                    if (externalCommand == null)
+                    // !!  注意这里的 addinItem 实例是刷新前的程序集中对应的类，这里只能用来提取其 FullName 字符串，而不能直接用来执行，因为虽然它确实可以执行，但是执行的是重新编译前的那个方法。
+                    // !!  这里一定要从最新加载进来的程序集中重新创建对应的外部命令插件
+                    IExcexExCommand newExCommand = assembly.CreateInstance(addinItem.GetType().FullName) as IExcexExCommand;
+
+                    if (newExCommand == null)
                     {
+                        MessageBox.Show(@"在新加载的程序集中未能找到匹配的方法", @"出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         result = ExternalCommandResult.Failed;
                     }
                     else
                     {
-                        // result = externalCommand.Execute(excelApp, ref errorMessage, ref errorRange);
-                        result = Execute(externalCommand, excelApp, ref errorMessage, ref errorRange);
+                        result = Execute(newExCommand, excelApp, ref errorMessage, ref errorRange);
                     }
                 }
             }
@@ -163,7 +172,7 @@ namespace eZx.AddinManager
         }
 
 
-        private static ExternalCommandResult Execute(IExternalCommand exCommand, Application excelApp, ref string errorMessage,
+        private static ExternalCommandResult Execute(IExcexExCommand exCommand, Application excelApp, ref string errorMessage,
             ref Range errorRange)
         {
             ExternalCommandResult res = ExternalCommandResult.Failed;
