@@ -167,8 +167,13 @@ namespace eZx.AddinManager
 
         #endregion
 
-        #region ---   HookAssemblyResolve
+        #region ---   HookAssemblyResolve ：以异常处理的方式加载不能正常引用的程序集
 
+        /// <summary>
+        /// AssemblyResolve事件在.Net对程序集的解析失败时触发，返回一个Assembly对象。
+        /// 因此，我们只要在这个事件的处理程序里手动加载对应目录的dll，并把对应dll的Assembly对象返回， .Net就能正确加载对应的dll了。
+        /// </summary>
+        /// <remarks></remarks>
         public void HookAssemblyResolve()
         {
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(this.CurrentDomain_AssemblyResolve);
@@ -179,18 +184,23 @@ namespace eZx.AddinManager
             AppDomain.CurrentDomain.AssemblyResolve -= new ResolveEventHandler(this.CurrentDomain_AssemblyResolve);
         }
 
+        /// <summary> 在 Execute() 方法中将不能引用到的程序集进行手动加载 </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             Assembly result;
             lock (this)
             {
                 new AssemblyName(args.Name);
+                // 1. 在临时文件夹中搜索程序集所对应的文件：对应于引用时 Copy Local 设置为 true 的程序集
                 string text = this.SearchAssemblyFileInTempFolder(args.Name);
                 if (File.Exists(text))
                 {
                     result = this.LoadAddin(text);
                 }
-                else
+                else  // 2. 在临时文件夹中没搜索到程序集所对应的文件，此时去原始文件夹中搜索
                 {
                     text = this.SearchAssemblyFileInOriginalFolders(args.Name);
                     if (string.IsNullOrEmpty(text))
@@ -216,7 +226,8 @@ namespace eZx.AddinManager
                             text = this.SearchAssemblyFileInOriginalFolders(text2);
                         }
                     }
-                    if (string.IsNullOrEmpty(text))
+
+                    if (string.IsNullOrEmpty(text))  // 3. 在临时文件夹与原始文件夹都没搜索到程序集所对应的文件，则跳出对话框，让用户自己选择
                     {
                         using (AssemblySelectorForm assemblySelectorForm = new AssemblySelectorForm(args.Name))
                         {
@@ -234,8 +245,10 @@ namespace eZx.AddinManager
             return result;
         }
 
-        #endregion
 
+        /// <summary> 在临时文件夹中根据程序集名搜索对应的文件：对应于引用时 Copy Local 设置为 true 的程序集 </summary>
+        /// <param name="assemName"></param>
+        /// <returns></returns>
         private string SearchAssemblyFileInTempFolder(string assemName)
         {
             string[] array = new string[]
@@ -321,6 +334,7 @@ namespace eZx.AddinManager
             }
             return null;
         }
+        #endregion
 
         /// <summary>
         /// 检查 RevitAPI.dll 是否被引用

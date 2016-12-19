@@ -651,6 +651,14 @@ namespace eZx
             return transposedRange;
         }
 
+
+        private void button_SpeedMode_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application app = Globals.ThisAddIn.Application;
+            FormSpeedModeHandler f = FormSpeedModeHandler.GetUniqueInstance(app);
+            f.Show(null);
+        }
+        
         #endregion
 
         #region   ---  测试与其他
@@ -671,8 +679,8 @@ namespace eZx
             // 要进行删除的左列与右列的列号
             int r = firstRow.Ex_CornerCell(CornerIndex.UpRight).Column;
             int l = Convert.ToInt32(shrinkFirstRow.Ex_CornerCell(CornerIndex.UpRight).Column + 1);
-            string deletedRight = ExcelFunction.ConvertColumnNumberToString(r);
-            string deletedLeft = ExcelFunction.ConvertColumnNumberToString(l);
+            string deletedRight = RangeValueConverter.ConvertColumnNumberToString(r);
+            string deletedLeft = RangeValueConverter.ConvertColumnNumberToString(l);
 
             //
             string s = "";
@@ -746,6 +754,9 @@ namespace eZx
             }
         }
 
+
         #endregion
+
+
     }
 }

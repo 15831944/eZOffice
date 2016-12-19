@@ -98,11 +98,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Debug\EcTest.cs" />
+    <Compile Include="DllActivator.cs" />
     <Compile Include="Entities\CellAddress.cs" />
     <Compile Include="Entities\CornerIndex.cs" />
     <Compile Include="Entities\ExcelApplication.cs" />
     <Compile Include="Entities\ExcelFunction.cs" />
     <Compile Include="Entities\ExtensionMethod.cs" />
+    <Compile Include="Entities\RangeValueConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Application.Designer.cs">
       <AutoGen>True</AutoGen>

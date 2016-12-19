@@ -31,5 +31,14 @@ E:\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.Ribbon_eZwd.resources
 E:\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.csproj.GenerateResource.Cache
 E:\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.dll
 E:\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.pdb
-E:\GitHubProjects\eZOffice\bin\eZwd.dll.CodeAnalysisLog.xml
-E:\GitHubProjects\eZOffice\bin\eZwd.dll.lastcodeanalysissucceeded
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\bin\eZwd.XML
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\bin\eZwd.dll
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\bin\eZwd.pdb
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\bin\eZwd.dll.manifest
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\bin\eZwd.vsto
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZwd\obj\Debug\eZwd.csprojResolveAssemblyReference.cache
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZwd\obj\Debug\eZwd.Properties.Resources.resources
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZwd\obj\Debug\eZwd.Ribbon_eZwd.resources
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZwd\obj\Debug\eZwd.csproj.GenerateResource.Cache
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZwd\obj\Debug\eZwd.dll
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZwd\obj\Debug\eZwd.pdb

@@ -9,7 +9,7 @@ using Application = Microsoft.Office.Interop.Excel.Application;
 
 namespace eZx_API.Debug
 {
-    class EcTest3 : IExcexExCommand
+    class EcTest3 : IExcelExCommand
     {
         public ExternalCommandResult Execute(Application excelApp, ref string errorMessage, ref Range errorRange)
         {
@@ -48,11 +48,9 @@ namespace eZx_API.Debug
             {
                 0     ,1.63  ,2.08  ,3.49  ,4.27  ,4.65  ,5.29  ,6.05  ,5.74  ,6.17  ,6.58  ,7.19  ,6.28  ,7.24  ,8.38  ,9.18  ,10.58 ,12.54 ,14.82 ,16.33 ,17.41 ,19.06 ,20.93 ,21.64 ,23.35 ,25.39 ,27.36 ,28.55 ,29.2  ,29.94 ,31.22 ,32.33 ,32.82 ,33.21 ,32.77 ,35.54 ,38.29 ,41.08 ,44.39 ,47.18 ,50    ,52.18 ,55.06 ,57.77 ,56.81 ,56.26 ,56.97 ,57.6  ,59.92 ,62.47 ,65.19 ,68.5  ,70.74 ,71.41 ,73.07 ,75.99 ,78.31 ,80.79 ,82.7  ,81.73 ,80.8  ,81.49 ,83.53 ,84.77 ,85.97 ,86.63 ,87.55 ,89.01 ,88.25 ,89.4  ,89.14 ,90.35 ,91.05 ,92.11 ,91.32 ,92.42 ,91.91 ,92.67 ,93.05 ,93.61 ,94.1  ,93.38 ,94.34 ,93.56 ,92.66 ,93.27 ,92.79 ,92.12 ,92.65 ,92.31 ,92.78 ,93.25 ,92.43 ,92.74 ,92.87 ,92.81 ,92.42 ,92.82 ,92.44 ,92.95 ,92.67 ,92.49 ,93.84 ,94.11 ,93.82 ,94.04 ,94.61 ,94.88 ,93.46 ,93.69 ,93.87 ,94.36 ,94.55 ,94.8  ,95.15 ,95.5  ,95.26 ,
             }; // 
-           
+
             var asss = AppDomain.CurrentDomain.GetAssemblies();
             DebugUtils.ShowEnumerable(asss);
-            
-            DebugUtils.show5();
 
             MessageBox.Show("a 200");
         }

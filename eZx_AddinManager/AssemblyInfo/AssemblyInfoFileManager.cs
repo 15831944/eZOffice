@@ -23,9 +23,9 @@ namespace eZx.AddinManager
         /// <summary> 将外部 二进制文件 中的字符进行反序列化 </summary>
         /// <remarks>对于CAD.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
         /// 但是在调用ExternalCommand时还是会出bug，通常的报错为：没有为该对象定义无参数的构造函数。 </remarks>
-        public static Dictionary<AddinManagerAssembly, List<IExcexExCommand>> GetInfosFromFile()
+        public static Dictionary<AddinManagerAssembly, List<IExcelExCommand>> GetInfosFromFile()
         {
-            var nodesInfo = new Dictionary<AddinManagerAssembly, List<IExcexExCommand>>(new AssemblyComparer());
+            var nodesInfo = new Dictionary<AddinManagerAssembly, List<IExcelExCommand>>(new AssemblyComparer());
 
             string infoPath = Path.Combine(AddinManagerDirectory, SerializedFileName);
             if (File.Exists(infoPath))
@@ -44,10 +44,10 @@ namespace eZx.AddinManager
         }
 
 
-        private static Dictionary<AddinManagerAssembly, List<IExcexExCommand>> DeserializeAssemblies(
+        private static Dictionary<AddinManagerAssembly, List<IExcelExCommand>> DeserializeAssemblies(
             AssemblyInfos amInfos)
         {
-            var nodesInfo = new Dictionary<AddinManagerAssembly, List<IExcexExCommand>>(new AssemblyComparer());
+            var nodesInfo = new Dictionary<AddinManagerAssembly, List<IExcelExCommand>>(new AssemblyComparer());
             //
             if (amInfos != null)
             {
@@ -56,7 +56,7 @@ namespace eZx.AddinManager
                     if (File.Exists(assemblyPath))
                     {
                         // 将每一个程序集中的外部命令提取出来
-                        List<IExcexExCommand> m = ExCommandFinder.RetriveExternalCommandsFromAssembly(assemblyPath);
+                        List<IExcelExCommand> m = ExCommandFinder.RetriveExternalCommandsFromAssembly(assemblyPath);
                         if (m.Any())
                         {
                             Assembly ass = m[0].GetType().Assembly;

@@ -63,75 +63,6 @@
             <param name="saveChanges"> 在关闭 Application 中的工作簿时，是否要保存对工作簿的修改 </param>
             <returns> 如果关闭成功，则返回true，如果关闭不完全成功，则返回false。 </returns>
         </member>
-        <member name="M:eZx_API.Entities.ExcelFunction.ConvertColumnNumberToString(System.Int32)">
-            <summary>
-            将Excel表中的列的数值编号转换为对应的字符
-            </summary>
-            <param name="ColNum">Excel中指定列的数值序号</param>
-            <returns>以字母序号的形式返回指定列的列号</returns>
-            <remarks>1对应A；26对应Z；27对应AA</remarks>
-        </member>
-        <member name="M:eZx_API.Entities.ExcelFunction.ConvertColumnStringToNumber(System.String)">
-            <summary>
-            将Excel表中的字符编号转换为对应的数值
-            </summary>
-            <param name="colString">以A1形式表示的列的字母序号，不区分大小写</param>
-            <returns>以整数的形式返回指定列的数值编号，A列对应数值1</returns>
-            <remarks></remarks>
-        </member>
-        <member name="M:eZx_API.Entities.ExcelFunction.GetRangeValue``1(System.Object)">
-            <summary> 从Range.Value所得到的数组转换为下标值为0的二维数组 </summary>
-            <typeparam name="T"></typeparam>
-            <param name="rgValue">通过Range.Value提取出来的单元格的数据集合</param>
-            <returns>与输入的集合相同大小的二维数组，其中第一个元素的下标为0 </returns>
-        </member>
-        <member name="M:eZx_API.Entities.ExcelFunction.GetRangeValue``1(System.Object,System.Boolean,System.Int32)">
-            <summary> 从Range.Value所得到的数组中提取指定的某一行或某一列的数据 </summary>
-            <typeparam name="T"></typeparam>
-            <param name="rgValue">通过Range.Value提取出来的单元格的数据集合</param>
-            <param name="isRow">如果是要提取一行值，则为true，否则是提取一列值</param>
-            <param name="Index">要提取的行或列的下标，第一行的下标为0</param>
-            <returns>返回一个行向量或者列向量，即返回的二维数组中只有一行值或者一列值。其中第一个元素的下标为0 </returns>
-        </member>
-        <member name="M:eZx_API.Entities.ExcelFunction.GetRangeValue``1(System.Object,System.Boolean,System.Int32[])">
-            <summary> 从Range.Value所得到的数组中提取指定的多行或多列的数据 </summary>
-            <typeparam name="T"></typeparam>
-            <param name="rgValue">通过Range.Value提取出来的单元格的数据集合</param>
-            <param name="isRow">如果是要提取多个行值，则为true，否则是提取多个列值</param>
-            <param name="Indices">要提取的行或列的下标，第一行的下标为0</param>
-            <returns>返回多个行向量或者列向量，其中第一个元素的下标为0 </returns>
-        </member>
-        <member name="M:eZx_API.Entities.ExcelFunction.GetRangeValue``1(System.Object,System.Int32[],System.Int32[])">
-            <summary> 从Range.Value所得到的数组中提取指定行与列的新集合 </summary>
-            <typeparam name="T"></typeparam>
-            <param name="rgValue">通过Range.Value提取出来的单元格的数据集合</param>
-            <param name="rowIndices">要提取的行的下标，第一行的下标为0</param>
-            <param name="columnIndices">要提取的列的下标，第一列的下标为0</param>
-            <returns>提取到的子数组，数组中第一个元素的下标为0。</returns>
-        </member>
-        <member name="M:eZx_API.Entities.ExcelFunction.ConvertRangeValueToArray(System.Object,System.Object[0:,0:]@,System.Int32@,System.Int32@,System.Int32@)">
-            <summary> 从Range.Value所得到的数组（或者单一值）转换为一个二维数组 </summary>
-            <param name="rgValue"></param>
-            <param name="convertedArray">转换后的数组，其中第一个元素的下标值并不一定是0，而是lowerBound</param>
-            <param name="lowerBound">转换后的数组中第一个元素的下标值</param>
-            <param name="rowsCount">二维数组中的行数</param>
-            <param name="columnsCount">二维数组中的列数</param>
-        </member>
-        <member name="M:eZx_API.Entities.ExcelFunction.GetRangeValue2D``1(System.Object[0:,0:],System.Int32,System.Int32[],System.Int32[])">
-            <summary> 从Range.Value所得到的数组中提取指定行与列的新集合 </summary>
-            <typeparam name="T"></typeparam>
-            <param name="serchingObjects">从Range.Value得到的数组，其中第一个元素的下标值并不一定是0，而是lowerBound</param>
-            <param name="lowerbound"></param>
-            <param name="rowIndices">要提取的行的下标，第一行的下标为0</param>
-            <param name="columnIndices">要提取的列的下标，第一列的下标为0</param>
-            <returns>提取到的子数组，数组中第一个元素的下标为0。</returns>
-        </member>
-        <member name="M:eZx_API.Entities.ExcelFunction.ConvertExcelValue``1(System.Object)">
-            <summary> 将Excel中的单元格中的值转换为其他类型的值 </summary>
-            <typeparam name="T">目标类型</typeparam>
-            <param name="v"></param>
-            <returns>转换后的值</returns>
-        </member>
         <member name="M:eZx_API.Entities.ExcelFunction.SheetCompare(Microsoft.Office.Interop.Excel.Worksheet,Microsoft.Office.Interop.Excel.Worksheet)">
             <summary>
             比较两个工作表是否相同。
@@ -226,12 +157,13 @@
         </member>
         <member name="M:eZx_API.Entities.ExcelExtension.Ex_ShrinkeRange(Microsoft.Office.Interop.Excel.Range)">
             <summary>
-            收缩Range.Areas.Item(1)的单元格范围。
-            在选择一个单元格范围时，有时为了界面操作简单，往往会选择一整列或者一整行，但是并不是要对基本所有的单元格进行操作，
-            而只需要操作其中有数据的那些区域。此函数即是将选择的整行或者整列的单元格收缩到 UsedRange 范围内。
+            收缩Range.Areas.Item(1)的单元格范围到 UsedRange 范围内。
             </summary>
             <param name="rg">此函数只考虑 rg 所对应的行或列的数量，并不会对 rg 中的单元格的值是否为空进行判断。</param>
-            <remarks></remarks>
+            <remarks> 
+            在选择一个单元格范围时，有时为了界面操作简单，往往会选择一整列或者一整行，但是并不是要对基本所有的单元格进行操作，
+            而只需要操作其中有数据的那些区域。此函数即是将选择的整行或者整列的单元格收缩到 UsedRange 范围内。
+            </remarks>
         </member>
         <member name="M:eZx_API.Entities.ExcelExtension.Ex_ShrinkeVectorAndCheckNull(Microsoft.Office.Interop.Excel.Range)">
             <summary>
@@ -243,6 +175,118 @@
         <member name="M:eZx_API.Entities.ExcelExtension.Ex_Transpose(Microsoft.Office.Interop.Excel.Range)">
             <summary> 将指定Range的第一个Area的矩形区域进行转置 </summary>
             <param name="rg"></param>
+            <returns></returns>
+        </member>
+        <member name="T:eZx_API.Entities.RangeValueConverter">
+            <summary> Range.Value的子数组提取 </summary>
+        </member>
+        <member name="M:eZx_API.Entities.RangeValueConverter.ConvertColumnNumberToString(System.Int32)">
+            <summary>
+            将Excel表中的列的数值编号转换为对应的字符
+            </summary>
+            <param name="colNum">Excel中指定列的数值序号</param>
+            <returns>以字母序号的形式返回指定列的列号</returns>
+            <remarks>1对应A；26对应Z；27对应AA</remarks>
+        </member>
+        <member name="M:eZx_API.Entities.RangeValueConverter.ConvertColumnStringToNumber(System.String)">
+            <summary>
+            将Excel表中的字符编号转换为对应的数值
+            </summary>
+            <param name="colString">以A1形式表示的列的字母序号，不区分大小写</param>
+            <returns>以整数的形式返回指定列的数值编号，A列对应数值1</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZx_API.Entities.RangeValueConverter.GetRangeValue``1(System.Object)">
+            <summary> 从Range.Value所得到的数组转换为下标值为0的二维数组 </summary>
+            <typeparam name="T"></typeparam>
+            <param name="rgValue">通过Range.Value提取出来的单元格的数据集合</param>
+            <returns>与输入的集合相同大小的二维数组，其中第一个元素的下标为0 </returns>
+        </member>
+        <member name="M:eZx_API.Entities.RangeValueConverter.GetRangeValue``1(System.Object,System.Boolean,System.Int32)">
+            <summary> 从Range.Value所得到的数组中提取指定的某一行或某一列的数据 </summary>
+            <typeparam name="T"></typeparam>
+            <param name="rgValue">通过Range.Value提取出来的单元格的数据集合</param>
+            <param name="isRow">如果是要提取一行值，则为true，否则是提取一列值</param>
+            <param name="index">要提取的行或列的下标，第一行的下标为0</param>
+            <returns>返回一个行向量或者列向量，即返回的二维数组中只有一行值或者一列值。其中第一个元素的下标为0 </returns>
+        </member>
+        <member name="M:eZx_API.Entities.RangeValueConverter.GetRangeValue``1(System.Object,System.Boolean,System.Int32[])">
+            <summary> 从Range.Value所得到的数组中提取指定的多行或多列的数据 </summary>
+            <typeparam name="T"></typeparam>
+            <param name="rgValue">通过Range.Value提取出来的单元格的数据集合</param>
+            <param name="isRow">如果是要提取多个行值，则为true，否则是提取多个列值</param>
+            <param name="indices">要提取的行或列的下标，第一行的下标为0</param>
+            <returns>返回多个行向量或者列向量，其中第一个元素的下标为0 </returns>
+        </member>
+        <member name="M:eZx_API.Entities.RangeValueConverter.GetRangeValue``1(System.Object,System.Int32[],System.Int32[])">
+            <summary> 从Range.Value所得到的数组中提取指定行与列的新集合 </summary>
+            <typeparam name="T"></typeparam>
+            <param name="rgValue">通过Range.Value提取出来的单元格的数据集合</param>
+            <param name="rowIndices">要提取的行的下标，第一行的下标为0</param>
+            <param name="columnIndices">要提取的列的下标，第一列的下标为0</param>
+            <returns>提取到的子数组，数组中第一个元素的下标为0。</returns>
+        </member>
+        <member name="M:eZx_API.Entities.RangeValueConverter.GetRangeValue(System.Object,System.Int32[],System.Int32[])">
+            <summary> 从Excel中 Range.Value 的大数组中提取子数组 </summary>
+            <param name="rgValue">Excel中提取出来的单元格数据</param>
+            <param name="rows">要提取的行号，第一行的下标为0</param>
+            <param name="cols">要提取的列号，第一列的下标为0</param>
+            <returns>返回的数组中，第一个元素的下标为0</returns>
+        </member>
+        <member name="M:eZx_API.Entities.RangeValueConverter.GetRangeValue1(System.Object)">
+            <summary> 将Excel中 Range.Value的数据转换为二维数组，但不确定数组中第一个元素的下标。 </summary>
+            <param name="rgValue"> 从Excel中 Range.Value 的大数组 </param>
+            <returns>如果<paramref name="rgValue"/>中只有一个单元格，则返回的数组的第一个元素的下标必为0；
+            如果<paramref name="rgValue"/>中不止一个单元格，则返回的数组的第一个元素的下标很有可能为1；</returns>
+        </member>
+        <member name="M:eZx_API.Entities.RangeValueConverter.ConvertRangeValueToArray(System.Object,System.Object[0:,0:]@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary> 从Range.Value所得到的数组（或者单一值）转换为一个二维数组 </summary>
+            <param name="rgValue"></param>
+            <param name="convertedArray">转换后的数组，其中第一个元素的下标值并不一定是0，而是lowerBound</param>
+            <param name="lowerBound">转换后的数组中第一个元素的下标值</param>
+            <param name="rowsCount">二维数组中的行数</param>
+            <param name="columnsCount">二维数组中的列数</param>
+        </member>
+        <member name="M:eZx_API.Entities.RangeValueConverter.GetRangeValue2D``1(System.Object[0:,0:],System.Int32,System.Int32[],System.Int32[])">
+            <summary> 从Range.Value所得到的数组中提取指定行与列的新集合 </summary>
+            <typeparam name="T"></typeparam>
+            <param name="serchingObjects">从Range.Value得到的数组，其中第一个元素的下标值并不一定是0，而是lowerBound</param>
+            <param name="lowerbound"></param>
+            <param name="rowIndices">要提取的行的下标，第一行的下标为0</param>
+            <param name="columnIndices">要提取的列的下标，第一列的下标为0</param>
+            <returns>提取到的子数组，数组中第一个元素的下标为0。</returns>
+        </member>
+        <member name="M:eZx_API.Entities.RangeValueConverter.ConvertExcelValue``1(System.Object)">
+            <summary> 将Excel中的单元格中的值转换为其他类型的值 </summary>
+            <typeparam name="T">目标类型</typeparam>
+            <param name="v">Excel中一个单元格中的值</param>
+            <returns>转换后的值</returns>
+        </member>
+        <member name="M:eZx_API.Entities.RangeValueConverter.FillRange(Microsoft.Office.Interop.Excel.Worksheet,System.Int32,System.Int32,System.Array,System.Boolean)">
+            <summary> 将数组的数据写入到Excel中 </summary>
+            <param name="sht"></param>
+            <param name="startRow">第一行的值为1</param>
+            <param name="startCol">第一列的值为1</param>
+            <param name="arr">要写入的数据，为一个一维向量或者二维数组。如果为一维向量，则默认写入一列中。</param>
+            <param name="colPrior">仅当<paramref name="arr"/>为一维向量，则true表示将数据写入一列，false表示将数据写入一行。</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZx_API.Entities.RangeValueConverter.GetRange(Microsoft.Office.Interop.Excel.Worksheet,System.Int32,System.Int32,System.Array,System.Boolean)">
+            <summary> 根据要写入到Excel中的数组数据确定对应的写入范围 </summary>
+            <param name="sht"></param>
+            <param name="startRow">第一行的值为1</param>
+            <param name="startCol">第一列的值为1</param>
+            <param name="arr">要写入的数据，为一个一维向量或者二维数组。如果为一维向量，则默认写入一列中。</param>
+            <param name="colPrior">仅当<paramref name="arr"/>为一维向量，则true表示将数据写入一列，false表示将数据写入一行。</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZx_API.Entities.RangeValueConverter.GetRange(Microsoft.Office.Interop.Excel.Worksheet,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary> 根据要写入到Excel中的数组数据确定对应的写入范围 </summary>
+            <param name="sht"></param>
+            <param name="startRow">第一行的值为1</param>
+            <param name="startCol">第一列的值为1</param>
+            <param name="rowsCount">要返回的行数，其值最小为1。</param>
+            <param name="colsCount">要返回的列数，其值最小为1。</param>
             <returns></returns>
         </member>
         <member name="T:eZx_API.Properties.Resources">
@@ -259,6 +303,14 @@
             <summary>
               Overrides the current thread's CurrentUICulture property for all
               resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:DllActivator.DllActivator_eZx_API">
+            <summary> 用于 OldW Revit 插件中多个dll之前的AddinManager调试 </summary>
+        </member>
+        <member name="M:DllActivator.DllActivator_eZx_API.ActivateReferences">
+            <summary>
+            激活本DLL所引用的那些DLLs
             </summary>
         </member>
     </members>

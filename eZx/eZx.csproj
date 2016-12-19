@@ -214,6 +214,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RibbonHandler\FormSpeedModeHandler.resx">
+      <DependentUpon>FormSpeedModeHandler.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ribbon_eZx.resx">
       <DependentUpon>Ribbon_eZx.cs</DependentUpon>
     </EmbeddedResource>
@@ -227,7 +230,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RibbonHandler\ChartHandler.cs" />
-    <Compile Include="RibbonHandler\SpeedMode.cs" />
+    <Compile Include="DllActivator.cs" />
+    <Compile Include="RibbonHandler\FormSpeedModeHandler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RibbonHandler\FormSpeedModeHandler.Designer.cs">
+      <DependentUpon>FormSpeedModeHandler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonHandler\SpeedModeHandler.cs" />
     <Compile Include="Ribbon_eZx.cs">
       <SubType>Component</SubType>
     </Compile>

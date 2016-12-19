@@ -17,9 +17,9 @@ namespace eZx.AddinManager
         /// <returns></returns>
         /// <remarks>对于CAD.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
         /// 但是在调用ExternalCommand时还是会出bug，通常的报错为：没有为该对象定义无参数的构造函数。 </remarks>
-        public static Dictionary<AddinManagerAssembly, List<IExcexExCommand>> GetInfosFromSettings()
+        public static Dictionary<AddinManagerAssembly, List<IExcelExCommand>> GetInfosFromSettings()
         {
-        var nodesInfo= new Dictionary<AddinManagerAssembly, List<IExcexExCommand>>(new AssemblyComparer());
+        var nodesInfo= new Dictionary<AddinManagerAssembly, List<IExcelExCommand>>(new AssemblyComparer());
 
             // 提取配置文件中的数据
             AssemblyInfoSettings s = new AssemblyInfoSettings();
@@ -36,11 +36,11 @@ namespace eZx.AddinManager
         }
 
 
-        private static Dictionary<AddinManagerAssembly, List<IExcexExCommand>> DeserializeAssemblies(
+        private static Dictionary<AddinManagerAssembly, List<IExcelExCommand>> DeserializeAssemblies(
             AssemblyInfos amInfos)
         {
-            Dictionary<AddinManagerAssembly, List<IExcexExCommand>> nodesInfo;
-            nodesInfo = new Dictionary<AddinManagerAssembly, List<IExcexExCommand>>(new AssemblyComparer());
+            Dictionary<AddinManagerAssembly, List<IExcelExCommand>> nodesInfo;
+            nodesInfo = new Dictionary<AddinManagerAssembly, List<IExcelExCommand>>(new AssemblyComparer());
             //
             if (amInfos != null)
             {
@@ -49,7 +49,7 @@ namespace eZx.AddinManager
                     if (File.Exists(assemblyPath))
                     {
                         // 将每一个程序集中的外部命令提取出来
-                        List<IExcexExCommand> m = ExCommandFinder.RetriveExternalCommandsFromAssembly(assemblyPath);
+                        List<IExcelExCommand> m = ExCommandFinder.RetriveExternalCommandsFromAssembly(assemblyPath);
                         if (m.Any())
                         {
                             Assembly ass = m[0].GetType().Assembly;
@@ -75,7 +75,7 @@ namespace eZx.AddinManager
         #region ---   序列化到文件
 
         public static void SaveAssemblyInfosToSettings(
-            Dictionary<AddinManagerAssembly, List<IExcexExCommand>> nodesInfo)
+            Dictionary<AddinManagerAssembly, List<IExcelExCommand>> nodesInfo)
         {
             // 转换为可序列化的数据
             List<string> assemblyPaths = nodesInfo.Select(r => r.Key.Path).ToList();
