@@ -11,7 +11,7 @@ namespace eZx.AddinManager
 {
     internal static class ExCommandExecutor
     {
-        private static IExcexExCommand _currentExternalCommand;
+        private static IExcelExCommand _currentExternalCommand;
         private static string _currentExternalCommandAssemblyPath;
 
         /// <summary> 执行当前（即上次执行过的那个）外部命令 </summary>
@@ -29,7 +29,7 @@ namespace eZx.AddinManager
         /// <param name="externalCommand">此命令必须是实现了 IExternalCommand.Execute </param>
         /// <param name="excelApp">作为Execute()方法的输入参数的对象，表示当前的Excel Application </param>
         /// <remarks>出于调试的即时更新的考虑，这里在每一次调试外部命令时，都对最新的dll进行重新加载。</remarks>
-        public static void InvokeExternalCommand(string assemblyPath, IExcexExCommand externalCommand, Application excelApp)
+        public static void InvokeExternalCommand(string assemblyPath, IExcelExCommand externalCommand, Application excelApp)
         {
 
             ExCommandExecutor.RunActiveCommand(externalCommand, assemblyPath, excelApp);
@@ -125,7 +125,7 @@ namespace eZx.AddinManager
         /// 这里只能用来提取其 FullName 字符串，而不能直接用来执行， 因为虽然它确实可以执行，但是执行的是重新编译前的那个方法。</param>
         /// <param name="assemblyPath"></param>
         /// <param name="excelApp"></param>
-        private static ExternalCommandResult RunActiveCommand(IExcexExCommand addinItem, string assemblyPath, Application excelApp)
+        private static ExternalCommandResult RunActiveCommand(IExcelExCommand addinItem, string assemblyPath, Application excelApp)
         {
             string errorMessage = "";
             Range errorRange = null;
@@ -135,7 +135,11 @@ namespace eZx.AddinManager
             try
             {
                 assemLoader.HookAssemblyResolve();
-                // 重新加载最新的程序集
+
+                // 重新加载最新的程序集。注意这里只加载了选择了程序集A本身，而没有加载其所引用的程序集。
+                // 此 程序集A 所引用的自定义 程序集B 由上面的 HookAssemblyResolve 方法自动来实现；
+                // 但是，当所选择的 Execute 方法中没有使用到程序集B 中的方法时，程序集B 就不会被加载；
+                // 这就是为什么 程序集A 中所有引用的 zengfy 自定义程序集B，都必须在  Execute() 方法中调用至少一次，以解决在Form.Show()时，出现不能找到或加载前面缺失的程序集B的问题。
                 Assembly assembly = assemLoader.LoadAddinsToTempFolder(assemblyPath, false);
                 if (null == assembly)
                 {
@@ -146,7 +150,7 @@ namespace eZx.AddinManager
                 {
                     // !!  注意这里的 addinItem 实例是刷新前的程序集中对应的类，这里只能用来提取其 FullName 字符串，而不能直接用来执行，因为虽然它确实可以执行，但是执行的是重新编译前的那个方法。
                     // !!  这里一定要从最新加载进来的程序集中重新创建对应的外部命令插件
-                    IExcexExCommand newExCommand = assembly.CreateInstance(addinItem.GetType().FullName) as IExcexExCommand;
+                    IExcelExCommand newExCommand = assembly.CreateInstance(addinItem.GetType().FullName) as IExcelExCommand;
 
                     if (newExCommand == null)
                     {
@@ -155,7 +159,7 @@ namespace eZx.AddinManager
                     }
                     else
                     {
-                        result = Execute(newExCommand, excelApp, ref errorMessage, ref errorRange);
+                        result = Execute(newExCommand, excelApp, ref errorMessage, ref errorRange);// 如果在 Execute() 中发现某个程序集不存在，则通过AssemblyResolve 事件手动进行加载
                     }
                 }
             }
@@ -170,15 +174,18 @@ namespace eZx.AddinManager
             }
             return result;
         }
-
-
-        private static ExternalCommandResult Execute(IExcexExCommand exCommand, Application excelApp, ref string errorMessage,
+        
+        private static ExternalCommandResult Execute(IExcelExCommand exCommand, Application excelApp, ref string errorMessage,
             ref Range errorRange)
         {
             ExternalCommandResult res = ExternalCommandResult.Failed;
             try
             {
                 // 执行操作
+                // 如果在执行 Execute()方法时发现某个程序集不存在，则通过AssemblyResolve 事件手动进行加载
+                // 所以，所有引用的 zengfy 自定义程序集，都必须在  Execute() 方法中调用至少一次，以解决在Form.Show()时，出现不能找到或加载前面缺失的程序集B的问题。
+
+                // 如果不想通过 AssemblyResolve 来加载缺失的程序集的话，可以在 AddinManager 中自行设计代码，手动在 Execute() 方法之前将要引用的程序集从临时文件夹中通过 Assembly.LoadFile() 进行加载即可。
                 res = exCommand.Execute(excelApp: excelApp, errorMessage: ref errorMessage, errorRange: ref errorRange);
             }
             catch (Exception ex)

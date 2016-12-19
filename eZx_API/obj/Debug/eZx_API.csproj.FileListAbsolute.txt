@@ -17,3 +17,11 @@ E:\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.Properties.Resources.resour
 E:\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.csproj.GenerateResource.Cache
 E:\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.dll
 E:\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.pdb
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZx_API\obj\Debug\eZx_API.csprojResolveAssemblyReference.cache
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZx_API\obj\Debug\eZx_API.Properties.Resources.resources
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZx_API\obj\Debug\eZx_API.csproj.GenerateResource.Cache
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZx_API\obj\Debug\eZx_API.dll
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZx_API\obj\Debug\eZx_API.pdb
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\bin\eZx_API.dll
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\bin\eZx_API.pdb
+C:\Users\zengfy\Desktop\Dormitory\eZOffice\bin\eZexcelAPI.xml

@@ -3158,6 +3158,82 @@
         <member name="M:eZstd.Data.XmlListTest`1.Clone">
             <summary> 将内部维护的集合进行复制 </summary>
         </member>
+        <member name="T:eZstd.Enumerable.EnumUtility">
+            <summary>
+            与集合相关的一些基本操作函数，比如数组的加减乘除等
+            </summary>
+        </member>
+        <member name="T:eZstd.Enumerable.ArrayConstructor">
+            <summary> 通过不同的方式构造数组 </summary>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.FromRangeAri(System.Double,System.Double,System.UInt32)">
+            <summary>
+            返回均匀分布的等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <param name="count">返回的数组中的元素个数，其值至少为1</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.FromRangeAri(System.Double,System.Double,System.Double)">
+            <summary>
+            返回均匀分布的等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
+            </summary>
+            <param name="start">返回的数组中必定包含这个值</param>
+            <param name="end">返回的数组中的最后一个元素的值必定小于等于此参数的值</param>
+            <param name="step"> step的值不能太小，避免导致数组元素过多</param>
+            <returns>返回的数组中的最后一个元素的值必定小于等于<paramref name="end" />的值</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.FromRangeAri(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            返回均匀分布的“整数”等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
+            </summary>
+            <param name="start">返回的数组中必定包含这个值</param>
+            <param name="end">返回的数组中的最后一个元素的值必定小于等于此参数的值</param>
+            <param name="step"> step的值不能太小，避免导致数组元素过多</param>
+            <returns>返回的数组中的最后一个元素的值必定小于等于<paramref name="end" />的值</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.FromStepAri(System.Double,System.UInt32,System.Double)">
+            <summary>
+            返回均匀分布的等差序列（Arithmetical series）
+            </summary>
+            <param name="start"></param>
+            <param name="step"> </param>
+            <param name="count">数组中的元素个数</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.FromStepGeo(System.Double,System.UInt32,System.Double)">
+            <summary>
+            返回等比序列（Geometric series），数组中的元素值不会跳出[start,end]闭区间。
+            </summary>
+            <param name="start"></param>
+            <param name="count"> </param>
+            <param name="bias">每一个元素值是上一个元素值的 bias 倍</param>
+            <returns></returns>
+            <remarks>等比数列的通项公式是：An=A1*q^(n-1)</remarks>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.GetRow``1(``0[0:,0:],System.Int32)">
+            <summary> 从二维数组中提取一行向量 </summary>
+            <param name="source"></param>
+            <param name="rowIndex">第一行的下标为0</param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.GetColumn``1(``0[0:,0:],System.Int32)">
+            <summary> 从二维数组中提取一列向量 </summary>
+            <param name="source"></param>
+            <param name="colIndex">第一列的下标为0</param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:eZstd.Enumerable.ArrayConstructor.DistributeMode.Linear">
+            <summary>
+            线性均匀分布
+            </summary>
+        </member>
+        <member name="F:eZstd.Enumerable.ArrayConstructor.DistributeMode.Exponential">
+            <summary>
+            指数分布
+            </summary>
+        </member>
         <member name="M:eZstd.MarshalReflection.AssemblyHelper.DynamicDebugClass(System.String,System.String,System.Object[])">
             <summary>
             将一个程序集插件进行动态加载，并可以在不关闭主程序的情况下进行调试。
@@ -3357,68 +3433,9 @@
               gr.Transform = mY;  // 将变换应用到绘图面板中
             </remarks>
         </member>
-        <member name="T:eZstd.Mathematics.ArrayConstructor">
-            <summary> 通过不同的方式构造数组 </summary>
-        </member>
-        <member name="M:eZstd.Mathematics.ArrayConstructor.FromRangeAri(System.Double,System.Double,System.UInt32)">
-            <summary>
-            返回均匀分布的等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
-            </summary>
-            <param name="start"></param>
-            <param name="end"></param>
-            <param name="count">返回的数组中的元素个数，其值至少为1</param>
-            <returns></returns>
-        </member>
-        <member name="M:eZstd.Mathematics.ArrayConstructor.FromRangeAri(System.Double,System.Double,System.Double)">
-            <summary>
-            返回均匀分布的等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
-            </summary>
-            <param name="start">返回的数组中必定包含这个值</param>
-            <param name="end">返回的数组中的最后一个元素的值必定小于等于此参数的值</param>
-            <param name="step"> step的值不能太小，避免导致数组元素过多</param>
-            <returns>返回的数组中的最后一个元素的值必定小于等于<paramref name="end" />的值</returns>
-        </member>
-        <member name="M:eZstd.Mathematics.ArrayConstructor.FromRangeAri(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            返回均匀分布的“整数”等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
-            </summary>
-            <param name="start">返回的数组中必定包含这个值</param>
-            <param name="end">返回的数组中的最后一个元素的值必定小于等于此参数的值</param>
-            <param name="step"> step的值不能太小，避免导致数组元素过多</param>
-            <returns>返回的数组中的最后一个元素的值必定小于等于<paramref name="end" />的值</returns>
-        </member>
-        <member name="M:eZstd.Mathematics.ArrayConstructor.FromStepAri(System.Double,System.UInt32,System.Double)">
-            <summary>
-            返回均匀分布的等差序列（Arithmetical series）
-            </summary>
-            <param name="start"></param>
-            <param name="step"> </param>
-            <param name="count">数组中的元素个数</param>
-            <returns></returns>
-        </member>
-        <member name="M:eZstd.Mathematics.ArrayConstructor.FromStepGeo(System.Double,System.UInt32,System.Double)">
-            <summary>
-            返回等比序列（Geometric series），数组中的元素值不会跳出[start,end]闭区间。
-            </summary>
-            <param name="start"></param>
-            <param name="count"> </param>
-            <param name="bias">每一个元素值是上一个元素值的 bias 倍</param>
-            <returns></returns>
-            <remarks>等比数列的通项公式是：An=A1*q^(n-1)</remarks>
-        </member>
-        <member name="F:eZstd.Mathematics.ArrayConstructor.DistributeMode.Linear">
-            <summary>
-            线性均匀分布
-            </summary>
-        </member>
-        <member name="F:eZstd.Mathematics.ArrayConstructor.DistributeMode.Exponential">
-            <summary>
-            指数分布
-            </summary>
-        </member>
         <member name="T:eZstd.Mathematics.SpeedMode">
             <summary>
-            
+            根据不同的算法进行密集点位曲线的数据点收缩
             </summary>
         </member>
         <member name="F:eZstd.Mathematics.SpeedMode._xValues">
@@ -3432,6 +3449,9 @@
         </member>
         <member name="P:eZstd.Mathematics.SpeedMode.Result">
             <summary> 缩减后的结果 </summary>
+        </member>
+        <member name="P:eZstd.Mathematics.SpeedMode.ErrorMessage">
+            <summary> 缩减出错的报错信息 </summary>
         </member>
         <member name="P:eZstd.Mathematics.SpeedMode.FilteredIds">
             <summary> 在执行Shrink后，剩下来的点在初始数组中的下标 </summary>
@@ -3452,11 +3472,29 @@
             <param name="count">计划要缩减到的目标个数</param>
             <remarks>不考虑数组中元素的值，只根据每个元素的下标进行平均化的缩减</remarks>
         </member>
+        <member name="M:eZstd.Mathematics.SpeedMode.ShrinkByXAxis(System.Int32)">
+            <summary> 考虑X坐标的分布，根据所占X轴的区间的分段数来进行缩减，缩减后的数组中的元素个数不大于 <paramref name="segments" />+1。 </summary>
+            <param name="segments"> 将整条曲线所占的X轴区间分割为 segments 段，所以其值至少为1，且无上限。 </param>
+            <remarks>
+            此收缩方法适用于数据对象随X轴增加的变化不大的情况。
+            比如基坑监测中每一天的位移。
+            </remarks>
+        </member>
+        <member name="M:eZstd.Mathematics.SpeedMode.PickOneByXAxis(System.Int32,System.Int32)">
+            <summary> 从递增的局部序列中选出一个点来 </summary>
+            <param name="startIndex">局部序列的起始下标</param>
+            <param name="endIndex">局部序列的终止下标</param>
+            <returns>选出来的那一个点在整个曲线集合中的下标</returns>
+        </member>
         <member name="M:eZstd.Mathematics.SpeedMode.CheckCount(System.Int32)">
             <summary> 对新的点数进行检测，以排除一些特殊的情况。如果返回的值为true，则还要继续缩减，此时的count值的范围为 [3,<see cref="P:eZstd.Mathematics.SpeedMode.Length"/>)。 </summary>
             <param name="count"></param>
             <returns>如果为 false，则表示不用再继续讨论如何缩减了。
             如果为true，则还需要继续计算，此时的count值的范围为 [3,<see cref="P:eZstd.Mathematics.SpeedMode.Length"/>) </returns>
+        </member>
+        <member name="M:eZstd.Mathematics.SpeedMode.CheckXTrend(System.Double[])">
+            <summary> 检查X序列的值的单调性 </summary>
+            <param name="xValues"></param>
         </member>
         <member name="T:eZstd.Mathematics.SpeedMode.ShrinkResult">
             <summary> 进行缩减计算后的结果 </summary>
@@ -3470,8 +3508,26 @@
         <member name="F:eZstd.Mathematics.SpeedMode.ShrinkResult.Succeed">
             <summary> 计算完成 </summary>
         </member>
+        <member name="F:eZstd.Mathematics.SpeedMode.ShrinkResult.Failed">
+            <summary> 缩减计算失败，但是不给出具体的出错原因 </summary>
+        </member>
         <member name="F:eZstd.Mathematics.SpeedMode.ShrinkResult.NewCountOutOfRange">
             <summary> 指定的缩减值在[1,<see cref="P:eZstd.Mathematics.SpeedMode.Length"/>]之外 </summary>
+        </member>
+        <member name="F:eZstd.Mathematics.SpeedMode.ShrinkResult.XNonMonotonic">
+            <summary> X 序列的值非单调 </summary>
+        </member>
+        <member name="T:eZstd.Mathematics.SpeedMode.CurveShape">
+            <summary> 曲线的大致形状 </summary>
+        </member>
+        <member name="F:eZstd.Mathematics.SpeedMode.CurveShape.XNonMonotonic">
+            <summary> X轴的值不是单调递增或单调递减 </summary>
+        </member>
+        <member name="F:eZstd.Mathematics.SpeedMode.CurveShape.XAscend">
+            <summary> X轴的值依次增加，也包括相邻的值相等的情况 </summary>
+        </member>
+        <member name="F:eZstd.Mathematics.SpeedMode.CurveShape.XDescend">
+            <summary> X轴的值依次减小，也包括相邻的值相等的情况 </summary>
         </member>
         <member name="F:eZstd.Test.Form1.components">
             <summary>
@@ -4519,6 +4575,9 @@
             <summary> 计算空间两个点的距离 </summary>
             <returns></returns>
         </member>
+        <member name="M:eZstd.Geometry.XY.GetLength">
+            <summary> 平面向量的长度 </summary>
+        </member>
         <member name="M:eZstd.Geometry.XY.IsAlmostEqualTo(eZstd.Geometry.XY)">
             <summary>
             比较两个点是否重合（容差为整个系统的容差 AngleTolerance）
@@ -5051,6 +5110,36 @@
         <member name="M:DllActivator.DllActivator_std.ActivateReferences">
             <summary>
             激活本DLL所引用的那些DLLs
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
             </summary>
         </member>
     </members>

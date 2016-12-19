@@ -53,6 +53,7 @@
             this.btnShrink = this.Factory.CreateRibbonButton();
             this.btnReshape = this.Factory.CreateRibbonButton();
             this.ButtonTranspose = this.Factory.CreateRibbonButton();
+            this.button_SpeedMode = this.Factory.CreateRibbonButton();
             this.Group3 = this.Factory.CreateRibbonGroup();
             this.EditBox_p1 = this.Factory.CreateRibbonEditBox();
             this.EditBox_p2 = this.Factory.CreateRibbonEditBox();
@@ -171,6 +172,7 @@
             this.Group2.Items.Add(this.btnShrink);
             this.Group2.Items.Add(this.btnReshape);
             this.Group2.Items.Add(this.ButtonTranspose);
+            this.Group2.Items.Add(this.button_SpeedMode);
             this.Group2.Label = "数据处理";
             this.Group2.Name = "Group2";
             // 
@@ -241,6 +243,15 @@
             this.ButtonTranspose.ShowImage = true;
             this.ButtonTranspose.SuperTip = "此命令可以将用户同时选择的多个不相交的小区域分别进行原位转置。";
             this.ButtonTranspose.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ButtonTranspose_Click);
+            // 
+            // button_SpeedMode
+            // 
+            this.button_SpeedMode.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.button_SpeedMode.Label = "缩减";
+            this.button_SpeedMode.Name = "button_SpeedMode";
+            this.button_SpeedMode.OfficeImageId = "ChartTrendline";
+            this.button_SpeedMode.ShowImage = true;
+            this.button_SpeedMode.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button_SpeedMode_Click);
             // 
             // Group3
             // 
@@ -376,6 +387,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ButtonTest;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ButtonValue;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ButtonTranspose;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button_SpeedMode;
     }
 
     partial class ThisRibbonCollection

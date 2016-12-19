@@ -29,8 +29,10 @@ namespace eZvso.CurveMaker
                 Flags: (short)VisDrawSplineFlags.visSplinePeriodic);
         }
 
+
+
         /// <summary>
-        /// 绘制一般的样条曲线
+        /// 绘制多段线折线
         /// </summary>
         /// <param name="vsoPage"></param>
         /// <param name="points"></param>

@@ -16,7 +16,7 @@
         </member>
         <member name="M:eZvso.CurveMaker.Drawer.DrawPolylineOnPage(Microsoft.Office.Interop.Visio.Page,System.Collections.Generic.List{eZvso.CurveMaker.LocationPoint})">
             <summary>
-            绘制一般的样条曲线
+            绘制多段线折线
             </summary>
             <param name="vsoPage"></param>
             <param name="points"></param>

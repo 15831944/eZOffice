@@ -45,39 +45,39 @@ namespace eZx_API.Entities
         }
 
         /// <summary>
-        /// 收缩Range.Areas.Item(1)的单元格范围。
-        /// 在选择一个单元格范围时，有时为了界面操作简单，往往会选择一整列或者一整行，但是并不是要对基本所有的单元格进行操作，
-        /// 而只需要操作其中有数据的那些区域。此函数即是将选择的整行或者整列的单元格收缩到 UsedRange 范围内。
+        /// 收缩Range.Areas.Item(1)的单元格范围到 UsedRange 范围内。
         /// </summary>
         /// <param name="rg">此函数只考虑 rg 所对应的行或列的数量，并不会对 rg 中的单元格的值是否为空进行判断。</param>
-        /// <remarks></remarks>
+        /// <remarks> 
+        /// 在选择一个单元格范围时，有时为了界面操作简单，往往会选择一整列或者一整行，但是并不是要对基本所有的单元格进行操作，
+        /// 而只需要操作其中有数据的那些区域。此函数即是将选择的整行或者整列的单元格收缩到 UsedRange 范围内。
+        /// </remarks>
         public static Range Ex_ShrinkeRange(this Range rg)
         {
             rg = rg.Areas[1];
-            int ColCount = rg.Columns.Count;
-            int RowCount = rg.Rows.Count;
+            int colCount = rg.Columns.Count;
+            int rowCount = rg.Rows.Count;
             //
-            Range BottomRightCell = rg.Ex_CornerCell(CornerIndex.BottomRight);
-            Range UsedBottomRightCell = rg.Worksheet.UsedRange.Ex_CornerCell(CornerIndex.BottomRight);
+            Range bottomRightCell = rg.Ex_CornerCell(CornerIndex.BottomRight);
+            Range usedBottomRightCell = rg.Worksheet.UsedRange.Ex_CornerCell(CornerIndex.BottomRight);
 
             //  将最下面的单元格收缩到UsedRange的最下面的位置
-            if (RowCount == MaxmumRowInExcel && ColCount == MaxmumColumnInExcel) // 说明选择了整个表格
+            if (rowCount == MaxmumRowInExcel && colCount == MaxmumColumnInExcel) // 说明选择了整个表格
             {
-                BottomRightCell = UsedBottomRightCell;
+                bottomRightCell = usedBottomRightCell;
             }
-            else if (RowCount == MaxmumRowInExcel && ColCount < MaxmumColumnInExcel) // 说明选择了整列
+            else if (rowCount == MaxmumRowInExcel && colCount < MaxmumColumnInExcel) // 说明选择了整列
             {
-                BottomRightCell = BottomRightCell.Offset[UsedBottomRightCell.Row - MaxmumRowInExcel, 0];
+                bottomRightCell = bottomRightCell.Offset[usedBottomRightCell.Row - MaxmumRowInExcel, 0];
             }
-            else if (RowCount < MaxmumRowInExcel && ColCount == MaxmumColumnInExcel) // 说明选择了整行
+            else if (rowCount < MaxmumRowInExcel && colCount == MaxmumColumnInExcel) // 说明选择了整行
             {
-                BottomRightCell = BottomRightCell.Offset[0, UsedBottomRightCell.Column - MaxmumColumnInExcel];
+                bottomRightCell = bottomRightCell.Offset[0, usedBottomRightCell.Column - MaxmumColumnInExcel];
                 // Else  ' 说明选择了一个有限的范围
             }
-            return rg.Worksheet.Range[rg.Cells[1, 1], BottomRightCell];
+            return rg.Worksheet.Range[rg.Cells[1, 1], bottomRightCell];
         }
-
-
+        
         /// <summary>
         /// 收缩任意一行或者一列，使其最后一个单元格的值不为空
         /// </summary>

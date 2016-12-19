@@ -146,6 +146,24 @@
             <param name="filePath">程序集的文件路径</param>
             <returns></returns>
         </member>
+        <member name="M:eZx.AddinManager.AssemLoader.HookAssemblyResolve">
+            <summary>
+            AssemblyResolve事件在.Net对程序集的解析失败时触发，返回一个Assembly对象。
+            因此，我们只要在这个事件的处理程序里手动加载对应目录的dll，并把对应dll的Assembly对象返回， .Net就能正确加载对应的dll了。
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZx.AddinManager.AssemLoader.CurrentDomain_AssemblyResolve(System.Object,System.ResolveEventArgs)">
+            <summary> 在 Execute() 方法中将不能引用到的程序集进行手动加载 </summary>
+            <param name="sender"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZx.AddinManager.AssemLoader.SearchAssemblyFileInTempFolder(System.String)">
+            <summary> 在临时文件夹中根据程序集名搜索对应的文件：对应于引用时 Copy Local 设置为 true 的程序集 </summary>
+            <param name="assemName"></param>
+            <returns></returns>
+        </member>
         <member name="M:eZx.AddinManager.AssemLoader.IsRevitAPIReferenced(System.Reflection.Assembly)">
             <summary>
             检查 RevitAPI.dll 是否被引用
@@ -188,7 +206,7 @@
         <member name="P:eZx.AddinManager.form_AddinManager.NodesInfo">
             <summary> 与 TreeView 同步的节点数据 </summary>
         </member>
-        <member name="M:eZx.AddinManager.form_AddinManager.AddMethodsInOneAssembly(System.String,System.Collections.Generic.List{eZx.AddinManager.IExcexExCommand})">
+        <member name="M:eZx.AddinManager.form_AddinManager.AddMethodsInOneAssembly(System.String,System.Collections.Generic.List{eZx.AddinManager.IExcelExCommand})">
             <summary> 将从一个 Assembly 中加载进来的所有有效的外部命令同步到 _nodesInfo 中 </summary>
             <param name="methods"></param>
         </member>
@@ -294,7 +312,7 @@
             <summary> 执行当前（即上次执行过的那个）外部命令 </summary>
             <param name="excelApp">作为Execute()方法的输入参数的对象，表示当前的Excel Application </param>
         </member>
-        <member name="M:eZx.AddinManager.ExCommandExecutor.InvokeExternalCommand(System.String,eZx.AddinManager.IExcexExCommand,Microsoft.Office.Interop.Excel.Application)">
+        <member name="M:eZx.AddinManager.ExCommandExecutor.InvokeExternalCommand(System.String,eZx.AddinManager.IExcelExCommand,Microsoft.Office.Interop.Excel.Application)">
             <summary> 执行 CAD 的外部命令 </summary>
             <param name="assemblyPath">外部命令所对应的dll的绝对路径</param>
             <param name="externalCommand">此命令必须是实现了 IExternalCommand.Execute </param>
@@ -305,7 +323,7 @@
             <summary> 执行 Excel 的外部命令 </summary>
             <param name="externalCommandMethod">此命令必须是实现了 IExternalCommand.Execute </param>
         </member>
-        <member name="M:eZx.AddinManager.ExCommandExecutor.RunActiveCommand(eZx.AddinManager.IExcexExCommand,System.String,Microsoft.Office.Interop.Excel.Application)">
+        <member name="M:eZx.AddinManager.ExCommandExecutor.RunActiveCommand(eZx.AddinManager.IExcelExCommand,System.String,Microsoft.Office.Interop.Excel.Application)">
             <summary> 执行外部命令 </summary>
             <param name="addinItem">注意这里的 addinItem 实例是刷新前的程序集中对应的类，
             这里只能用来提取其 FullName 字符串，而不能直接用来执行， 因为虽然它确实可以执行，但是执行的是重新编译前的那个方法。</param>
@@ -323,10 +341,11 @@
             <param name="assemblyPath"></param>
             <returns></returns>
         </member>
-        <member name="T:eZx.AddinManager.IExcexExCommand">
-            <summary> 用来进行AddinManager快速调试的接口。实现此接口的类必须有一个无参数的构造函数 </summary>
+        <member name="T:eZx.AddinManager.IExcelExCommand">
+            <summary> 用来进行AddinManager快速调试的接口。实现此接口的类必须有一个无参数的构造函数。
+            另外，推荐实现此接口的类所在程序集中也设计一个实现 IDllActivator_std 接口的类。 </summary>
         </member>
-        <member name="M:eZx.AddinManager.IExcexExCommand.Execute(Microsoft.Office.Interop.Excel.Application,System.String@,Microsoft.Office.Interop.Excel.Range@)">
+        <member name="M:eZx.AddinManager.IExcelExCommand.Execute(Microsoft.Office.Interop.Excel.Application,System.String@,Microsoft.Office.Interop.Excel.Range@)">
             <summary> Excel AddinManger 快速调试插件 </summary>
             <param name="excelApp">Excel当前程序</param>
             <param name="errorMessage">当返回值为<see cref="F:eZx.AddinManager.ExternalCommandResult.Failed"/>时，这个属性代表给出的报错信息。</param>

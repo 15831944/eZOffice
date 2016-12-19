@@ -341,6 +341,73 @@
             <summary> 提取图表中的数据 </summary>
             <remarks></remarks>
         </member>
+        <member name="F:eZx.RibbonHandler.FormSpeedModeHandler._srcX">
+            <summary> 数据源中的X数据 </summary>
+        </member>
+        <member name="F:eZx.RibbonHandler.FormSpeedModeHandler._srcY">
+            <summary> 数据源中的Y数据 </summary>
+        </member>
+        <member name="F:eZx.RibbonHandler.FormSpeedModeHandler._srcD">
+            <summary> 要将缩减后的数据放置在哪里，此属性中只包含一个单元格，表示整个缩减后的曲线的左上角单元格 </summary>
+        </member>
+        <member name="M:eZx.RibbonHandler.FormSpeedModeHandler.GetUniqueInstance(Microsoft.Office.Interop.Excel.Application)">
+            <summary> 获取全局唯一窗口实例 </summary>
+        </member>
+        <member name="M:eZx.RibbonHandler.FormSpeedModeHandler.button_Datasource_Click(System.Object,System.EventArgs)">
+            <summary> 选择数据源或者目标数据的单元格 </summary>
+            <param name="sender"><see cref="T:System.Windows.Forms.Button"/>对象</param>
+        </member>
+        <member name="M:eZx.RibbonHandler.FormSpeedModeHandler.SeperateXY(Microsoft.Office.Interop.Excel.Range,Microsoft.Office.Interop.Excel.Range@,Microsoft.Office.Interop.Excel.Range@)">
+            <summary>
+            将选择的XY数据源拆分为X与Y
+            </summary>
+            <param name="sourceRange"></param>
+            <param name="sourceX"></param>
+            <param name="sourceY"></param>
+            <returns>如果拆解成功，则返回true</returns>
+        </member>
+        <member name="F:eZx.RibbonHandler.FormSpeedModeHandler.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:eZx.RibbonHandler.FormSpeedModeHandler.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:eZx.RibbonHandler.FormSpeedModeHandler.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:eZx.RibbonHandler.SpeedModeHandler.ShrinkByPointCount(Microsoft.Office.Interop.Excel.Range,Microsoft.Office.Interop.Excel.Range,System.Int32,Microsoft.Office.Interop.Excel.Range)">
+            <summary>
+            以只考虑数据点个数的方式进行缩减
+            </summary>
+            <param name="srcX">数据源中的X数据</param>
+            <param name="srcY">数据源中的Y数据</param>
+            <param name="newCount">缩减后的新数据点个数</param>
+            <param name="srcD">要将缩减后的数据放置在哪里，此属性中只包含一个单元格，表示整个缩减后的曲线的左上角单元格</param>
+        </member>
+        <member name="M:eZx.RibbonHandler.SpeedModeHandler.ShrinkByXRange(Microsoft.Office.Interop.Excel.Range,Microsoft.Office.Interop.Excel.Range,System.Int32,Microsoft.Office.Interop.Excel.Range)">
+            <summary>
+            以只考虑曲线的X轴数据区间的分段的方式进行缩减
+            </summary>
+            <param name="srcX">数据源中的X数据</param>
+            <param name="srcY">数据源中的Y数据</param>
+            <param name="xSeg">要将X轴所占区间分为多少段</param>
+            <param name="srcD">要将缩减后的数据放置在哪里，此属性中只包含一个单元格，表示整个缩减后的曲线的左上角单元格</param>
+        </member>
+        <member name="M:eZx.RibbonHandler.SpeedModeHandler.GetColumnData(Microsoft.Office.Interop.Excel.Range)">
+            <summary>
+            提取一列数据中有效的数值或者时间数据
+            </summary>
+            <param name="columnOrRow">一列或者一行</param>
+            <returns></returns>
+        </member>
         <member name="T:eZx.ThisRibbonCollection">
             
         </member>
@@ -409,6 +476,14 @@
         </member>
         <member name="M:eZx.Globals.#ctor">
             
+        </member>
+        <member name="T:DllActivator.DllActivator_eZx">
+            <summary> 用于 AddinManager 中调试 dll 时将引用的程序集加载到进程中 </summary>
+        </member>
+        <member name="M:DllActivator.DllActivator_eZx.ActivateReferences">
+            <summary>
+            激活本DLL所引用的那些DLLs
+            </summary>
         </member>
     </members>
 </doc>
