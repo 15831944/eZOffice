@@ -190,7 +190,7 @@
     <Compile Include="AssemblyInfo\StringSerializer.cs" />
     <Compile Include="ExternalCommand\ExCommandExecutor.cs" />
     <Compile Include="ExternalCommand\ExCommandFinder.cs" />
-    <Compile Include="ExternalCommand\IExcexExCommand.cs" />
+    <Compile Include="ExternalCommand\IExcelExCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

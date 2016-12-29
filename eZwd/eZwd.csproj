@@ -107,6 +107,10 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="eZstd, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\eZstd\bin\eZstd.dll</HintPath>
+    </Reference>
     <Reference Include="eZwd_AddinManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\eZwd_AddinManager\bin\Debug\eZwd_AddinManager.dll</HintPath>
@@ -171,7 +175,7 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="Debug\EcTest.cs" />
+    <Compile Include="Debug\Ec_ShowRangeStart.cs" />
     <Compile Include="Debug\Ec_RangeIndex.cs" />
     <Compile Include="RibbonHandlers\StaticFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

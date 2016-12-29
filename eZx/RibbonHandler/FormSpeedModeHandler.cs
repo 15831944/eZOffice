@@ -61,6 +61,7 @@ namespace eZx.RibbonHandler
 
         private void button_Cancel_Click(object sender, EventArgs e)
         {
+
             Close();
         }
 
@@ -70,7 +71,7 @@ namespace eZx.RibbonHandler
             {
                 if (radioButton_PointCount.Checked)
                 {
-                    int newCount = (int)textBoxNum_PointsSegments.ValueNumber;
+                    int newCount = (int)numericUpDown_PointsSegments.Value;
                     if (_srcX != null && _srcY != null && _srcD != null)
                     {
                         SpeedModeHandler.ShrinkByPointCount(_srcX, _srcY, newCount, _srcD);
@@ -78,7 +79,7 @@ namespace eZx.RibbonHandler
                 }
                 else if (radioButton_XSegment.Checked)
                 {
-                    int xSeg = (int)textBoxNum_PointsSegments.ValueNumber;
+                    int xSeg = (int)numericUpDown_PointsSegments.Value;
                     if (_srcX != null && _srcY != null && _srcD != null)
                     {
                         SpeedModeHandler.ShrinkByXRange(_srcX, _srcY, xSeg, _srcD);

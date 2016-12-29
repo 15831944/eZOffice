@@ -2816,6 +2816,11 @@
             <returns>一个OleDataBase的Connection连接，此连接还没有Open。</returns>
             <remarks></remarks>
         </member>
+        <member name="M:eZstd.Data.ExcelDbHelper.OpenConnection(System.Data.OleDb.OleDbConnection)">
+            <summary> 打开 Excel 数据库 </summary>
+            <param name="excelConnection"></param>
+            <returns>如果打开成功，则返回 true</returns>
+        </member>
         <member name="M:eZstd.Data.ExcelDbHelper.IsExcelDataSource(System.String)">
             <summary>
             验证连接的数据源是否是Excel数据库
@@ -3158,9 +3163,254 @@
         <member name="M:eZstd.Data.XmlListTest`1.Clone">
             <summary> 将内部维护的集合进行复制 </summary>
         </member>
+        <member name="T:eZstd.Drawing.HSLColor">
+            <summary>
+            RGB 与 HSL 颜色的相互转换。
+            转换算法参考： http://en.wikipedia.org/wiki/HSL_color_space。
+            </summary>
+        </member>
+        <member name="F:eZstd.Drawing.HSLColor._alpha">
+            <summary> 透明度 Alpha  </summary>
+        </member>
+        <member name="F:eZstd.Drawing.HSLColor._hue">
+            <summary> 色相，其值的范围为[0,360]   </summary>
+        </member>
+        <member name="P:eZstd.Drawing.HSLColor.Hue">
+            <summary> 色相，其值的范围为[0,360]  </summary>
+        </member>
+        <member name="F:eZstd.Drawing.HSLColor._saturation">
+            <summary> 饱和度，其值的范围为[0,1]   </summary>
+        </member>
+        <member name="P:eZstd.Drawing.HSLColor.Saturation">
+            <summary> 饱和度，其值的范围为[0,1]  </summary>
+        </member>
+        <member name="F:eZstd.Drawing.HSLColor._luminosity">
+            <summary> 亮度或明度，也译为 Lightness/Brightness，其值的范围为[0,1]   </summary>
+        </member>
+        <member name="P:eZstd.Drawing.HSLColor.Luminosity">
+            <summary> 亮度或明度，也译为 Lightness/Brightness，其值的范围为[0,1]   </summary>
+        </member>
+        <member name="P:eZstd.Drawing.HSLColor.Color">
+            <summary> 对应的 RGB 颜色 </summary>
+        </member>
+        <member name="M:eZstd.Drawing.HSLColor.#ctor(System.Drawing.Color)">
+            <summary>
+            用一个RGB颜色构造HSLColor。
+            </summary>
+            <param name="color"></param>
+        </member>
+        <member name="M:eZstd.Drawing.HSLColor.#ctor(System.Int32,System.Double,System.Double)">
+            <summary>
+            用色彩、饱和度、亮度 构造HSLColor。并检查每一个分量值的范围是否超出允许值。
+            </summary>
+            <param name="hue">色彩。</param>
+            <param name="saturation">饱和度。</param>
+            <param name="lightness">亮度。</param>
+        </member>
+        <member name="M:eZstd.Drawing.HSLColor.#ctor(System.Int32,System.Double,System.Double,System.Boolean)">
+            <summary>
+            用色彩、饱和度、亮度 构造HSLColor。但不检查每一个分量值的范围是否超出允许值。
+            </summary>
+            <param name="hue">色彩。</param>
+            <param name="saturation">饱和度。</param>
+            <param name="lightness">亮度。</param>
+            <param name="checkRange">不论此参数的值如何，都不会检查每一个分量值的范围是否超出允许值，如要检查，请用另一个构造函数</param>
+        </member>
+        <member name="M:eZstd.Drawing.HSLColor.FromRGB(System.Drawing.Color)">
+            <summary> 将 RGB 颜色转换为 HSL 颜色 </summary>
+            <param name="color"></param>
+        </member>
+        <member name="M:eZstd.Drawing.HSLColor.ToRGB">
+            <summary> 将 HSL 颜色转换为 RGB 颜色 </summary>
+        </member>
+        <member name="T:eZstd.Drawing.ColorUtils">
+            <summary>
+            对颜色进行处理
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZstd.Drawing.ColorUtils.ColorToValue(System.Drawing.Color)">
+            <summary>
+            将一个RGB颜色转换为对应的数值。
+            颜色的数值与RGB参量的换算关系为：Color属性值=R + 256*G + 256^2*B
+            </summary>
+            <param name="c"></param>
+            <returns>返回值为[0,16777215]之间的任意整数</returns>
+        </member>
+        <member name="M:eZstd.Drawing.ColorUtils.ValueToColor(System.Double)">
+            <summary>
+            将一个[0,16777215]之间的数值转换为对应的RGB颜色。
+            颜色的数值与RGB参量的换算关系为：Color属性值=R + 256*G + 256^2*B
+            </summary>
+            <param name="value">value的范围为[0,16777215]之间的任意数值</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Drawing.ColorUtils.ColorInterp(System.Double,System.Double,System.Double)">
+            <summary>
+            RGB 颜色插值
+            </summary>
+            <param name="c1">颜色1所对应的数值，其值为[0,16777215]之间的任意整数</param>
+            <param name="c2">颜色2所对应的数值，其值为[0,16777215]之间的任意整数</param>
+            <param name="x">x的值位于[0,1]的闭区间内，当其值为0时，它代表颜色c1，当其值为1时，它代表颜色c2</param>
+            <returns>插值后的RGB颜色所对应的数值</returns>
+            <remarks>颜色的数值与RGB参量的换算关系为：Color属性值=R + 256*G + 256^2*B</remarks>
+        </member>
+        <member name="M:eZstd.Drawing.ColorUtils.ColorInterp(System.Drawing.Color,System.Drawing.Color,System.Double)">
+            <summary>
+            RGB 颜色插值
+            </summary>
+            <param name="c1"></param>
+            <param name="c2"></param>
+            <param name="x">x的值位于[0,1]的闭区间内，当其值为0时，它代表颜色c1，当其值为1时，它代表颜色c2</param>
+            <returns>插值后的RGB颜色</returns>
+        </member>
+        <member name="M:eZstd.Drawing.ColorUtils.ClassicalExpand(System.Int32)">
+            <summary> 根据经典的有限元插值色系作为基准来进行颜色的插值扩展 </summary>
+            <param name="colorsCount">目标颜色集的个数</param>
+            <returns>数组中元素的个数为colorsCount </returns>
+        </member>
+        <member name="M:eZstd.Drawing.ColorUtils.ColorExpand(System.Drawing.Color[],System.Int32)">
+            <summary> 根据多个基准色平均插值出指定数量的渐变颜色集 </summary>
+            <param name="baseColors">用来进行插值的基准色</param>
+            <param name="colorsCount">目标颜色集的数量</param>
+            <returns>数组中元素的个数为colorsCount</returns>
+        </member>
+        <member name="T:eZstd.Drawing.DrawShapesTest">
+            <summary>
+            与 GDI+ 绘图相关的测试
+            </summary>
+        </member>
+        <member name="M:eZstd.Drawing.DrawShapesTest.MetafileCallback(System.Drawing.Imaging.EmfPlusRecordType,System.Int32,System.Int32,System.IntPtr,System.Drawing.Imaging.PlayRecordCallback)">
+            <summary>
+            Provides a callback method for the EnumerateMetafile method.
+            </summary>
+            <param name="recordType">Member of the EmfPlusRecordType enumeration that specifies the type of metafile record.</param>
+            <param name="flags">Set of flags that specify attributes of the record.</param>
+            <param name="dataSize">Number of bytes in the record data.</param>
+            <param name="data">Pointer to a buffer that contains the record data.</param>
+            <param name="callbackData">Not used.</param>
+            <returns></returns>
+        </member>
+        <member name="F:eZstd.Drawing.DrawShapesTest.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:eZstd.Drawing.DrawShapesTest.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:eZstd.Drawing.DrawShapesTest.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:eZstd.Drawing.TransformUtils.GetAxisTransform(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single@,System.Single@)">
+            <summary>
+            在单一轴上进行模型与屏幕之间的变换
+            </summary>
+            <param name="s1">屏幕上的端点1</param>
+            <param name="s2">屏幕上的端点2</param>
+            <param name="m1">s1 在模型中对应的端点1</param>
+            <param name="m2">s2 在模型中对应的端点2</param>
+            <param name="mp">模型中的任意一个点</param>
+            <param name="sp">模型中的点 mp 在屏幕中对应的位置点</param>
+            <param name="ratio">从模型到屏幕的缩放比例</param>
+            <remarks>
+            应用举例：
+            // 转换坐标系：对 Y 方向进行变换
+              float sp; float ratio;
+              GetAxisTransform(
+              s1: _daShaft.Top, s2: _daShaft.Top + _daShaft.Height,
+              m1: elevations.Max, m2: elevations.Min,
+              mp: 0f, sp: out sp, ratio: out ratio);
+            
+            // 将得到的结果应用到仿射矩阵中
+              Matrix mY = new Matrix();
+              mY.Translate(_daShaft.Left, sp);
+              mY.Scale(1, ratio);
+              gr.Transform = mY;  // 将变换应用到绘图面板中
+            </remarks>
+        </member>
+        <member name="T:eZstd.Enumerable.Array2D">
+            <summary>
+            一些二维数组所特有的操作。
+            注意，有很多集合的算法都可以通过 LINQ 语句来实现，如果可以，则推荐用 Linq。但是对于一些特殊的情况，比如二维数组的运算，则在此类中实现。
+            </summary>
+        </member>
+        <member name="F:eZstd.Enumerable.Array2D._arrayInt">
+            <summary> 如果<see cref="P:eZstd.Enumerable.Array2D.IsElementsInterger"/>，则此字段的值为对应的源二维数组。否则为 null </summary>
+        </member>
+        <member name="F:eZstd.Enumerable.Array2D._arraydbl">
+            <summary> 如果<see cref="P:eZstd.Enumerable.Array2D.IsElementsInterger"/>为false，则此字段的值为对应的源二维数组。否则为 null </summary>
+        </member>
+        <member name="P:eZstd.Enumerable.Array2D.Value">
+            <summary> 二维数组对象，即 double[,] 或 int[,] 对象。在外部可通过 as 进行类型转换，如 double[,] v = Value as double[,]; </summary>
+        </member>
+        <member name="P:eZstd.Enumerable.Array2D.ValueI">
+            <summary> 二维数组对象，即 double[,]。如果数据源为 int[,]，则会从其中提取出 double[,] ; </summary>
+        </member>
+        <member name="P:eZstd.Enumerable.Array2D.ValueD">
+            <summary> 二维数组对象，即 int[,]。如果数据源为 double[,]，则会从其中提取出 int[,] ; </summary>
+        </member>
+        <member name="P:eZstd.Enumerable.Array2D.IsElementsInterger">
+            <summary> 二维数组中的元素类型是否为整数。如果为true，则 Value 为 int[,]类型，否则 Value 为 double[,]类型。 </summary>
+        </member>
+        <member name="P:eZstd.Enumerable.Array2D.Rows">
+            <summary> 二维数组中的行数 </summary>
+        </member>
+        <member name="P:eZstd.Enumerable.Array2D.Columns">
+            <summary> 二维数组中的列数 </summary>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.Max(System.Boolean,System.Int32[]@)">
+            <summary> 求二维数组中每一行或者每一列的最大值 </summary>
+            <param name="rank"> true 表示输出每一行的最大值，false 表示输出每一列的最大值 </param>
+            <param name="maxValue">每一行或者每一列的最大值</param>
+            <returns>每一个最大值所在的位置下标</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.Max(System.Boolean,System.Double[]@)">
+            <summary> 求二维数组中每一行或者每一列的最大值 </summary>
+            <param name="rank"> true 表示输出每一行的最大值，false 表示输出每一列的最大值 </param>
+            <param name="maxValue">每一行或者每一列的最大值</param>
+            <returns>每一个最大值所在的位置下标</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.Min(System.Boolean,System.Int32[]@)">
+            <summary> 求二维数组中每一行或者每一列的最小值 </summary>
+            <param name="rank"> true 表示输出每一行的最小值，false 表示输出每一列的最小值 </param>
+            <param name="minValue">每一行或者每一列的最小值</param>
+            <returns>每一个最小值所在的位置下标</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.Min(System.Boolean,System.Double[]@)">
+            <summary> 求二维数组中每一行或者每一列的最小值 </summary>
+            <param name="rank"> true 表示输出每一行的最小值，false 表示输出每一列的最小值 </param>
+            <param name="minValue">每一行或者每一列的最小值</param>
+            <returns>每一个最小值所在的位置下标</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.Clone">
+            <summary> 将对象创建一个副本。返回值为一个<see cref="T:eZstd.Enumerable.Array2D"/>对象 </summary>
+            <returns> 返回值为一个<see cref="T:eZstd.Enumerable.Array2D"/>对象 </returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CheckArray(System.Int32[0:,0:]@)">
+            <summary> 检查两个二维数组的元素数量是否一致 </summary>
+            <param name="array2d2">必须为二维数组，如 int[,] </param>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CheckArray(System.Double[0:,0:]@)">
+            <summary> 检查两个二维数组的元素数量是否一致 </summary>
+            <param name="array2d2">必须为二维数组，如 int[,] </param>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.Int2Double">
+            <summary> 将整数类型的二维数组转换为双精度的二维数组 </summary>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.Double2Int">
+            <summary> 将整数类型的二维数组转换为双精度的二维数组 </summary>
+        </member>
         <member name="T:eZstd.Enumerable.EnumUtility">
             <summary>
-            与集合相关的一些基本操作函数，比如数组的加减乘除等
+            与集合相关的一些基本操作函数，比如数组的加减乘除等。
+            注意，有很多集合的算法都可以通过 LINQ 语句来实现，如果可以，则推荐用 Linq。但是对于一些特殊的情况，比如二维数组的运算，则在此类中实现。
             </summary>
         </member>
         <member name="T:eZstd.Enumerable.ArrayConstructor">
@@ -3320,118 +3570,6 @@
         </member>
         <member name="M:eZstd.MarshalReflection.AssemblyCompiler.DeleteAssembly">
             <summary> 删除编译生成的程序集文件 </summary>
-        </member>
-        <member name="T:eZstd.Drawing.ColorUtils">
-            <summary>
-            对颜色进行处理
-            </summary>
-            <remarks></remarks>
-        </member>
-        <member name="M:eZstd.Drawing.ColorUtils.ColorToValue(System.Drawing.Color)">
-            <summary>
-            将一个RGB颜色转换为对应的数值。
-            颜色的数值与RGB参量的换算关系为：Color属性值=R + 256*G + 256^2*B
-            </summary>
-            <param name="c"></param>
-            <returns>返回值为[0,16777215]之间的任意整数</returns>
-        </member>
-        <member name="M:eZstd.Drawing.ColorUtils.ValueToColor(System.Double)">
-            <summary>
-            将一个[0,16777215]之间的数值转换为对应的RGB颜色。
-            颜色的数值与RGB参量的换算关系为：Color属性值=R + 256*G + 256^2*B
-            </summary>
-            <param name="value">value的范围为[0,16777215]之间的任意数值</param>
-            <returns></returns>
-        </member>
-        <member name="M:eZstd.Drawing.ColorUtils.ColorInterp(System.Double,System.Double,System.Double)">
-            <summary>
-            RGB 颜色插值
-            </summary>
-            <param name="c1">颜色1所对应的数值，其值为[0,16777215]之间的任意整数</param>
-            <param name="c2">颜色2所对应的数值，其值为[0,16777215]之间的任意整数</param>
-            <param name="x">x的值位于[0,1]的闭区间内，当其值为0时，它代表颜色c1，当其值为1时，它代表颜色c2</param>
-            <returns>插值后的RGB颜色所对应的数值</returns>
-            <remarks>颜色的数值与RGB参量的换算关系为：Color属性值=R + 256*G + 256^2*B</remarks>
-        </member>
-        <member name="M:eZstd.Drawing.ColorUtils.ColorInterp(System.Drawing.Color,System.Drawing.Color,System.Double)">
-            <summary>
-            RGB 颜色插值
-            </summary>
-            <param name="c1"></param>
-            <param name="c2"></param>
-            <param name="x">x的值位于[0,1]的闭区间内，当其值为0时，它代表颜色c1，当其值为1时，它代表颜色c2</param>
-            <returns>插值后的RGB颜色</returns>
-        </member>
-        <member name="M:eZstd.Drawing.ColorUtils.ClassicalExpand(System.Int32)">
-            <summary> 根据经典的有限元插值色系作为基准来进行颜色的插值扩展 </summary>
-            <param name="colorsCount">目标颜色集的个数</param>
-            <returns>数组中元素的个数为colorsCount </returns>
-        </member>
-        <member name="M:eZstd.Drawing.ColorUtils.ColorExpand(System.Drawing.Color[],System.Int32)">
-            <summary> 根据多个基准色平均插值出指定数量的渐变颜色集 </summary>
-            <param name="baseColors">用来进行插值的基准色</param>
-            <param name="colorsCount">目标颜色集的数量</param>
-            <returns>数组中元素的个数为colorsCount</returns>
-        </member>
-        <member name="T:eZstd.Drawing.DrawShapesTest">
-            <summary>
-            与 GDI+ 绘图相关的测试
-            </summary>
-        </member>
-        <member name="M:eZstd.Drawing.DrawShapesTest.MetafileCallback(System.Drawing.Imaging.EmfPlusRecordType,System.Int32,System.Int32,System.IntPtr,System.Drawing.Imaging.PlayRecordCallback)">
-            <summary>
-            Provides a callback method for the EnumerateMetafile method.
-            </summary>
-            <param name="recordType">Member of the EmfPlusRecordType enumeration that specifies the type of metafile record.</param>
-            <param name="flags">Set of flags that specify attributes of the record.</param>
-            <param name="dataSize">Number of bytes in the record data.</param>
-            <param name="data">Pointer to a buffer that contains the record data.</param>
-            <param name="callbackData">Not used.</param>
-            <returns></returns>
-        </member>
-        <member name="F:eZstd.Drawing.DrawShapesTest.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:eZstd.Drawing.DrawShapesTest.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:eZstd.Drawing.DrawShapesTest.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:eZstd.Drawing.TransformUtils.GetAxisTransform(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single@,System.Single@)">
-            <summary>
-            在单一轴上进行模型与屏幕之间的变换
-            </summary>
-            <param name="s1">屏幕上的端点1</param>
-            <param name="s2">屏幕上的端点2</param>
-            <param name="m1">s1 在模型中对应的端点1</param>
-            <param name="m2">s2 在模型中对应的端点2</param>
-            <param name="mp">模型中的任意一个点</param>
-            <param name="sp">模型中的点 mp 在屏幕中对应的位置点</param>
-            <param name="ratio">从模型到屏幕的缩放比例</param>
-            <remarks>
-            应用举例：
-            // 转换坐标系：对 Y 方向进行变换
-              float sp; float ratio;
-              GetAxisTransform(
-              s1: _daShaft.Top, s2: _daShaft.Top + _daShaft.Height,
-              m1: elevations.Max, m2: elevations.Min,
-              mp: 0f, sp: out sp, ratio: out ratio);
-            
-            // 将得到的结果应用到仿射矩阵中
-              Matrix mY = new Matrix();
-              mY.Translate(_daShaft.Left, sp);
-              mY.Scale(1, ratio);
-              gr.Transform = mY;  // 将变换应用到绘图面板中
-            </remarks>
         </member>
         <member name="T:eZstd.Mathematics.SpeedMode">
             <summary>

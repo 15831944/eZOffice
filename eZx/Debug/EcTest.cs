@@ -6,6 +6,7 @@ using Microsoft.Office.Interop.Excel;
 
 namespace eZx.Debug
 {
+    [EcDescription("一般性的测试")]
     class EcTest4 : IExcelExCommand
     {
         public ExternalCommandResult Execute(Application excelApp, ref string errorMessage, ref Range errorRange)
@@ -19,7 +20,7 @@ namespace eZx.Debug
             }
             catch (Exception ex)
             {
-                errorMessage = ex.Message + ex.StackTrace;
+                errorMessage = ex.Message + "\r\n\r\n" + ex.StackTrace;
                 return ExternalCommandResult.Failed;
             }
         }
@@ -27,6 +28,7 @@ namespace eZx.Debug
         // 开始具体的调试操作
         private static void DoSomething(Application excelApp)
         {
+            throw new NullReferenceException();
             FormSpeedModeHandler f = FormSpeedModeHandler.GetUniqueInstance(excelApp);
             f.Show(null);
         }
