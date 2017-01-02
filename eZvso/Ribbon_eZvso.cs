@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using eZvso.CurveMaker;
+using eZvso.RibbonHandler.CurveMaker;
+using eZvso.RibbonHandler;
 using Microsoft.Office.Interop.Visio;
 using Microsoft.Office.Tools.Ribbon;
 using Application = Microsoft.Office.Interop.Visio.Application;
@@ -200,8 +201,30 @@ namespace eZvso
 
         private void button_FunctionCurve_Click(object sender, RibbonControlEventArgs e)
         {
-            frm_CurveParameter f =  frm_CurveParameter.GetUniqueInstance(Globals.ThisAddIn.Application);
+            frm_CurveParameter f = frm_CurveParameter.GetUniqueInstance(Globals.ThisAddIn.Application);
             f.Show(null);
         }
+
+        #region    ---   文本的上下标
+
+        private void button_superscript_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application vsoApp = Globals.ThisAddIn.Application;
+            SuperSubscript.SetSuperOrSubScript(vsoApp, true);
+        }
+
+        private void button_subscript_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application vsoApp = Globals.ThisAddIn.Application;
+            SuperSubscript.SetSuperOrSubScript(vsoApp, false);
+        }
+
+        private void button_normal_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application vsoApp = Globals.ThisAddIn.Application;
+            SuperSubscript.SetSuperOrSubScript(vsoApp, null);
+        }
+        #endregion
+
     }
 }

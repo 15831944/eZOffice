@@ -214,6 +214,9 @@
             <summary> 通过选择文件对话框选择要进行数据提取的Excel文件 </summary>
             <returns> 要进行数据提取的Excel文件的绝对路径 </returns>
         </member>
+        <member name="M:eZx.AddinManager.form_AddinManager.ShowExCommandDescription(System.Object,System.Windows.Forms.TreeNodeMouseClickEventArgs)">
+            <summary> 提取出 TreeView中节点对应的外部命令上的描述字符 </summary>
+        </member>
         <member name="F:eZx.AddinManager.form_AddinManager.components">
             <summary>
             Required designer variable.
@@ -340,6 +343,14 @@
             <summary> 将程序集文件加载到内存，并且提取出其中的 CAD 外部命令 </summary>
             <param name="assemblyPath"></param>
             <returns></returns>
+        </member>
+        <member name="T:eZx.AddinManager.EcDescriptionAttribute">
+            <summary>
+            用来作为实现 ExternalCommand 的类的描述
+            </summary>
+        </member>
+        <member name="F:eZx.AddinManager.EcDescriptionAttribute.Description">
+            <summary> 具体的描述 </summary>
         </member>
         <member name="T:eZx.AddinManager.IExcelExCommand">
             <summary> 用来进行AddinManager快速调试的接口。实现此接口的类必须有一个无参数的构造函数。

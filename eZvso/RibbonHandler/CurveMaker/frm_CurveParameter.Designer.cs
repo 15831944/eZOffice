@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using eZstd.UserControls;
 
-namespace eZvso.CurveMaker
+namespace eZvso.RibbonHandler.CurveMaker
 {
     partial class frm_CurveParameter
     {

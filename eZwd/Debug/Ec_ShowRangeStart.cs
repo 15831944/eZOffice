@@ -11,7 +11,10 @@ using eZwd.RibbonHandlers;
 
 namespace eZwd.Debug
 {
-    class EcTest : IExternalCommand
+    /// <summary>
+    /// 显示当前光标选择区域的起始处的坐标
+    /// </summary>
+    class Ec_ShowRangeStart : IExternalCommand
     {
         public ExternalCommandResult Execute(Microsoft.Office.Interop.Word.Application wdApp, ref string errorMessage, ref object errorObj)
         {
@@ -22,19 +25,15 @@ namespace eZwd.Debug
             }
             catch (Exception ex)
             {
-                errorMessage = ex.Message + ex.StackTrace;
+                errorMessage = ex.Message + "\r\n\r\n" + ex.StackTrace;
                 return ExternalCommandResult.Failed;
             }
         }
 
-
         // 开始具体的调试操作
         private static void DoSomething(Application wdApp)
         {
-            //var sele = wdApp.Selection;
-            MessageBox.Show(@"啥也没做啊");
-
-            //StaticFunction.PdfReformat(wdApp);
+            MessageBox.Show(wdApp.Selection.Start.ToString());
         }
     }
 }

@@ -4,8 +4,17 @@
         <name>eZwd</name>
     </assembly>
     <members>
+        <member name="T:eZwd.Debug.Ec_ShowRangeStart">
+            <summary>
+            显示当前光标选择区域的起始处的坐标
+            </summary>
+        </member>
         <member name="T:eZwd.Debug.Ec_RangeIndex">
             <summary> 查看选择的区域的Range的范围 </summary>
+        </member>
+        <member name="M:eZwd.Debug.Ec_RangeIndex.GenerateEmbededField(Microsoft.Office.Interop.Word.Application)">
+            <summary> 生成一个嵌套的域代码： { quote "一九一一年一月{ STYLEREF 1 \s }日" \@"D" }</summary>
+            <param name="wdApp"></param>
         </member>
         <member name="T:eZwd.RibbonHandlers.StaticFunction">
             <summary> 一些结构性的静态方法 </summary>

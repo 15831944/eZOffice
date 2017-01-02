@@ -1,37 +1,36 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
+using eZstd.Miscellaneous;
 using eZvso.ExternalCommand;
 using Microsoft.Office.Interop.Visio;
 using Application = Microsoft.Office.Interop.Visio.Application;
-
+using eZvso.eZvso_API;
 namespace eZvso.Debug
 {
-   public class EcTest_Curve : IExternalCommand
+    public class Ec_Test : IExternalCommand
     {
         public ExternalCommandResult Execute(Application visioApp, ref string errorMessage, ref object errorObj)
         {
+            int undoScopeID1 = visioApp.BeginUndoScope("文字属性");
             try
             {
-                // DrawNURBS(visioApp);
+                // SuperScript(visioApp, false);
                 return ExternalCommandResult.Succeeded;
             }
             catch (Exception ex)
             {
-                errorMessage = ex.Message + ex.StackTrace;
+                errorMessage = ex.Message + "\r\n\r\n" + ex.StackTrace;
                 return ExternalCommandResult.Failed;
+            }
+            finally
+            {
+                visioApp.EndUndoScope(undoScopeID1, true);
             }
         }
 
-        // 开始具体的调试操作
-        private static void DoSomething(Application vsoApp)
-        {
-            Document doc = vsoApp.ActiveDocument;
-            if (doc != null)
-            {
-                MessageBox.Show(doc.Pages.ItemU[1].Name);
-                // throw new NullReferenceException(doc.Pages.ItemU[1].Name);
-            }
-        }
 
     }
 }

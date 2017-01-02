@@ -40,7 +40,6 @@ namespace eZx.AddinManager
             //
             _nodesInfo = new Dictionary<AddinManagerAssembly, List<IExcelExCommand>>(new AssemblyComparer());
             //
-            treeView1.NodeMouseDoubleClick += TreeView1OnNodeMouseDoubleClick;
         }
 
         #endregion
@@ -176,7 +175,7 @@ namespace eZx.AddinManager
 
         #region ---   加载
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonLoad_Click(object sender, EventArgs e)
         {
             string[] dllPaths = ChooseOpenDll("Choose an Addin file");
             bool hasNewMethodAdded = false;
@@ -258,7 +257,16 @@ namespace eZx.AddinManager
             }
         }
 
-        private void TreeView1OnNodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void RunExternalCommand(TreeNode ndCommand)
+        {
+            var exCommand = ndCommand.Tag as IExcelExCommand;
+            AddinManagerAssembly asm = ndCommand.Parent.Tag as AddinManagerAssembly;
+            //
+            string assemblyPath = asm.Path;
+            ExCommandExecutor.InvokeExternalCommand(assemblyPath, exCommand, _excelApplication);
+        }
+
+        private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             var nd = e.Node;
             if (nd != null && nd.Level == 1)  // 选择了某一个方法
@@ -267,16 +275,25 @@ namespace eZx.AddinManager
             }
         }
 
-
-        private void RunExternalCommand(TreeNode ndMethod)
-        {
-            var mtd = ndMethod.Tag as IExcelExCommand;
-            AddinManagerAssembly asm = ndMethod.Parent.Tag as AddinManagerAssembly;
-            //
-            string assemblyPath = asm.Path;
-            ExCommandExecutor.InvokeExternalCommand(assemblyPath, mtd, _excelApplication);
-        }
-        
         #endregion
+
+        /// <summary> 提取出 TreeView中节点对应的外部命令上的描述字符 </summary>
+        private void ShowExCommandDescription(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            var nd = e.Node;
+            string description = "描述：";
+            if (nd != null && nd.Level == 1)  // 选择了某一个方法
+            {
+                // 提取此方法所在的类的对应的描述
+                var exCommand = nd.Tag as IExcelExCommand;
+                var atts = exCommand.GetType().GetCustomAttributes(typeof(EcDescriptionAttribute), false);
+                if (atts.Length > 0)
+                {
+                    var att = atts.First() as EcDescriptionAttribute;
+                    description += att.Description;
+                }
+            }
+            label_Description.Text = description;
+        }
     }
 }

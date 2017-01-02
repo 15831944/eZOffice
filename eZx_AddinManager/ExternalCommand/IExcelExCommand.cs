@@ -1,11 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Office.Interop.Excel;
 
 namespace eZx.AddinManager
 {
+    /// <summary>
+    /// 用来作为实现 ExternalCommand 的类的描述
+    /// </summary>
+    public class EcDescriptionAttribute : Attribute
+    {
+        /// <summary> 具体的描述 </summary>
+        public readonly string Description;
+
+        public EcDescriptionAttribute(string description)
+        {
+            Description = description;
+        }
+    }
+
     public enum ExternalCommandResult
     {
         Cancelled = 0,
