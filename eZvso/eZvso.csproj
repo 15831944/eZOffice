@@ -167,16 +167,16 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="CurveMaker\Drawer.cs" />
-    <Compile Include="CurveMaker\frm_CurveParameter.cs">
+    <Compile Include="RibbonHandler\CurveMaker\Drawer.cs" />
+    <Compile Include="RibbonHandler\CurveMaker\frm_CurveParameter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CurveMaker\frm_CurveParameter.Designer.cs">
+    <Compile Include="RibbonHandler\CurveMaker\frm_CurveParameter.Designer.cs">
       <DependentUpon>frm_CurveParameter.cs</DependentUpon>
     </Compile>
-    <Compile Include="CurveMaker\LocationPoint.cs" />
-    <Compile Include="Debug\EcTest_CurveForm.cs" />
-    <Compile Include="Debug\EcTest_Curve.cs" />
+    <Compile Include="RibbonHandler\CurveMaker\LocationPoint.cs" />
+    <Compile Include="Debug\Ec_CurveForm.cs" />
+    <Compile Include="Debug\Ec_Test.cs" />
     <Compile Include="Dialog_CircleArray.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +184,9 @@
       <DependentUpon>Dialog_CircleArray.cs</DependentUpon>
     </Compile>
     <Compile Include="DllActivator_eZvso.cs" />
+    <Compile Include="eZvso_API\SelectionUtils.cs" />
+    <Compile Include="eZvso_API\ShapeSearching.cs" />
+    <Compile Include="RibbonHandler\SuperSubscript.cs" />
     <Compile Include="Ribbon_eZvso.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -193,7 +196,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <EmbeddedResource Include="CurveMaker\frm_CurveParameter.resx">
+    <EmbeddedResource Include="RibbonHandler\CurveMaker\frm_CurveParameter.resx">
       <DependentUpon>frm_CurveParameter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialog_CircleArray.resx">
@@ -234,6 +237,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Curve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\normal.png" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

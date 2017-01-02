@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using Microsoft.Office.Interop.Visio;
 using Application = Microsoft.Office.Interop.Visio.Application;
 
-namespace eZvso.CurveMaker
+namespace eZvso.RibbonHandler.CurveMaker
 {
     internal class Drawer
     {

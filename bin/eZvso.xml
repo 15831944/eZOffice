@@ -4,7 +4,7 @@
         <name>eZvso</name>
     </assembly>
     <members>
-        <member name="M:eZvso.CurveMaker.Drawer.DrawSplineOnPage(Microsoft.Office.Interop.Visio.Page,System.Collections.Generic.List{eZvso.CurveMaker.LocationPoint},System.Double)">
+        <member name="M:eZvso.RibbonHandler.CurveMaker.Drawer.DrawSplineOnPage(Microsoft.Office.Interop.Visio.Page,System.Collections.Generic.List{eZvso.RibbonHandler.CurveMaker.LocationPoint},System.Double)">
             <summary>
             绘制一般的样条曲线
             </summary>
@@ -14,69 +14,139 @@
             The error from the points to the path of the resulting shape is roughly within tolerance. 
             When the number of points is large, the actual error may sometimes exceed the prescribed tolerance.</param>
         </member>
-        <member name="M:eZvso.CurveMaker.Drawer.DrawPolylineOnPage(Microsoft.Office.Interop.Visio.Page,System.Collections.Generic.List{eZvso.CurveMaker.LocationPoint})">
+        <member name="M:eZvso.RibbonHandler.CurveMaker.Drawer.DrawPolylineOnPage(Microsoft.Office.Interop.Visio.Page,System.Collections.Generic.List{eZvso.RibbonHandler.CurveMaker.LocationPoint})">
             <summary>
             绘制多段线折线
             </summary>
             <param name="vsoPage"></param>
             <param name="points"></param>
         </member>
-        <member name="M:eZvso.CurveMaker.Drawer.DrawBezierOnPage(Microsoft.Office.Interop.Visio.Page,System.Collections.Generic.List{eZvso.CurveMaker.LocationPoint},System.Int32)">
+        <member name="M:eZvso.RibbonHandler.CurveMaker.Drawer.DrawBezierOnPage(Microsoft.Office.Interop.Visio.Page,System.Collections.Generic.List{eZvso.RibbonHandler.CurveMaker.LocationPoint},System.Int32)">
             <summary> 绘制一条 贝塞尔曲线  </summary>
         </member>
-        <member name="M:eZvso.CurveMaker.Drawer.FitSmoothTest(Microsoft.Office.Interop.Visio.Application)">
+        <member name="M:eZvso.RibbonHandler.CurveMaker.Drawer.FitSmoothTest(Microsoft.Office.Interop.Visio.Application)">
             <summary> 绘制一个 NURBS 曲线 </summary>
             <param name="vsoApp"></param>
         </member>
-        <member name="M:eZvso.CurveMaker.Drawer.DrawNURBSTest(Microsoft.Office.Interop.Visio.Application)">
+        <member name="M:eZvso.RibbonHandler.CurveMaker.Drawer.DrawNURBSTest(Microsoft.Office.Interop.Visio.Application)">
             <summary> 绘制一个 NURBS 曲线 </summary>
         </member>
-        <member name="M:eZvso.CurveMaker.Drawer.DrawSplineTest(Microsoft.Office.Interop.Visio.Application)">
+        <member name="M:eZvso.RibbonHandler.CurveMaker.Drawer.DrawSplineTest(Microsoft.Office.Interop.Visio.Application)">
             <summary> 绘制一个 Spline </summary>
         </member>
-        <member name="M:eZvso.CurveMaker.Drawer.DrawBezier_Example(Microsoft.Office.Interop.Visio.Application)">
+        <member name="M:eZvso.RibbonHandler.CurveMaker.Drawer.DrawBezier_Example(Microsoft.Office.Interop.Visio.Application)">
             <summary> 绘制一条 贝塞尔曲线  </summary>
         </member>
-        <member name="M:eZvso.CurveMaker.frm_CurveParameter.GetUniqueInstance(Microsoft.Office.Interop.Visio.Application)">
+        <member name="M:eZvso.RibbonHandler.CurveMaker.frm_CurveParameter.GetUniqueInstance(Microsoft.Office.Interop.Visio.Application)">
             <summary> 全局唯一的一个窗口实例 </summary>
             <param name="vsoApp"></param>
             <returns></returns>
         </member>
-        <member name="M:eZvso.CurveMaker.frm_CurveParameter.#ctor(Microsoft.Office.Interop.Visio.Application)">
+        <member name="M:eZvso.RibbonHandler.CurveMaker.frm_CurveParameter.#ctor(Microsoft.Office.Interop.Visio.Application)">
             <summary> 构造函数 </summary>
         </member>
-        <member name="M:eZvso.CurveMaker.frm_CurveParameter.OnKeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+        <member name="M:eZvso.RibbonHandler.CurveMaker.frm_CurveParameter.OnKeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
             <summary> 按下 ESC 时关闭窗口 </summary>
         </member>
-        <member name="F:eZvso.CurveMaker.frm_CurveParameter.components">
+        <member name="F:eZvso.RibbonHandler.CurveMaker.frm_CurveParameter.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:eZvso.CurveMaker.frm_CurveParameter.Dispose(System.Boolean)">
+        <member name="M:eZvso.RibbonHandler.CurveMaker.frm_CurveParameter.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:eZvso.CurveMaker.frm_CurveParameter.InitializeComponent">
+        <member name="M:eZvso.RibbonHandler.CurveMaker.frm_CurveParameter.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="T:eZvso.CurveMaker.LocationPoint">
+        <member name="T:eZvso.RibbonHandler.CurveMaker.LocationPoint">
             <summary>
             用来绘制曲线的坐标点，其单位为Visio的内部单位英寸 1 inch = 25.4 mm
             </summary>
         </member>
-        <member name="M:eZvso.CurveMaker.LocationPoint.ToSafeArray(System.Collections.Generic.IList{eZvso.CurveMaker.LocationPoint})">
+        <member name="M:eZvso.RibbonHandler.CurveMaker.LocationPoint.ToSafeArray(System.Collections.Generic.IList{eZvso.RibbonHandler.CurveMaker.LocationPoint})">
             <summary>
             将坐标点集合转换为一维数组，以用作 Draw方法的 xyArray 参数
             </summary>
             <returns>数组中每两个连续的元素组成一个点的x、y坐标值</returns>
             <remarks>and weights arrays should be of type SAFEARRAY of 8-byte floating point values passed by  reference (VT_R8|VT_ARRAY|VT_BYREF).
              This is how Microsoft Visual Basic passes arrays to Automation objects.</remarks>
+        </member>
+        <member name="T:eZvso.RibbonHandler.SuperSubscript">
+            <summary>
+            设置文本的上下标
+            </summary>
+        </member>
+        <member name="M:eZvso.RibbonHandler.SuperSubscript.SetSuperOrSubScript(Microsoft.Office.Interop.Visio.Application,System.Nullable{System.Boolean})">
+            <summary>
+            设置文本的上下标
+            </summary>
+            <param name="visioApp"></param>
+            <param name="superOrSubscript">null 表示“正常”，true表示“上标”，false表示“下标”</param>
+        </member>
+        <member name="M:eZvso.RibbonHandler.SuperSubscript.SuperOrSubScriptCharactors(Microsoft.Office.Interop.Visio.Characters,System.Nullable{System.Boolean})">
+            <summary>
+            设置一段字符的上下标
+            </summary>
+            <param name="chs"></param>
+            <param name="superScript">null 表示“正常”，true表示“上标”，false表示“下标”</param>
+        </member>
+        <member name="M:eZvso.RibbonHandler.SuperSubscript.SuperOrSubScriptShape(Microsoft.Office.Interop.Visio.Shape,System.Nullable{System.Boolean})">
+            <summary>
+            设置一个形状中所有字符的上下标
+            </summary>
+            <param name="shp"></param>
+            <param name="superScript">null 表示“正常”，true表示“上标”，false表示“下标”</param>
+        </member>
+        <member name="T:eZvso.eZvso_API.SelectionUtils">
+            <summary>
+            与Visio界面中的选择集相关的操作
+            </summary>
+        </member>
+        <member name="M:eZvso.eZvso_API.SelectionUtils.GetSelectionMode(Microsoft.Office.Interop.Visio.Selection,System.Int32[]@)">
+            <summary>
+            
+            </summary>
+            <param name="sel"></param>
+            <param name="selectedShapeIds">在 <see cref="F:Microsoft.Office.Interop.Visio.VisSelectMode.visSelModeSkipSuper"/> 模式下筛选得到的选择形状的ID集合</param>
+            <returns></returns>
+        </member>
+        <member name="T:eZvso.eZvso_API.VisSelectionMode">
+            <summary>
+            Visio当前界面中在进行何种选择操作
+            </summary>
+        </member>
+        <member name="F:eZvso.eZvso_API.VisSelectionMode.NoSelection">
+            <summary> 未选择任何对象 </summary>
+        </member>
+        <member name="F:eZvso.eZvso_API.VisSelectionMode.EditingCharactors">
+            <summary> 正在编辑某个形状中的文字，此时只可能选中一个形状 </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:eZvso.eZvso_API.VisSelectionMode.SingleShape" -->
+        <member name="F:eZvso.eZvso_API.VisSelectionMode.MultiShapes">
+            <summary> 选择多个形状 </summary>
+        </member>
+        <member name="M:eZvso.eZvso_API.ShapeSearching.GetAllShapes(Microsoft.Office.Interop.Visio.Shape,System.Boolean)">
+            <summary>
+            按逐级深入的方式获得形状的所有子形状
+            </summary>
+            <param name="shp"></param>
+            <param name="includeMyself">返回的所有子形状的集合中是否包含自身</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZvso.eZvso_API.ShapeSearching.AddNextChildShapes(System.Collections.Generic.List{Microsoft.Office.Interop.Visio.Shape},System.Collections.Generic.List{Microsoft.Office.Interop.Visio.Shape})">
+            <summary>
+            搜索某一级形状集合中的下一级的所有子形状
+            </summary>
+            <param name="totalShapes"></param>
+            <param name="shps">要搜索子形状的某一级形状的集合</param>
+            <returns>搜索到的下一级的所有子形状</returns>
         </member>
         <member name="F:eZvso.Ribbon_eZvso.MasterInEdit">
             <summary>
@@ -160,6 +230,11 @@
             </summary>
         </member>
         <member name="P:eZvso.Properties.Resources.Curve">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:eZvso.Properties.Resources.normal">
             <summary>
               Looks up a localized resource of type System.Drawing.Bitmap.
             </summary>

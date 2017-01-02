@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eZvso.CurveMaker
+namespace eZvso.RibbonHandler.CurveMaker
 {
     /// <summary>
     /// 用来绘制曲线的坐标点，其单位为Visio的内部单位英寸 1 inch = 25.4 mm

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Windows.Forms;
 using eZstd.UserControls;
-using eZvso.CurveMaker;
+using eZvso.RibbonHandler.CurveMaker;
 using eZvso.ExternalCommand;
 using Microsoft.Office.Interop.Visio;
 using Application = Microsoft.Office.Interop.Visio.Application;
 
 namespace eZvso.Debug
 {
-    public class EcTest_CurveForm : IExternalCommand
+    public class Ec_CurveForm : IExternalCommand
     {
         public ExternalCommandResult Execute(Application visioApp, ref string errorMessage, ref object errorObj)
         {

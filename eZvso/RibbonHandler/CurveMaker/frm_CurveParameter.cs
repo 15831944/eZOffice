@@ -13,7 +13,7 @@ using eZstd.Miscellaneous;
 using eZstd.UserControls;
 using Application = Microsoft.Office.Interop.Visio.Application;
 
-namespace eZvso.CurveMaker
+namespace eZvso.RibbonHandler.CurveMaker
 {
     public partial class frm_CurveParameter : Form
     {
