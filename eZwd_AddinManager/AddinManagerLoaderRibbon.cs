@@ -12,14 +12,14 @@ namespace eZwd_AddinManager
         private void AddinManagerLoader_Load(object sender, RibbonUIEventArgs e)
         {
             // 将上次插件卸载时保存的程序集数据加载进来
-            Application excelApp = Globals.ThisAddIn.Application;
-            AddinManagerLoader.InstallAddinManager(excelApp);
+            Application WordApp = Globals.ThisAddIn.Application;
+            AddinManagerLoader.InstallAddinManager(WordApp);
         }
 
         private void AddinManagerLoaderRibbon_Close(object sender, EventArgs e)
         {
-            Application excelApp = Globals.ThisAddIn.Application;
-            AddinManagerLoader.UninstallAddinManager(excelApp);
+            Application WordApp = Globals.ThisAddIn.Application;
+            AddinManagerLoader.UninstallAddinManager(WordApp);
         }
 
         #endregion
@@ -28,14 +28,14 @@ namespace eZwd_AddinManager
 
         private void buttonAddinManager_Click(object sender, RibbonControlEventArgs e)
         {
-            Application excelApp = Globals.ThisAddIn.Application;
-            AddinManagerLoader.ShowAddinManager(excelApp);
+            Application WordApp = Globals.ThisAddIn.Application;
+            AddinManagerLoader.ShowAddinManager(WordApp);
         }
 
         private void buttonLastCommand_Click(object sender, RibbonControlEventArgs e)
         {
-            Application excelApp = Globals.ThisAddIn.Application;
-            AddinManagerLoader.LastExternalCommand(excelApp);
+            Application WordApp = Globals.ThisAddIn.Application;
+            AddinManagerLoader.LastExternalCommand(WordApp);
         }
 
         #endregion

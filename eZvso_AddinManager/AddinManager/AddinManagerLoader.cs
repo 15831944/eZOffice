@@ -4,23 +4,24 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using eZvso.AddinManager;
-using eZvso.ExternalCommand;
+using eZvso_AddinManager;
 using Microsoft.Office.Interop.Visio;
 using Microsoft.Office.Tools.Ribbon;
 
 namespace eZvso.AddinManager
 {
+    /// <summary> AddinManager插件 的窗口加载、命令执行 </summary>
     internal class AddinManagerLoader
     {
         #region ---   插件的加载与卸载
 
-        public static void InstallAddinManager(Application excelApp)
+        public static void InstallAddinManager(Application VisioApp)
         {
             try
             {
                 // 将上次插件卸载时保存的程序集数据加载进来
-                form_AddinManager frm = form_AddinManager.GetUniqueForm(excelApp);
-                var nodesInfo = AssemblyInfoDllManager.GetInfosFromFile();
+                form_AddinManager frm = form_AddinManager.GetUniqueForm(VisioApp);
+                var nodesInfo = AssemblyInfoDllManager.GetInfosFromSettings();
                 frm.RefreshTreeView(nodesInfo);
             }
             catch (Exception ex)
@@ -29,15 +30,15 @@ namespace eZvso.AddinManager
             }
         }
 
-        public static void UninstallAddinManager(Application excelApp)
+        public static void UninstallAddinManager(Application VisioApp)
         {
             try
             {
-                form_AddinManager frm = form_AddinManager.GetUniqueForm(excelApp);
+                form_AddinManager frm = form_AddinManager.GetUniqueForm(VisioApp);
                 var nodesInfo = frm.NodesInfo;
                 //
                 // 将窗口中加载的程序集数据保存下来
-                AssemblyInfoDllManager.SaveAssemblyInfosToFile(nodesInfo);
+                AssemblyInfoDllManager.SaveAssemblyInfosToSettings(nodesInfo);
             }
             catch (Exception ex)
             {
@@ -48,15 +49,15 @@ namespace eZvso.AddinManager
 
         #region ---   点击调试按钮
 
-        public static void ShowAddinManager(Application excelApp)
+        public static void ShowAddinManager(Application VisioApp)
         {
-            form_AddinManager frm = form_AddinManager.GetUniqueForm(excelApp);
+            form_AddinManager frm = form_AddinManager.GetUniqueForm(VisioApp);
             frm.Show(null);
         }
 
-        public static void LastExternalCommand(Application excelApp)
+        public static void LastExternalCommand(Application VisioApp)
         {
-            ExternalCommandHandler.InvokeCurrentExternalCommand(excelApp);
+            ExCommandExecutor.InvokeCurrentExternalCommand(VisioApp);
         }
 
         #endregion

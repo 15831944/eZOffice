@@ -53,13 +53,13 @@ namespace eZx.AddinManager
         }
 
         /// <summary>
-        /// 为了解决SerializationException，方法之一是确保此assembly放置在与acad.exe 或 revit.exe相同的文件夹中，
+        /// 为了解决SerializationException，方法之一是确保此assembly放置在与aExcel.exe 或 revit.exe相同的文件夹中，
         /// 另一个方法就是实现一个像这样的类。
         /// </summary>
         /// <remarks>
         ///  Resolve System.Runtime.Serialization.SerializationException, Message =
         /// "Unable to find assembly 'StoreData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'."
-        /// One solution is to ensure that assembly resides in same directory as acad.exe or revit.exe,
+        /// One solution is to ensure that assembly resides in same directory as aExcel.exe or revit.exe,
         /// the other is to implement a class such as this, cf.
         /// http://www.codeproject.com/soap/Serialization_Samples.asp
         /// </remarks>

@@ -175,8 +175,10 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="Debug\Ec_ShowRangeStart.cs" />
-    <Compile Include="Debug\Ec_RangeIndex.cs" />
+    <Compile Include="Debug\Ec_FormatPythonCodeFromPyCharm.cs" />
+    <Compile Include="Debug\Ec_ShowRange.cs" />
+    <Compile Include="Debug\Ec_FillPythonPrint.cs" />
+    <Compile Include="eZwd_API\RangeUtils.cs" />
     <Compile Include="RibbonHandlers\StaticFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

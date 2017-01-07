@@ -10,7 +10,7 @@ namespace eZx.AddinManager
     /// <summary> 将指定程序集中的 IExternalCommand 类提取出来 </summary>
     public static class ExCommandFinder
     {
-        /// <summary> 将程序集文件加载到内存，并且提取出其中的 CAD 外部命令 </summary>
+        /// <summary> 将程序集文件加载到内存，并且提取出其中的 Excel 外部命令 </summary>
         /// <param name="assemblyPath"></param>
         /// <returns></returns>
         public static List<IExcelExCommand> RetriveExternalCommandsFromAssembly(string assemblyPath)
@@ -49,7 +49,7 @@ namespace eZx.AddinManager
                 foreach (Type cls in classes)
                 {
                     if ((cls != null) && cls.GetInterfaces().Any(r => r == typeof (IExcelExCommand)))
-                        // 说明这个类实现了 CAD 的命令接口
+                        // 说明这个类实现了 Excel 的命令接口
                     {
                         // 寻找此类中所实现的那个 Execute 方法
                         Type[] paraTypes = new Type[3]

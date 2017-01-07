@@ -121,6 +121,46 @@
         <member name="M:eZwd_AddinManager.Globals.#ctor">
             
         </member>
+        <member name="T:eZwd.AddinManager.AddinManagerLoader">
+            <summary> AddinManager插件 的窗口加载、命令执行 </summary>
+        </member>
+        <member name="M:eZwd.AddinManager.form_AddinManager.#ctor">
+            <summary> 构造函数 </summary>
+        </member>
+        <member name="F:eZwd.AddinManager.form_AddinManager._nodesInfo">
+            <summary> 与 TreeView 同步的节点数据 </summary>
+        </member>
+        <member name="P:eZwd.AddinManager.form_AddinManager.NodesInfo">
+            <summary> 与 TreeView 同步的节点数据 </summary>
+        </member>
+        <member name="M:eZwd.AddinManager.form_AddinManager.AddMethodsInOneAssembly(System.String,System.Collections.Generic.List{eZwd.AddinManager.IWordExCommand})">
+            <summary> 将从一个 Assembly 中加载进来的所有有效的外部命令同步到 _nodesInfo 中 </summary>
+            <param name="methods"></param>
+        </member>
+        <member name="M:eZwd.AddinManager.form_AddinManager.ChooseOpenDll(System.String)">
+            <summary> 通过选择文件对话框选择要进行数据提取的Excel文件 </summary>
+            <returns> 要进行数据提取的Excel文件的绝对路径 </returns>
+        </member>
+        <member name="M:eZwd.AddinManager.form_AddinManager.ShowExCommandDescription(System.Object,System.Windows.Forms.TreeNodeMouseClickEventArgs)">
+            <summary> 提取出 TreeView中节点对应的外部命令上的描述字符 </summary>
+        </member>
+        <member name="F:eZwd.AddinManager.form_AddinManager.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:eZwd.AddinManager.form_AddinManager.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:eZwd.AddinManager.form_AddinManager.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="T:eZwd.AddinManager.AddinManagerAssembly">
             <summary> 比较两个 Assembly 是否表示同一个对象 </summary>
             <remarks>在比较的过程中，会先对GetHashCode的返回值进行比较，如果返回的HashCode是相同的，则再进行 Equals 比较；
@@ -131,11 +171,17 @@
             <remarks>在比较的过程中，会先对GetHashCode的返回值进行比较，如果返回的HashCode是相同的，则再进行 Equals 比较；
             如果返回的HashCode值不同，则直接认为Equals为false。</remarks>
         </member>
-        <member name="M:eZwd.AddinManager.AssemblyInfoDllManager.GetInfosFromFile">
+        <member name="T:eZwd.AddinManager.AssemblyInfoDllManager">
+            <summary> 通过Dll中的Settings来进行程序集信息的存储与提取 </summary>
+        </member>
+        <member name="M:eZwd.AddinManager.AssemblyInfoDllManager.GetInfosFromSettings">
             <summary> 将 Settings 配置文件中的字符进行反序列化 </summary>
             <returns></returns>
             <remarks>对于CAD.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
             但是在调用ExternalCommand时还是会出bug，通常的报错为：没有为该对象定义无参数的构造函数。 </remarks>
+        </member>
+        <member name="T:eZwd.AddinManager.AssemblyInfoFileManager">
+            <summary> 通过 外部文本文件 来进行程序集信息的存储与提取 </summary>
         </member>
         <member name="M:eZwd.AddinManager.AssemblyInfoFileManager.GetInfosFromFile">
             <summary> 将外部 二进制文件 中的字符进行反序列化 </summary>
@@ -202,76 +248,119 @@
             http://www.codeproject.com/soap/Serialization_Samples.asp
             </remarks>
         </member>
-        <member name="M:eZwd.AddinManager.form_AddinManager.#ctor">
+        <member name="T:eZwd.AddinManager.AssemLoader">
+            <summary> 将程序集及其引用项加载到进程中 </summary>
+            <remarks>此类是完全从 Revit AddinManager中移植过来并稍微修改的</remarks>
+        </member>
+        <member name="M:eZwd.AddinManager.AssemLoader.#ctor">
             <summary> 构造函数 </summary>
         </member>
-        <member name="F:eZwd.AddinManager.form_AddinManager._nodesInfo">
-            <summary> 与 TreeView 同步的节点数据 </summary>
+        <member name="M:eZwd.AddinManager.AssemLoader.LoadAddin(System.String)">
+            <summary> 将程序集加载到程序中 </summary>
+            <param name="filePath">程序集的文件路径</param>
+            <returns></returns>
         </member>
-        <member name="P:eZwd.AddinManager.form_AddinManager.NodesInfo">
-            <summary> 与 TreeView 同步的节点数据 </summary>
-        </member>
-        <member name="M:eZwd.AddinManager.form_AddinManager.AddMethodsInOneAssembly(System.String,System.Collections.Generic.List{System.Reflection.MethodInfo})">
-            <summary> 将从一个 Assembly 中加载进来的所有有效的外部命令同步到 _nodesInfo 中 </summary>
-            <param name="methods"></param>
-        </member>
-        <member name="M:eZwd.AddinManager.form_AddinManager.ChooseOpenDll(System.String)">
-            <summary> 通过选择文件对话框选择要进行数据提取的Excel文件 </summary>
-            <returns> 要进行数据提取的Excel文件的绝对路径 </returns>
-        </member>
-        <member name="F:eZwd.AddinManager.form_AddinManager.components">
+        <member name="M:eZwd.AddinManager.AssemLoader.HookAssemblyResolve">
             <summary>
-            Required designer variable.
+            AssemblyResolve事件在.Net对程序集的解析失败时触发，返回一个Assembly对象。
+            因此，我们只要在这个事件的处理程序里手动加载对应目录的dll，并把对应dll的Assembly对象返回， .Net就能正确加载对应的dll了。
             </summary>
+            <remarks></remarks>
         </member>
-        <member name="M:eZwd.AddinManager.form_AddinManager.Dispose(System.Boolean)">
+        <member name="M:eZwd.AddinManager.AssemLoader.CurrentDomain_AssemblyResolve(System.Object,System.ResolveEventArgs)">
+            <summary> 在 Execute() 方法中将不能引用到的程序集进行手动加载 </summary>
+            <param name="sender"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZwd.AddinManager.AssemLoader.SearchAssemblyFileInTempFolder(System.String)">
+            <summary> 在临时文件夹中根据程序集名搜索对应的文件：对应于引用时 Copy Local 设置为 true 的程序集 </summary>
+            <param name="assemName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZwd.AddinManager.AssemLoader.IsRevitAPIReferenced(System.Reflection.Assembly)">
             <summary>
-            Clean up any resources being used.
+            检查 RevitAPI.dll 是否被引用
             </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+            <param name="assembly"></param>
+            <returns></returns>
         </member>
-        <member name="M:eZwd.AddinManager.form_AddinManager.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
+        <member name="T:eZwd.AddinManager.AssemblySelectorForm">
+            <summary> 选择程序集文件的窗口 </summary>
+            <remarks>此类是完全从 Revit AddinManager中移植过来并稍微修改的</remarks>
         </member>
-        <member name="T:eZwd.ExternalCommand.ExternalCommandHandler">
+        <member name="M:eZwd.AddinManager.AssemblySelectorForm.#ctor(System.String)">
+            <summary> 构造函数 </summary>
+            <param name="assemName"></param>
+        </member>
+        <member name="T:eZwd.AddinManager.FileUtils">
+            <summary> Revit AddinManager 中用来进行文件处理的类，用来参考，并不具有通用性 </summary>
+        </member>
+        <member name="M:eZwd.AddinManager.FileUtils.CopyFileToFolder(System.String,System.String,System.Boolean,System.Collections.Generic.List{System.IO.FileInfo})">
             <summary>
             
             </summary>
-        </member>
-        <member name="M:eZwd.ExternalCommand.ExternalCommandHandler.LoadExternalCommandsFromAssembly(System.String)">
-            <summary> 将程序集文件加载到内存，并且提取出其中的 CAD 外部命令 </summary>
-            <param name="assemblyPath"></param>
+            <param name="sourceFilePath"></param>
+            <param name="destFolder"></param>
+            <param name="onlyCopyRelated"></param>
+            <param name="allCopiedFiles">方法结束后，此 List中包含有所有复制到的文件 </param>
             <returns></returns>
         </member>
-        <member name="M:eZwd.ExternalCommand.ExternalCommandHandler.InvokeCurrentExternalCommand(Microsoft.Office.Interop.Word.Application)">
+        <member name="M:eZwd.AddinManager.FileUtils.GetFolderSize(System.String)">
+            <summary> 返回文件夹内所有文件的总大小，单位为 MB  </summary>
+            <param name="folderPath"></param>
+            <returns> 文件夹内所有文件的总大小，单位为 MB </returns>
+        </member>
+        <member name="M:eZwd.AddinManager.ExCommandExecutor.InvokeCurrentExternalCommand(Microsoft.Office.Interop.Word.Application)">
             <summary> 执行当前（即上次执行过的那个）外部命令 </summary>
             <param name="excelApp">作为Execute()方法的输入参数的对象，表示当前的Excel Application </param>
         </member>
-        <member name="M:eZwd.ExternalCommand.ExternalCommandHandler.InvokeExternalCommand(System.String,System.Reflection.MethodInfo,Microsoft.Office.Interop.Word.Application)">
+        <member name="M:eZwd.AddinManager.ExCommandExecutor.InvokeExternalCommand(System.String,eZwd.AddinManager.IWordExCommand,Microsoft.Office.Interop.Word.Application)">
             <summary> 执行 CAD 的外部命令 </summary>
             <param name="assemblyPath">外部命令所对应的dll的绝对路径</param>
             <param name="externalCommand">此命令必须是实现了 IExternalCommand.Execute </param>
             <param name="excelApp">作为Execute()方法的输入参数的对象，表示当前的Excel Application </param>
             <remarks>出于调试的即时更新的考虑，这里在每一次调试外部命令时，都对最新的dll进行重新加载。</remarks>
         </member>
-        <member name="M:eZwd.ExternalCommand.ExternalCommandHandler.InvokeCommand(System.Reflection.MethodInfo,Microsoft.Office.Interop.Word.Application)">
-            <summary> 执行 CAD 的外部命令 </summary>
-            <param name="externalCommand">此命令必须是实现了 IExternalCommand.Execute </param>
+        <member name="M:eZwd.AddinManager.ExCommandExecutor.InvokeCommand(System.Reflection.MethodInfo,Microsoft.Office.Interop.Word.Application)">
+            <summary> 执行 Excel 的外部命令 </summary>
+            <param name="externalCommandMethod">此命令必须是实现了 IExternalCommand.Execute </param>
         </member>
-        <member name="M:eZwd.ExternalCommand.ExternalCommandHandler.GetDebugMessage(System.Exception)">
+        <member name="M:eZwd.AddinManager.ExCommandExecutor.RunActiveCommand(eZwd.AddinManager.IWordExCommand,System.String,Microsoft.Office.Interop.Word.Application)">
+            <summary> 执行外部命令 </summary>
+            <param name="addinItem">注意这里的 addinItem 实例是刷新前的程序集中对应的类，
+            这里只能用来提取其 FullName 字符串，而不能直接用来执行， 因为虽然它确实可以执行，但是执行的是重新编译前的那个方法。</param>
+            <param name="assemblyPath"></param>
+            <param name="excelApp"></param>
+        </member>
+        <member name="M:eZwd.AddinManager.ExCommandExecutor.GetDebugMessage(System.Exception)">
             <summary> 在调试阶段，为每一种报错显示对应的报错信息及出错位置。 </summary>
         </member>
-        <member name="T:eZwd.ExternalCommand.IExternalCommand">
-            <summary> 用来进行AddinManager快速调试的接口。实现此接口的类必须有一个无参数的构造函数 </summary>
+        <member name="T:eZwd.AddinManager.ExCommandFinder">
+            <summary> 将指定程序集中的 IExternalCommand 类提取出来 </summary>
         </member>
-        <member name="M:eZwd.ExternalCommand.IExternalCommand.Execute(Microsoft.Office.Interop.Word.Application,System.String@,System.Object@)">
+        <member name="M:eZwd.AddinManager.ExCommandFinder.RetriveExternalCommandsFromAssembly(System.String)">
+            <summary> 将程序集文件加载到内存，并且提取出其中的 CAD 外部命令 </summary>
+            <param name="assemblyPath"></param>
+            <returns></returns>
+        </member>
+        <member name="T:eZwd.AddinManager.EcDescriptionAttribute">
+            <summary>
+            用来作为实现 ExternalCommand 的类的描述
+            </summary>
+        </member>
+        <member name="F:eZwd.AddinManager.EcDescriptionAttribute.Description">
+            <summary> 具体的描述 </summary>
+        </member>
+        <member name="T:eZwd.AddinManager.IWordExCommand">
+            <summary> 用来进行AddinManager快速调试的接口。实现此接口的类必须有一个无参数的构造函数。
+            另外，推荐实现此接口的类所在程序集中也设计一个实现 IDllActivator_std 接口的类。 </summary>
+        </member>
+        <member name="M:eZwd.AddinManager.IWordExCommand.Execute(Microsoft.Office.Interop.Word.Application,System.String@,System.Object@)">
             <summary> Word AddinManger 快速调试插件 </summary>
             <param name="wdApp"> Word 当前程序</param>
-            <param name="errorMessage">当返回值为<see cref="F:eZwd.ExternalCommand.ExternalCommandResult.Failed"/>时，这个属性代表给出的报错信息。</param>
-            <param name="errorObj">当返回值为<see cref="F:eZwd.ExternalCommand.ExternalCommandResult.Failed"/>时，这个属性代表与出错内容相关的任何对象。</param>
+            <param name="errorMessage">当返回值为<see cref="F:eZwd.AddinManager.ExternalCommandResult.Failed"/>时，这个属性代表给出的报错信息。</param>
+            <param name="errorObj">当返回值为<see cref="F:eZwd.AddinManager.ExternalCommandResult.Failed"/>时，这个属性代表与出错内容相关的任何对象。</param>
             <returns></returns>
         </member>
     </members>

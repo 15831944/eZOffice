@@ -166,22 +166,28 @@
     <Compile Include="AddinManagerLoaderRibbon.Designer.cs">
       <DependentUpon>AddinManagerLoaderRibbon.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddinManager\AddinManagerAssembly.cs" />
     <Compile Include="AddinManager\AddinManagerLoader.cs" />
-    <Compile Include="AddinManager\AssemblyInfo\AssemblyInfoDllManager.cs" />
-    <Compile Include="AddinManager\AssemblyInfo\AssemblyInfoFileManager.cs" />
-    <Compile Include="AddinManager\AssemblyInfo\AssemblyInfos.cs" />
-    <Compile Include="AddinManager\AssemblyInfo\AssemblyInfoSettings.cs" />
-    <Compile Include="AddinManager\AssemblyInfo\BinarySerializer.cs" />
-    <Compile Include="AddinManager\AssemblyInfo\StringSerializer.cs" />
     <Compile Include="AddinManager\form_AddinManager.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AddinManager\form_AddinManager.Designer.cs">
       <DependentUpon>form_AddinManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExternalCommand\ExternalCommandHandler.cs" />
-    <Compile Include="ExternalCommand\IExternalCommand.cs" />
+    <Compile Include="AssemblyInfo\AddinManagerAssembly.cs" />
+    <Compile Include="AssemblyInfo\AssemblyInfoDllManager.cs" />
+    <Compile Include="AssemblyInfo\AssemblyInfoFileManager.cs" />
+    <Compile Include="AssemblyInfo\AssemblyInfos.cs" />
+    <Compile Include="AssemblyInfo\AssemblyInfoSettings.cs" />
+    <Compile Include="AssemblyInfo\BinarySerializer.cs" />
+    <Compile Include="AssemblyInfo\StringSerializer.cs" />
+    <Compile Include="AssemblyLoader\AssemblyLoader.cs" />
+    <Compile Include="AssemblyLoader\AssemblySelectorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssemblyLoader\FileUtils.cs" />
+    <Compile Include="ExternalCommand\ExCommandExecutor.cs" />
+    <Compile Include="ExternalCommand\ExCommandFinder.cs" />
+    <Compile Include="ExternalCommand\IVisioExCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -252,7 +258,7 @@
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
-        <ProjectProperties HostName="Visio" HostPackage="{29A7B9D7-A7F1-4328-8EF0-6B2D1A56B2C1}" OfficeVersion="15.0" VstxVersion="4.0" ApplicationType="Visio" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\15.0\Visio\InstallRoot\Path#visio.exe" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
+        <ProjectProperties HostName="Visio" HostPackage="{29A7B9D7-A7F1-4328-8EF0-6B2D1A56B2C1}" OfficeVersion="15.0" VstxVersion="4.0" ApplicationType="Visio" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\16.0\Visio\InstallRoot\Path#visio.exe" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
         <Host Name="Visio" GeneratedCodeNamespace="eZvso_AddinManager" IconIndex="0">
           <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
         </Host>

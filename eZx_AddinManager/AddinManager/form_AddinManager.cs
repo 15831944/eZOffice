@@ -157,16 +157,16 @@ namespace eZx.AddinManager
             _nodesInfo.Remove(asm);
         }
 
-        private void RemoveMethod(TreeNode ndMethod)
+        private void RemoveMethod(TreeNode ndAss)
         {
-            if (ndMethod.Level != 1)
+            if (ndAss.Level != 1)
             {
                 throw new ArgumentException("this is not a node representing an method.");
             }
             //
-            AddinManagerAssembly asm = ndMethod.Parent.Tag as AddinManagerAssembly;
+            AddinManagerAssembly asm = ndAss.Parent.Tag as AddinManagerAssembly;
 
-            IExcelExCommand mtd = ndMethod.Tag as IExcelExCommand;
+            IExcelExCommand mtd = ndAss.Tag as IExcelExCommand;
             //
             _nodesInfo[asm].Remove(mtd);
         }
@@ -203,6 +203,44 @@ namespace eZx.AddinManager
             }
         }
 
+        private void button_Reload_Click(object sender, EventArgs e)
+        {
+            TreeNode nd = treeView1.SelectedNode;
+            TreeNode ndAss = null;
+            if (nd == null) return;
+            //
+            if (nd.Level == 0) // 移除程序集
+            {
+                ndAss = nd;
+            }
+            else if (nd.Level == 1)// 移除某个方法所对应的程序集
+            {
+                ndAss = nd.Parent;
+            }
+            AddinManagerAssembly mtd = ndAss.Tag as AddinManagerAssembly;
+            string assFullPath = mtd.Path;
+           
+            // 重新加载此程序集
+            if (!string.IsNullOrEmpty(assFullPath))
+            {
+                bool hasNewMethodAdded = false;
+                //
+                var methods = ExCommandFinder.RetriveExternalCommandsFromAssembly(assFullPath);
+                if (methods.Any())
+                {
+                    // 更新 Dictionary
+                    AddMethodsInOneAssembly(assFullPath, methods);
+                    hasNewMethodAdded = true;
+                }
+
+                if (hasNewMethodAdded)
+                {
+                    // 刷新界面
+                    RefreshTreeView(_nodesInfo);
+                }
+            }
+        }
+
         /// <summary> 通过选择文件对话框选择要进行数据提取的Excel文件 </summary>
         /// <returns> 要进行数据提取的Excel文件的绝对路径 </returns>
         public static string[] ChooseOpenDll(string title)
@@ -222,6 +260,7 @@ namespace eZx.AddinManager
             }
             return null;
         }
+
 
         #endregion
 
@@ -295,5 +334,7 @@ namespace eZx.AddinManager
             }
             label_Description.Text = description;
         }
+
+
     }
 }
