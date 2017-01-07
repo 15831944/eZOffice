@@ -240,7 +240,7 @@
         <member name="M:eZx.AddinManager.AssemblyInfoDllManager.GetInfosFromSettings">
             <summary> 将 Settings 配置文件中的字符进行反序列化 </summary>
             <returns></returns>
-            <remarks>对于CAD.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
+            <remarks>对于Excel.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
             但是在调用ExternalCommand时还是会出bug，通常的报错为：没有为该对象定义无参数的构造函数。 </remarks>
         </member>
         <member name="T:eZx.AddinManager.AssemblyInfoFileManager">
@@ -248,7 +248,7 @@
         </member>
         <member name="M:eZx.AddinManager.AssemblyInfoFileManager.GetInfosFromFile">
             <summary> 将外部 二进制文件 中的字符进行反序列化 </summary>
-            <remarks>对于CAD.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
+            <remarks>对于Excel.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
             但是在调用ExternalCommand时还是会出bug，通常的报错为：没有为该对象定义无参数的构造函数。 </remarks>
         </member>
         <member name="T:eZx.AddinManager.AssemblyInfos">
@@ -300,13 +300,13 @@
         </member>
         <member name="T:eZx.AddinManager.StringSerializer.ZengfyLinkBinder">
             <summary>
-            为了解决SerializationException，方法之一是确保此assembly放置在与acad.exe 或 revit.exe相同的文件夹中，
+            为了解决SerializationException，方法之一是确保此assembly放置在与aExcel.exe 或 revit.exe相同的文件夹中，
             另一个方法就是实现一个像这样的类。
             </summary>
             <remarks>
              Resolve System.Runtime.Serialization.SerializationException, Message =
             "Unable to find assembly 'StoreData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'."
-            One solution is to ensure that assembly resides in same directory as acad.exe or revit.exe,
+            One solution is to ensure that assembly resides in same directory as aExcel.exe or revit.exe,
             the other is to implement a class such as this, cf.
             http://www.codeproject.com/soap/Serialization_Samples.asp
             </remarks>
@@ -316,7 +316,7 @@
             <param name="excelApp">作为Execute()方法的输入参数的对象，表示当前的Excel Application </param>
         </member>
         <member name="M:eZx.AddinManager.ExCommandExecutor.InvokeExternalCommand(System.String,eZx.AddinManager.IExcelExCommand,Microsoft.Office.Interop.Excel.Application)">
-            <summary> 执行 CAD 的外部命令 </summary>
+            <summary> 执行 Excel 的外部命令 </summary>
             <param name="assemblyPath">外部命令所对应的dll的绝对路径</param>
             <param name="externalCommand">此命令必须是实现了 IExternalCommand.Execute </param>
             <param name="excelApp">作为Execute()方法的输入参数的对象，表示当前的Excel Application </param>
@@ -340,7 +340,7 @@
             <summary> 将指定程序集中的 IExternalCommand 类提取出来 </summary>
         </member>
         <member name="M:eZx.AddinManager.ExCommandFinder.RetriveExternalCommandsFromAssembly(System.String)">
-            <summary> 将程序集文件加载到内存，并且提取出其中的 CAD 外部命令 </summary>
+            <summary> 将程序集文件加载到内存，并且提取出其中的 Excel 外部命令 </summary>
             <param name="assemblyPath"></param>
             <returns></returns>
         </member>

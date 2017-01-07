@@ -80,16 +80,39 @@
         </member>
         <member name="M:eZstd.API.IO.ShellExecute(System.IntPtr,System.String,System.String,System.String,System.String,eZstd.API.ShowCommands)">
             <summary>
-            以不同的显示方式执行指定的文件。
+            以不同的显示方式执行指定的文件（异步非阻塞模式，直接返回结果，不等待执行的程序结束）
+            如果要等待某执行的程序结束，可以参考<seealso cref="T:System.Diagnostics.Process"/>类中的“WaitForExit()”的相关帮助，zengfy亲测有效。
             </summary>
-            <param name="hwnd"></param>
-            <param name="lpOperation"></param>
-            <param name="lpFile"></param>
-            <param name="lpParameters"></param>
-            <param name="lpDirectory"></param>
-            <param name="nShowCmd"></param>
-            <returns> 若ShellExecute函数调用成功，则返回值为被执行程序的实例句柄。若返回值小于32，则表示出现错误。 </returns>
-            <remarks> 比如要以隐藏的方式打开某文件，则可能使用语句：ShellExecute(IntPtr.Zero, "open", FileFullName, "", "", ShowCommands.SW_HIDE); </remarks>
+            <param name="hwnd">A handle to the parent window used for displaying a UI or error messages. 
+            This value can be NULL if the operation is not associated with a window.
+            </param>
+            <param name="lpOperation"><see cref="T:eZstd.API.ShellExecuteOperation"/>中的某一个常数。
+            A pointer to a null-terminated string, referred to in this case as a verb, that specifies the action to be performed. 
+            The set of available verbs depends on the particular file or folder.
+            </param>
+            <param name="lpFile">用于指定要打开的文件名、要执行的可执行程序文件名，或要浏览的文件夹名。
+            A pointer to a null-terminated string that specifies the file or object on which to execute the specified verb. 
+            To specify a Shell namespace object, pass the fully qualified parse name. 
+            Note that not all verbs are supported on all objects. 
+            For example, not all document types support the "print" verb. If a relative path is used for the lpDirectory parameter do not use a relative path for lpFile.
+            </param>
+            <param name="lpParameters"> 如果 <paramref name="lpFile"/> 指向一个可执行程序，则此参数为对应的程序指定输入参数。多个参数之间以空格进行分隔。 
+            If lpFile specifies an executable file, this parameter is a pointer to a null-terminated string that specifies the parameters to be passed to the application. 
+            The format of this string is determined by the verb that is to be invoked. If lpFile specifies a document file, lpParameters should be NULL.
+            </param>
+            <param name="lpDirectory">指定默认工作文件夹。 A pointer to a null-terminated string that specifies the default (working) directory for the action. If this value is NULL, the current working directory is used. 
+            If a relative path is provided at lpFile, do not use a relative path for lpDirectory.
+            </param>
+            <param name="nShowCmd">The flags that specify how an application is to be displayed when it is opened. 
+            If lpFile specifies a document file, the flag is simply passed to the associated application. It is up to the application to decide how to handle it. 
+            These values are defined in Winuser.h.
+            </param>
+            <returns> 若ShellExecute函数调用成功，则返回值为被执行程序的实例句柄，其值大于32。若返回值小于32，则表示出现错误。  </returns>
+            <remarks> 
+            举例：
+            1. 要以隐藏的方式打开某文件，则可能使用语句：ShellExecute(IntPtr.Zero, "open", FileFullName, "", "", ShowCommands.SW_HIDE);
+            2.  
+            </remarks>
         </member>
         <member name="T:eZstd.API.Message">
             <summary>
@@ -2689,6 +2712,39 @@
             用原来的大小和位置显示一个窗口，同时令其进入活动状态
             </summary>
         </member>
+        <member name="T:eZstd.API.ShellExecuteOperation">
+            <summary> <see cref="M:eZstd.API.IO.ShellExecute(System.IntPtr,System.String,System.String,System.String,System.String,eZstd.API.ShowCommands)"/> 方法中的 lpOperation 参数。 </summary>
+        </member>
+        <member name="F:eZstd.API.ShellExecuteOperation.NULL">
+            <summary>
+            The default verb is used, if available. If not, the "open" verb is used. If neither verb is available, the system uses the first verb listed in the registry.
+            </summary>
+        </member>
+        <member name="F:eZstd.API.ShellExecuteOperation.edit">
+            <summary>
+            Launches an editor and opens the document for editing. If lpFile is not a document file, the function will fail.
+            </summary>
+        </member>
+        <member name="F:eZstd.API.ShellExecuteOperation.explore">
+            <summary>
+            Explores a folder specified by lpFile.
+            </summary>
+        </member>
+        <member name="F:eZstd.API.ShellExecuteOperation.find">
+            <summary>
+            Initiates a search beginning in the directory specified by lpDirectory.
+            </summary>
+        </member>
+        <member name="F:eZstd.API.ShellExecuteOperation.open">
+            <summary>
+            Opens the item specified by the lpFile parameter. The item can be a file or folder.
+            </summary>
+        </member>
+        <member name="F:eZstd.API.ShellExecuteOperation.print">
+            <summary>
+            Prints the file specified by lpFile. If lpFile is not a document file, the function fails.
+            </summary>
+        </member>
         <member name="T:eZstd.API.MSG">
             <summary>
             The MSG structure contains message information from a thread's message queue.
@@ -2729,7 +2785,7 @@
              新的窗口过程替换了以前的窗口过程。应用程序必须通过调用CallWindowsProc来将新窗口过程没有处理的任何消息传送到以前的窗口过程中，
              这样就允许应用程序创建一系列窗口过程。  It is possible to execute an array of bytes. lpPrevWndFunc is equal to the address of the byte array.</remarks>
         </member>
-        <member name="M:eZstd.APIUtils.IO.KillFileByBat(System.String)">
+        <member name="M:eZstd.API.IOUtils.KillFileByBat(System.String)">
             <summary>
             通过生成.bat文件的方式来删除指定的文件，包括某正在执行的.exe或.dll文件。
             </summary>
@@ -2738,13 +2794,13 @@
             <returns> 返回生成的那个.bat文件的绝对路径。但是当此函数执行完成时，此.bat文件应该已经被删除了。 </returns>
             <remarks>此函数是通过先在同文件夹下生成一个.bat命令文件，然后再通过.bat中的命令来删除.exe文件的。 </remarks>
         </member>
-        <member name="T:eZstd.APIUtils.Windows">
+        <member name="T:eZstd.API.WindowsUtils">
             <summary>
             在windows API中，已经有大量的函数可以直接调用，但是在某些特殊的情况下，还是要通过一些复杂的操作流程才能对窗口进行处理。
             此类对于这些复杂操作进行进一步封装。
             </summary>
         </member>
-        <member name="M:eZstd.APIUtils.Windows.FindChildWindow(System.IntPtr,System.String,System.String)">
+        <member name="M:eZstd.API.WindowsUtils.FindChildWindow(System.IntPtr,System.String,System.String)">
             <summary>
             搜索父窗口（或控件）中指定类名与窗口文本的子窗口。如果没有匹配到指定类名与文本的子窗口，则返回 new IntPtr(0)
             </summary>
@@ -2753,12 +2809,12 @@
             <param name="windowText">要匹配的窗口文本，如果不需要匹配，则输入null</param>
             <returns>如果没有匹配到指定类名与文本的子窗口，则返回 new IntPtr(0)</returns>
         </member>
-        <member name="T:eZstd.APIUtils.Windows.ChildWindowFinder">
+        <member name="T:eZstd.API.WindowsUtils.ChildWindowFinder">
             <summary>
             搜索父窗口（或控件）中指定类名与窗口文本的子窗口
             </summary>
         </member>
-        <member name="M:eZstd.APIUtils.Windows.ChildWindowFinder.FindChild(System.IntPtr,System.String,System.String)">
+        <member name="M:eZstd.API.WindowsUtils.ChildWindowFinder.FindChild(System.IntPtr,System.String,System.String)">
             <summary>
             搜索父窗口（或控件）中指定类名与窗口文本的子窗口
             </summary>
@@ -2767,7 +2823,7 @@
             <param name="windowText">要匹配的窗口文本，如果不需要匹配，则输入null</param>
             <returns> 如果没有匹配到指定类名与文本的子窗口，则返回 new IntPtr(0) </returns>
         </member>
-        <member name="M:eZstd.APIUtils.Windows.ChildWindowFinder.FindGraphicalViewProc(System.IntPtr,System.IntPtr)">
+        <member name="M:eZstd.API.WindowsUtils.ChildWindowFinder.FindGraphicalViewProc(System.IntPtr,System.IntPtr)">
             <summary>
             对 Revit 主窗口下的所有子窗口进行遍历，以找到 绘图View的那个子窗口
             </summary>
@@ -3392,6 +3448,45 @@
         <member name="M:eZstd.Enumerable.Array2D.Clone">
             <summary> 将对象创建一个副本。返回值为一个<see cref="T:eZstd.Enumerable.Array2D"/>对象 </summary>
             <returns> 返回值为一个<see cref="T:eZstd.Enumerable.Array2D"/>对象 </returns>
+        </member>
+        <member name="T:eZstd.Enumerable.Array2D.NumericalOperation">
+            <summary>
+            多个数值之间的计算过程
+            </summary>
+            <param name="values"></param>
+            <returns>多个数值之间算术计算的结果值</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CompositeCalculation(eZstd.Enumerable.Array2D.NumericalOperation,eZstd.Enumerable.Array2D[])">
+            <summary>
+            多个二维数组的复合计算
+            </summary>
+            <param name="operation"></param>
+            <param name="arrays">集合中二维数组的个数可以多于 <paramref name="operation"/> 中进行数值计算的元素个数；
+            但是每一个二维数组的大小必须相同。</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CompositeCalculation(eZstd.Enumerable.Array2D.NumericalOperation,System.Int32,System.Int32,System.Int32,System.Double[0:,0:][])">
+            <summary> 核心计算过程 </summary>
+            <param name="operation">多个数组之间的计算过程</param>
+            <param name="rows">每个数组的行数</param>
+            <param name="columns">每个数组的列数</param>
+            <param name="arraysCount">数组的个数</param>
+            <param name="arrays">所有要参与计算的数组，每个数组都是一个二维数组double[,]或int[,]，而且数组的大小一定要相同</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CheckArrays(System.Array[]@,System.Int32@,System.Int32@)">
+            <summary> 比较多个二维数组的大小是否相同 </summary>
+            <param name="array2ds">每一个数组都必须是二维数组，比如double[,]或者int[,]</param>
+            <param name="rows"></param>
+            <param name="columns"></param>
+            <returns>如果所有二维数组的大小都相同，则返回true</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CheckArrays(eZstd.Enumerable.Array2D[]@,System.Int32@,System.Int32@)">
+            <summary> 比较多个二维数组的大小是否相同 </summary>
+            <param name="array2ds"></param>
+            <param name="rows"></param>
+            <param name="columns"></param>
+            <returns>如果所有二维数组的大小都相同，则返回true</returns>
         </member>
         <member name="M:eZstd.Enumerable.Array2D.CheckArray(System.Int32[0:,0:]@)">
             <summary> 检查两个二维数组的元素数量是否一致 </summary>

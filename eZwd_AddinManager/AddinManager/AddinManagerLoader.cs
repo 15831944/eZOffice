@@ -4,23 +4,23 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using eZwd.AddinManager;
-using eZwd.ExternalCommand;
 using Microsoft.Office.Interop.Word;
 using Microsoft.Office.Tools.Ribbon;
 
 namespace eZwd.AddinManager
 {
+    /// <summary> AddinManager插件 的窗口加载、命令执行 </summary>
     internal class AddinManagerLoader
     {
         #region ---   插件的加载与卸载
 
-        public static void InstallAddinManager(Application excelApp)
+        public static void InstallAddinManager(Application WordApp)
         {
             try
             {
                 // 将上次插件卸载时保存的程序集数据加载进来
-                form_AddinManager frm = form_AddinManager.GetUniqueForm(excelApp);
-                var nodesInfo = AssemblyInfoDllManager.GetInfosFromFile();
+                form_AddinManager frm = form_AddinManager.GetUniqueForm(WordApp);
+                var nodesInfo = AssemblyInfoDllManager.GetInfosFromSettings();
                 frm.RefreshTreeView(nodesInfo);
             }
             catch (Exception ex)
@@ -29,15 +29,15 @@ namespace eZwd.AddinManager
             }
         }
 
-        public static void UninstallAddinManager(Application excelApp)
+        public static void UninstallAddinManager(Application WordApp)
         {
             try
             {
-                form_AddinManager frm = form_AddinManager.GetUniqueForm(excelApp);
+                form_AddinManager frm = form_AddinManager.GetUniqueForm(WordApp);
                 var nodesInfo = frm.NodesInfo;
                 //
                 // 将窗口中加载的程序集数据保存下来
-                AssemblyInfoDllManager.SaveAssemblyInfosToFile(nodesInfo);
+                AssemblyInfoDllManager.SaveAssemblyInfosToSettings(nodesInfo);
             }
             catch (Exception ex)
             {
@@ -48,15 +48,15 @@ namespace eZwd.AddinManager
 
         #region ---   点击调试按钮
 
-        public static void ShowAddinManager(Application excelApp)
+        public static void ShowAddinManager(Application WordApp)
         {
-            form_AddinManager frm = form_AddinManager.GetUniqueForm(excelApp);
+            form_AddinManager frm = form_AddinManager.GetUniqueForm(WordApp);
             frm.Show(null);
         }
 
-        public static void LastExternalCommand(Application excelApp)
+        public static void LastExternalCommand(Application WordApp)
         {
-            ExternalCommandHandler.InvokeCurrentExternalCommand(excelApp);
+            ExCommandExecutor.InvokeCurrentExternalCommand(WordApp);
         }
 
         #endregion

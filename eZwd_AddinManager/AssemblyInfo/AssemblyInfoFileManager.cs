@@ -4,11 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using eZwd.AddinManager;
-using eZwd.ExternalCommand;
 
 namespace eZwd.AddinManager
 {
+    /// <summary> 通过 外部文本文件 来进行程序集信息的存储与提取 </summary>
     internal class AssemblyInfoFileManager
     {
         private static readonly string _addinManagerDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName;
@@ -22,12 +21,11 @@ namespace eZwd.AddinManager
         #region ---   从文件反序列化
 
         /// <summary> 将外部 二进制文件 中的字符进行反序列化 </summary>
-        /// <remarks>对于CAD.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
+        /// <remarks>对于Word.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
         /// 但是在调用ExternalCommand时还是会出bug，通常的报错为：没有为该对象定义无参数的构造函数。 </remarks>
-        public static Dictionary<AddinManagerAssembly, List<MethodInfo>> GetInfosFromFile()
+        public static Dictionary<AddinManagerAssembly, List<IWordExCommand>> GetInfosFromFile()
         {
-            Dictionary<AddinManagerAssembly, List<MethodInfo>> nodesInfo;
-            nodesInfo = new Dictionary<AddinManagerAssembly, List<MethodInfo>>(new AssemblyComparer());
+            var nodesInfo = new Dictionary<AddinManagerAssembly, List<IWordExCommand>>(new AssemblyComparer());
 
             string infoPath = Path.Combine(AddinManagerDirectory, SerializedFileName);
             if (File.Exists(infoPath))
@@ -46,11 +44,10 @@ namespace eZwd.AddinManager
         }
 
 
-        private static Dictionary<AddinManagerAssembly, List<MethodInfo>> DeserializeAssemblies(
+        private static Dictionary<AddinManagerAssembly, List<IWordExCommand>> DeserializeAssemblies(
             AssemblyInfos amInfos)
         {
-            Dictionary<AddinManagerAssembly, List<MethodInfo>> nodesInfo;
-            nodesInfo = new Dictionary<AddinManagerAssembly, List<MethodInfo>>(new AssemblyComparer());
+            var nodesInfo = new Dictionary<AddinManagerAssembly, List<IWordExCommand>>(new AssemblyComparer());
             //
             if (amInfos != null)
             {
@@ -59,10 +56,10 @@ namespace eZwd.AddinManager
                     if (File.Exists(assemblyPath))
                     {
                         // 将每一个程序集中的外部命令提取出来
-                        List<MethodInfo> m = ExternalCommandHandler.LoadExternalCommandsFromAssembly(assemblyPath);
+                        List<IWordExCommand> m = ExCommandFinder.RetriveExternalCommandsFromAssembly(assemblyPath);
                         if (m.Any())
                         {
-                            Assembly ass = m[0].DeclaringType.Assembly;
+                            Assembly ass = m[0].GetType().Assembly;
                             AddinManagerAssembly amAssembly = new AddinManagerAssembly(assemblyPath, ass);
                             nodesInfo.Add(amAssembly, m);
                         }
@@ -94,7 +91,7 @@ namespace eZwd.AddinManager
             fs.Close();
             fs.Dispose();
         }
-        
+
         #endregion
 
     }

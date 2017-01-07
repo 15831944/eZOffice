@@ -12,14 +12,14 @@ namespace eZvso_AddinManager
         private void AddinManagerLoader_Load(object sender, RibbonUIEventArgs e)
         {
             // 将上次插件卸载时保存的程序集数据加载进来
-            Application excelApp = Globals.ThisAddIn.Application;
-            AddinManagerLoader.InstallAddinManager(excelApp);
+            Application VisioApp = Globals.ThisAddIn.Application;
+            AddinManagerLoader.InstallAddinManager(VisioApp);
         }
 
         private void AddinManagerLoaderRibbon_Close(object sender, EventArgs e)
         {
-            Application excelApp = Globals.ThisAddIn.Application;
-            AddinManagerLoader.UninstallAddinManager(excelApp);
+            Application VisioApp = Globals.ThisAddIn.Application;
+            AddinManagerLoader.UninstallAddinManager(VisioApp);
         }
 
         #endregion
@@ -28,14 +28,14 @@ namespace eZvso_AddinManager
 
         private void buttonAddinManager_Click(object sender, RibbonControlEventArgs e)
         {
-            Application excelApp = Globals.ThisAddIn.Application;
-            AddinManagerLoader.ShowAddinManager(excelApp);
+            Application VisioApp = Globals.ThisAddIn.Application;
+            AddinManagerLoader.ShowAddinManager(VisioApp);
         }
 
         private void buttonLastCommand_Click(object sender, RibbonControlEventArgs e)
         {
-            Application excelApp = Globals.ThisAddIn.Application;
-            AddinManagerLoader.LastExternalCommand(excelApp);
+            Application VisioApp = Globals.ThisAddIn.Application;
+            AddinManagerLoader.LastExternalCommand(VisioApp);
         }
 
         #endregion

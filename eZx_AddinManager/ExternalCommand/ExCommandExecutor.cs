@@ -24,7 +24,7 @@ namespace eZx.AddinManager
             }
         }
 
-        /// <summary> 执行 CAD 的外部命令 </summary>
+        /// <summary> 执行 Excel 的外部命令 </summary>
         /// <param name="assemblyPath">外部命令所对应的dll的绝对路径</param>
         /// <param name="externalCommand">此命令必须是实现了 IExternalCommand.Execute </param>
         /// <param name="excelApp">作为Execute()方法的输入参数的对象，表示当前的Excel Application </param>
@@ -207,12 +207,13 @@ namespace eZx.AddinManager
             {
                 case ExternalCommandResult.Failed:
                     {
-                        MessageBox.Show(errorMessage, @"外部命令执行出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         // 选择出错的单元格
                         if (errorRange != null)
                         {
                             errorRange.Select();
+                            errorMessage += "\r\n出错单元格： " + errorRange.Address;
                         }
+                        MessageBox.Show(errorMessage, @"外部命令执行出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     }
                 case ExternalCommandResult.Cancelled:

@@ -4,17 +4,38 @@
         <name>eZwd</name>
     </assembly>
     <members>
-        <member name="T:eZwd.Debug.Ec_ShowRangeStart">
+        <member name="T:eZwd.Debug.Ec_FormatPythonCodeFromPyCharm">
+            <summary> 将从Pycharm中复制到word中的代码进行格式化 </summary>
+        </member>
+        <member name="M:eZwd.Debug.Ec_FormatPythonCodeFromPyCharm.FormatPythonCodeFromPyCharm(Microsoft.Office.Interop.Word.Application)">
+            <summary> 将从Pycharm中复制到word中的代码进行格式化</summary>
+            <param name="wdApp"></param>
+        </member>
+        <member name="T:eZwd.Debug.Ec_ShowRange">
             <summary>
             显示当前光标选择区域的起始处的坐标
             </summary>
         </member>
-        <member name="T:eZwd.Debug.Ec_RangeIndex">
-            <summary> 查看选择的区域的Range的范围 </summary>
+        <member name="T:eZwd.Debug.Ec_FillPythonPrint">
+            <summary> 为 旧版本中Python的Print 方法无括号问题添加括号 </summary>
         </member>
-        <member name="M:eZwd.Debug.Ec_RangeIndex.GenerateEmbededField(Microsoft.Office.Interop.Word.Application)">
+        <member name="M:eZwd.Debug.Ec_FillPythonPrint.FillParathesisForPrint(Microsoft.Office.Interop.Word.Application)">
             <summary> 生成一个嵌套的域代码： { quote "一九一一年一月{ STYLEREF 1 \s }日" \@"D" }</summary>
             <param name="wdApp"></param>
+        </member>
+        <member name="T:eZwd.eZwd_API.RangeUtils">
+            <summary> 对 <see cref="T:Microsoft.Office.Interop.Word.Range"/> 对象进行一些通用性的操作</summary>
+        </member>
+        <member name="M:eZwd.eZwd_API.RangeUtils.ReplaceCharactors(Microsoft.Office.Interop.Word.Range,System.String,System.String,System.Boolean)">
+            <summary>
+            将指定range范围内的特定字符串进行字符替换（不修改文字样式）
+            </summary>
+            <param name="rg"></param>
+            <param name="src">要查找的字符，支持手动换行符“^l”等特殊字符</param>
+            <param name="replace">要替换的字符，支持段落标记“^p”等特殊字符</param>
+            <param name="matchCase"></param>
+            <returns>returns True if the find operation is successful.</returns>
+            <remarks>搜索或替换完成后，此Range对象的范围不会发生改变</remarks>
         </member>
         <member name="T:eZwd.RibbonHandlers.StaticFunction">
             <summary> 一些结构性的静态方法 </summary>
