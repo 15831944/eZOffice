@@ -258,7 +258,7 @@ namespace eZx_API.Entities
             {
                 // 则 rgValue 中只有一个单元格的值
                 convertedArray = new object[1, 1];
-                convertedArray[1, 1] = rgValue;
+                convertedArray[0, 0] = rgValue;
                 lowerBound = 0;
                 rowsCount = 1;
                 columnsCount = 1;

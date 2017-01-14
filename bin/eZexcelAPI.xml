@@ -305,6 +305,97 @@
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
+        <member name="T:eZx_API.UserControls.CurveRangeLocator">
+            <summary> 对二维曲线数据进行操作时，用来定位对应的数据源 </summary>
+        </member>
+        <member name="M:eZx_API.UserControls.CurveRangeLocator.SetApplication(Microsoft.Office.Interop.Excel.Application)">
+            <summary> 为控件设置一个 Application 对象，此方法必须在构造函数执行后立即执行。 </summary>
+        </member>
+        <member name="M:eZx_API.UserControls.CurveRangeLocator.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:eZx_API.UserControls.CurveRangeLocator.button_srcXY_Click(System.Object,System.EventArgs)">
+            <summary> 选择数据源或者目标数据的单元格 </summary>
+            <param name="sender"><see cref="T:System.Windows.Forms.Button"/>对象</param>
+        </member>
+        <member name="M:eZx_API.UserControls.CurveRangeLocator.SeperateXY(Microsoft.Office.Interop.Excel.Range,Microsoft.Office.Interop.Excel.Range@,Microsoft.Office.Interop.Excel.Range@)">
+            <summary>
+            将选择的XY数据源拆分为X与Y
+            </summary>
+            <param name="sourceRange"></param>
+            <param name="sourceX"></param>
+            <param name="sourceY"></param>
+            <returns>如果拆解成功，则返回true</returns>
+        </member>
+        <member name="F:eZx_API.UserControls.CurveRangeLocator.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:eZx_API.UserControls.CurveRangeLocator.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:eZx_API.UserControls.CurveRangeLocator.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:eZx_API.UserControls.RangeGetor">
+            <summary>
+            从 Excel 界面中获得指定的单元格区域
+            </summary>
+        </member>
+        <member name="M:eZx_API.UserControls.RangeGetor.SetApplication(Microsoft.Office.Interop.Excel.Application)">
+            <summary> 为控件设置一个 Application 对象，此方法必须在构造函数执行后立即执行。 </summary>
+        </member>
+        <member name="M:eZx_API.UserControls.RangeGetor.#ctor">
+            <summary> 构造函数，在初始化对象后，必须要立即通过<seealso cref="M:eZx_API.UserControls.RangeGetor.SetApplication(Microsoft.Office.Interop.Excel.Application)"/>方法赋值。 </summary>
+        </member>
+        <member name="E:eZx_API.UserControls.RangeGetor.RangeChanged">
+            <summary>
+            当 <seealso cref="P:eZx_API.UserControls.RangeGetor.Range"/> 属性发生变化时触发
+            </summary>
+        </member>
+        <member name="P:eZx_API.UserControls.RangeGetor.Range">
+            <summary> 控件所对应的Excel单元格区域 </summary>
+        </member>
+        <member name="M:eZx_API.UserControls.RangeGetor.InnerSetRange(Microsoft.Office.Interop.Excel.Range)">
+            <summary>
+            在类外部对 Range 对象的值进行设置
+            </summary>
+            <param name="newRange"></param>
+        </member>
+        <member name="F:eZx_API.UserControls.RangeGetor._rangeHasBeenChangeByOuterEvent">
+            <summary>
+            如果 Range 属性已经通过<seealso cref="M:eZx_API.UserControls.RangeGetor.SetRange(Microsoft.Office.Interop.Excel.Range,System.Boolean,System.Boolean)"/>方法被外部用户强制修改过了，
+            那么在<seealso cref="M:eZx_API.UserControls.RangeGetor.InnerSetRange(Microsoft.Office.Interop.Excel.Range)"/>方法中就不能再将其值复原了。
+            </summary>
+        </member>
+        <member name="M:eZx_API.UserControls.RangeGetor.SetRange(Microsoft.Office.Interop.Excel.Range,System.Boolean,System.Boolean)">
+            <summary>
+            在类外部对 Range 对象的值进行设置
+            </summary>
+            <param name="newRange"></param>
+            <param name="isOuterEvent"> 此方法是否通过外部的 <seealso cref="E:eZx_API.UserControls.RangeGetor.RangeChanged"/>事件触发时被执行 </param>
+            <param name="raisePossibleEvent"> 是否触发可能的 <seealso cref="E:eZx_API.UserControls.RangeGetor.RangeChanged"/> 事件 </param>
+        </member>
+        <member name="F:eZx_API.UserControls.RangeGetor.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:eZx_API.UserControls.RangeGetor.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
         <member name="T:DllActivator.DllActivator_eZx_API">
             <summary> 用于 OldW Revit 插件中多个dll之前的AddinManager调试 </summary>
         </member>

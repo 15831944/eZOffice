@@ -73,3 +73,4 @@ C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZx\obj\Debug\eZx.csproj.GenerateReso
 C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZx\obj\Debug\eZx.dll
 C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZx\obj\Debug\eZx.pdb
 E:\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.RibbonHandler.FormSpeedModeHandler.resources
+E:\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.RibbonHandler.FormInterpolations.resources

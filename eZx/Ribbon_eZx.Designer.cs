@@ -54,6 +54,7 @@
             this.btnReshape = this.Factory.CreateRibbonButton();
             this.ButtonTranspose = this.Factory.CreateRibbonButton();
             this.button_SpeedMode = this.Factory.CreateRibbonButton();
+            this.button_Interpolations = this.Factory.CreateRibbonButton();
             this.Group3 = this.Factory.CreateRibbonGroup();
             this.EditBox_p1 = this.Factory.CreateRibbonEditBox();
             this.EditBox_p2 = this.Factory.CreateRibbonEditBox();
@@ -173,6 +174,7 @@
             this.Group2.Items.Add(this.btnReshape);
             this.Group2.Items.Add(this.ButtonTranspose);
             this.Group2.Items.Add(this.button_SpeedMode);
+            this.Group2.Items.Add(this.button_Interpolations);
             this.Group2.Label = "数据处理";
             this.Group2.Name = "Group2";
             // 
@@ -250,8 +252,21 @@
             this.button_SpeedMode.Label = "缩减";
             this.button_SpeedMode.Name = "button_SpeedMode";
             this.button_SpeedMode.OfficeImageId = "ChartTrendline";
+            this.button_SpeedMode.ScreenTip = "缩减曲线数据点的数量";
             this.button_SpeedMode.ShowImage = true;
+            this.button_SpeedMode.SuperTip = "类似于Origin中的SpeedMode功能，用来将大量数据点曲线缩减为少量的数据点，并保持曲线原来的大致形态。";
             this.button_SpeedMode.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button_SpeedMode_Click);
+            // 
+            // button_Interpolations
+            // 
+            this.button_Interpolations.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.button_Interpolations.Image = global::eZx.Properties.Resources.Interpolation;
+            this.button_Interpolations.Label = "样条插值";
+            this.button_Interpolations.Name = "button_Interpolations";
+            this.button_Interpolations.ScreenTip = "三次样条插值";
+            this.button_Interpolations.ShowImage = true;
+            this.button_Interpolations.SuperTip = "三次样条的特性为：曲线中任意点处的二阶导数连续。";
+            this.button_Interpolations.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button_Interpolations_Click);
             // 
             // Group3
             // 
@@ -388,6 +403,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ButtonValue;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ButtonTranspose;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button_SpeedMode;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button_Interpolations;
     }
 
     partial class ThisRibbonCollection

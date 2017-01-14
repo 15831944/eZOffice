@@ -25,3 +25,5 @@ C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZx_API\obj\Debug\eZx_API.pdb
 C:\Users\zengfy\Desktop\Dormitory\eZOffice\bin\eZx_API.dll
 C:\Users\zengfy\Desktop\Dormitory\eZOffice\bin\eZx_API.pdb
 C:\Users\zengfy\Desktop\Dormitory\eZOffice\bin\eZexcelAPI.xml
+E:\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.UserControls.CurveRangeLocator.resources
+E:\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.UserControls.RangeGetor.resources

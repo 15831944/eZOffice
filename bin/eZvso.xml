@@ -140,6 +140,30 @@
             <param name="includeMyself">返回的所有子形状的集合中是否包含自身</param>
             <returns></returns>
         </member>
+        <member name="M:eZvso.eZvso_API.ShapeSearching.GetAllShapes(Microsoft.Office.Interop.Visio.Shape,System.UInt16,System.Boolean)">
+            <summary>
+            按逐级深入的方式获得形状的所有子形状
+            </summary>
+            <param name="shp"></param>
+            <param name="subLevel"> 0表示此形状本身，1形状此形状的下一级直接子形状，依此类推 </param>
+            <param name="includeMyself">返回的所有子形状的集合中是否包含自身</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZvso.eZvso_API.ShapeSearching.GetAllShapes(Microsoft.Office.Interop.Visio.Page)">
+            <summary>
+            按逐级深入的方式获得页面中的所有子形状
+            </summary>
+            <param name="pg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZvso.eZvso_API.ShapeSearching.GetAllShapes(Microsoft.Office.Interop.Visio.Page,System.UInt16)">
+            <summary>
+            按逐级深入的方式获得页面中的所有子形状
+            </summary>
+            <param name="pg"></param>
+            <param name="subLevel">要向下搜索多少层。1表示直接隶属于<see cref="T:Microsoft.Office.Interop.Visio.Page"/>的形状，2表示这些形状的下一级子形状。0表示page本身，则返回null。</param>
+            <returns></returns>
+        </member>
         <member name="M:eZvso.eZvso_API.ShapeSearching.AddNextChildShapes(System.Collections.Generic.List{Microsoft.Office.Interop.Visio.Shape},System.Collections.Generic.List{Microsoft.Office.Interop.Visio.Shape})">
             <summary>
             搜索某一级形状集合中的下一级的所有子形状
