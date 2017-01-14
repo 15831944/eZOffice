@@ -1,7 +1,10 @@
 ﻿using System;
 using DllActivator;
+using eZstd.Enumerable;
+using eZstd.Mathematics;
 using eZx.AddinManager;
 using eZx.RibbonHandler;
+using eZx_API.Entities;
 using Microsoft.Office.Interop.Excel;
 
 namespace eZx.Debug
@@ -26,15 +29,14 @@ namespace eZx.Debug
             }
         }
 
+        #region ---   具体的调试操作
+
         // 开始具体的调试操作
         private static void DoSomething(Application excelApp)
         {
-            throw new NullReferenceException();
-            FormSpeedModeHandler f = FormSpeedModeHandler.GetUniqueInstance(excelApp);
-            f.Show(null);
+
         }
 
-        #region ---   具体的调试操作
 
         #endregion
     }

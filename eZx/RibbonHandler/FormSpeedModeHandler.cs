@@ -16,13 +16,6 @@ namespace eZx.RibbonHandler
     {
         #region ---   Fields
 
-        /// <summary> 数据源中的X数据 </summary>
-        private Range _srcX;
-        /// <summary> 数据源中的Y数据 </summary>
-        private Range _srcY;
-        /// <summary> 要将缩减后的数据放置在哪里，此属性中只包含一个单元格，表示整个缩减后的曲线的左上角单元格 </summary>
-        private Range _srcD;
-
         private Application _app;
         #endregion
 
@@ -40,6 +33,8 @@ namespace eZx.RibbonHandler
         {
             InitializeComponent();
             _app = excelApp;
+            rangeSource.SetApplication(excelApp);
+            rangeGetorD.SetApplication(excelApp);
         }
 
         private void FormSpeedModeHandler_FormClosing(object sender, FormClosingEventArgs e)
@@ -65,6 +60,8 @@ namespace eZx.RibbonHandler
             Close();
         }
 
+        #endregion
+
         private void button_Ok_Click(object sender, EventArgs e)
         {
             try
@@ -72,17 +69,17 @@ namespace eZx.RibbonHandler
                 if (radioButton_PointCount.Checked)
                 {
                     int newCount = (int)numericUpDown_PointsSegments.Value;
-                    if (_srcX != null && _srcY != null && _srcD != null)
+                    if (rangeSource.RangeX != null && rangeSource.RangeY != null && rangeGetorD.Range != null)
                     {
-                        SpeedModeHandler.ShrinkByPointCount(_srcX, _srcY, newCount, _srcD);
+                        SpeedModeHandler.ShrinkByPointCount(rangeSource.RangeX, rangeSource.RangeY, newCount, rangeGetorD.Range);
                     }
                 }
                 else if (radioButton_XSegment.Checked)
                 {
                     int xSeg = (int)numericUpDown_PointsSegments.Value;
-                    if (_srcX != null && _srcY != null && _srcD != null)
+                    if (rangeSource.RangeX != null && rangeSource.RangeY != null && rangeGetorD.Range != null)
                     {
-                        SpeedModeHandler.ShrinkByXRange(_srcX, _srcY, xSeg, _srcD);
+                        SpeedModeHandler.ShrinkByXRange(rangeSource.RangeX, rangeSource.RangeY, xSeg, rangeGetorD.Range);
                     }
                 }
             }
@@ -92,120 +89,5 @@ namespace eZx.RibbonHandler
             }
         }
 
-        #endregion
-
-        #region ---   选择数据源
-
-        /// <summary> 选择数据源或者目标数据的单元格 </summary>
-        /// <param name="sender"><see cref="System.Windows.Forms.Button"/>对象</param>
-        private void button_Datasource_Click(object sender, EventArgs e)
-        {
-            System.Windows.Forms.Button btn = sender as System.Windows.Forms.Button;
-            if (btn != null)
-            {
-                Range tagRg = btn.Tag as Range;
-                var inputResult = _app.InputBox(
-                    Prompt: "选择初始曲线的单元格",
-                    Title: "选择单元格区域",
-                    Default: (tagRg != null) ? tagRg.Address : "A1",
-                    Type: 8);
-                if (!(inputResult is Range)) return;
-
-                // 对不同的按钮设置不同的
-                Range rg = inputResult as Range;
-                btn.Tag = rg;
-                switch (btn.Name)
-                {
-                    case "button_srcX":
-                        _srcX = rg.Columns[1];
-                        btn.Tag = _srcX;
-                        textBox_srcX.Text = _srcX.Address;
-                        button_srcXY.Tag = (_srcY == null) ? _srcX : _app.Union(_srcX, _srcY);
-                        break;
-                    case "button_srcY":
-                        _srcY = rg.Columns[1];
-                        btn.Tag = _srcY;
-                        textBox_srcY.Text = _srcY.Address;
-                        button_srcXY.Tag = (_srcX == null) ? _srcY : _app.Union(_srcX, _srcY);
-                        break;
-                    case "button_srcD":
-                        _srcD = rg.Cells[1, 1];
-                        btn.Tag = _srcD;
-                        textBox_srcD.Text = _srcD.Address;
-                        break;
-                    case "button_srcXY":
-                        // 从XY中拆解出X与Y这两列数据
-                        Range sourceX;
-                        Range sourceY;
-                        if (SeperateXY(rg, out sourceX, out sourceY))
-                        {
-                            _srcX = sourceX;
-                            button_srcX.Tag = _srcX;
-                            textBox_srcX.Text = _srcX.Address;
-                            //
-                            _srcY = sourceY;
-                            button_srcY.Tag = _srcY;
-                            textBox_srcY.Text = _srcY.Address;
-                            //
-                            btn.Tag = _app.Union(sourceX, sourceY);
-                        }
-                        break;
-                }
-            }
         }
-
-        /// <summary>
-        /// 将选择的XY数据源拆分为X与Y
-        /// </summary>
-        /// <param name="sourceRange"></param>
-        /// <param name="sourceX"></param>
-        /// <param name="sourceY"></param>
-        /// <returns>如果拆解成功，则返回true</returns>
-        private bool SeperateXY(Range sourceRange, out Range sourceX, out Range sourceY)
-        {
-            if (sourceRange.Areas.Count >= 2)
-            {
-                sourceX = sourceRange.Areas[1].Columns[1];
-                sourceY = sourceRange.Areas[2].Columns[1];
-                return true;
-            }
-            else
-            {
-                if (sourceRange.Columns.Count >= 2)
-                {
-                    sourceX = sourceRange.Columns[1];
-                    sourceY = sourceRange.Columns[2];
-                    return true;
-                }
-                else
-                {
-                    sourceX = null;
-                    sourceY = null;
-                    return false;
-                }
-            }
-        }
-
-
-        #endregion
-
-        private void textBox_Datasource_Enter(object sender, EventArgs e)
-        {
-            System.Windows.Forms.TextBox text = sender as System.Windows.Forms.TextBox;
-            if (text != null)
-            {
-                Range rg = null;
-                switch (text.Name)
-                {
-                    case "textBox_srcX": rg = button_srcX.Tag as Range; break;
-                    case "textBox_srcY": rg = button_srcY.Tag as Range; break;
-                    case "textBox_srcD": rg = button_srcD.Tag as Range; break;
-                }
-                if (rg != null)
-                {
-                    rg.Select();
-                }
-            }
-        }
-    }
 }

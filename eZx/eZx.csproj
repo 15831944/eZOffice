@@ -214,6 +214,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RibbonHandler\FormInterpolations.resx">
+      <DependentUpon>FormInterpolations.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RibbonHandler\FormSpeedModeHandler.resx">
       <DependentUpon>FormSpeedModeHandler.cs</DependentUpon>
     </EmbeddedResource>
@@ -231,6 +234,12 @@
     </Compile>
     <Compile Include="RibbonHandler\ChartHandler.cs" />
     <Compile Include="DllActivator.cs" />
+    <Compile Include="RibbonHandler\FormInterpolations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RibbonHandler\FormInterpolations.Designer.cs">
+      <DependentUpon>FormInterpolations.cs</DependentUpon>
+    </Compile>
     <Compile Include="RibbonHandler\FormSpeedModeHandler.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,6 +269,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DynamicDebug.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Interpolation.png" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

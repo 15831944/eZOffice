@@ -652,13 +652,22 @@ namespace eZx
         }
 
 
+        /// <summary> 数据点缩减 </summary>
         private void button_SpeedMode_Click(object sender, RibbonControlEventArgs e)
         {
             Application app = Globals.ThisAddIn.Application;
             FormSpeedModeHandler f = FormSpeedModeHandler.GetUniqueInstance(app);
             f.Show(null);
         }
-        
+
+        /// <summary> 插值算法集 </summary>
+        private void button_Interpolations_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application app = Globals.ThisAddIn.Application;
+            FormInterpolations f = FormInterpolations.GetUniqueInstance(app);
+            f.Show(null);
+        }
+
         #endregion
 
         #region   ---  测试与其他
@@ -753,6 +762,7 @@ namespace eZx
                 Para3 = strText;
             }
         }
+
 
 
         #endregion

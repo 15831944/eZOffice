@@ -247,6 +247,12 @@
             <param name="range"></param>
             <returns></returns>
         </member>
+        <member name="M:eZx.Ribbon_eZx.button_SpeedMode_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+            <summary> 数据点缩减 </summary>
+        </member>
+        <member name="M:eZx.Ribbon_eZx.button_Interpolations_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+            <summary> 插值算法集 </summary>
+        </member>
         <member name="M:eZx.Ribbon_eZx.ExcelApp_SheetActivate(System.Object)">
             <summary>
              激活一个新的工作表
@@ -306,6 +312,11 @@
               Looks up a localized resource of type System.Drawing.Bitmap.
             </summary>
         </member>
+        <member name="P:eZx.Properties.Resources.Interpolation">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
         <member name="T:eZx.RibbonHandler.ChartHandler">
             <summary>
             与图表相关的操作
@@ -341,30 +352,32 @@
             <summary> 提取图表中的数据 </summary>
             <remarks></remarks>
         </member>
-        <member name="F:eZx.RibbonHandler.FormSpeedModeHandler._srcX">
-            <summary> 数据源中的X数据 </summary>
+        <member name="M:eZx.RibbonHandler.FormInterpolations.GetUniqueInstance(Microsoft.Office.Interop.Excel.Application)">
+            <summary> 获取全局唯一窗口实例 </summary>
         </member>
-        <member name="F:eZx.RibbonHandler.FormSpeedModeHandler._srcY">
-            <summary> 数据源中的Y数据 </summary>
+        <member name="M:eZx.RibbonHandler.FormInterpolations.#ctor(Microsoft.Office.Interop.Excel.Application)">
+            <summary> 构造函数
+            </summary> <param name="excelApp"></param>
         </member>
-        <member name="F:eZx.RibbonHandler.FormSpeedModeHandler._srcD">
-            <summary> 要将缩减后的数据放置在哪里，此属性中只包含一个单元格，表示整个缩减后的曲线的左上角单元格 </summary>
+        <member name="F:eZx.RibbonHandler.FormInterpolations.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:eZx.RibbonHandler.FormInterpolations.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:eZx.RibbonHandler.FormInterpolations.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
         </member>
         <member name="M:eZx.RibbonHandler.FormSpeedModeHandler.GetUniqueInstance(Microsoft.Office.Interop.Excel.Application)">
             <summary> 获取全局唯一窗口实例 </summary>
-        </member>
-        <member name="M:eZx.RibbonHandler.FormSpeedModeHandler.button_Datasource_Click(System.Object,System.EventArgs)">
-            <summary> 选择数据源或者目标数据的单元格 </summary>
-            <param name="sender"><see cref="T:System.Windows.Forms.Button"/>对象</param>
-        </member>
-        <member name="M:eZx.RibbonHandler.FormSpeedModeHandler.SeperateXY(Microsoft.Office.Interop.Excel.Range,Microsoft.Office.Interop.Excel.Range@,Microsoft.Office.Interop.Excel.Range@)">
-            <summary>
-            将选择的XY数据源拆分为X与Y
-            </summary>
-            <param name="sourceRange"></param>
-            <param name="sourceX"></param>
-            <param name="sourceY"></param>
-            <returns>如果拆解成功，则返回true</returns>
         </member>
         <member name="F:eZx.RibbonHandler.FormSpeedModeHandler.components">
             <summary>

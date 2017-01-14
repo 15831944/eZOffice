@@ -3762,6 +3762,20 @@
         <member name="F:eZstd.Mathematics.SpeedMode.CurveShape.XDescend">
             <summary> X轴的值依次减小，也包括相邻的值相等的情况 </summary>
         </member>
+        <member name="T:eZstd.Mathematics.SplineInterpolation">
+            <summary>
+            样条插值算法
+            </summary>
+        </member>
+        <member name="M:eZstd.Mathematics.SplineInterpolation.Execute(System.Double[],System.Double[],System.Double[])">
+            <summary>
+            进行二维曲线的样条插值
+            </summary>
+            <param name="srcX">插值数据源中的X，X序列中的值不一定必须要递增或者递减排列</param>
+            <param name="srcY">插值数据源中的Y</param>
+            <param name="interpX">想要进行插值的x序列</param>
+            <returns>插值后得到的与 <paramref name="interpX"/> 相对应的y值序列</returns>
+        </member>
         <member name="F:eZstd.Test.Form1.components">
             <summary>
             Required designer variable.
