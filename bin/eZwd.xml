@@ -4,6 +4,13 @@
         <name>eZwd</name>
     </assembly>
     <members>
+        <member name="T:eZwd.Debug.Ec_ClearHyperlinks">
+            <summary> 清除选择范围内的超链接 </summary>
+        </member>
+        <member name="M:eZwd.Debug.Ec_ClearHyperlinks.ClearHyperlinks(Microsoft.Office.Interop.Word.Application)">
+            <summary> 生成一个嵌套的域代码： { quote "一九一一年一月{ STYLEREF 1 \s }日" \@"D" }</summary>
+            <param name="wdApp"></param>
+        </member>
         <member name="T:eZwd.Debug.Ec_FormatPythonCodeFromPyCharm">
             <summary> 将从Pycharm中复制到word中的代码进行格式化 </summary>
         </member>

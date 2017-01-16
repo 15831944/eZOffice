@@ -175,6 +175,7 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Debug\Ec_ClearHyperlinks.cs" />
     <Compile Include="Debug\Ec_FormatPythonCodeFromPyCharm.cs" />
     <Compile Include="Debug\Ec_ShowRange.cs" />
     <Compile Include="Debug\Ec_FillPythonPrint.cs" />

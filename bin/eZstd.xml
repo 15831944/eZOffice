@@ -3474,12 +3474,30 @@
             <param name="arrays">所有要参与计算的数组，每个数组都是一个二维数组double[,]或int[,]，而且数组的大小一定要相同</param>
             <returns></returns>
         </member>
-        <member name="M:eZstd.Enumerable.Array2D.CheckArrays(System.Array[]@,System.Int32@,System.Int32@)">
-            <summary> 比较多个二维数组的大小是否相同 </summary>
-            <param name="array2ds">每一个数组都必须是二维数组，比如double[,]或者int[,]</param>
-            <param name="rows"></param>
-            <param name="columns"></param>
-            <returns>如果所有二维数组的大小都相同，则返回true</returns>
+        <member name="T:eZstd.Enumerable.Array2D.NumericalOperationI">
+            <summary>
+            多个数值之间的计算过程
+            </summary>
+            <param name="values"></param>
+            <returns>多个数值之间算术计算的结果值</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CompositeCalculation(eZstd.Enumerable.Array2D.NumericalOperationI,eZstd.Enumerable.Array2D[])">
+            <summary>
+            多个整数型二维数组的复合计算
+            </summary>
+            <param name="operation"></param>
+            <param name="arrays">集合中二维数组的个数可以多于 <paramref name="operation"/> 中进行数值计算的元素个数；
+            但是每一个二维数组的大小必须相同。 每个二维数组最好都是整数类型的。</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CompositeCalculation(eZstd.Enumerable.Array2D.NumericalOperationI,System.Int32,System.Int32,System.Int32,System.Int32[0:,0:][])">
+            <summary> 核心计算过程 </summary>
+            <param name="operation">多个数组之间的计算过程</param>
+            <param name="rows">每个数组的行数</param>
+            <param name="columns">每个数组的列数</param>
+            <param name="arraysCount">数组的个数</param>
+            <param name="arrays">所有要参与计算的数组，每个数组都是一个二维数组double[,]或int[,]，而且数组的大小一定要相同</param>
+            <returns></returns>
         </member>
         <member name="M:eZstd.Enumerable.Array2D.CheckArrays(eZstd.Enumerable.Array2D[]@,System.Int32@,System.Int32@)">
             <summary> 比较多个二维数组的大小是否相同 </summary>

@@ -138,8 +138,8 @@
             <param name="methods"></param>
         </member>
         <member name="M:eZwd.AddinManager.form_AddinManager.ChooseOpenDll(System.String)">
-            <summary> 通过选择文件对话框选择要进行数据提取的Excel文件 </summary>
-            <returns> 要进行数据提取的Excel文件的绝对路径 </returns>
+            <summary> 通过选择文件对话框选择要进行数据提取的Word文件 </summary>
+            <returns> 要进行数据提取的Word文件的绝对路径 </returns>
         </member>
         <member name="M:eZwd.AddinManager.form_AddinManager.ShowExCommandDescription(System.Object,System.Windows.Forms.TreeNodeMouseClickEventArgs)">
             <summary> 提取出 TreeView中节点对应的外部命令上的描述字符 </summary>
@@ -177,7 +177,7 @@
         <member name="M:eZwd.AddinManager.AssemblyInfoDllManager.GetInfosFromSettings">
             <summary> 将 Settings 配置文件中的字符进行反序列化 </summary>
             <returns></returns>
-            <remarks>对于CAD.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
+            <remarks>对于Word.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
             但是在调用ExternalCommand时还是会出bug，通常的报错为：没有为该对象定义无参数的构造函数。 </remarks>
         </member>
         <member name="T:eZwd.AddinManager.AssemblyInfoFileManager">
@@ -185,7 +185,7 @@
         </member>
         <member name="M:eZwd.AddinManager.AssemblyInfoFileManager.GetInfosFromFile">
             <summary> 将外部 二进制文件 中的字符进行反序列化 </summary>
-            <remarks>对于CAD.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
+            <remarks>对于Word.NET的开发，不要在 IExtensionApplication.Initialize() 方法中执行此操作，否则即使在Initialize时可以正常序列化，
             但是在调用ExternalCommand时还是会出bug，通常的报错为：没有为该对象定义无参数的构造函数。 </remarks>
         </member>
         <member name="T:eZwd.AddinManager.AssemblyInfos">
@@ -237,13 +237,13 @@
         </member>
         <member name="T:eZwd.AddinManager.StringSerializer.ZengfyLinkBinder">
             <summary>
-            为了解决SerializationException，方法之一是确保此assembly放置在与acad.exe 或 revit.exe相同的文件夹中，
+            为了解决SerializationException，方法之一是确保此assembly放置在与aWord.exe 或 revit.exe相同的文件夹中，
             另一个方法就是实现一个像这样的类。
             </summary>
             <remarks>
              Resolve System.Runtime.Serialization.SerializationException, Message =
             "Unable to find assembly 'StoreData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'."
-            One solution is to ensure that assembly resides in same directory as acad.exe or revit.exe,
+            One solution is to ensure that assembly resides in same directory as aWord.exe or revit.exe,
             the other is to implement a class such as this, cf.
             http://www.codeproject.com/soap/Serialization_Samples.asp
             </remarks>
@@ -313,17 +313,17 @@
         </member>
         <member name="M:eZwd.AddinManager.ExCommandExecutor.InvokeCurrentExternalCommand(Microsoft.Office.Interop.Word.Application)">
             <summary> 执行当前（即上次执行过的那个）外部命令 </summary>
-            <param name="excelApp">作为Execute()方法的输入参数的对象，表示当前的Excel Application </param>
+            <param name="WordApp">作为Execute()方法的输入参数的对象，表示当前的Word Application </param>
         </member>
         <member name="M:eZwd.AddinManager.ExCommandExecutor.InvokeExternalCommand(System.String,eZwd.AddinManager.IWordExCommand,Microsoft.Office.Interop.Word.Application)">
-            <summary> 执行 CAD 的外部命令 </summary>
+            <summary> 执行 Word 的外部命令 </summary>
             <param name="assemblyPath">外部命令所对应的dll的绝对路径</param>
             <param name="externalCommand">此命令必须是实现了 IExternalCommand.Execute </param>
-            <param name="excelApp">作为Execute()方法的输入参数的对象，表示当前的Excel Application </param>
+            <param name="WordApp">作为Execute()方法的输入参数的对象，表示当前的Word Application </param>
             <remarks>出于调试的即时更新的考虑，这里在每一次调试外部命令时，都对最新的dll进行重新加载。</remarks>
         </member>
         <member name="M:eZwd.AddinManager.ExCommandExecutor.InvokeCommand(System.Reflection.MethodInfo,Microsoft.Office.Interop.Word.Application)">
-            <summary> 执行 Excel 的外部命令 </summary>
+            <summary> 执行 Word 的外部命令 </summary>
             <param name="externalCommandMethod">此命令必须是实现了 IExternalCommand.Execute </param>
         </member>
         <member name="M:eZwd.AddinManager.ExCommandExecutor.RunActiveCommand(eZwd.AddinManager.IWordExCommand,System.String,Microsoft.Office.Interop.Word.Application)">
@@ -331,7 +331,7 @@
             <param name="addinItem">注意这里的 addinItem 实例是刷新前的程序集中对应的类，
             这里只能用来提取其 FullName 字符串，而不能直接用来执行， 因为虽然它确实可以执行，但是执行的是重新编译前的那个方法。</param>
             <param name="assemblyPath"></param>
-            <param name="excelApp"></param>
+            <param name="WordApp"></param>
         </member>
         <member name="M:eZwd.AddinManager.ExCommandExecutor.GetDebugMessage(System.Exception)">
             <summary> 在调试阶段，为每一种报错显示对应的报错信息及出错位置。 </summary>
@@ -340,7 +340,7 @@
             <summary> 将指定程序集中的 IExternalCommand 类提取出来 </summary>
         </member>
         <member name="M:eZwd.AddinManager.ExCommandFinder.RetriveExternalCommandsFromAssembly(System.String)">
-            <summary> 将程序集文件加载到内存，并且提取出其中的 CAD 外部命令 </summary>
+            <summary> 将程序集文件加载到内存，并且提取出其中的 Word 外部命令 </summary>
             <param name="assemblyPath"></param>
             <returns></returns>
         </member>
