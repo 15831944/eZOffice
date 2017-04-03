@@ -670,49 +670,6 @@ namespace eZx
 
         #endregion
 
-        #region   ---  测试与其他
-
-        public void ButtonTest_Click(object sender, RibbonControlEventArgs e)
-        {
-            Application app = _app;
-            Workbook wkbk = app.ActiveWorkbook;
-            Worksheet sht = wkbk.ActiveSheet;
-            //
-            sht.Cells[1, 1].Value = "时间";
-            sht.Columns[1].NumberFormatLocal = "yyyy/m/d";
-            sht.Cells.EntireColumn.AutoFit();
-            //
-            Range firstRow = sht.UsedRange.Rows[1];
-            Range shrinkFirstRow = firstRow.Ex_ShrinkeVectorAndCheckNull();
-
-            // 要进行删除的左列与右列的列号
-            int r = firstRow.Ex_CornerCell(CornerIndex.UpRight).Column;
-            int l = Convert.ToInt32(shrinkFirstRow.Ex_CornerCell(CornerIndex.UpRight).Column + 1);
-            string deletedRight = RangeValueConverter.ConvertColumnNumberToString(r);
-            string deletedLeft = RangeValueConverter.ConvertColumnNumberToString(l);
-
-            //
-            string s = "";
-            if (r == l)
-            {
-                s = deletedLeft.ToString();
-            }
-            else if (r > l)
-            {
-                s = deletedLeft + ":" + deletedRight;
-            }
-
-            if (!string.IsNullOrEmpty(s))
-            {
-                Range deletedColumns = sht.Columns[s];
-                //
-                deletedColumns.Delete();
-            }
-            sht.UsedRange.Select();
-        }
-
-        #endregion
-
         #region   ---  事件处理 ---
 
         /// <summary>
@@ -765,8 +722,8 @@ namespace eZx
 
 
 
-        #endregion
 
+        #endregion
 
     }
 }

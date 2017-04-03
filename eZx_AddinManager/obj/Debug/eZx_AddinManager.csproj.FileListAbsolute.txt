@@ -60,3 +60,4 @@ C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZx_AddinManager\obj\Debug\eZx_AddinM
 C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZx_AddinManager\obj\Debug\eZx_AddinManager.csproj.GenerateResource.Cache
 C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZx_AddinManager\obj\Debug\eZx_AddinManager.dll
 C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZx_AddinManager\obj\Debug\eZx_AddinManager.pdb
+D:\ProgrammingCases\GitHubProjects\eZOffice\eZx_AddinManager\obj\Debug\eZx_AddinManager.csprojResolveAssemblyReference.cache

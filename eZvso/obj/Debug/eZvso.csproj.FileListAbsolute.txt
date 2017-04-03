@@ -48,3 +48,16 @@ C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZvso\obj\Debug\eZvso.csproj.Generate
 C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZvso\obj\Debug\eZvso.dll
 C:\Users\zengfy\Desktop\Dormitory\eZOffice\eZvso\obj\Debug\eZvso.pdb
 E:\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.RibbonHandler.CurveMaker.frm_CurveParameter.resources
+D:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZvso.XML
+D:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZvso.dll
+D:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZvso.pdb
+D:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZvso.dll.manifest
+D:\ProgrammingCases\GitHubProjects\eZOffice\bin\eZvso.vsto
+D:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.csprojResolveAssemblyReference.cache
+D:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.RibbonHandler.CurveMaker.frm_CurveParameter.resources
+D:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.Dialog_CircleArray.resources
+D:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.Ribbon_eZvso.resources
+D:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.Properties.Resources.resources
+D:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.csproj.GenerateResource.Cache
+D:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.dll
+D:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.pdb

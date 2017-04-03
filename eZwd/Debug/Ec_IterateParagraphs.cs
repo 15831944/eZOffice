@@ -14,8 +14,8 @@ namespace eZwd.Debug
     /// <summary>
     /// 显示当前光标选择区域的起始处的坐标
     /// </summary>
-    [EcDescription("显示选择区域的起止下标值")]
-    class Ec_ShowRange : IWordExCommand
+    [EcDescription("对文档中的第一个段落进行迭代，以进入相关操作")]
+    class Ec_IterateParagraphs : IWordExCommand
     {
         public ExternalCommandResult Execute(Application wdApp, ref string errorMessage, ref object errorObj)
         {
@@ -32,14 +32,25 @@ namespace eZwd.Debug
         }
 
         // 开始具体的调试操作
-        public static void DoSomething(Application wdApp)
+        private static void DoSomething(Application wdApp)
         {
-            Range rg = wdApp.Selection.Range;
-            if (rg != null)
+            Document doc = wdApp.ActiveDocument;
+            foreach (Paragraph p in doc.Paragraphs)
             {
-                string t = rg.Text;
-                int charactorsCount = t?.Length ?? 0;
-                MessageBox.Show($"Start :\t{rg.Start}\r\n End :\t{rg.End}\r\n 字符数 :\t{charactorsCount}");
+                if (p.Format.FirstLineIndent == 0)
+                {
+                    var rg = p.Range;
+                    if (rg.Tables.Count <= 0 && rg.Text.Length>20)
+                    {
+                        var res = MessageBox.Show( "\r\n" + rg.Text, "", MessageBoxButtons.OKCancel);
+                        if (res == DialogResult.Cancel)
+                        {
+                            break;
+                        }
+                    }
+
+                }
+
             }
         }
     }

@@ -34,7 +34,6 @@ namespace eZwd.Debug
         private static void ClearHyperlinks(Application wdApp)
         {
             wdApp.ScreenUpdating = false;
-            Document doc = wdApp.ActiveDocument;
 
             var hyperLinks = wdApp.Selection.Range.Hyperlinks;
             for (int i = hyperLinks.Count; i >= 1; i--)
@@ -42,6 +41,7 @@ namespace eZwd.Debug
                 var hp = hyperLinks[i];
                 hp.Delete();
             }
+
             wdApp.ScreenUpdating = true;
         }
 

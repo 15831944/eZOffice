@@ -78,54 +78,56 @@ namespace eZx_API.UserControls
 
         private void InitializeComponent()
         {
-            button1 = new Button();
-            label1 = new Label();
-            textBox1 = new TextBox();
-            SuspendLayout();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
             // 
             // button1
             // 
-            button1.Anchor = ((AnchorStyles)((AnchorStyles.Top | AnchorStyles.Right)));
-            button1.Location = new Point(193, 0);
-            button1.Margin = new Padding(2);
-            button1.Name = "button1";
-            button1.Size = new Size(17, 20);
-            button1.TabIndex = 16;
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += new EventHandler(button_srcX_Click);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(257, 0);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(23, 25);
+            this.button1.TabIndex = 16;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button_srcX_Click);
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(1, 4);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(29, 12);
-            label1.TabIndex = 15;
-            label1.Text = "说明";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(1, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(37, 15);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "说明";
             // 
             // textBox1
             // 
-            textBox1.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
-            textBox1.Location = new Point(56, 0);
-            textBox1.Margin = new Padding(2);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(134, 21);
-            textBox1.TabIndex = 14;
-            textBox1.TextChanged += new EventHandler(textBox1_TextChanged);
-            textBox1.Enter += new EventHandler(textBox_srcX_Enter);
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(75, 1);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(177, 25);
+            this.textBox1.TabIndex = 14;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.Enter += new System.EventHandler(this.textBox_srcX_Enter);
             // 
             // RangeGetor
             // 
-            AutoScaleDimensions = new SizeF(6F, 12F);
-            AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(button1);
-            Controls.Add(label1);
-            Controls.Add(textBox1);
-            Name = "RangeGetor";
-            Size = new Size(212, 22);
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox1);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "RangeGetor";
+            this.Size = new System.Drawing.Size(283, 28);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

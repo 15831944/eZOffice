@@ -177,9 +177,12 @@
   <ItemGroup>
     <Compile Include="Debug\Ec_ClearHyperlinks.cs" />
     <Compile Include="Debug\Ec_FormatPythonCodeFromPyCharm.cs" />
+    <Compile Include="Debug\Ec_IterateParagraphs.cs" />
     <Compile Include="Debug\Ec_ShowRange.cs" />
     <Compile Include="Debug\Ec_FillPythonPrint.cs" />
+    <Compile Include="Debug\Ec_Test.cs" />
     <Compile Include="eZwd_API\RangeUtils.cs" />
+    <Compile Include="eZwd_API\TableUtils.cs" />
     <Compile Include="RibbonHandlers\StaticFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
