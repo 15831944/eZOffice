@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DllActivator;
 using eZstd.Enumerable;
 using eZstd.Mathematics;
@@ -34,9 +35,33 @@ namespace eZx.Debug
         // 开始具体的调试操作
         private static void DoSomething(Application excelApp)
         {
+            Worksheet sht = excelApp.ActiveSheet;
+            Workbook wkbk = excelApp.ActiveWorkbook;
+            var rgNum = excelApp.Selection as Range;
+            var rgState = rgNum.Offset[0, 3];
+            int currentId = 0;
+            var numId = new Dictionary<string, int>();
+            var rowId = new List<int>();
 
+            foreach (Range c in rgNum)
+            {
+                int id;
+                string num = c.Formula.ToString();
+                if (numId.ContainsKey(num))
+                {
+                    id = numId[num];
+                }
+                else
+                {
+                    currentId += 1;
+                    numId.Add(num,currentId);
+                    id = currentId;
+                }
+                rowId.Add(id);
+            }
+
+            rgState.Value = excelApp.WorksheetFunction.Transpose(rowId.ToArray());
         }
-
 
         #endregion
     }

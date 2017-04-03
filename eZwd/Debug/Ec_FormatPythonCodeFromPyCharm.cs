@@ -13,6 +13,7 @@ using Application = Microsoft.Office.Interop.Word.Application;
 namespace eZwd.Debug
 {
     /// <summary> 将从Pycharm中复制到word中的代码进行格式化 </summary>
+    [EcDescription("将从Pycharm中复制到word中的代码进行格式化")]
     class Ec_FormatPythonCodeFromPyCharm : IWordExCommand
     {
         public ExternalCommandResult Execute(Microsoft.Office.Interop.Word.Application wdApp, ref string errorMessage,
@@ -82,7 +83,8 @@ namespace eZwd.Debug
                     // 7. replace the charactors
                     RangeUtils.ReplaceCharactors(rg, "^l", "^p");
 
-
+                    //
+                    rg.HighlightColorIndex =WdColorIndex.wdNoHighlight;
 
                 }
                 finally

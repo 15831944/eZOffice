@@ -3,13 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Microsoft.Office.Interop.Word;
 
 namespace eZwd.eZwd_API
 {
     /// <summary> 对 <see cref="Range"/> 对象进行一些通用性的操作</summary>
-    public class RangeUtils
+    public static class RangeUtils
     {
+
+        /// <summary>
+        /// 显示 Range 对象的范围
+        /// </summary>
+        /// <param name="rg"></param>
+        public static void ShowRange(params Range[] rgs)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (Range rg in rgs)
+            {
+                if (rg != null)
+                {
+                    string t = rg.Text;
+                    int charactorsCount = t?.Length ?? 0;
+                    sb.AppendLine($"Start : {rg.Start}\t End : {rg.End}\t 字符数 :\t{charactorsCount}");
+                }
+            }
+            MessageBox.Show(sb.ToString());
+        }
+
         /// <summary>
         /// 将指定range范围内的特定字符串进行字符替换（不修改文字样式）
         /// </summary>

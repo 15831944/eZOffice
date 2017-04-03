@@ -59,8 +59,6 @@
             this.EditBox_p1 = this.Factory.CreateRibbonEditBox();
             this.EditBox_p2 = this.Factory.CreateRibbonEditBox();
             this.EditBox_p3 = this.Factory.CreateRibbonEditBox();
-            this.Group4 = this.Factory.CreateRibbonGroup();
-            this.ButtonTest = this.Factory.CreateRibbonButton();
             this.Tab2 = this.Factory.CreateRibbonTab();
             this.Group_Help = this.Factory.CreateRibbonGroup();
             this.btn_ExcelHelp = this.Factory.CreateRibbonButton();
@@ -70,7 +68,6 @@
             this.Group1.SuspendLayout();
             this.Group2.SuspendLayout();
             this.Group3.SuspendLayout();
-            this.Group4.SuspendLayout();
             this.Tab2.SuspendLayout();
             this.Group_Help.SuspendLayout();
             this.SuspendLayout();
@@ -81,7 +78,6 @@
             this.Tab1.Groups.Add(this.Group1);
             this.Tab1.Groups.Add(this.Group2);
             this.Tab1.Groups.Add(this.Group3);
-            this.Tab1.Groups.Add(this.Group4);
             this.Tab1.Label = "eZx";
             this.Tab1.Name = "Tab1";
             // 
@@ -299,22 +295,6 @@
             this.EditBox_p3.Text = "False";
             this.EditBox_p3.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.EditBox_p3_TextChanged);
             // 
-            // Group4
-            // 
-            this.Group4.Items.Add(this.ButtonTest);
-            this.Group4.Label = "其他";
-            this.Group4.Name = "Group4";
-            // 
-            // ButtonTest
-            // 
-            this.ButtonTest.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.ButtonTest.Image = global::eZx.Properties.Resources.DynamicDebug;
-            this.ButtonTest.Label = "功能测试";
-            this.ButtonTest.Name = "ButtonTest";
-            this.ButtonTest.ShowImage = true;
-            this.ButtonTest.SuperTip = "在执行此命令之前请自行查看源代码以确认其功能";
-            this.ButtonTest.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ButtonTest_Click);
-            // 
             // Tab2
             // 
             this.Tab2.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
@@ -362,8 +342,6 @@
             this.Group2.PerformLayout();
             this.Group3.ResumeLayout(false);
             this.Group3.PerformLayout();
-            this.Group4.ResumeLayout(false);
-            this.Group4.PerformLayout();
             this.Tab2.ResumeLayout(false);
             this.Tab2.PerformLayout();
             this.Group_Help.ResumeLayout(false);
@@ -393,17 +371,15 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox EditBox_p1;
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox EditBox_p2;
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox EditBox_p3;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup Group4;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnEditDatabase;
         internal Microsoft.Office.Tools.Ribbon.RibbonTab Tab2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup Group_Help;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ExcelHelp;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_OfficeHelp;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton ButtonTest;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ButtonValue;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ButtonTranspose;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button_SpeedMode;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button_Interpolations;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup Group_Help;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ExcelHelp;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_OfficeHelp;
     }
 
     partial class ThisRibbonCollection

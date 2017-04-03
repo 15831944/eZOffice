@@ -48,6 +48,7 @@ namespace eZx.RibbonHandler
             Hide();
             e.Cancel = true;
         }
+
         #endregion
 
         #region ---   界面事件
@@ -66,7 +67,6 @@ namespace eZx.RibbonHandler
         }
 
         #endregion
-
 
         private void buttonOk_Click(object sender, EventArgs e)
         {

@@ -4,24 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using eZstd.Miscellaneous;
 using eZwd.AddinManager;
 using Microsoft.Office.Interop.Word;
 using Application = Microsoft.Office.Interop.Word.Application;
-using eZwd.RibbonHandlers;
 
 namespace eZwd.Debug
 {
-    /// <summary>
-    /// 显示当前光标选择区域的起始处的坐标
-    /// </summary>
-    [EcDescription("显示选择区域的起止下标值")]
-    class Ec_ShowRange : IWordExCommand
+    /// <summary> 清除选择范围内的超链接 </summary>
+    [EcDescription("清除选择范围内的超链接")]
+    class Ec_ClearHyperlinks : IWordExCommand
     {
         public ExternalCommandResult Execute(Application wdApp, ref string errorMessage, ref object errorObj)
         {
             try
             {
-                DoSomething(wdApp);
+                ClearHyperlinks(wdApp);
                 return ExternalCommandResult.Succeeded;
             }
             catch (Exception ex)
@@ -31,16 +29,21 @@ namespace eZwd.Debug
             }
         }
 
-        // 开始具体的调试操作
-        public static void DoSomething(Application wdApp)
+        /// <summary> 生成一个嵌套的域代码： { quote "一九一一年一月{ STYLEREF 1 \s }日" \@"D" }</summary>
+        /// <param name="wdApp"></param>
+        private static void ClearHyperlinks(Application wdApp)
         {
-            Range rg = wdApp.Selection.Range;
-            if (rg != null)
+            wdApp.ScreenUpdating = false;
+
+            var hyperLinks = wdApp.Selection.Range.Hyperlinks;
+            for (int i = hyperLinks.Count; i >= 1; i--)
             {
-                string t = rg.Text;
-                int charactorsCount = t?.Length ?? 0;
-                MessageBox.Show($"Start :\t{rg.Start}\r\n End :\t{rg.End}\r\n 字符数 :\t{charactorsCount}");
+                var hp = hyperLinks[i];
+                hp.Delete();
             }
+
+            wdApp.ScreenUpdating = true;
         }
+
     }
 }

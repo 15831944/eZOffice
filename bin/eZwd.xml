@@ -4,12 +4,24 @@
         <name>eZwd</name>
     </assembly>
     <members>
+        <member name="T:eZwd.Debug.Ec_ClearHyperlinks">
+            <summary> 清除选择范围内的超链接 </summary>
+        </member>
+        <member name="M:eZwd.Debug.Ec_ClearHyperlinks.ClearHyperlinks(Microsoft.Office.Interop.Word.Application)">
+            <summary> 生成一个嵌套的域代码： { quote "一九一一年一月{ STYLEREF 1 \s }日" \@"D" }</summary>
+            <param name="wdApp"></param>
+        </member>
         <member name="T:eZwd.Debug.Ec_FormatPythonCodeFromPyCharm">
             <summary> 将从Pycharm中复制到word中的代码进行格式化 </summary>
         </member>
         <member name="M:eZwd.Debug.Ec_FormatPythonCodeFromPyCharm.FormatPythonCodeFromPyCharm(Microsoft.Office.Interop.Word.Application)">
             <summary> 将从Pycharm中复制到word中的代码进行格式化</summary>
             <param name="wdApp"></param>
+        </member>
+        <member name="T:eZwd.Debug.Ec_IterateParagraphs">
+            <summary>
+            显示当前光标选择区域的起始处的坐标
+            </summary>
         </member>
         <member name="T:eZwd.Debug.Ec_ShowRange">
             <summary>
@@ -26,6 +38,12 @@
         <member name="T:eZwd.eZwd_API.RangeUtils">
             <summary> 对 <see cref="T:Microsoft.Office.Interop.Word.Range"/> 对象进行一些通用性的操作</summary>
         </member>
+        <member name="M:eZwd.eZwd_API.RangeUtils.ShowRange(Microsoft.Office.Interop.Word.Range[])">
+            <summary>
+            显示 Range 对象的范围
+            </summary>
+            <param name="rg"></param>
+        </member>
         <member name="M:eZwd.eZwd_API.RangeUtils.ReplaceCharactors(Microsoft.Office.Interop.Word.Range,System.String,System.String,System.Boolean)">
             <summary>
             将指定range范围内的特定字符串进行字符替换（不修改文字样式）
@@ -36,6 +54,14 @@
             <param name="matchCase"></param>
             <returns>returns True if the find operation is successful.</returns>
             <remarks>搜索或替换完成后，此Range对象的范围不会发生改变</remarks>
+        </member>
+        <member name="T:eZwd.eZwd_API.TableUtils">
+            <summary> 与表格相关的操作 </summary>
+        </member>
+        <member name="M:eZwd.eZwd_API.TableUtils.InsertTable(Microsoft.Office.Interop.Word.Document,System.Int32,System.String[0:,0:])">
+            <summary> 在文档中插入一个表格 </summary>
+            <param name="startIndex">表格起始的位置</param>
+            <param name="data"> 表格所对应的数据，包含表头 </param>
         </member>
         <member name="T:eZwd.RibbonHandlers.StaticFunction">
             <summary> 一些结构性的静态方法 </summary>

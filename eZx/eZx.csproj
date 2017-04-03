@@ -76,7 +76,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\eZx.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
@@ -114,10 +115,6 @@
     <Reference Include="eZx_AddinManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\eZx_AddinManager\bin\Debug\eZx_AddinManager.dll</HintPath>
-    </Reference>
-    <Reference Include="eZx_API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\eZx_API.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -272,6 +269,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Interpolation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eZx_API\eZx_API.csproj">
+      <Project>{60bf7d52-330a-4ed2-9632-4efb8fb6f231}</Project>
+      <Name>eZx_API</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -3171,6 +3171,14 @@
             <param name="safeSql"></param>
             <returns></returns>
         </member>
+        <member name="T:eZstd.Data.StaticClassSerializer">
+            <summary> 对 静态类 进行序列化与反序列化 </summary>
+            <remarks>
+            调用方法：
+            bool succ1 = StaticClassSerializer.Save(typeof(StaticClass1), filePath);
+            bool succ2 = StaticClassSerializer.Load(typeof(StaticClass1), filePath);
+            </remarks>
+        </member>
         <member name="T:eZstd.Data.StringSerializer">
             <summary>
             将任意一个有 Serializable标记的类以二进制转换器将类中所有数据与字符串间的相互序列化。
@@ -3202,22 +3210,308 @@
             http://www.codeproject.com/soap/Serialization_Samples.asp
             </remarks>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:eZstd.Data.XmlList`1" -->
-        <member name="M:eZstd.Data.XmlList`1.#ctor">
+        <member name="T:eZstd.Enumerable.XmlDictionary`2">
+            <summary>
+            支持Xml序列化的泛型Dictionary
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="M:eZstd.Enumerable.XmlDictionary`2.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            反序列化
+            </summary>
+            <param name="reader"></param>
+        </member>
+        <member name="M:eZstd.Enumerable.XmlDictionary`2.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            序列化
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="T:eZstd.Enumerable.XmlList`1">
+            <summary> 专门用来作为 XmlSerializer 序列化与反序列化的 IList 泛型集合，
+            以解决 XmlSerializer 不能直接对 IList 泛型进行序列化的问题。 
+            </summary>
+            <remarks>
+            参考： <see cref="!:http://www.telerik.com/help/openaccess-classic/openaccess-tasks-using-xmlserializer-with-generic-lists-and-persistent-objects.html"/>
+            XmlSerializer 可以很好地支持 数组Array 的序列化与反序列化，
+            但是对于IList甚至是非泛型的ArrayList集合而言，其在反序列化Deserialize() 时，会出现将集合中的元素重复反序列化的情况。
+            比如原List集合中的元素个数有3个（不管有没有null值），通过Serialize()序列化到XML文档中也是正常的3个，
+            但是通过Deserialize() 反序列化回来的集合中，却有6个元素，即原来正常集合中的每一个元素都产生了一个重复项。
+            </remarks>
+            <typeparam name="T">泛型集合的类型</typeparam>
+        </member>
+        <member name="M:eZstd.Enumerable.XmlList`1.#ctor">
             <summary> 构造函数 </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:eZstd.Data.XmlListTest`1" -->
-        <member name="F:eZstd.Data.XmlListTest`1._sourceList">
+        <member name="M:eZstd.Enumerable.XmlList`1.Clone">
+            <summary> ICloneable.Clone() </summary>
+        </member>
+        <member name="M:eZstd.Enumerable.XmlList`1.System#Xml#Serialization#IXmlSerializable#ReadXml(System.Xml.XmlReader)">
+            <summary> 从 xml 文档中提取对象 </summary>
+            <param name="reader"></param>
+        </member>
+        <member name="M:eZstd.Enumerable.XmlList`1.System#Xml#Serialization#IXmlSerializable#WriteXml(System.Xml.XmlWriter)">
+            <summary> 将可序列化对象写入到 xml 文档中 </summary>
+        </member>
+        <member name="T:eZstd.Enumerable.ListEv`1">
+            <summary> 添加了 <seealso cref="E:eZstd.Enumerable.ListEv`1.ItemChanged"/> 事件的 List对象 </summary>
+            <typeparam name="T">泛型集合的类型</typeparam>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="E:eZstd.Enumerable.ListEv`1.ItemChanged">
+            <summary>
+            集合中的元素发生 增加、减少、修改 时触发
+            </summary>
+        </member>
+        <member name="F:eZstd.Enumerable.ListEv`1._sourceList">
             <summary> 集合内部维护的 IList 集合</summary>
         </member>
-        <member name="M:eZstd.Data.XmlListTest`1.#ctor(System.Collections.Generic.IList{`0})">
+        <member name="M:eZstd.Enumerable.ListEv`1.#ctor(System.Collections.Generic.IList{`0})">
             <summary> 构造函数（不推荐，因为通过此方法构造出来的 XmlList 内部维护的IList集合
             与这里的输入参数 wrapped 集合代表同一个地址） </summary>
             <param name="wrapped">在外部继续对此集合元素的增加、插入、移除会同步到 SourceList 属性中，
             因为这二者引用的是内存中同一个集合的地址。</param>
         </member>
-        <member name="M:eZstd.Data.XmlListTest`1.Clone">
+        <member name="M:eZstd.Enumerable.ListEv`1.Clone">
             <summary> 将内部维护的集合进行复制 </summary>
+        </member>
+        <member name="T:eZstd.Enumerable.Array2D">
+            <summary>
+            一些二维数组所特有的操作。
+            注意，有很多集合的算法都可以通过 LINQ 语句来实现，如果可以，则推荐用 Linq。但是对于一些特殊的情况，比如二维数组的运算，则在此类中实现。
+            </summary>
+        </member>
+        <member name="F:eZstd.Enumerable.Array2D._arrayInt">
+            <summary> 如果<see cref="P:eZstd.Enumerable.Array2D.IsElementsInterger"/>，则此字段的值为对应的源二维数组。否则为 null </summary>
+        </member>
+        <member name="F:eZstd.Enumerable.Array2D._arraydbl">
+            <summary> 如果<see cref="P:eZstd.Enumerable.Array2D.IsElementsInterger"/>为false，则此字段的值为对应的源二维数组。否则为 null </summary>
+        </member>
+        <member name="P:eZstd.Enumerable.Array2D.Value">
+            <summary> 二维数组对象，即 double[,] 或 int[,] 对象。在外部可通过 as 进行类型转换，如 double[,] v = Value as double[,]; </summary>
+        </member>
+        <member name="P:eZstd.Enumerable.Array2D.ValueI">
+            <summary> 二维数组对象，即 double[,]。如果数据源为 int[,]，则会从其中提取出 double[,] ; </summary>
+        </member>
+        <member name="P:eZstd.Enumerable.Array2D.ValueD">
+            <summary> 二维数组对象，即 int[,]。如果数据源为 double[,]，则会从其中提取出 int[,] ; </summary>
+        </member>
+        <member name="P:eZstd.Enumerable.Array2D.IsElementsInterger">
+            <summary> 二维数组中的元素类型是否为整数。如果为true，则 Value 为 int[,]类型，否则 Value 为 double[,]类型。 </summary>
+        </member>
+        <member name="P:eZstd.Enumerable.Array2D.Rows">
+            <summary> 二维数组中的行数 </summary>
+        </member>
+        <member name="P:eZstd.Enumerable.Array2D.Columns">
+            <summary> 二维数组中的列数 </summary>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.Max(System.Boolean,System.Int32[]@)">
+            <summary> 求二维数组中每一行或者每一列的最大值 </summary>
+            <param name="rank"> true 表示输出每一行的最大值，false 表示输出每一列的最大值 </param>
+            <param name="maxValue">每一行或者每一列的最大值</param>
+            <returns>每一个最大值所在的位置下标</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.Max(System.Boolean,System.Double[]@)">
+            <summary> 求二维数组中每一行或者每一列的最大值 </summary>
+            <param name="rank"> true 表示输出每一行的最大值，false 表示输出每一列的最大值 </param>
+            <param name="maxValue">每一行或者每一列的最大值</param>
+            <returns>每一个最大值所在的位置下标</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.Min(System.Boolean,System.Int32[]@)">
+            <summary> 求二维数组中每一行或者每一列的最小值 </summary>
+            <param name="rank"> true 表示输出每一行的最小值，false 表示输出每一列的最小值 </param>
+            <param name="minValue">每一行或者每一列的最小值</param>
+            <returns>每一个最小值所在的位置下标</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.Min(System.Boolean,System.Double[]@)">
+            <summary> 求二维数组中每一行或者每一列的最小值 </summary>
+            <param name="rank"> true 表示输出每一行的最小值，false 表示输出每一列的最小值 </param>
+            <param name="minValue">每一行或者每一列的最小值</param>
+            <returns>每一个最小值所在的位置下标</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.Clone">
+            <summary> 将对象创建一个副本。返回值为一个<see cref="T:eZstd.Enumerable.Array2D"/>对象 </summary>
+            <returns> 返回值为一个<see cref="T:eZstd.Enumerable.Array2D"/>对象 </returns>
+        </member>
+        <member name="T:eZstd.Enumerable.Array2D.NumericalOperation">
+            <summary>
+            多个数值之间的计算过程
+            </summary>
+            <param name="values"></param>
+            <returns>多个数值之间算术计算的结果值</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CompositeCalculation(eZstd.Enumerable.Array2D.NumericalOperation,eZstd.Enumerable.Array2D[])">
+            <summary>
+            多个二维数组的复合计算
+            </summary>
+            <param name="operation"></param>
+            <param name="arrays">集合中二维数组的个数可以多于 <paramref name="operation"/> 中进行数值计算的元素个数；
+            但是每一个二维数组的大小必须相同。</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CompositeCalculation(eZstd.Enumerable.Array2D.NumericalOperation,System.Int32,System.Int32,System.Int32,System.Double[0:,0:][])">
+            <summary> 核心计算过程 </summary>
+            <param name="operation">多个数组之间的计算过程</param>
+            <param name="rows">每个数组的行数</param>
+            <param name="columns">每个数组的列数</param>
+            <param name="arraysCount">数组的个数</param>
+            <param name="arrays">所有要参与计算的数组，每个数组都是一个二维数组double[,]或int[,]，而且数组的大小一定要相同</param>
+            <returns></returns>
+        </member>
+        <member name="T:eZstd.Enumerable.Array2D.NumericalOperationI">
+            <summary>
+            多个数值之间的计算过程
+            </summary>
+            <param name="values"></param>
+            <returns>多个数值之间算术计算的结果值</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CompositeCalculation(eZstd.Enumerable.Array2D.NumericalOperationI,eZstd.Enumerable.Array2D[])">
+            <summary>
+            多个整数型二维数组的复合计算
+            </summary>
+            <param name="operation"></param>
+            <param name="arrays">集合中二维数组的个数可以多于 <paramref name="operation"/> 中进行数值计算的元素个数；
+            但是每一个二维数组的大小必须相同。 每个二维数组最好都是整数类型的。</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CompositeCalculation(eZstd.Enumerable.Array2D.NumericalOperationI,System.Int32,System.Int32,System.Int32,System.Int32[0:,0:][])">
+            <summary> 核心计算过程 </summary>
+            <param name="operation">多个数组之间的计算过程</param>
+            <param name="rows">每个数组的行数</param>
+            <param name="columns">每个数组的列数</param>
+            <param name="arraysCount">数组的个数</param>
+            <param name="arrays">所有要参与计算的数组，每个数组都是一个二维数组double[,]或int[,]，而且数组的大小一定要相同</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CheckArrays(eZstd.Enumerable.Array2D[]@,System.Int32@,System.Int32@)">
+            <summary> 比较多个二维数组的大小是否相同 </summary>
+            <param name="array2ds"></param>
+            <param name="rows"></param>
+            <param name="columns"></param>
+            <returns>如果所有二维数组的大小都相同，则返回true</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CheckArray(System.Int32[0:,0:]@)">
+            <summary> 检查两个二维数组的元素数量是否一致 </summary>
+            <param name="array2d2">必须为二维数组，如 int[,] </param>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.CheckArray(System.Double[0:,0:]@)">
+            <summary> 检查两个二维数组的元素数量是否一致 </summary>
+            <param name="array2d2">必须为二维数组，如 int[,] </param>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.Int2Double">
+            <summary> 将整数类型的二维数组转换为双精度的二维数组 </summary>
+        </member>
+        <member name="M:eZstd.Enumerable.Array2D.Double2Int">
+            <summary> 将整数类型的二维数组转换为双精度的二维数组 </summary>
+        </member>
+        <member name="T:eZstd.Enumerable.EnumUtility">
+            <summary>
+            与集合相关的一些基本操作函数，比如数组的加减乘除等。
+            注意，有很多集合的算法都可以通过 LINQ 语句来实现，如果可以，则推荐用 Linq。但是对于一些特殊的情况，比如二维数组的运算，则在此类中实现。
+            </summary>
+        </member>
+        <member name="T:eZstd.Enumerable.XmlListEv`1">
+            <summary>
+            添加了 ItemChanged 事件的 List对象，同时支持 xml 文件的序列化与反序列化
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:eZstd.Enumerable.XmlListEv`1.System#Xml#Serialization#IXmlSerializable#ReadXml(System.Xml.XmlReader)">
+            <summary> 从 xml 文档中提取对象 </summary>
+            <param name="reader"></param>
+        </member>
+        <member name="M:eZstd.Enumerable.XmlListEv`1.System#Xml#Serialization#IXmlSerializable#WriteXml(System.Xml.XmlWriter)">
+            <summary> 将可序列化对象写入到 xml 文档中 </summary>
+        </member>
+        <member name="T:eZstd.Enumerable.ArrayConstructor">
+            <summary> 通过不同的方式构造一维或多维数组 </summary>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.FromRangeAri(System.Double,System.Double,System.UInt32)">
+            <summary>
+            返回均匀分布的等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <param name="count">返回的数组中的元素个数，其值至少为1</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.FromRangeAri(System.Double,System.Double,System.Double)">
+            <summary>
+            返回均匀分布的等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
+            </summary>
+            <param name="start">返回的数组中必定包含这个值</param>
+            <param name="end">返回的数组中的最后一个元素的值必定小于等于此参数的值</param>
+            <param name="step"> step的值不能太小，避免导致数组元素过多</param>
+            <returns>返回的数组中的最后一个元素的值必定小于等于<paramref name="end" />的值</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.FromRangeAri(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            返回均匀分布的“整数”等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
+            </summary>
+            <param name="start">返回的数组中必定包含这个值</param>
+            <param name="end">返回的数组中的最后一个元素的值必定小于等于此参数的值</param>
+            <param name="step"> step的值不能太小，避免导致数组元素过多</param>
+            <returns>返回的数组中的最后一个元素的值必定小于等于<paramref name="end" />的值</returns>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.FromStepAri(System.Double,System.UInt32,System.Double)">
+            <summary>
+            返回均匀分布的等差序列（Arithmetical series）
+            </summary>
+            <param name="start"></param>
+            <param name="step"> </param>
+            <param name="count">数组中的元素个数</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.FromStepGeo(System.Double,System.UInt32,System.Double)">
+            <summary>
+            返回等比序列（Geometric series），数组中的元素值不会跳出[start,end]闭区间。
+            </summary>
+            <param name="start"></param>
+            <param name="count"> </param>
+            <param name="bias">每一个元素值是上一个元素值的 bias 倍</param>
+            <returns></returns>
+            <remarks>等比数列的通项公式是：An=A1*q^(n-1)</remarks>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.GetRow``1(``0[0:,0:],System.Int32)">
+            <summary> 从二维数组中提取一行向量 </summary>
+            <param name="source"></param>
+            <param name="rowIndex">第一行的下标为0</param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.GetColumn``1(``0[0:,0:],System.Int32)">
+            <summary> 从二维数组中提取一列向量 </summary>
+            <param name="source"></param>
+            <param name="colIndex">第一列的下标为0</param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:eZstd.Enumerable.ArrayConstructor.FromList2D(System.Collections.Generic.List{System.Double[]})">
+            <summary>
+            从多个一维行向量的List集合中构造出对应的二维数组
+            </summary>
+            <param name="numList"></param>
+            <returns> 返回的二维数组的列数与 List 中的第一个行向量的列数相同。</returns>
+        </member>
+        <member name="F:eZstd.Enumerable.ArrayConstructor.DistributeMode.Linear">
+            <summary>
+            线性均匀分布
+            </summary>
+        </member>
+        <member name="F:eZstd.Enumerable.ArrayConstructor.DistributeMode.Exponential">
+            <summary>
+            指数分布
+            </summary>
+        </member>
+        <member name="T:eZstd.Diagnostics.ProcessesKiller">
+            <summary>
+            关闭进程或者关闭进程树
+            </summary>
+        </member>
+        <member name="M:eZstd.Diagnostics.ProcessesKiller.KillProcessAndChildren(System.Int32)">
+            <summary>根据父进程id，杀死与之相关的进程树</summary>
+             <param name="pid">父进程id</param>
         </member>
         <member name="T:eZstd.Drawing.HSLColor">
             <summary>
@@ -3390,194 +3684,6 @@
               mY.Scale(1, ratio);
               gr.Transform = mY;  // 将变换应用到绘图面板中
             </remarks>
-        </member>
-        <member name="T:eZstd.Enumerable.Array2D">
-            <summary>
-            一些二维数组所特有的操作。
-            注意，有很多集合的算法都可以通过 LINQ 语句来实现，如果可以，则推荐用 Linq。但是对于一些特殊的情况，比如二维数组的运算，则在此类中实现。
-            </summary>
-        </member>
-        <member name="F:eZstd.Enumerable.Array2D._arrayInt">
-            <summary> 如果<see cref="P:eZstd.Enumerable.Array2D.IsElementsInterger"/>，则此字段的值为对应的源二维数组。否则为 null </summary>
-        </member>
-        <member name="F:eZstd.Enumerable.Array2D._arraydbl">
-            <summary> 如果<see cref="P:eZstd.Enumerable.Array2D.IsElementsInterger"/>为false，则此字段的值为对应的源二维数组。否则为 null </summary>
-        </member>
-        <member name="P:eZstd.Enumerable.Array2D.Value">
-            <summary> 二维数组对象，即 double[,] 或 int[,] 对象。在外部可通过 as 进行类型转换，如 double[,] v = Value as double[,]; </summary>
-        </member>
-        <member name="P:eZstd.Enumerable.Array2D.ValueI">
-            <summary> 二维数组对象，即 double[,]。如果数据源为 int[,]，则会从其中提取出 double[,] ; </summary>
-        </member>
-        <member name="P:eZstd.Enumerable.Array2D.ValueD">
-            <summary> 二维数组对象，即 int[,]。如果数据源为 double[,]，则会从其中提取出 int[,] ; </summary>
-        </member>
-        <member name="P:eZstd.Enumerable.Array2D.IsElementsInterger">
-            <summary> 二维数组中的元素类型是否为整数。如果为true，则 Value 为 int[,]类型，否则 Value 为 double[,]类型。 </summary>
-        </member>
-        <member name="P:eZstd.Enumerable.Array2D.Rows">
-            <summary> 二维数组中的行数 </summary>
-        </member>
-        <member name="P:eZstd.Enumerable.Array2D.Columns">
-            <summary> 二维数组中的列数 </summary>
-        </member>
-        <member name="M:eZstd.Enumerable.Array2D.Max(System.Boolean,System.Int32[]@)">
-            <summary> 求二维数组中每一行或者每一列的最大值 </summary>
-            <param name="rank"> true 表示输出每一行的最大值，false 表示输出每一列的最大值 </param>
-            <param name="maxValue">每一行或者每一列的最大值</param>
-            <returns>每一个最大值所在的位置下标</returns>
-        </member>
-        <member name="M:eZstd.Enumerable.Array2D.Max(System.Boolean,System.Double[]@)">
-            <summary> 求二维数组中每一行或者每一列的最大值 </summary>
-            <param name="rank"> true 表示输出每一行的最大值，false 表示输出每一列的最大值 </param>
-            <param name="maxValue">每一行或者每一列的最大值</param>
-            <returns>每一个最大值所在的位置下标</returns>
-        </member>
-        <member name="M:eZstd.Enumerable.Array2D.Min(System.Boolean,System.Int32[]@)">
-            <summary> 求二维数组中每一行或者每一列的最小值 </summary>
-            <param name="rank"> true 表示输出每一行的最小值，false 表示输出每一列的最小值 </param>
-            <param name="minValue">每一行或者每一列的最小值</param>
-            <returns>每一个最小值所在的位置下标</returns>
-        </member>
-        <member name="M:eZstd.Enumerable.Array2D.Min(System.Boolean,System.Double[]@)">
-            <summary> 求二维数组中每一行或者每一列的最小值 </summary>
-            <param name="rank"> true 表示输出每一行的最小值，false 表示输出每一列的最小值 </param>
-            <param name="minValue">每一行或者每一列的最小值</param>
-            <returns>每一个最小值所在的位置下标</returns>
-        </member>
-        <member name="M:eZstd.Enumerable.Array2D.Clone">
-            <summary> 将对象创建一个副本。返回值为一个<see cref="T:eZstd.Enumerable.Array2D"/>对象 </summary>
-            <returns> 返回值为一个<see cref="T:eZstd.Enumerable.Array2D"/>对象 </returns>
-        </member>
-        <member name="T:eZstd.Enumerable.Array2D.NumericalOperation">
-            <summary>
-            多个数值之间的计算过程
-            </summary>
-            <param name="values"></param>
-            <returns>多个数值之间算术计算的结果值</returns>
-        </member>
-        <member name="M:eZstd.Enumerable.Array2D.CompositeCalculation(eZstd.Enumerable.Array2D.NumericalOperation,eZstd.Enumerable.Array2D[])">
-            <summary>
-            多个二维数组的复合计算
-            </summary>
-            <param name="operation"></param>
-            <param name="arrays">集合中二维数组的个数可以多于 <paramref name="operation"/> 中进行数值计算的元素个数；
-            但是每一个二维数组的大小必须相同。</param>
-            <returns></returns>
-        </member>
-        <member name="M:eZstd.Enumerable.Array2D.CompositeCalculation(eZstd.Enumerable.Array2D.NumericalOperation,System.Int32,System.Int32,System.Int32,System.Double[0:,0:][])">
-            <summary> 核心计算过程 </summary>
-            <param name="operation">多个数组之间的计算过程</param>
-            <param name="rows">每个数组的行数</param>
-            <param name="columns">每个数组的列数</param>
-            <param name="arraysCount">数组的个数</param>
-            <param name="arrays">所有要参与计算的数组，每个数组都是一个二维数组double[,]或int[,]，而且数组的大小一定要相同</param>
-            <returns></returns>
-        </member>
-        <member name="M:eZstd.Enumerable.Array2D.CheckArrays(System.Array[]@,System.Int32@,System.Int32@)">
-            <summary> 比较多个二维数组的大小是否相同 </summary>
-            <param name="array2ds">每一个数组都必须是二维数组，比如double[,]或者int[,]</param>
-            <param name="rows"></param>
-            <param name="columns"></param>
-            <returns>如果所有二维数组的大小都相同，则返回true</returns>
-        </member>
-        <member name="M:eZstd.Enumerable.Array2D.CheckArrays(eZstd.Enumerable.Array2D[]@,System.Int32@,System.Int32@)">
-            <summary> 比较多个二维数组的大小是否相同 </summary>
-            <param name="array2ds"></param>
-            <param name="rows"></param>
-            <param name="columns"></param>
-            <returns>如果所有二维数组的大小都相同，则返回true</returns>
-        </member>
-        <member name="M:eZstd.Enumerable.Array2D.CheckArray(System.Int32[0:,0:]@)">
-            <summary> 检查两个二维数组的元素数量是否一致 </summary>
-            <param name="array2d2">必须为二维数组，如 int[,] </param>
-        </member>
-        <member name="M:eZstd.Enumerable.Array2D.CheckArray(System.Double[0:,0:]@)">
-            <summary> 检查两个二维数组的元素数量是否一致 </summary>
-            <param name="array2d2">必须为二维数组，如 int[,] </param>
-        </member>
-        <member name="M:eZstd.Enumerable.Array2D.Int2Double">
-            <summary> 将整数类型的二维数组转换为双精度的二维数组 </summary>
-        </member>
-        <member name="M:eZstd.Enumerable.Array2D.Double2Int">
-            <summary> 将整数类型的二维数组转换为双精度的二维数组 </summary>
-        </member>
-        <member name="T:eZstd.Enumerable.EnumUtility">
-            <summary>
-            与集合相关的一些基本操作函数，比如数组的加减乘除等。
-            注意，有很多集合的算法都可以通过 LINQ 语句来实现，如果可以，则推荐用 Linq。但是对于一些特殊的情况，比如二维数组的运算，则在此类中实现。
-            </summary>
-        </member>
-        <member name="T:eZstd.Enumerable.ArrayConstructor">
-            <summary> 通过不同的方式构造数组 </summary>
-        </member>
-        <member name="M:eZstd.Enumerable.ArrayConstructor.FromRangeAri(System.Double,System.Double,System.UInt32)">
-            <summary>
-            返回均匀分布的等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
-            </summary>
-            <param name="start"></param>
-            <param name="end"></param>
-            <param name="count">返回的数组中的元素个数，其值至少为1</param>
-            <returns></returns>
-        </member>
-        <member name="M:eZstd.Enumerable.ArrayConstructor.FromRangeAri(System.Double,System.Double,System.Double)">
-            <summary>
-            返回均匀分布的等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
-            </summary>
-            <param name="start">返回的数组中必定包含这个值</param>
-            <param name="end">返回的数组中的最后一个元素的值必定小于等于此参数的值</param>
-            <param name="step"> step的值不能太小，避免导致数组元素过多</param>
-            <returns>返回的数组中的最后一个元素的值必定小于等于<paramref name="end" />的值</returns>
-        </member>
-        <member name="M:eZstd.Enumerable.ArrayConstructor.FromRangeAri(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            返回均匀分布的“整数”等差序列（Arithmetical series），数组中的元素值不会跳出[start,end]闭区间。
-            </summary>
-            <param name="start">返回的数组中必定包含这个值</param>
-            <param name="end">返回的数组中的最后一个元素的值必定小于等于此参数的值</param>
-            <param name="step"> step的值不能太小，避免导致数组元素过多</param>
-            <returns>返回的数组中的最后一个元素的值必定小于等于<paramref name="end" />的值</returns>
-        </member>
-        <member name="M:eZstd.Enumerable.ArrayConstructor.FromStepAri(System.Double,System.UInt32,System.Double)">
-            <summary>
-            返回均匀分布的等差序列（Arithmetical series）
-            </summary>
-            <param name="start"></param>
-            <param name="step"> </param>
-            <param name="count">数组中的元素个数</param>
-            <returns></returns>
-        </member>
-        <member name="M:eZstd.Enumerable.ArrayConstructor.FromStepGeo(System.Double,System.UInt32,System.Double)">
-            <summary>
-            返回等比序列（Geometric series），数组中的元素值不会跳出[start,end]闭区间。
-            </summary>
-            <param name="start"></param>
-            <param name="count"> </param>
-            <param name="bias">每一个元素值是上一个元素值的 bias 倍</param>
-            <returns></returns>
-            <remarks>等比数列的通项公式是：An=A1*q^(n-1)</remarks>
-        </member>
-        <member name="M:eZstd.Enumerable.ArrayConstructor.GetRow``1(``0[0:,0:],System.Int32)">
-            <summary> 从二维数组中提取一行向量 </summary>
-            <param name="source"></param>
-            <param name="rowIndex">第一行的下标为0</param>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:eZstd.Enumerable.ArrayConstructor.GetColumn``1(``0[0:,0:],System.Int32)">
-            <summary> 从二维数组中提取一列向量 </summary>
-            <param name="source"></param>
-            <param name="colIndex">第一列的下标为0</param>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="F:eZstd.Enumerable.ArrayConstructor.DistributeMode.Linear">
-            <summary>
-            线性均匀分布
-            </summary>
-        </member>
-        <member name="F:eZstd.Enumerable.ArrayConstructor.DistributeMode.Exponential">
-            <summary>
-            指数分布
-            </summary>
         </member>
         <member name="M:eZstd.MarshalReflection.AssemblyHelper.DynamicDebugClass(System.String,System.String,System.Object[])">
             <summary>
@@ -5364,36 +5470,6 @@
         <member name="M:DllActivator.DllActivator_std.ActivateReferences">
             <summary>
             激活本DLL所引用的那些DLLs
-            </summary>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
             </summary>
         </member>
     </members>

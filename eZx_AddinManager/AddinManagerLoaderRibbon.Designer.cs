@@ -37,21 +37,21 @@ namespace eZx_AddinManager
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddinManagerLoaderRibbon));
-            this.tab1 = this.Factory.CreateRibbonTab();
+            this.eZxAddinManager = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.buttonAddinManager = this.Factory.CreateRibbonButton();
             this.buttonLastCommand = this.Factory.CreateRibbonButton();
-            this.tab1.SuspendLayout();
+            this.eZxAddinManager.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tab1
+            // eZxAddinManager
             // 
-            this.tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
-            this.tab1.ControlId.OfficeId = "TabDeveloper";
-            this.tab1.Groups.Add(this.group1);
-            this.tab1.Label = "TabDeveloper";
-            this.tab1.Name = "tab1";
+            this.eZxAddinManager.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
+            this.eZxAddinManager.ControlId.OfficeId = "TabDeveloper";
+            this.eZxAddinManager.Groups.Add(this.group1);
+            this.eZxAddinManager.Label = "TabDeveloper";
+            this.eZxAddinManager.Name = "eZxAddinManager";
             // 
             // group1
             // 
@@ -85,11 +85,11 @@ namespace eZx_AddinManager
             // 
             this.Name = "AddinManagerLoaderRibbon";
             this.RibbonType = "Microsoft.Excel.Workbook";
-            this.Tabs.Add(this.tab1);
+            this.Tabs.Add(this.eZxAddinManager);
             this.Close += new System.EventHandler(this.AddinManagerLoaderRibbon_Close);
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.AddinManagerLoader_Load);
-            this.tab1.ResumeLayout(false);
-            this.tab1.PerformLayout();
+            this.eZxAddinManager.ResumeLayout(false);
+            this.eZxAddinManager.PerformLayout();
             this.group1.ResumeLayout(false);
             this.group1.PerformLayout();
             this.ResumeLayout(false);
@@ -97,11 +97,10 @@ namespace eZx_AddinManager
         }
 
         #endregion
-
-        internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonAddinManager;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonLastCommand;
+        private Microsoft.Office.Tools.Ribbon.RibbonTab eZxAddinManager;
     }
 
     partial class ThisRibbonCollection
