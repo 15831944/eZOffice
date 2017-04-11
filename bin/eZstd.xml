@@ -3868,12 +3868,26 @@
         <member name="F:eZstd.Mathematics.SpeedMode.CurveShape.XDescend">
             <summary> X轴的值依次减小，也包括相邻的值相等的情况 </summary>
         </member>
-        <member name="T:eZstd.Mathematics.SplineInterpolation">
+        <member name="T:eZstd.Mathematics.Interpolation">
             <summary>
             样条插值算法
             </summary>
         </member>
-        <member name="M:eZstd.Mathematics.SplineInterpolation.Execute(System.Double[],System.Double[],System.Double[])">
+        <member name="M:eZstd.Mathematics.Interpolation.LinearInterpolation(System.Double[],System.Double[],System.Double[])">
+            <summary>
+            进行二维曲线的线性插值，对于超出源数据范围的区域，采用直线放射
+            </summary>
+            <param name="srcX">插值数据源中的X，X序列中的值不一定必须要递增或者递减排列</param>
+            <param name="srcY">插值数据源中的Y</param>
+            <param name="interpX">想要进行插值的x序列</param>
+            <returns>插值后得到的与 <paramref name="interpX"/> 相对应的y值序列</returns>
+        </member>
+        <member name="M:eZstd.Mathematics.Interpolation.LinearInterp(System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary> 两个点之间的线性插值 </summary>
+            <param name="interpX">要进行插值的位置，此位移可以在[x1, x2]之外</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZstd.Mathematics.Interpolation.SplineInterpolation(System.Double[],System.Double[],System.Double[])">
             <summary>
             进行二维曲线的样条插值
             </summary>
@@ -5470,6 +5484,36 @@
         <member name="M:DllActivator.DllActivator_std.ActivateReferences">
             <summary>
             激活本DLL所引用的那些DLLs
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
             </summary>
         </member>
     </members>

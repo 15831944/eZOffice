@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using eZx.AddinManager;
-using eZx_AddinManager;
 using Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Tools.Ribbon;
 
 namespace eZx.AddinManager
 {
@@ -45,6 +39,7 @@ namespace eZx.AddinManager
                 Debug.Print("AddinManager 插件关闭时出错： \n\r" + ex.Message + "\n\r" + ex.StackTrace);
             }
         }
+
         #endregion
 
         #region ---   点击调试按钮

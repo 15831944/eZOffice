@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using eZstd.Enumerable;
+using eZstd.Mathematics;
 using eZx_API.Entities;
 using Microsoft.Office.Interop.Excel;
 using Application = Microsoft.Office.Interop.Excel.Application;
@@ -17,8 +11,8 @@ namespace eZx.RibbonHandler
     public partial class FormInterpolations : Form
     {
         private Application _exApp;
-        #region ---   构造函数与窗口开启关闭
 
+        #region ---   构造函数与窗口开启关闭
 
         private static FormInterpolations _uniqueInstance;
 
@@ -40,7 +34,7 @@ namespace eZx.RibbonHandler
             rangeGetorI.SetApplication(excelApp);
             rangeGetorD.SetApplication(excelApp);
             //
-            this.KeyPreview = true;
+            KeyPreview = true;
         }
 
         private void FormInterpolations_FormClosing(object sender, FormClosingEventArgs e)
@@ -72,13 +66,21 @@ namespace eZx.RibbonHandler
         {
             try
             {
-                if (radioButton_Spline.Checked)
-                {
+                double[] srcX, srcY, interpX;
 
-                    double[] srcX, srcY, interpX, interpY;
-                    if (GetSplineSrc(out srcX, out srcY, out interpX))
+                if (GetSplineSrc(out srcX, out srcY, out interpX))
+                {
+                    double[] interpY = null;
+                    if (radioButton_Spline.Checked)
                     {
-                        interpY = eZstd.Mathematics.SplineInterpolation.Execute(srcX, srcY, interpX);
+                        interpY = Interpolation.SplineInterpolation(srcX, srcY, interpX);
+                    }
+                    else if (radioButton_whatever.Checked)
+                    {
+                        interpY = Interpolation.LinearInterpolation(srcX, srcY, interpX);
+                    }
+                    if (interpY != null)
+                    {
                         // 将结果写入 Excel 表格中
                         Range destCell;
                         if (rangeGetorD.Range == null)
@@ -93,19 +95,16 @@ namespace eZx.RibbonHandler
                         Worksheet sht = _exApp.ActiveSheet;
                         RangeValueConverter.FillRange(sht, destCell.Row, destCell.Column, interpY, true);
                     }
-                    else
-                    {
-                        MessageBox.Show(@"无法找到有效的数据源", @"出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
                 }
-                else if (radioButton_whatever.Checked)
+                else
                 {
-
+                    MessageBox.Show(@"无法找到有效的数据源", @"出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\r\n" + ex.StackTrace, @"出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message + "\r\n" + "\r\n", // + ex.StackTrace
+                    @"出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -138,7 +137,6 @@ namespace eZx.RibbonHandler
             var cv = ArrayConstructor.GetColumn(d, 0);
             return cv;
         }
-
 
         #endregion
     }

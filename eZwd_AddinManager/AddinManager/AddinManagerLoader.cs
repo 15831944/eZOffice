@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using eZwd.AddinManager;
 using Microsoft.Office.Interop.Word;
-using Microsoft.Office.Tools.Ribbon;
 
 namespace eZwd.AddinManager
 {
@@ -44,6 +39,7 @@ namespace eZwd.AddinManager
                 Debug.Print("AddinManager 插件关闭时出错： \n\r" + ex.Message + "\n\r" + ex.StackTrace);
             }
         }
+
         #endregion
 
         #region ---   点击调试按钮
