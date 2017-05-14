@@ -56,23 +56,27 @@ namespace eZwd
             this.Tab1 = this.Factory.CreateRibbonTab();
             this.Group4 = this.Factory.CreateRibbonGroup();
             this.btnDeleteRow = this.Factory.CreateRibbonButton();
+            this.group6 = this.Factory.CreateRibbonGroup();
+            this.btn_ExtractDataFromWordChart = this.Factory.CreateRibbonButton();
             this.Group3 = this.Factory.CreateRibbonGroup();
             this.Button_SetHyperlinks = this.Factory.CreateRibbonButton();
             this.Button_ClearTextFormat = this.Factory.CreateRibbonButton();
-            this.btn_ExtractDataFromWordChart = this.Factory.CreateRibbonButton();
+            this.buttonPdfReformat = this.Factory.CreateRibbonButton();
+            this.btn_CrossRef = this.Factory.CreateRibbonButton();
+            this.btn_CrossRefExecute = this.Factory.CreateRibbonButton();
+            this.chk_CrossRefReturn = this.Factory.CreateRibbonCheckBox();
             this.Group5 = this.Factory.CreateRibbonGroup();
+            this.button_CodeFormater = this.Factory.CreateRibbonButton();
             this.Button_DeleteSapce = this.Factory.CreateRibbonButton();
             this.Button_AddSpace = this.Factory.CreateRibbonButton();
             this.EditBox_SpaceCount = this.Factory.CreateRibbonEditBox();
-            this.group6 = this.Factory.CreateRibbonGroup();
-            this.buttonPdfReformat = this.Factory.CreateRibbonButton();
             this.Group2.SuspendLayout();
             this.group1.SuspendLayout();
             this.Tab1.SuspendLayout();
             this.Group4.SuspendLayout();
+            this.group6.SuspendLayout();
             this.Group3.SuspendLayout();
             this.Group5.SuspendLayout();
-            this.group6.SuspendLayout();
             this.SuspendLayout();
             // 
             // Group2
@@ -171,11 +175,30 @@ namespace eZwd
     "一个表格的所有行中进行检索；\r\n 这如果选择了多个表格，则在多个表格中进行检索。";
             this.btnDeleteRow.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnDeleteRow_Click);
             // 
+            // group6
+            // 
+            this.group6.Items.Add(this.btn_ExtractDataFromWordChart);
+            this.group6.Label = "图表";
+            this.group6.Name = "group6";
+            // 
+            // btn_ExtractDataFromWordChart
+            // 
+            this.btn_ExtractDataFromWordChart.Label = "提取数据";
+            this.btn_ExtractDataFromWordChart.Name = "btn_ExtractDataFromWordChart";
+            this.btn_ExtractDataFromWordChart.OfficeImageId = "ChartTypeXYScatterInsertGallery";
+            this.btn_ExtractDataFromWordChart.ScreenTip = "提取Word中的图表（Chart）数据";
+            this.btn_ExtractDataFromWordChart.ShowImage = true;
+            this.btn_ExtractDataFromWordChart.SuperTip = null;
+            this.btn_ExtractDataFromWordChart.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ExtractDataFromWordChart);
+            // 
             // Group3
             // 
             this.Group3.Items.Add(this.Button_SetHyperlinks);
             this.Group3.Items.Add(this.Button_ClearTextFormat);
             this.Group3.Items.Add(this.buttonPdfReformat);
+            this.Group3.Items.Add(this.btn_CrossRef);
+            this.Group3.Items.Add(this.btn_CrossRefExecute);
+            this.Group3.Items.Add(this.chk_CrossRefReturn);
             this.Group3.Label = "文档处理";
             this.Group3.Name = "Group3";
             // 
@@ -200,23 +223,55 @@ namespace eZwd
             this.Button_ClearTextFormat.SuperTip = "    具体过程有： vbcrlf 删除乱码空格、将手动换行符替换为回车、设置嵌入式图片的段落样式";
             this.Button_ClearTextFormat.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Button_ClearTextFormat_Click);
             // 
-            // btn_ExtractDataFromWordChart
+            // buttonPdfReformat
             // 
-            this.btn_ExtractDataFromWordChart.Label = "提取数据";
-            this.btn_ExtractDataFromWordChart.Name = "btn_ExtractDataFromWordChart";
-            this.btn_ExtractDataFromWordChart.OfficeImageId = "ChartTypeXYScatterInsertGallery";
-            this.btn_ExtractDataFromWordChart.ScreenTip = "提取Word中的图表（Chart）数据";
-            this.btn_ExtractDataFromWordChart.ShowImage = true;
-            this.btn_ExtractDataFromWordChart.SuperTip = null;
-            this.btn_ExtractDataFromWordChart.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ExtractDataFromWordChart);
+            this.buttonPdfReformat.Label = "段落重排";
+            this.buttonPdfReformat.Name = "buttonPdfReformat";
+            this.buttonPdfReformat.OfficeImageId = "InsertBuildingBlock";
+            this.buttonPdfReformat.ScreenTip = "将多个段落转换为一个段落";
+            this.buttonPdfReformat.ShowImage = true;
+            this.buttonPdfReformat.SuperTip = "比如将从PDF中粘贴过来的多段文字转换为一个段落。具体操作为：将选择区域的文字中的换行符转换为空格";
+            this.buttonPdfReformat.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonPdfReformat_Click);
+            // 
+            // btn_CrossRef
+            // 
+            this.btn_CrossRef.Label = "锚定引用";
+            this.btn_CrossRef.Name = "btn_CrossRef";
+            this.btn_CrossRef.ScreenTip = "快速引用";
+            this.btn_CrossRef.SuperTip = "快速添加交叉引用";
+            this.btn_CrossRef.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_CrossRef_Click);
+            // 
+            // btn_CrossRefExecute
+            // 
+            this.btn_CrossRefExecute.Enabled = false;
+            this.btn_CrossRefExecute.Label = "引用";
+            this.btn_CrossRefExecute.Name = "btn_CrossRefExecute";
+            this.btn_CrossRefExecute.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_CrossRefExecute_Click);
+            // 
+            // chk_CrossRefReturn
+            // 
+            this.chk_CrossRefReturn.Enabled = false;
+            this.chk_CrossRefReturn.Label = "归位";
+            this.chk_CrossRefReturn.Name = "chk_CrossRefReturn";
             // 
             // Group5
             // 
+            this.Group5.Items.Add(this.button_CodeFormater);
             this.Group5.Items.Add(this.Button_DeleteSapce);
             this.Group5.Items.Add(this.Button_AddSpace);
             this.Group5.Items.Add(this.EditBox_SpaceCount);
             this.Group5.Label = "Coder";
             this.Group5.Name = "Group5";
+            // 
+            // button_CodeFormater
+            // 
+            this.button_CodeFormater.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.button_CodeFormater.Label = "Format";
+            this.button_CodeFormater.Name = "button_CodeFormater";
+            this.button_CodeFormater.ScreenTip = "代码格式美化";
+            this.button_CodeFormater.ShowImage = true;
+            this.button_CodeFormater.SuperTip = "将从Visual Studio 或者 Pycharm中复制到word中的代码进行格式化";
+            this.button_CodeFormater.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button_CodeFormater_Click);
             // 
             // Button_DeleteSapce
             // 
@@ -245,22 +300,6 @@ namespace eZwd
             this.EditBox_SpaceCount.SuperTip = "要在代码行中增加或者删除的空白字符数。";
             this.EditBox_SpaceCount.Text = "4";
             // 
-            // group6
-            // 
-            this.group6.Items.Add(this.btn_ExtractDataFromWordChart);
-            this.group6.Label = "图表";
-            this.group6.Name = "group6";
-            // 
-            // buttonPdfReformat
-            // 
-            this.buttonPdfReformat.Label = "段落重排";
-            this.buttonPdfReformat.Name = "buttonPdfReformat";
-            this.buttonPdfReformat.OfficeImageId = "InsertBuildingBlock";
-            this.buttonPdfReformat.ScreenTip = "将多个段落转换为一个段落";
-            this.buttonPdfReformat.ShowImage = true;
-            this.buttonPdfReformat.SuperTip = "比如将从PDF中粘贴过来的多段文字转换为一个段落。具体操作为：将选择区域的文字中的换行符转换为空格";
-            this.buttonPdfReformat.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonPdfReformat_Click);
-            // 
             // Ribbon_eZwd
             // 
             this.Name = "Ribbon_eZwd";
@@ -275,12 +314,12 @@ namespace eZwd
             this.Tab1.PerformLayout();
             this.Group4.ResumeLayout(false);
             this.Group4.PerformLayout();
+            this.group6.ResumeLayout(false);
+            this.group6.PerformLayout();
             this.Group3.ResumeLayout(false);
             this.Group3.PerformLayout();
             this.Group5.ResumeLayout(false);
             this.Group5.PerformLayout();
-            this.group6.ResumeLayout(false);
-            this.group6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -308,6 +347,10 @@ namespace eZwd
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox EditBox_SpaceCount;
         internal RibbonGroup group6;
         internal RibbonButton buttonPdfReformat;
+        internal RibbonButton button_CodeFormater;
+        internal RibbonButton btn_CrossRef;
+        internal RibbonButton btn_CrossRefExecute;
+        internal RibbonCheckBox chk_CrossRefReturn;
     }
 
     partial class ThisRibbonCollection

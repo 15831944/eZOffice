@@ -75,7 +75,7 @@ namespace eZx.RibbonHandler
                     {
                         interpY = Interpolation.SplineInterpolation(srcX, srcY, interpX);
                     }
-                    else if (radioButton_whatever.Checked)
+                    else if (radioButton_Linear.Checked)
                     {
                         interpY = Interpolation.LinearInterpolation(srcX, srcY, interpX);
                     }

@@ -4050,6 +4050,25 @@
             <param name="typeIn"></param>
             <returns></returns>
         </member>
+        <member name="M:eZstd.Miscellaneous.Utils.ChooseOpenFile(System.String,System.String,System.Boolean)">
+            <summary> 选择一个或多个要打开的文件 </summary>
+            <param name="title">对话框的标题</param>
+            <param name="filter"> 文件过滤规则，比如 
+            “材料库(*.txt)| *.txt”、
+            “Excel文件(*.xls; *.xlsx; *.xlsb)| *.xls; *.xlsx; *.xlsb”、
+            “Excel工作簿(*.xlsx)|*.xlsx| Excel二进制工作簿(*.xlsb) |*.xlsb| Excel 97-2003 工作簿(*.xls)|*.xls” </param>
+            <param name="multiselect"> 是否支持多选 </param>
+            <returns> 成功选择，则返回对应文件的绝对路径，如果没有选择任何文件，则返回 null </returns>
+        </member>
+        <member name="M:eZstd.Miscellaneous.Utils.ChooseSaveFile(System.String,System.String)">
+            <summary> 选择要将数据保存到哪个文件 </summary>
+            <param name="title">对话框的标题</param>
+            <param name="filter"> 文件过滤规则，比如 
+            “材料库(*.txt)| *.txt”、
+            “Excel文件(*.xls; *.xlsx; *.xlsb)| *.xls; *.xlsx; *.xlsb”、
+            “Excel工作簿(*.xlsx)|*.xlsx| Excel二进制工作簿(*.xlsb) |*.xlsb| Excel 97-2003 工作簿(*.xls)|*.xls” </param>
+            <returns> 成功选择，则返回对应文件的绝对路径，否则返回 null </returns>
+        </member>
         <member name="T:eZstd.UserControls.eZDataGridViewUIAdd">
             <summary> 通过设计界面中的弹出菜单，来执行表格中记录行的插入、增加或删除等操作 </summary>
         </member>

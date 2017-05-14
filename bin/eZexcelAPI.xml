@@ -268,7 +268,8 @@
             <param name="startRow">第一行的值为1</param>
             <param name="startCol">第一列的值为1</param>
             <param name="arr">要写入的数据，为一个一维向量或者二维数组。如果为一维向量，则默认写入一列中。</param>
-            <param name="colPrior">仅当<paramref name="arr"/>为一维向量，则true表示将数据写入一列，false表示将数据写入一行。</param>
+            <param name="colPrior">仅当<paramref name="arr"/>为一维向量，则true表示将数据写入一列，false表示将数据写入一行。
+            当<paramref name="arr"/>为二维数组时，此参数没有任何效果</param>
             <returns></returns>
         </member>
         <member name="M:eZx_API.Entities.RangeValueConverter.GetRange(Microsoft.Office.Interop.Excel.Worksheet,System.Int32,System.Int32,System.Array,System.Boolean)">
@@ -277,7 +278,8 @@
             <param name="startRow">第一行的值为1</param>
             <param name="startCol">第一列的值为1</param>
             <param name="arr">要写入的数据，为一个一维向量或者二维数组。如果为一维向量，则默认写入一列中。</param>
-            <param name="colPrior">仅当<paramref name="arr"/>为一维向量，则true表示将数据写入一列，false表示将数据写入一行。</param>
+            <param name="colPrior">仅当<paramref name="arr"/>为一维向量，则true表示将数据写入一列，false表示将数据写入一行。
+            当<paramref name="arr"/>为二维数组时，此参数没有任何效果</param>
             <returns></returns>
         </member>
         <member name="M:eZx_API.Entities.RangeValueConverter.GetRange(Microsoft.Office.Interop.Excel.Worksheet,System.Int32,System.Int32,System.Int32,System.Int32)">

@@ -3,38 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using eZstd.Miscellaneous;
-using eZwd.AddinManager;
 using eZwd.eZwd_API;
 using Microsoft.Office.Interop.Word;
-using Application = Microsoft.Office.Interop.Word.Application;
 
-namespace eZwd.Debug
+namespace eZwd.RibbonHandlers
 {
-    /// <summary> 将从Pycharm中复制到word中的代码进行格式化 </summary>
-    [EcDescription("将从Pycharm中复制到word中的代码进行格式化")]
-    class Ec_FormatPythonCodeFromPyCharm : IWordExCommand
+    /// <summary>
+    /// 与代码编辑相关的操作
+    /// </summary>
+    public class Coder
     {
-        public ExternalCommandResult Execute(Microsoft.Office.Interop.Word.Application wdApp, ref string errorMessage,
-            ref object errorObj)
-        {
-            try
-            {
-
-                FormatPythonCodeFromPyCharm(wdApp);
-                return ExternalCommandResult.Succeeded;
-            }
-            catch (Exception ex)
-            {
-                errorMessage = ex.Message + "\r\n\r\n" + ex.StackTrace;
-                return ExternalCommandResult.Failed;
-            }
-        }
-
         /// <summary> 将从Pycharm中复制到word中的代码进行格式化</summary>
         /// <param name="wdApp"></param>
-        private static void FormatPythonCodeFromPyCharm(Application wdApp)
+        public static void FormatCodeFromIDE(Application wdApp)
         {
 
             Document doc = wdApp.ActiveDocument;
@@ -84,7 +65,7 @@ namespace eZwd.Debug
                     RangeUtils.ReplaceCharactors(rg, "^l", "^p");
 
                     //
-                    rg.HighlightColorIndex =WdColorIndex.wdNoHighlight;
+                    rg.HighlightColorIndex = WdColorIndex.wdNoHighlight;
 
                 }
                 finally
@@ -94,7 +75,6 @@ namespace eZwd.Debug
 
             }
         }
-
 
     }
 }
