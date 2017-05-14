@@ -31,7 +31,7 @@ namespace eZx.RibbonHandler
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton_whatever = new System.Windows.Forms.RadioButton();
+            this.radioButton_Linear = new System.Windows.Forms.RadioButton();
             this.radioButton_Spline = new System.Windows.Forms.RadioButton();
             this.button_Cancel = new System.Windows.Forms.Button();
             this.buttonOk = new System.Windows.Forms.Button();
@@ -46,36 +46,36 @@ namespace eZx.RibbonHandler
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.radioButton_whatever);
+            this.groupBox1.Controls.Add(this.radioButton_Linear);
             this.groupBox1.Controls.Add(this.radioButton_Spline);
-            this.groupBox1.Location = new System.Drawing.Point(11, 112);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Location = new System.Drawing.Point(15, 140);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(231, 79);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Size = new System.Drawing.Size(308, 99);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "插值模式";
             // 
-            // radioButton_whatever
+            // radioButton_Linear
             // 
-            this.radioButton_whatever.AutoSize = true;
-            this.radioButton_whatever.Location = new System.Drawing.Point(8, 50);
-            this.radioButton_whatever.Margin = new System.Windows.Forms.Padding(2);
-            this.radioButton_whatever.Name = "radioButton_whatever";
-            this.radioButton_whatever.Size = new System.Drawing.Size(41, 16);
-            this.radioButton_whatever.TabIndex = 0;
-            this.radioButton_whatever.Text = "***";
-            this.radioButton_whatever.UseVisualStyleBackColor = true;
+            this.radioButton_Linear.AutoSize = true;
+            this.radioButton_Linear.Location = new System.Drawing.Point(11, 62);
+            this.radioButton_Linear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.radioButton_Linear.Name = "radioButton_Linear";
+            this.radioButton_Linear.Size = new System.Drawing.Size(88, 19);
+            this.radioButton_Linear.TabIndex = 0;
+            this.radioButton_Linear.Text = "线性插值";
+            this.radioButton_Linear.UseVisualStyleBackColor = true;
             // 
             // radioButton_Spline
             // 
             this.radioButton_Spline.AutoSize = true;
             this.radioButton_Spline.Checked = true;
-            this.radioButton_Spline.Location = new System.Drawing.Point(8, 23);
-            this.radioButton_Spline.Margin = new System.Windows.Forms.Padding(2);
+            this.radioButton_Spline.Location = new System.Drawing.Point(11, 29);
+            this.radioButton_Spline.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButton_Spline.Name = "radioButton_Spline";
-            this.radioButton_Spline.Size = new System.Drawing.Size(71, 16);
+            this.radioButton_Spline.Size = new System.Drawing.Size(88, 19);
             this.radioButton_Spline.TabIndex = 0;
             this.radioButton_Spline.TabStop = true;
             this.radioButton_Spline.Text = "样条插值";
@@ -84,10 +84,10 @@ namespace eZx.RibbonHandler
             // button_Cancel
             // 
             this.button_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Cancel.Location = new System.Drawing.Point(120, 195);
-            this.button_Cancel.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Cancel.Location = new System.Drawing.Point(160, 244);
+            this.button_Cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_Cancel.Name = "button_Cancel";
-            this.button_Cancel.Size = new System.Drawing.Size(56, 20);
+            this.button_Cancel.Size = new System.Drawing.Size(75, 25);
             this.button_Cancel.TabIndex = 7;
             this.button_Cancel.Text = "取消";
             this.button_Cancel.UseVisualStyleBackColor = true;
@@ -96,10 +96,10 @@ namespace eZx.RibbonHandler
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.Location = new System.Drawing.Point(181, 195);
-            this.buttonOk.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonOk.Location = new System.Drawing.Point(241, 244);
+            this.buttonOk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(56, 20);
+            this.buttonOk.Size = new System.Drawing.Size(75, 25);
             this.buttonOk.TabIndex = 8;
             this.buttonOk.Text = "确定";
             this.buttonOk.UseVisualStyleBackColor = true;
@@ -109,35 +109,38 @@ namespace eZx.RibbonHandler
             // 
             this.rangeGetorD.ButtonText = "D";
             this.rangeGetorD.LabelText = "结果";
-            this.rangeGetorD.Location = new System.Drawing.Point(10, 85);
+            this.rangeGetorD.Location = new System.Drawing.Point(13, 106);
+            this.rangeGetorD.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.rangeGetorD.Name = "rangeGetorD";
-            this.rangeGetorD.Size = new System.Drawing.Size(212, 22);
+            this.rangeGetorD.Size = new System.Drawing.Size(283, 28);
             this.rangeGetorD.TabIndex = 11;
             // 
             // rangeGetorI
             // 
             this.rangeGetorI.ButtonText = "I";
             this.rangeGetorI.LabelText = "插值x源";
-            this.rangeGetorI.Location = new System.Drawing.Point(10, 58);
+            this.rangeGetorI.Location = new System.Drawing.Point(13, 72);
+            this.rangeGetorI.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.rangeGetorI.Name = "rangeGetorI";
-            this.rangeGetorI.Size = new System.Drawing.Size(212, 22);
+            this.rangeGetorI.Size = new System.Drawing.Size(283, 28);
             this.rangeGetorI.TabIndex = 10;
             // 
             // rangeSource
             // 
-            this.rangeSource.Location = new System.Drawing.Point(6, 2);
-            this.rangeSource.MaximumSize = new System.Drawing.Size(235, 50);
-            this.rangeSource.MinimumSize = new System.Drawing.Size(235, 50);
+            this.rangeSource.Location = new System.Drawing.Point(8, 2);
+            this.rangeSource.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.rangeSource.MaximumSize = new System.Drawing.Size(313, 62);
+            this.rangeSource.MinimumSize = new System.Drawing.Size(313, 62);
             this.rangeSource.Name = "rangeSource";
-            this.rangeSource.Size = new System.Drawing.Size(235, 50);
+            this.rangeSource.Size = new System.Drawing.Size(313, 62);
             this.rangeSource.TabIndex = 0;
             // 
             // FormInterpolations
             // 
             this.AcceptButton = this.buttonOk;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(248, 226);
+            this.ClientSize = new System.Drawing.Size(331, 282);
             this.Controls.Add(this.rangeGetorD);
             this.Controls.Add(this.rangeGetorI);
             this.Controls.Add(this.groupBox1);
@@ -145,6 +148,7 @@ namespace eZx.RibbonHandler
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.rangeSource);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormInterpolations";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "曲线插值";
@@ -160,7 +164,7 @@ namespace eZx.RibbonHandler
 
         private CurveRangeLocator rangeSource;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton_whatever;
+        private System.Windows.Forms.RadioButton radioButton_Linear;
         private System.Windows.Forms.RadioButton radioButton_Spline;
         private System.Windows.Forms.Button button_Cancel;
         private System.Windows.Forms.Button buttonOk;

@@ -63,7 +63,6 @@ namespace eZwd.RibbonHandlers
             }
         }
 
-
         /// <summary> 设置超链接 </summary>
         /// <param name="wdApp"></param>
         /// <remarks>此方法的要求是文本的排布格式要求：选择的段落格式必须是：
@@ -97,7 +96,6 @@ namespace eZwd.RibbonHandlers
             }
         }
 
-
         /// <summary>
         /// 清理文本的格式
         /// </summary>
@@ -130,7 +128,6 @@ namespace eZwd.RibbonHandlers
                 inlineShp.Range.ParagraphFormat.set_Style(pictureParagraphStyle);
             }
         }
-
 
         /// <summary>
         /// 嵌入式图片加边框
@@ -206,6 +203,5 @@ namespace eZwd.RibbonHandlers
             }
             wdApp.ScreenUpdating = true;
         }
-
     }
 }

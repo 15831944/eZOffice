@@ -11,13 +11,6 @@
             <summary> 生成一个嵌套的域代码： { quote "一九一一年一月{ STYLEREF 1 \s }日" \@"D" }</summary>
             <param name="wdApp"></param>
         </member>
-        <member name="T:eZwd.Debug.Ec_FormatPythonCodeFromPyCharm">
-            <summary> 将从Pycharm中复制到word中的代码进行格式化 </summary>
-        </member>
-        <member name="M:eZwd.Debug.Ec_FormatPythonCodeFromPyCharm.FormatPythonCodeFromPyCharm(Microsoft.Office.Interop.Word.Application)">
-            <summary> 将从Pycharm中复制到word中的代码进行格式化</summary>
-            <param name="wdApp"></param>
-        </member>
         <member name="T:eZwd.Debug.Ec_IterateParagraphs">
             <summary>
             显示当前光标选择区域的起始处的坐标
@@ -62,6 +55,34 @@
             <summary> 在文档中插入一个表格 </summary>
             <param name="startIndex">表格起始的位置</param>
             <param name="data"> 表格所对应的数据，包含表头 </param>
+        </member>
+        <member name="T:eZwd.RibbonHandlers.Coder">
+            <summary>
+            与代码编辑相关的操作
+            </summary>
+        </member>
+        <member name="M:eZwd.RibbonHandlers.Coder.FormatCodeFromIDE(Microsoft.Office.Interop.Word.Application)">
+            <summary> 将从Pycharm中复制到word中的代码进行格式化</summary>
+            <param name="wdApp"></param>
+        </member>
+        <member name="T:eZwd.RibbonHandlers.FastCrossReference">
+            <summary> 快速添加交叉引用 </summary>
+        </member>
+        <member name="M:eZwd.RibbonHandlers.FastCrossReference.CrossRef(Microsoft.Office.Interop.Word.Application,System.Boolean)">
+            <summary>
+            插入交叉引用
+            </summary>
+            <param name="wdApp"></param>
+            <param name="returnToCited">是否要返回到发起引用的位置</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZwd.RibbonHandlers.FastCrossReference.FindCrossRefIndex(Microsoft.Office.Interop.Word.Document,Microsoft.Office.Interop.Word.Range)">
+            <summary>
+            被引用的目标段落在整个交叉引用的“标题”集合中的下标
+            </summary>
+            <param name="doc"></param>
+            <param name="destPara"></param>
+            <returns></returns>
         </member>
         <member name="T:eZwd.RibbonHandlers.StaticFunction">
             <summary> 一些结构性的静态方法 </summary>
@@ -165,6 +186,14 @@
             <param name="IdCol"></param>
             <returns>此次一共删除了多少行</returns>
             <remarks></remarks>
+        </member>
+        <member name="M:eZwd.Ribbon_eZwd.Button_DeleteSapce_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+            <summary> 代码向前缩进 </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:eZwd.Ribbon_eZwd.Button_AddSpace_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+            <summary> 代码向前缩进 </summary>
         </member>
         <member name="M:eZwd.Ribbon_eZwd.TableFormat(System.String,System.String,System.Boolean)">
             <summary>

@@ -127,7 +127,7 @@ namespace eZwd
         public void Button_ClearTextFormat_Click(object sender, RibbonControlEventArgs e)
         {
             Application wdApp = Globals.ThisAddIn.Application;
-            StaticFunction.ClearTextFormat(wdApp,pictureParagraphStyle: "图片");
+            StaticFunction.ClearTextFormat(wdApp, pictureParagraphStyle: "图片");
         }
 
         /// <summary>
@@ -349,8 +349,11 @@ namespace eZwd
 
         #endregion
 
-        #region    ---   代表的向前或者向后缩进
+        #region    ---   代码编辑相关操作
 
+        /// <summary> 代码向前缩进 </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Button_DeleteSapce_Click(object sender, RibbonControlEventArgs e)
         {
             // 要删除或者添加的字符数
@@ -405,6 +408,7 @@ namespace eZwd
             }
         }
 
+        /// <summary> 代码向前缩进 </summary>
         public void Button_AddSpace_Click(object sender, RibbonControlEventArgs e)
         {
             // 要删除或者添加的字符数
@@ -463,6 +467,55 @@ namespace eZwd
             }
         }
 
+
+        private void button_CodeFormater_Click(object sender, RibbonControlEventArgs e)
+        {
+            var app = Globals.ThisAddIn.Application;
+            RibbonHandlers.Coder.FormatCodeFromIDE(app);
+        }
+        #endregion
+
+        #region    ---   快速引用
+
+        private void btn_CrossRef_Click(object sender, RibbonControlEventArgs e)
+        {
+            if (FastCrossReference.CitedRg == null)
+            {
+                var app = Globals.ThisAddIn.Application;
+                FastCrossReference.SetAnchor(app);
+                UI_CrossRefStarted();
+            }
+            else
+            {
+                FastCrossReference.Exit();
+                UI_CrossRefEnded();
+            }
+        }
+
+        private void btn_CrossRefExecute_Click(object sender, RibbonControlEventArgs e)
+        {
+            var app = Globals.ThisAddIn.Application;
+            bool ret = chk_CrossRefReturn.Checked;
+            var succ = FastCrossReference.CrossRef(app, ret);
+            if (succ)
+            {
+                FastCrossReference.Exit();
+                UI_CrossRefEnded();
+            }
+        }
+
+        private void UI_CrossRefStarted()
+        {
+            btn_CrossRef.Label = "取消引用";
+            btn_CrossRefExecute.Enabled = true;
+            chk_CrossRefReturn.Enabled = true;
+        }
+        private void UI_CrossRefEnded()
+        {
+            btn_CrossRef.Label = "锚定引用";
+            btn_CrossRefExecute.Enabled = false;
+            chk_CrossRefReturn.Enabled = false;
+        }
         #endregion
 
         #region   ---  子方法
@@ -582,7 +635,8 @@ namespace eZwd
                 return;
             }
         }
-        
+
         #endregion
+
     }
 }

@@ -344,7 +344,8 @@ namespace eZx_API.Entities
         /// <param name="startRow">第一行的值为1</param>
         /// <param name="startCol">第一列的值为1</param>
         /// <param name="arr">要写入的数据，为一个一维向量或者二维数组。如果为一维向量，则默认写入一列中。</param>
-        /// <param name="colPrior">仅当<paramref name="arr"/>为一维向量，则true表示将数据写入一列，false表示将数据写入一行。</param>
+        /// <param name="colPrior">仅当<paramref name="arr"/>为一维向量，则true表示将数据写入一列，false表示将数据写入一行。
+        /// 当<paramref name="arr"/>为二维数组时，此参数没有任何效果</param>
         /// <returns></returns>
         public static void FillRange(Worksheet sht, int startRow, int startCol, Array arr, bool colPrior = true)
         {
@@ -365,7 +366,8 @@ namespace eZx_API.Entities
         /// <param name="startRow">第一行的值为1</param>
         /// <param name="startCol">第一列的值为1</param>
         /// <param name="arr">要写入的数据，为一个一维向量或者二维数组。如果为一维向量，则默认写入一列中。</param>
-        /// <param name="colPrior">仅当<paramref name="arr"/>为一维向量，则true表示将数据写入一列，false表示将数据写入一行。</param>
+        /// <param name="colPrior">仅当<paramref name="arr"/>为一维向量，则true表示将数据写入一列，false表示将数据写入一行。
+        /// 当<paramref name="arr"/>为二维数组时，此参数没有任何效果</param>
         /// <returns></returns>
         public static Range GetRange(Worksheet sht, int startRow, int startCol, Array arr, bool colPrior = true)
         {
@@ -373,7 +375,7 @@ namespace eZx_API.Entities
             int colsCount = 1;
             switch (arr.Rank)
             {
-                case 1:
+                case 1:  // 表示是一个一维行向量
                     if (colPrior)
                     {
                         colsCount = 1;
@@ -384,8 +386,10 @@ namespace eZx_API.Entities
                         rowsCount = 1;
                     }
                     break;
-                case 2:
-                    rowsCount = arr.GetLength(1); break;
+                case 2:  // 表示是一个二维向量
+                    rowsCount = arr.GetLength(0);
+                    colsCount = arr.GetLength(1);
+                    break;
                 default:
                     return null;
             }

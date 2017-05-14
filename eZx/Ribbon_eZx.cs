@@ -107,14 +107,14 @@ namespace eZx
         {
             Range rg = _app.ActiveSheet.UsedRange;
             rg.Select();
-            // .Value = .Value '这一操作会将单元格中的公式转化为对应的值，而且，将#DIV/0!、#VALUE!等错误转换为Integer.MinValue
+            // .Value = .Value '这一操作会将单元`格中的公式转化为对应的值，而且，将#DIV/0!、#VALUE!等错误转换为Integer.MinValue
         }
 
         /// <summary> 显示工作表中的UsedRange的范围 </summary>
         public void ButtonValue_Click(object sender, RibbonControlEventArgs e)
         {
             Range rg = _app.Selection;
-            rg.Value = rg.Value; //这一操作会将单元格中的公式转化为对应的值，而且，将#DIV/0!、#VALUE!等错误转换为Integer.MinValue
+            rg.Formula = rg.Formula; //这一操作会将单元格中的公式转化为对应的值，而且，将#DIV/0!、#VALUE!等错误转换为Integer.MinValue
         }
 
         /// <summary>
