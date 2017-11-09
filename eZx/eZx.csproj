@@ -181,7 +181,17 @@
     <Compile Include="Database\Form_ConstructDatabase.Designer.cs">
       <DependentUpon>Form_ConstructDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Debug\EcTest.cs" />
+    <Compile Include="Debug\工程数量表\EcMergeSumupRow.cs" />
+    <Compile Include="Debug\工程数量表\EcInsertSumupRow.cs" />
+    <Compile Include="PrintingFormat\A3Page.cs" />
+    <Compile Include="PrintingFormat\RowHeightSetter.cs" />
+    <Compile Include="PrintingFormat\A3PageSetup.cs" />
+    <Compile Include="Debug\EcSlopeInfo.cs" />
+    <Compile Include="Debug\EcSumArea.cs" />
+    <Compile Include="Debug\AddinManagerDebuger.cs" />
+    <Compile Include="Debug\工程量清单\Item.cs" />
+    <Compile Include="Debug\工程量清单\规范数据源.cs" />
+    <Compile Include="Debug\工程量清单\工程量清单.cs" />
     <Compile Include="HelpDoc\Ribbon_eZx_HelpDoc.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -243,7 +253,13 @@
     <Compile Include="RibbonHandler\FormSpeedModeHandler.Designer.cs">
       <DependentUpon>FormSpeedModeHandler.cs</DependentUpon>
     </Compile>
+    <Compile Include="RibbonHandler\SlopeProtection\MileageInfo.cs" />
+    <Compile Include="RibbonHandler\SlopeProtection\SectionInfoHandler.cs" />
+    <Compile Include="RibbonHandler\SlopeProtection\SlopeAreaSumup.cs" />
+    <Compile Include="RibbonHandler\SlopeProtection\SlopeUtils.cs" />
     <Compile Include="RibbonHandler\SpeedModeHandler.cs" />
+    <Compile Include="RibbonHandler\StaticUtils.cs" />
+    <Compile Include="RibbonHandler\SumRowHandler.cs" />
     <Compile Include="Ribbon_eZx.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -284,10 +300,11 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>eZx_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>6795B9559779BDBB2231C6A2A534D64635254AB6</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>0426FDB74657784B32E660C8E9EBA37106D1A0B6</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

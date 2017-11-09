@@ -102,3 +102,17 @@ D:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.Ribbon_eZx.resourc
 D:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.csproj.GenerateResource.Cache
 D:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.dll
 D:\ProgrammingCases\GitHubProjects\eZOffice\eZx\obj\Debug\eZx.pdb
+D:\GithubProjects\eZOffice\bin\eZx.dll
+D:\GithubProjects\eZOffice\bin\eZx.pdb
+D:\GithubProjects\eZOffice\bin\eZx.dll.manifest
+D:\GithubProjects\eZOffice\eZx\obj\Debug\eZx.csprojResolveAssemblyReference.cache
+D:\GithubProjects\eZOffice\eZx\obj\Debug\eZx.Database.Form_ConstructDatabase.resources
+D:\GithubProjects\eZOffice\eZx\obj\Debug\eZx.HelpLocation.resources
+D:\GithubProjects\eZOffice\eZx\obj\Debug\eZx.Properties.Resources.resources
+D:\GithubProjects\eZOffice\eZx\obj\Debug\eZx.RibbonHandler.FormInterpolations.resources
+D:\GithubProjects\eZOffice\eZx\obj\Debug\eZx.RibbonHandler.FormSpeedModeHandler.resources
+D:\GithubProjects\eZOffice\eZx\obj\Debug\eZx.Ribbon_eZx.resources
+D:\GithubProjects\eZOffice\eZx\obj\Debug\eZx.csproj.GenerateResource.Cache
+D:\GithubProjects\eZOffice\eZx\obj\Debug\eZx.dll
+D:\GithubProjects\eZOffice\eZx\obj\Debug\eZx.pdb
+D:\GithubProjects\eZOffice\bin\eZx.vsto

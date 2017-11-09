@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows.Forms;
-using eZx_API.Entities;
-using eZstd.Miscellaneous;
 using eZx.Database;
+using eZx.Debug;
+using eZx.PrintingFormat;
 using eZx.RibbonHandler;
+using eZx.RibbonHandler.SlopeProtection;
+using eZx_API.Entities;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Tools.Ribbon;
-using Microsoft.VisualBasic;
 using Application = Microsoft.Office.Interop.Excel.Application;
 using Office = Microsoft.Office.Core;
 
@@ -20,10 +20,14 @@ namespace eZx
 
         #region   ---  Fields
 
-        /// <summary>
-        /// 此Application中所有的数据库工作表
-        /// </summary>
+        /// <summary> 此Application中所有的数据库工作表 </summary>
         private List<DataSheet> F_DbSheets = new List<DataSheet>();
+
+
+        /// <summary> 用来保存程序执行过程中的出错数据 </summary>
+        private string _errorMessage;
+        /// <summary> 用来保存程序执行过程中的出错单元格范围 </summary>
+        private Range _errorRange;
 
         #endregion
 
@@ -36,19 +40,19 @@ namespace eZx
         /// 则此属性指向此对应的数据库对象，否则，返回Nothing。</remarks>
         public DataSheet ActiveDatabaseSheet
         {
-            get { return this.F_ActiveDataSheet; }
+            get { return F_ActiveDataSheet; }
             set
             {
                 F_ActiveDataSheet = value;
                 if (value == null) // 说明此Worksheet不能成功地构成一个数据库格式
                 {
-                    this.btnEditDatabase.Enabled = false;
-                    this.btnConstructDatabase.Enabled = true;
+                    btnEditDatabase.Enabled = false;
+                    btnConstructDatabase.Enabled = true;
                 }
                 else // 说明此Worksheet 符合数据库格式
                 {
-                    this.btnEditDatabase.Enabled = true;
-                    this.btnConstructDatabase.Enabled = true;
+                    btnEditDatabase.Enabled = true;
+                    btnConstructDatabase.Enabled = true;
                 }
             }
         }
@@ -75,16 +79,16 @@ namespace eZx
         /// <remarks>此工作簿位于桌面上的“tempData.xlsx”</remarks>
         private Char path_Tempwkbk;
 
-        // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
+        //// VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
 
-        /// <summary> 供各项命令使用的第一个基本参数，此字段值会由TextChange事件而自动修改。 </summary>
-        private string Para1;
+        ///// <summary> 供各项命令使用的第一个基本参数，此字段值会由TextChange事件而自动修改。 </summary>
+        //private string Para1;
 
-        /// <summary> 供各项命令使用的第二个基本参数 </summary>
-        private string Para2;
+        ///// <summary> 供各项命令使用的第二个基本参数 </summary>
+        //private string Para2;
 
-        /// <summary> 供各项命令使用的第三个基本参数 </summary>
-        private string Para3;
+        ///// <summary> 供各项命令使用的第三个基本参数 </summary>
+        //private string Para3;
 
         #endregion
 
@@ -94,11 +98,37 @@ namespace eZx
         public void Ribbon_zfy_Load(Object sender, RibbonUIEventArgs e)
         {
             _app = Globals.ThisAddIn.Application;
-            _app.SheetActivate += this.ExcelApp_SheetActivate;
-            Para1 = EditBox_p1.Text;
-            Para2 = EditBox_p2.Text;
-            Para3 = EditBox_p3.Text;
+            _app.SheetActivate += ExcelApp_SheetActivate;
+            //Para1 = EditBox_p1.Text;
+            //Para2 = EditBox_p2.Text;
+            //Para3 = EditBox_p3.Text;
         }
+
+        #region   ---  事件处理 ---
+
+        /// <summary>
+        ///  激活一个新的工作表
+        /// </summary>
+        private void ExcelApp_SheetActivate(object sender)
+        {
+            Worksheet sheet = _app.ActiveSheet;
+            ActiveDatabaseSheet = CorrespondingInCollection(sheet, F_DbSheets);
+        }
+
+        public double? GetNumfromString(string str)
+        {
+            double v;
+            if (double.TryParse(str, out v))
+            {
+                return v;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        #endregion
 
         #region   ---  数据库 ---
 
@@ -126,7 +156,7 @@ namespace eZx
             // -------------------------- 对当前工作表的信息进行处理 --------------------------
             // 此工作表是否曾经是一个数据库
             Worksheet sht = _app.ActiveSheet;
-            DataSheet CorrespondingDatasheet = CorrespondingInCollection(sht, this.F_DbSheets);
+            DataSheet CorrespondingDatasheet = CorrespondingInCollection(sht, F_DbSheets);
             try
             {
                 if (CorrespondingDatasheet != null)
@@ -134,16 +164,16 @@ namespace eZx
                     // 说明此工作表是包含在当前的数据库集合中的，它曾经是一个数据库，但是可能在进行修改后，已经不符合数据库规范了。
                     // ------------ 构造数据库 --------------
                     CorrespondingDatasheet = ConstructDatabase(); //将刷新后的数据库更新到集合中的元素中
-                    this.ActiveDatabaseSheet = CorrespondingDatasheet;
+                    ActiveDatabaseSheet = CorrespondingDatasheet;
                 }
                 else
                 {
                     // 说明此工作表并不在数据库集合中，但是它可能是一个数据库。
                     // ------------ 构造数据库 --------------
-                    this.ActiveDatabaseSheet = ConstructDatabase();
-                    if (this.ActiveDatabaseSheet != null)
+                    ActiveDatabaseSheet = ConstructDatabase();
+                    if (ActiveDatabaseSheet != null)
                     {
-                        this.F_DbSheets.Add(this.ActiveDatabaseSheet);
+                        F_DbSheets.Add(ActiveDatabaseSheet);
                     }
                 }
             }
@@ -151,7 +181,7 @@ namespace eZx
             {
                 MessageBox.Show("当前工作表不符合数据库格式。", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.ActiveDatabaseSheet = null;
+                ActiveDatabaseSheet = null;
             }
         }
 
@@ -180,7 +210,7 @@ namespace eZx
             DataSheet dtSheet;
             //
             Form_ConstructDatabase frm = new Form_ConstructDatabase(_app.ActiveSheet, false,
-                this.ActiveDatabaseSheet);
+                ActiveDatabaseSheet);
             dtSheet = frm.ShowDialog();
             //
         }
@@ -193,7 +223,7 @@ namespace eZx
         private DataSheet CorrespondingInCollection(Worksheet DataSheet, List<DataSheet> DatasheetCollection)
         {
             DataSheet dtSheet = null;
-            foreach (DataSheet dbSheet in this.F_DbSheets)
+            foreach (DataSheet dbSheet in F_DbSheets)
             {
                 if (ExcelFunction.SheetCompare(dbSheet.WorkSheet, DataSheet))
                 {
@@ -399,7 +429,7 @@ namespace eZx
             }
             else
             {
-                if (int.TryParse(Para1, out sortedId))
+                if (int.TryParse(EditBox_p1.Text, out sortedId))
                 {
                     if (sortedId == 0 || sortedId > colsCount)
                     {
@@ -483,9 +513,10 @@ namespace eZx
             bool blnDeleteNull = false;
             try
             {
-                row = uint.Parse(Para1);
-                col = uint.Parse(Para2);
-                blnDeleteNull = (Para3 != null) && (string.Compare(Para3.ToString(), "False", false) != 0);
+                row = uint.Parse(EditBox_p1.Text);
+                col = uint.Parse(EditBox_p2.Text);
+                var p3 = EditBox_p3.Text;
+                blnDeleteNull = (p3 != null) && (string.Compare(p3, "False", ignoreCase: false) != 0);
                 if (row == 0 || col == 0)
                 {
                     throw new ArgumentOutOfRangeException("Col 或 Row", "行或列的数值不能为零。");
@@ -670,59 +701,140 @@ namespace eZx
 
         #endregion
 
-        #region   ---  事件处理 ---
+        #region   ---  边坡防护 ---
+
+        private void btn_SectionInterp_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application app = Globals.ThisAddIn.Application;
+            var slpHdl = new SlopeInfoHandler(app);
+            slpHdl.Execute(checkBox_ContainsHeader.Checked);
+        }
+
+        private void btn_AreaSumup_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application app = Globals.ThisAddIn.Application;
+            var slpHdl = new SlopeAreaSumup(app);
+            slpHdl.Execute(checkBox_ContainsHeader.Checked);
+        }
+
+        #endregion
+
+        #region   ---  工程表格规范 ---
+
+        private void btn_fitToPrint_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application app = Globals.ThisAddIn.Application;
+
+            var rightBoundary = -1.0;
+            var r = GetNumfromString(EditBox_p1.Text);
+            if (r != null)
+            {
+                rightBoundary = r.Value;
+            }
+
+            var bottomBoundary = -1.0;
+            var b = GetNumfromString(EditBox_p2.Text);
+            if (b != null)
+            {
+                bottomBoundary = b.Value;
+            }
+            //
+            StaticUtils.以磅为单位为定位单元格宽度(app, rightBoundary, bottomBoundary);
+        }
+
+        private void button_A3PageSetup_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application app = Globals.ThisAddIn.Application;
+            //
+            var ps = new PrintingFormat.A3PageSetup();
+            AddinManagerDebuger.ExecuteInRibbon(ps.SetupA3Page
+                , app, ref _errorMessage, ref _errorRange);
+        }
+
+        private void button_ContentRowHeight_Click(object sender, RibbonControlEventArgs e)
+        {
+
+            Application app = Globals.ThisAddIn.Application;
+            //
+            var ps = new PrintingFormat.RowHeightSetter();
+            AddinManagerDebuger.ExecuteInRibbon(ps.SetContentRowHeight
+                , app, ref _errorMessage, ref _errorRange);
+        }
+        /// <summary>
+        /// 将桩号数值转换为字符。转换字符的最大小数位数由参数 P2 指定
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_Station_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application app = Globals.ThisAddIn.Application;
+            var s = app.Selection as Range;
+            if (s != null)
+            {
+                s = s.Areas[1];
+                s = s.Ex_ShrinkeRange();
+                // 
+                var maxDigits = GetNumfromString(EditBox_p2.Text);
+                if (maxDigits != null)
+                {
+                    StaticUtils.ConvertStationToString(app, s, Convert.ToInt32(maxDigits.Value));
+                }
+            }
+        }
 
         /// <summary>
-        ///  激活一个新的工作表
+        /// 对于有很多行数据的工程量表，自动将多数据行进行分隔，并插入小计行
         /// </summary>
-        private void ExcelApp_SheetActivate(object sender)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_SumupInsertRow_Click(object sender, RibbonControlEventArgs e)
         {
-            Worksheet sheet = _app.ActiveSheet;
-            this.ActiveDatabaseSheet = CorrespondingInCollection(sheet, this.F_DbSheets);
+            Application app = Globals.ThisAddIn.Application;
+            var sht = app.ActiveSheet as Worksheet;
+            //
+            var rg = app.InputBox("选择第二张表格中的区域（包括第一个表格中的小计行）", Type: 8) as Range;
+            if (rg != null)
+            {
+                int? lastRow = ExcelFunction.GetRowNum(app, "最后一行数据：");
+
+                if (lastRow != null)
+                {
+                    var sumupRow = rg.Rows[1] as Range;
+                    Range indexColumn = sht.Range[rg.Cells[2, 1], rg.Cells[rg.Rows.Count - 1, 1]] as Range;
+
+                    var startRow = sumupRow.Row + 1;
+                    var dataRowsCount = indexColumn.Count;
+                    //
+                    SumRowHandler.InsertSumupRow(app, sumupRow: sumupRow, indexColumn: indexColumn,
+                        startRow: startRow, dataRowsCount: dataRowsCount, lastRow: lastRow.Value);
+                }
+                else
+                {
+                    MessageBox.Show(@"请输入一个数值");
+                }
+            }
+
         }
 
-        public void EditBox_p1_TextChanged(object sender, RibbonControlEventArgs e)
+        private void btn_MergeSumRow_Click(object sender, RibbonControlEventArgs e)
         {
-            string strText = EditBox_p1.Text;
-            if (string.IsNullOrEmpty(strText))
+
+            Application app = Globals.ThisAddIn.Application;
+            var sht = app.ActiveSheet as Worksheet;
+            //
+
+            var rg = app.InputBox("选择要进行小计行删除的第一页数据，包括小计行。", Type: 8) as Range;
+            if (rg != null)
             {
-                Para1 = null;
-            }
-            else
-            {
-                Para1 = strText;
+                var sumRows = ExcelFunction.GetMultipleRowNum(app, "选择第一页中的多个小计行：");
+                if (sumRows.Count == 0) return;
+                //
+                int? lastRow = ExcelFunction.GetRowNum(app, "选择要处理的最后一行数据：");
+                if (lastRow == null) return;
+                //
+                SumRowHandler.DeleteSumupRow(app, page1: rg, sumRows: sumRows, lastRow: lastRow.Value);
             }
         }
-
-        public void EditBox_p2_TextChanged(object sender, RibbonControlEventArgs e)
-        {
-            string strText = EditBox_p2.Text;
-            if (string.IsNullOrEmpty(strText))
-            {
-                Para2 = null;
-            }
-            else
-            {
-                Para2 = strText;
-            }
-        }
-
-        public void EditBox_p3_TextChanged(object sender, RibbonControlEventArgs e)
-        {
-            string strText = EditBox_p2.Text;
-            if (string.IsNullOrEmpty(strText))
-            {
-                Para3 = null;
-            }
-            else
-            {
-                Para3 = strText;
-            }
-        }
-
-
-
-
         #endregion
 
     }

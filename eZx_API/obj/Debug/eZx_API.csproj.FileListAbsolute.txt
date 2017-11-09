@@ -37,3 +37,13 @@ D:\ProgrammingCases\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.UserContro
 D:\ProgrammingCases\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.csproj.GenerateResource.Cache
 D:\ProgrammingCases\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.dll
 D:\ProgrammingCases\GitHubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.pdb
+D:\GithubProjects\eZOffice\bin\eZx_API.dll
+D:\GithubProjects\eZOffice\bin\eZx_API.pdb
+D:\GithubProjects\eZOffice\bin\eZexcelAPI.xml
+D:\GithubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.Properties.Resources.resources
+D:\GithubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.UserControls.CurveRangeLocator.resources
+D:\GithubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.UserControls.RangeGetor.resources
+D:\GithubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.csproj.GenerateResource.Cache
+D:\GithubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.dll
+D:\GithubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.pdb
+D:\GithubProjects\eZOffice\eZx_API\obj\Debug\eZx_API.csprojResolveAssemblyReference.cache

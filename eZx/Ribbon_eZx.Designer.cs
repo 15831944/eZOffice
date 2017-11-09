@@ -59,6 +59,19 @@
             this.EditBox_p1 = this.Factory.CreateRibbonEditBox();
             this.EditBox_p2 = this.Factory.CreateRibbonEditBox();
             this.EditBox_p3 = this.Factory.CreateRibbonEditBox();
+            this.group5 = this.Factory.CreateRibbonGroup();
+            this.btn_fitToPrint = this.Factory.CreateRibbonButton();
+            this.btn_Station = this.Factory.CreateRibbonButton();
+            this.button_A3PageSetup = this.Factory.CreateRibbonButton();
+            this.button_ContentRowHeight = this.Factory.CreateRibbonButton();
+            this.group_slopeProtection = this.Factory.CreateRibbonGroup();
+            this.checkBox_ContainsHeader = this.Factory.CreateRibbonCheckBox();
+            this.btn_SectionInterp = this.Factory.CreateRibbonButton();
+            this.btn_AreaSumup = this.Factory.CreateRibbonButton();
+            this.group6 = this.Factory.CreateRibbonGroup();
+            this.btn_SumupInsertRow = this.Factory.CreateRibbonButton();
+            this.btn_MergeSumRow = this.Factory.CreateRibbonButton();
+            this.group4 = this.Factory.CreateRibbonGroup();
             this.Tab2 = this.Factory.CreateRibbonTab();
             this.Group_Help = this.Factory.CreateRibbonGroup();
             this.btn_ExcelHelp = this.Factory.CreateRibbonButton();
@@ -68,6 +81,9 @@
             this.Group1.SuspendLayout();
             this.Group2.SuspendLayout();
             this.Group3.SuspendLayout();
+            this.group5.SuspendLayout();
+            this.group_slopeProtection.SuspendLayout();
+            this.group6.SuspendLayout();
             this.Tab2.SuspendLayout();
             this.Group_Help.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +94,10 @@
             this.Tab1.Groups.Add(this.Group1);
             this.Tab1.Groups.Add(this.Group2);
             this.Tab1.Groups.Add(this.Group3);
+            this.Tab1.Groups.Add(this.group5);
+            this.Tab1.Groups.Add(this.group_slopeProtection);
+            this.Tab1.Groups.Add(this.group6);
+            this.Tab1.Groups.Add(this.group4);
             this.Tab1.Label = "eZx";
             this.Tab1.Name = "Tab1";
             // 
@@ -277,7 +297,6 @@
             this.EditBox_p1.Label = "P1";
             this.EditBox_p1.Name = "EditBox_p1";
             this.EditBox_p1.Text = "2";
-            this.EditBox_p1.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.EditBox_p1_TextChanged);
             // 
             // EditBox_p2
             // 
@@ -286,14 +305,108 @@
             this.EditBox_p2.ScreenTip = "其他命令的基本参数";
             this.EditBox_p2.SuperTip = "文本框中的数据类型为Object";
             this.EditBox_p2.Text = "4";
-            this.EditBox_p2.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.EditBox_p2_TextChanged);
             // 
             // EditBox_p3
             // 
             this.EditBox_p3.Label = "P3";
             this.EditBox_p3.Name = "EditBox_p3";
             this.EditBox_p3.Text = "False";
-            this.EditBox_p3.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.EditBox_p3_TextChanged);
+            // 
+            // group5
+            // 
+            this.group5.Items.Add(this.btn_fitToPrint);
+            this.group5.Items.Add(this.btn_Station);
+            this.group5.Items.Add(this.button_A3PageSetup);
+            this.group5.Items.Add(this.button_ContentRowHeight);
+            this.group5.Label = "表格规范";
+            this.group5.Name = "group5";
+            // 
+            // btn_fitToPrint
+            // 
+            this.btn_fitToPrint.Label = "对齐打印";
+            this.btn_fitToPrint.Name = "btn_fitToPrint";
+            this.btn_fitToPrint.ScreenTip = "对齐指定列的边界， 以适应图纸的打印区域";
+            this.btn_fitToPrint.SuperTip = "打印右边界的定位值由参数 P1 指定，下边界的定位值由参数 P2 指定，单位为 厘米。\r\n    如果某参数值不大于0，则保持其原定位。\r\n    由于Excel" +
+    "中对于列宽的设置是以字符宽度为基准，其值是离散的，所以最终得到的列宽可能与设置的列宽有微小的差别。";
+            this.btn_fitToPrint.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_fitToPrint_Click);
+            // 
+            // btn_Station
+            // 
+            this.btn_Station.Label = "桩号字符";
+            this.btn_Station.Name = "btn_Station";
+            this.btn_Station.ScreenTip = "将桩号数值转换为字符";
+            this.btn_Station.SuperTip = "转换字符的最大小数位数由参数 P2 指定";
+            this.btn_Station.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_Station_Click);
+            // 
+            // button_A3PageSetup
+            // 
+            this.button_A3PageSetup.Label = "页面设置";
+            this.button_A3PageSetup.Name = "button_A3PageSetup";
+            this.button_A3PageSetup.ScreenTip = "A3页面打印设置";
+            this.button_A3PageSetup.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button_A3PageSetup_Click);
+            // 
+            // button_ContentRowHeight
+            // 
+            this.button_ContentRowHeight.Label = "正文行高";
+            this.button_ContentRowHeight.Name = "button_ContentRowHeight";
+            this.button_ContentRowHeight.ScreenTip = "A3表格的数据正文的行高设置";
+            this.button_ContentRowHeight.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button_ContentRowHeight_Click);
+            // 
+            // group_slopeProtection
+            // 
+            this.group_slopeProtection.Items.Add(this.checkBox_ContainsHeader);
+            this.group_slopeProtection.Items.Add(this.btn_SectionInterp);
+            this.group_slopeProtection.Items.Add(this.btn_AreaSumup);
+            this.group_slopeProtection.Label = "边坡防护";
+            this.group_slopeProtection.Name = "group_slopeProtection";
+            // 
+            // checkBox_ContainsHeader
+            // 
+            this.checkBox_ContainsHeader.Checked = true;
+            this.checkBox_ContainsHeader.Label = "包含表头";
+            this.checkBox_ContainsHeader.Name = "checkBox_ContainsHeader";
+            // 
+            // btn_SectionInterp
+            // 
+            this.btn_SectionInterp.Label = "断面插值";
+            this.btn_SectionInterp.Name = "btn_SectionInterp";
+            this.btn_SectionInterp.ScreenTip = "对源断面数据进行排序与插值";
+            this.btn_SectionInterp.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_SectionInterp_Click);
+            // 
+            // btn_AreaSumup
+            // 
+            this.btn_AreaSumup.Label = "面积汇总";
+            this.btn_AreaSumup.Name = "btn_AreaSumup";
+            this.btn_AreaSumup.ScreenTip = "对某一种防护方式的面积进行汇总";
+            this.btn_AreaSumup.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AreaSumup_Click);
+            // 
+            // group6
+            // 
+            this.group6.Items.Add(this.btn_SumupInsertRow);
+            this.group6.Items.Add(this.btn_MergeSumRow);
+            this.group6.Label = "工程量表";
+            this.group6.Name = "group6";
+            // 
+            // btn_SumupInsertRow
+            // 
+            this.btn_SumupInsertRow.Label = "插入小计";
+            this.btn_SumupInsertRow.Name = "btn_SumupInsertRow";
+            this.btn_SumupInsertRow.ScreenTip = "插入小计行";
+            this.btn_SumupInsertRow.SuperTip = "对于有很多行数据的工程量表，自动将多数据行进行分隔，并插入小计行";
+            this.btn_SumupInsertRow.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_SumupInsertRow_Click);
+            // 
+            // btn_MergeSumRow
+            // 
+            this.btn_MergeSumRow.Label = "删除小计";
+            this.btn_MergeSumRow.Name = "btn_MergeSumRow";
+            this.btn_MergeSumRow.ScreenTip = "将同一Sheet中的多个工程量表进行合并";
+            this.btn_MergeSumRow.SuperTip = "删除小计行，并将多个表格中的数据合并";
+            this.btn_MergeSumRow.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_MergeSumRow_Click);
+            // 
+            // group4
+            // 
+            this.group4.Label = "其他操作";
+            this.group4.Name = "group4";
             // 
             // Tab2
             // 
@@ -342,6 +455,12 @@
             this.Group2.PerformLayout();
             this.Group3.ResumeLayout(false);
             this.Group3.PerformLayout();
+            this.group5.ResumeLayout(false);
+            this.group5.PerformLayout();
+            this.group_slopeProtection.ResumeLayout(false);
+            this.group_slopeProtection.PerformLayout();
+            this.group6.ResumeLayout(false);
+            this.group6.PerformLayout();
             this.Tab2.ResumeLayout(false);
             this.Tab2.PerformLayout();
             this.Group_Help.ResumeLayout(false);
@@ -380,6 +499,19 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup Group_Help;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ExcelHelp;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_OfficeHelp;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group_slopeProtection;
+        internal Microsoft.Office.Tools.Ribbon.RibbonCheckBox checkBox_ContainsHeader;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_SectionInterp;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_AreaSumup;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_fitToPrint;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group4;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_Station;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group5;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button_A3PageSetup;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button_ContentRowHeight;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_SumupInsertRow;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group6;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_MergeSumRow;
     }
 
     partial class ThisRibbonCollection

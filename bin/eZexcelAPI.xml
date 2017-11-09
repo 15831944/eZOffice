@@ -141,6 +141,18 @@
             如果Ax是一个竖向Y轴，则返回的是坐标轴Ax中的值Value在Chart中的Top值。</returns>
             <remarks></remarks>
         </member>
+        <member name="M:eZx_API.Entities.ExcelFunction.GetRowNum(Microsoft.Office.Interop.Excel.Application,System.String)">
+            <summary> 弹出一个对话框，提示用户输入一个行号 </summary>
+            <param name="excelApp"></param>
+            <param name="message"></param>
+            <returns>如果成功返回一个行号数值，则返回数值，否则返回 null</returns>
+        </member>
+        <member name="M:eZx_API.Entities.ExcelFunction.GetMultipleRowNum(Microsoft.Office.Interop.Excel.Application,System.String)">
+            <summary> 弹出一个对话框，提示用户输入多个行号 </summary>
+            <param name="excelApp"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
         <member name="F:eZx_API.Entities.ExcelExtension.MaxmumRowInExcel">
             <summary> Excel的工作表中，最大的行号。在Excel 2016 中，这个值为2^20 </summary>
         </member>
@@ -197,7 +209,7 @@
             <remarks></remarks>
         </member>
         <member name="M:eZx_API.Entities.RangeValueConverter.GetRangeValue``1(System.Object)">
-            <summary> 从Range.Value所得到的数组转换为下标值为0的二维数组 </summary>
+            <summary> 从Range.Value所得到的数组（或者一个单一的值）转换为下标值为0的二维数组 </summary>
             <typeparam name="T"></typeparam>
             <param name="rgValue">通过Range.Value提取出来的单元格的数据集合</param>
             <returns>与输入的集合相同大小的二维数组，其中第一个元素的下标为0 </returns>
