@@ -361,5 +361,70 @@ namespace eZx_API.Entities
         }
 
         #endregion
+
+        #region   ---  Input 对话框操作
+
+        /// <summary> 弹出一个对话框，提示用户输入一个行号 </summary>
+        /// <param name="excelApp"></param>
+        /// <param name="message"></param>
+        /// <returns>如果成功返回一个行号数值，则返回数值，否则返回 null</returns>
+        public static int? GetRowNum(Application excelApp, string message)
+        {
+            dynamic input = excelApp.InputBox(Prompt: message, Type: 8);
+            int rowNum = 0;
+            if (input is Range && input != null)
+            {
+                return (input as Range).Row;
+            }
+            else
+            {
+                var succ = int.TryParse(input.ToString(), out rowNum);
+                if (succ && rowNum > 0)
+                {
+                    return rowNum;
+                }
+            }
+            return null;
+        }
+
+
+        /// <summary> 弹出一个对话框，提示用户输入多个行号 </summary>
+        /// <param name="excelApp"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static List<int> GetMultipleRowNum(Application excelApp, string message)
+        {
+            dynamic input = excelApp.InputBox(Prompt: message, Type: 8);
+            var rowNums = new List<int>();
+            if (input is Range && input != null)
+            {
+                var rg = input as Range;
+                foreach (Range area in rg.Areas)
+                {
+                    foreach (Range r in area.Rows)
+                    {
+                        rowNums.Add(r.Row);
+                    }
+                }
+            }
+            else
+            {
+                string txt = input.ToString();
+                var nums = txt.Split(',');
+                bool succ = false;
+                int rowNum;
+                foreach (var n in nums)
+                {
+                    succ = int.TryParse(input.ToString(), out rowNum);
+                    if (succ && rowNum > 0)
+                    {
+                        rowNums.Add(rowNum);
+                    }
+                }
+            }
+            return rowNums;
+        }
+        #endregion
+
     }
 }

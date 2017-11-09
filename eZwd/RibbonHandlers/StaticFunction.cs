@@ -190,8 +190,8 @@ namespace eZwd.RibbonHandlers
                     } //下一个边框
 
                     //设置图片的大小
-                    with_1.ScaleHeight = 100;
-                    with_1.ScaleWidth = 100;
+                    with_1.ScaleHeight = 80; // 以 80% 的比例进行缩放
+                    with_1.ScaleWidth = 80;
                     rg.Collapse(WdCollapseDirection.wdCollapseStart);
                     rg.Delete(Unit: WdUnits.wdCharacter, Count: 1);
                 } //下一张图片

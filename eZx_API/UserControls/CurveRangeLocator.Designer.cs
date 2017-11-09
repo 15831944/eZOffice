@@ -38,10 +38,10 @@ namespace eZx_API.UserControls
             // 
             // button_srcXY
             // 
-            this.button_srcXY.Location = new System.Drawing.Point(288, 4);
-            this.button_srcXY.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_srcXY.Location = new System.Drawing.Point(216, 3);
+            this.button_srcXY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_srcXY.Name = "button_srcXY";
-            this.button_srcXY.Size = new System.Drawing.Size(23, 56);
+            this.button_srcXY.Size = new System.Drawing.Size(17, 45);
             this.button_srcXY.TabIndex = 15;
             this.button_srcXY.Text = "XY";
             this.button_srcXY.UseVisualStyleBackColor = true;
@@ -51,10 +51,10 @@ namespace eZx_API.UserControls
             // 
             this.rangeGetorX.ButtonText = "X";
             this.rangeGetorX.LabelText = "X数据源";
-            this.rangeGetorX.Location = new System.Drawing.Point(5, 4);
-            this.rangeGetorX.Margin = new System.Windows.Forms.Padding(5);
+            this.rangeGetorX.Location = new System.Drawing.Point(4, 3);
+            this.rangeGetorX.Margin = new System.Windows.Forms.Padding(4);
             this.rangeGetorX.Name = "rangeGetorX";
-            this.rangeGetorX.Size = new System.Drawing.Size(283, 28);
+            this.rangeGetorX.Size = new System.Drawing.Size(212, 22);
             this.rangeGetorX.TabIndex = 20;
             this.rangeGetorX.RangeChanged += new System.Action<object, Microsoft.Office.Interop.Excel.Range>(this.rangeGetorX_RangeChanged);
             // 
@@ -62,25 +62,24 @@ namespace eZx_API.UserControls
             // 
             this.rangeGetorY.ButtonText = "Y";
             this.rangeGetorY.LabelText = "Y数据源";
-            this.rangeGetorY.Location = new System.Drawing.Point(5, 35);
-            this.rangeGetorY.Margin = new System.Windows.Forms.Padding(5);
+            this.rangeGetorY.Location = new System.Drawing.Point(4, 28);
+            this.rangeGetorY.Margin = new System.Windows.Forms.Padding(4);
             this.rangeGetorY.Name = "rangeGetorY";
-            this.rangeGetorY.Size = new System.Drawing.Size(283, 28);
+            this.rangeGetorY.Size = new System.Drawing.Size(212, 22);
             this.rangeGetorY.TabIndex = 18;
             this.rangeGetorY.RangeChanged += new System.Action<object, Microsoft.Office.Interop.Excel.Range>(this.rangeGetorY_RangeChanged);
             // 
             // CurveRangeLocator
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.rangeGetorX);
             this.Controls.Add(this.rangeGetorY);
             this.Controls.Add(this.button_srcXY);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.MaximumSize = new System.Drawing.Size(313, 62);
-            this.MinimumSize = new System.Drawing.Size(313, 62);
+            this.MaximumSize = new System.Drawing.Size(235, 50);
+            this.MinimumSize = new System.Drawing.Size(235, 50);
             this.Name = "CurveRangeLocator";
-            this.Size = new System.Drawing.Size(313, 62);
+            this.Size = new System.Drawing.Size(235, 50);
             this.ResumeLayout(false);
 
         }

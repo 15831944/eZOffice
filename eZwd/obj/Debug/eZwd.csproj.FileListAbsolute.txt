@@ -53,3 +53,14 @@ D:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.Ribbon_eZwd.reso
 D:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.csproj.GenerateResource.Cache
 D:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.dll
 D:\ProgrammingCases\GitHubProjects\eZOffice\eZwd\obj\Debug\eZwd.pdb
+D:\GithubProjects\eZOffice\bin\eZwd.XML
+D:\GithubProjects\eZOffice\bin\eZwd.dll
+D:\GithubProjects\eZOffice\bin\eZwd.pdb
+D:\GithubProjects\eZOffice\bin\eZwd.dll.manifest
+D:\GithubProjects\eZOffice\eZwd\obj\Debug\eZwd.csprojResolveAssemblyReference.cache
+D:\GithubProjects\eZOffice\eZwd\obj\Debug\eZwd.Properties.Resources.resources
+D:\GithubProjects\eZOffice\eZwd\obj\Debug\eZwd.Ribbon_eZwd.resources
+D:\GithubProjects\eZOffice\eZwd\obj\Debug\eZwd.csproj.GenerateResource.Cache
+D:\GithubProjects\eZOffice\eZwd\obj\Debug\eZwd.dll
+D:\GithubProjects\eZOffice\eZwd\obj\Debug\eZwd.pdb
+D:\GithubProjects\eZOffice\bin\eZwd.vsto

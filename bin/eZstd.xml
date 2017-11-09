@@ -618,7 +618,7 @@
             </summary>
             <param name="handle">指定窗口句柄</param>
             <param name="processId">指定一个变量，用于装载拥有那个窗口的一个进程的标识符</param>
-            <returns></returns>
+            <returns> 创建目标窗口的线程（不是进程）的Id：the id of the thread that created the target window.</returns>
             <remarks>拥有窗口的线程的标识符</remarks>
         </member>
         <member name="M:eZstd.API.Windows.GetClassName(System.IntPtr,System.Text.StringBuilder,System.Int32)">
@@ -3179,35 +3179,67 @@
             bool succ2 = StaticClassSerializer.Load(typeof(StaticClass1), filePath);
             </remarks>
         </member>
+        <member name="T:eZstd.Data.XmlSerializer">
+            <summary> XML 文件的序列化与反序列化 </summary>
+        </member>
+        <member name="M:eZstd.Data.XmlSerializer.GetXmlRootType(System.String,System.Type,System.Boolean)">
+            <summary>
+                在 xml 文档的根节点中去匹配指定的基类型的下一级派生类型，或者匹配指定的基类型本身。
+                匹配原则为类型自身的名称，所以不要为根节点所对应的类定义中添加 XmlRoot(elementName: "Myclass") 这样的Attribute。
+            </summary>
+            <param name="xmlFilePath">xml 文件的绝对路径</param>
+            <param name="baseForRoot">根节点对应的类型要与此基类型的下一级派生类进行匹配</param>
+            <param name="baseIncluded">根节点所匹配的对象中是否包含基类本身。所以如果指定的基类型为抽象类，则此参数的值要赋为 false。</param>
+            <returns>如果未匹配到，则返回<paramref name="baseForRoot" /> 对象</returns>
+        </member>
+        <member name="M:eZstd.Data.XmlSerializer.ImportFromXml(System.String,System.Type,System.Boolean@,System.Text.StringBuilder@)">
+            <summary>从 xml 文件中导入对象 </summary>
+            <param name="filePath">此路径必须为一个有效的路径</param>
+            <param name="exactRootType">
+                xml文件的根节点所对应的类型，也就是要导入的类型。
+                注意，此类型必须与根节点类型完全匹配，而不能是其基类。
+            </param>
+            <param name="succeeded">  </param>
+            <param name="errorMessage">要导入的类型</param>
+        </member>
+        <member name="M:eZstd.Data.XmlSerializer.ExportToXmlFile(System.String,System.Object,System.Text.StringBuilder@)">
+            <summary>
+                将C#中的可序列化对象写入到 xml 文件中
+            </summary>
+            <param name="xmlFilePath"></param>
+            <param name="src">要导出的数据源</param>
+            <param name="errorMessage"></param>
+            <returns>如果成功写入，则返回 true，如果失败则返回 false。</returns>
+        </member>
         <member name="T:eZstd.Data.StringSerializer">
             <summary>
-            将任意一个有 Serializable标记的类以二进制转换器将类中所有数据与字符串间的相互序列化。
-            即可以将类中的数据（包括数组）序列化为字符，还可以将序列化的字符反序列化为一个类。
+                将任意一个有 Serializable标记的类以二进制转换器将类中所有数据与字符串间的相互序列化。
+                即可以将类中的数据（包括数组）序列化为字符，还可以将序列化的字符反序列化为一个类。
             </summary>
         </member>
         <member name="M:eZstd.Data.StringSerializer.Encode64(System.Object)">
             <summary>
-            Encode arbitrary .NET serialisable object
-            into binary data encodes as base64 string.
+                Encode arbitrary .NET serialisable object
+                into binary data encodes as base64 string.
             </summary>
         </member>
         <member name="M:eZstd.Data.StringSerializer.Decode64(System.String)">
             <summary>
-            Decode arbitrary .NET serialisable object
-            from binary data encoded as base64 string.
+                Decode arbitrary .NET serialisable object
+                from binary data encoded as base64 string.
             </summary>
         </member>
         <member name="T:eZstd.Data.StringSerializer.ZengfyLinkBinder">
             <summary>
-            为了解决SerializationException，方法之一是确保此assembly放置在与acad.exe 或 revit.exe相同的文件夹中，
-            另一个方法就是实现一个像这样的类。
+                为了解决SerializationException，方法之一是确保此assembly放置在与acad.exe 或 revit.exe相同的文件夹中，
+                另一个方法就是实现一个像这样的类。
             </summary>
             <remarks>
-             Resolve System.Runtime.Serialization.SerializationException, Message =
-            "Unable to find assembly 'StoreData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'."
-            One solution is to ensure that assembly resides in same directory as acad.exe or revit.exe,
-            the other is to implement a class such as this, cf.
-            http://www.codeproject.com/soap/Serialization_Samples.asp
+                Resolve System.Runtime.Serialization.SerializationException, Message =
+                "Unable to find assembly 'StoreData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'."
+                One solution is to ensure that assembly resides in same directory as acad.exe or revit.exe,
+                the other is to implement a class such as this, cf.
+                http://www.codeproject.com/soap/Serialization_Samples.asp
             </remarks>
         </member>
         <member name="T:eZstd.Enumerable.XmlDictionary`2">
@@ -3487,11 +3519,13 @@
             <param name="colIndex">第一列的下标为0</param>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:eZstd.Enumerable.ArrayConstructor.FromList2D(System.Collections.Generic.List{System.Double[]})">
+        <member name="M:eZstd.Enumerable.ArrayConstructor.FromList2D``1(System.Collections.Generic.IList{``0[]})">
             <summary>
             从多个一维行向量的List集合中构造出对应的二维数组
             </summary>
-            <param name="numList"></param>
+            <param name="listOfRows">第一个元素（一个行向量）中的元素个数必须最小。
+            如果某行的元素个数大于第一行的元素个数，则此行的多余元素不考虑；
+            如果某行的元素个数小于第一行的元素个数，则此行的空缺元素以默认值填充 </param>
             <returns> 返回的二维数组的列数与 List 中的第一个行向量的列数相同。</returns>
         </member>
         <member name="F:eZstd.Enumerable.ArrayConstructor.DistributeMode.Linear">
@@ -3503,6 +3537,24 @@
             <summary>
             指数分布
             </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:eZstd.Enumerable.ArrayConstructor.InsertVector``3(``0[0:,0:],System.Boolean,System.Collections.Generic.IList{System.Collections.Generic.IList{``1}},System.Single[])" -->
+        <member name="M:eZstd.Enumerable.ArrayConstructor.GetIndicesAndVectors``1(System.Int32,eZstd.Enumerable.ArrayConstructor.InsertedVector{``0}[]@,System.Collections.Generic.Dictionary{System.Int32,System.Int32}@)">
+            <summary>
+            
+            </summary>
+            <param name="originalCount">原数组中有多少行</param>
+            <param name="insertedVectors">要插入的行的下标</param>
+            <param name="newId_srcId">源数组某行所对应的新下标</param>
+            <remarks>indices 集合中的元素个数必须与 insertedVectors 的列数或行数相同，每一个向量要插入到源数组的那一行或哪一列。
+            如果 indices 集合中有相同的值，表示多个新列插入同一列的后面，这些多个新列会按输入的顺序排列。比如{2,2}表示将两列按顺序插入到源数组的第3列后面。
+            </remarks>
+        </member>
+        <member name="F:eZstd.Enumerable.ArrayConstructor.InsertedVector`1.WantedIndex">
+            <summary> 要插入的行的下标 </summary>
+        </member>
+        <member name="F:eZstd.Enumerable.ArrayConstructor.InsertedVector`1.RealIndex">
+            <summary> 要插入的某行所对应的真正的下标 </summary>
         </member>
         <member name="T:eZstd.Diagnostics.ProcessesKiller">
             <summary>
@@ -3697,6 +3749,49 @@
             <remarks>将此程序集作为动态插件加载到某程序中去后（比如将某Excel或者CAD的插件功能加载到对应的程序进程中），
             可以在不关闭对应的主程序的情况下，对插件dll进行调试，然后在主程序中重新调用调试更新后的插件功能。</remarks>
         </member>
+        <member name="M:eZstd.MarshalReflection.AssemblyHelper.OverrideFields(System.Object,System.Object)">
+            <summary> 用新对象中的成员值去替换原对象中的对应成员值。
+            其作用是在不改变原变量的内存地址的情况下，对实例对象中的属性值进行修改。
+            比如对于引用类型的变量：A=B,当后期修改B的值为C时，如果用B=C，则A的值不会修改，此时只能将C中的成员的值赋值到B的对应成员中，此时A中的对应成员才会同步修改。 </summary>
+            <param name="originalObject">可以是<paramref name="newObject"/>的派生类 </param>
+            <param name="newObject">可以是<paramref name="originalObject"/>的基类</param>
+            <remarks>所以新对象不能是原对象的派生类。</remarks>
+            <returns>成功则返回 true，反之返回 false </returns>
+        </member>
+        <member name="M:eZstd.MarshalReflection.RegistryHandler.GetRegistryKeyWithRegView(Microsoft.Win32.RegistryHive,System.Nullable{Microsoft.Win32.RegistryView})">
+            <summary>
+            用于32位程序访问64位注册表
+            </summary>
+            <param name="hive">根级别的名称</param>
+            <param name="view">注册表视图，比如要访问64位注册表，请输入<seealso cref="F:Microsoft.Win32.RegistryView.Registry64"/></param>
+            <returns>值</returns>
+            <remarks> 
+            1. 微软为了让32位程序不做任何修改就能运行在64的操作系统上，添加了一个十分重要的WOW64子系统来实现这个功能，WOW64是Windows-32-on-Windows-64的简称，从总体上来说，WOW64是一套基于用户模式的动态链接库，它可以把32位应用程序的发出的命令翻译成64位系统可以接受的格式，即：WOW 层处理诸如在 32 位和 64 位模式之间切换处理器以及模拟 32 位系统的事务。
+            2. 为了防止注册表键冲突，64位机器注册表信息分成了两个部分。一部分是专门给64位系统（即：64位程序）访问的，另一部分是专门给32位系统（即：32位程序）访问的，放在Wow6432Node下面。（Wow6432Node这个节 点存在于HKEY_LOCAL_MACHINE和HKEY_CURRENT_USER下面）
+            3. 目标平台是32位的程序运行在64位的系统上，去访问部分注册表的时候系统自动重定向到win32node节点对应的项去了。但是做过安装程序开发人员可能遇到过“需要去掉重定向”的问题，即直接访问64位程序的注册表。
+            </remarks>
+        </member>
+        <member name="M:eZstd.MarshalReflection.RegistryHandler.GetValueWithRegView(Microsoft.Win32.RegistryHive,System.String,System.String,Microsoft.Win32.RegistryView)">
+            <summary>
+            用于32位程序访问64位注册表
+            </summary>
+            <param name="hive">根级别的名称</param>
+            <param name="keyName">不包括根级别的名称</param>
+            <param name="valueName">项名称</param>
+            <param name="view">注册表视图</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:eZstd.MarshalReflection.RegistryHandler.SetValueWithRegView(Microsoft.Win32.RegistryHive,System.String,System.String,System.Object,Microsoft.Win32.RegistryValueKind,Microsoft.Win32.RegistryView)">
+            <summary>
+            用于32位的程序设置64位的注册表
+            </summary>
+            <param name="hive">根级别的名称</param>
+            <param name="keyName">不包括根级别的名称</param>
+            <param name="valueName">项名称</param>
+            <param name="value">值</param>
+            <param name="kind">值类型</param>
+            <param name="view">注册表视图</param>
+        </member>
         <member name="T:eZstd.MarshalReflection.Interaction">
             <summary>
             在多种不同的进程或者 COM 对象之间进行交互
@@ -3771,6 +3866,34 @@
         </member>
         <member name="M:eZstd.MarshalReflection.AssemblyCompiler.DeleteAssembly">
             <summary> 删除编译生成的程序集文件 </summary>
+        </member>
+        <member name="T:eZstd.Mathematics.MathUtils">
+            <summary>
+            一些基础的算法
+            </summary>
+        </member>
+        <member name="M:eZstd.Mathematics.MathUtils.GetAngleR(System.Double,System.Double)">
+            <summary> 根据二维矢量返回其相对于正X轴沿逆时针的角度值，其值的范围为[0,2*π) </summary>
+            <param name="dx"></param>
+            <param name="dy"></param>
+        </member>
+        <member name="M:eZstd.Mathematics.MathUtils.GetAngleD(System.Double,System.Double)">
+            <summary> 根据二维矢量返回其相对于正X轴沿逆时针的角度值，其值的范围为[0,360度) </summary>
+        </member>
+        <member name="T:eZstd.Mathematics.SegmentData`2">
+            <summary>
+            包含起点，终点，以及此分段中的某些数据。比如一段边坡中的防护面积
+            </summary>
+            <typeparam name="TSeg">起止点定位数据的类型</typeparam>
+            <typeparam name="TValue">分段数据的类型</typeparam>
+        </member>
+        <member name="P:eZstd.Mathematics.SegmentData`2.Data">
+            <summary> 此分段中所对应的数据 </summary>
+        </member>
+        <member name="M:eZstd.Mathematics.SegmentData`2.ConvertToArr(System.Collections.Generic.IList{eZstd.Mathematics.SegmentData{`0,`1}})">
+            <summary> 将 边坡横断面集合转换为二维数组，以用来写入 Excel </summary>
+            <param name="segments"> <seealso cref="!:TValue"/>类必须为标量 </param>
+            <returns></returns>
         </member>
         <member name="T:eZstd.Mathematics.SpeedMode">
             <summary>
@@ -4011,7 +4134,7 @@
             <param name="array2D">一个二维表格</param>
             <returns></returns>
         </member>
-        <member name="M:eZstd.Miscellaneous.ExtensionMethods.AddRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:eZstd.Miscellaneous.ExtensionMethods.AddRange``1(System.Collections.Generic.List{``0},System.Collections.Generic.List{``0})">
             <summary>
             将某集合中的元素添加到另一个集合中去
             </summary>
@@ -4050,8 +4173,13 @@
             <param name="typeIn"></param>
             <returns></returns>
         </member>
+        <member name="M:eZstd.Miscellaneous.Utils.StringHasNonEnglish(System.String)">
+            <summary> 指定的字符串中是否包含有非英文字符 </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
         <member name="M:eZstd.Miscellaneous.Utils.ChooseOpenFile(System.String,System.String,System.Boolean)">
-            <summary> 选择一个或多个要打开的文件 </summary>
+            <summary> 选择一个或多个要打开的文件。成功选择，则返回对应文件的绝对路径，否则返回 null </summary>
             <param name="title">对话框的标题</param>
             <param name="filter"> 文件过滤规则，比如 
             “材料库(*.txt)| *.txt”、
@@ -4061,7 +4189,7 @@
             <returns> 成功选择，则返回对应文件的绝对路径，如果没有选择任何文件，则返回 null </returns>
         </member>
         <member name="M:eZstd.Miscellaneous.Utils.ChooseSaveFile(System.String,System.String)">
-            <summary> 选择要将数据保存到哪个文件 </summary>
+            <summary> 选择要将数据保存到哪个文件。成功选择，则返回对应文件的绝对路径，否则返回 null </summary>
             <param name="title">对话框的标题</param>
             <param name="filter"> 文件过滤规则，比如 
             “材料库(*.txt)| *.txt”、

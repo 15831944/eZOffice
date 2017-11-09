@@ -84,7 +84,7 @@ namespace eZx_API.Entities
 
         #region   ---  Range.Value的子数组提取
 
-        /// <summary> 从Range.Value所得到的数组转换为下标值为0的二维数组 </summary>
+        /// <summary> 从Range.Value所得到的数组（或者一个单一的值）转换为下标值为0的二维数组 </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="rgValue">通过Range.Value提取出来的单元格的数据集合</param>
         /// <returns>与输入的集合相同大小的二维数组，其中第一个元素的下标为0 </returns>
@@ -262,7 +262,6 @@ namespace eZx_API.Entities
                 lowerBound = 0;
                 rowsCount = 1;
                 columnsCount = 1;
-
             }
         }
 
