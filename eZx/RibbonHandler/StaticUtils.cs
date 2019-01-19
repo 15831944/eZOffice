@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using eZstd.Table;
 using eZx_API.Entities;
 using Microsoft.Office.Interop.Excel;
 using Application = Microsoft.Office.Interop.Excel.Application;
@@ -110,7 +111,6 @@ namespace eZx.RibbonHandler
         /// <param name="maxDigits">转换为字符的最大的小数位数</param>
         public static void ConvertStationToString(Application app, Range selectedRange, int maxDigits)
         {
-
             var firstFillCell = selectedRange.Ex_CornerCell(CornerIndex.UpRight).Offset[0, 1];
             var colCount = selectedRange.Columns.Count;
             if (colCount == 0 || colCount > 2)
@@ -190,5 +190,50 @@ namespace eZx.RibbonHandler
             return res;
         }
 
+        /// <summary>
+        /// 将桩号数值转换为对应的字符
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="selectedRange"></param>
+        public static void ConvertStationFromString(Application app, Range selectedRange)
+        {
+            var firstFillCell = selectedRange.Ex_CornerCell(CornerIndex.UpRight).Offset[0, 1];
+            var arr = RangeValueConverter.GetRangeValue<object>(selectedRange.Value) as object[,];
+            if (arr == null) { return; }
+            var row = arr.GetLength(0);
+            var col = arr.GetLength(1);
+            var newArray = new object[row, col];
+            for (int r = 0; r < row; r++)
+            {
+                for (int c = 0; c < col; c++)
+                {
+                    if (arr[r, c] is string)
+                    {
+                        var str = arr[r, c] as string;
+                        var num = GetStationFromString(str);
+                        newArray[r, c] = num;
+                    }
+                    else { newArray[r, c] = arr[r, c]; }
+                }
+            }
+
+            // 写入到 工作表中
+            RangeValueConverter.FillRange(app.ActiveSheet, firstFillCell.Row, firstFillCell.Column, newArray);
+        }
+
+        private static object GetStationFromString(string str)
+        {
+            var tempStr = str.Replace("K", "");
+            tempStr = tempStr.Replace("+", "");
+            double num;
+            if (double.TryParse(tempStr, out num))
+            {
+                return num;
+            }
+            else
+            {
+                return str;
+            }
+        }
     }
 }

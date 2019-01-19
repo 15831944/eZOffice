@@ -61,7 +61,6 @@ D:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.Properties.Res
 D:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.csproj.GenerateResource.Cache
 D:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.dll
 D:\ProgrammingCases\GitHubProjects\eZOffice\eZvso\obj\Debug\eZvso.pdb
-D:\GithubProjects\eZOffice\bin\eZvso.XML
 D:\GithubProjects\eZOffice\bin\eZvso.dll
 D:\GithubProjects\eZOffice\bin\eZvso.pdb
 D:\GithubProjects\eZOffice\bin\eZvso.dll.manifest

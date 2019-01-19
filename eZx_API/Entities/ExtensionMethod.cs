@@ -1,5 +1,7 @@
 using System;
 using System.Windows.Forms;
+using eZstd.Miscellaneous;
+using eZstd.Table;
 using Microsoft.Office.Interop.Excel;
 
 namespace eZx_API.Entities

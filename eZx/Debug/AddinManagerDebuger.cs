@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using DllActivator;
-using eZstd.Enumerable;
-using eZstd.Mathematics;
 using eZx.AddinManager;
-using eZx.RibbonHandler;
-using eZx_API.Entities;
 using Microsoft.Office.Interop.Excel;
 
 namespace eZx.Debug
@@ -16,7 +11,6 @@ namespace eZx.Debug
 
     class AddinManagerDebuger
     {
-
         /// <summary>
         /// 用于 AddinManager 对代码进行调试
         /// </summary>
@@ -25,7 +19,8 @@ namespace eZx.Debug
         /// <param name="errorMessage"></param>
         /// <param name="errorRange"></param>
         /// <returns></returns>
-        public static ExternalCommandResult DebugInAddinManager(ExternalCommand cmd, Application excelApp, ref string errorMessage, ref Range errorRange)
+        public static ExternalCommandResult DebugInAddinManager(ExternalCommand cmd, Application excelApp,
+            ref string errorMessage, ref Range errorRange)
         {
             DllActivator_eZx dat = new DllActivator_eZx();
             dat.ActivateReferences();
@@ -34,7 +29,6 @@ namespace eZx.Debug
                 var res = cmd(excelApp);
                 switch (res)
                 {
-
                 }
                 return res;
             }
@@ -58,7 +52,8 @@ namespace eZx.Debug
         /// <param name="errorMessage"></param>
         /// <param name="errorRange"></param>
         /// <returns></returns>
-        public static ExternalCommandResult ExecuteInRibbon(ExternalCommand cmd, Application excelApp, ref string errorMessage, ref Range errorRange)
+        public static ExternalCommandResult ExecuteInRibbon(ExternalCommand cmd, Application excelApp,
+            ref string errorMessage, ref Range errorRange)
         {
             //DllActivator_eZx dat = new DllActivator_eZx();
             //dat.ActivateReferences();
@@ -67,7 +62,6 @@ namespace eZx.Debug
                 var res = cmd(excelApp);
                 switch (res)
                 {
-
                 }
                 return res;
             }

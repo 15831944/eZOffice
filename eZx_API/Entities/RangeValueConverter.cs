@@ -345,8 +345,8 @@ namespace eZx_API.Entities
         /// <param name="arr">要写入的数据，为一个一维向量或者二维数组。如果为一维向量，则默认写入一列中。</param>
         /// <param name="colPrior">仅当<paramref name="arr"/>为一维向量，则true表示将数据写入一列，false表示将数据写入一行。
         /// 当<paramref name="arr"/>为二维数组时，此参数没有任何效果</param>
-        /// <returns></returns>
-        public static void FillRange(Worksheet sht, int startRow, int startCol, Array arr, bool colPrior = true)
+        /// <returns>写入的数据所占据的单元格区域</returns>
+        public static Range FillRange(Worksheet sht, int startRow, int startCol, Array arr, bool colPrior = true)
         {
             Range rg = GetRange(sht, startRow, startCol, arr, colPrior);
             if (arr.Rank == 1 && colPrior)
@@ -358,6 +358,7 @@ namespace eZx_API.Entities
             {
                 rg.Value = arr;
             }
+            return rg;
         }
 
         /// <summary> 根据要写入到Excel中的数组数据确定对应的写入范围 </summary>
