@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using eZstd.Table;
 using eZx.Database;
 using eZx.Debug;
 using eZx.PrintingFormat;
@@ -128,6 +129,16 @@ namespace eZx
             }
         }
 
+        public static bool GetBool(string str)
+        {
+            bool b = false;
+            switch (str.ToUpper())
+            {
+                case "TRUE": b = true; break;
+                default: b = false; break;
+            }
+            return b;
+        }
         #endregion
 
         #region   ---  数据库 ---
@@ -146,6 +157,23 @@ namespace eZx
             Range rg = _app.Selection;
             rg.Formula = rg.Formula; //这一操作会将单元格中的公式转化为对应的值，而且，将#DIV/0!、#VALUE!等错误转换为Integer.MinValue
         }
+
+        /// <summary> 显示工作表中的UsedRange的范围 </summary>
+        public void Btn_ToText_Click(object sender, RibbonControlEventArgs e)
+        {
+            Range rg = _app.Selection;
+            string text;
+            foreach (Range c in rg.Cells)
+            {
+                text = c.Text;
+                if (!text.StartsWith("'"))
+                {
+                    c.Value = "'" + text;
+                }
+            }
+            // rg.Formula = rg.Formula; //这一操作会将单元格中的公式转化为对应的值，而且，将#DIV/0!、#VALUE!等错误转换为Integer.MinValue
+        }
+
 
         /// <summary>
         /// 准备构造一个数据库
@@ -746,6 +774,7 @@ namespace eZx
         {
             Application app = Globals.ThisAddIn.Application;
             //
+
             var ps = new PrintingFormat.A3PageSetup();
             AddinManagerDebuger.ExecuteInRibbon(ps.SetupA3Page
                 , app, ref _errorMessage, ref _errorRange);
@@ -760,27 +789,7 @@ namespace eZx
             AddinManagerDebuger.ExecuteInRibbon(ps.SetContentRowHeight
                 , app, ref _errorMessage, ref _errorRange);
         }
-        /// <summary>
-        /// 将桩号数值转换为字符。转换字符的最大小数位数由参数 P2 指定
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btn_Station_Click(object sender, RibbonControlEventArgs e)
-        {
-            Application app = Globals.ThisAddIn.Application;
-            var s = app.Selection as Range;
-            if (s != null)
-            {
-                s = s.Areas[1];
-                s = s.Ex_ShrinkeRange();
-                // 
-                var maxDigits = GetNumfromString(EditBox_p2.Text);
-                if (maxDigits != null)
-                {
-                    StaticUtils.ConvertStationToString(app, s, Convert.ToInt32(maxDigits.Value));
-                }
-            }
-        }
+
 
         /// <summary>
         /// 对于有很多行数据的工程量表，自动将多数据行进行分隔，并插入小计行
@@ -792,7 +801,7 @@ namespace eZx
             Application app = Globals.ThisAddIn.Application;
             var sht = app.ActiveSheet as Worksheet;
             //
-            var rg = app.InputBox("选择第二张表格中的区域（包括第一个表格中的小计行）", Type: 8) as Range;
+            var rg = app.InputBox("选择第二页表格中的区域（包括第一页表格中的小计行，以及第二页表格中最后一行）", Type: 8) as Range;
             if (rg != null)
             {
                 int? lastRow = ExcelFunction.GetRowNum(app, "最后一行数据：");
@@ -813,9 +822,14 @@ namespace eZx
                     MessageBox.Show(@"请输入一个数值");
                 }
             }
-
+            app.ScreenUpdating = true;
         }
 
+        /// <summary>
+        /// 删除小计行，并将同一Sheet中的多个工程量表进行合并
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_MergeSumRow_Click(object sender, RibbonControlEventArgs e)
         {
 
@@ -834,8 +848,93 @@ namespace eZx
                 //
                 SumRowHandler.DeleteSumupRow(app, page1: rg, sumRows: sumRows, lastRow: lastRow.Value);
             }
+            app.ScreenUpdating = true;
+        }
+
+        /// <summary> 将工程数量表的工作簿中的多个工程数量表拆分为单独的工作簿 </summary>
+        private void btn_SepFiles_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application app = Globals.ThisAddIn.Application;
+            //
+            var sf = new SepFilesHandler();
+            AddinManagerDebuger.ExecuteInRibbon(sf.SepFiles
+                , app, ref _errorMessage, ref _errorRange);
+        }
+
+
+        private void btn_LockSheet_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application app = Globals.ThisAddIn.Application;
+            var operateOnAllSheet = GetBool(EditBox_p3.Text);
+            app.ScreenUpdating = false;
+            //
+            var sf = new SheetLocker() { OperateOnAllSheets = operateOnAllSheet };
+            AddinManagerDebuger.ExecuteInRibbon(sf.LockSheet
+                , app, ref _errorMessage, ref _errorRange);
+        }
+
+        private void btn_UnLockSheet_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application app = Globals.ThisAddIn.Application;
+            var operateOnAllSheet = GetBool(EditBox_p3.Text);
+            app.ScreenUpdating = false;
+            //
+            var sf = new SheetLocker() { OperateOnAllSheets = operateOnAllSheet };
+            AddinManagerDebuger.ExecuteInRibbon(sf.UnLockSheet
+                , app, ref _errorMessage, ref _errorRange);
+        }
+
+        #endregion
+
+        #region ---   其他操作
+
+        /// <summary>
+        /// 将桩号数值转换为字符。转换字符的最大小数位数由参数 P2 指定
+        /// </summary>
+        private void btn_Station_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application app = Globals.ThisAddIn.Application;
+            var s = app.Selection as Range;
+            if (s != null)
+            {
+                s = s.Areas[1];
+                s = s.Ex_ShrinkeRange();
+                // 
+                var maxDigits = GetNumfromString(EditBox_p2.Text);
+                if (maxDigits != null)
+                {
+                    StaticUtils.ConvertStationToString(app, s, Convert.ToInt32(maxDigits.Value));
+                }
+            }
+            app.ScreenUpdating = true;
+        }
+
+        /// <summary> 将桩号字符转换为数值。 </summary>
+        private void btn_Station2_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application app = Globals.ThisAddIn.Application;
+            var seleRg = app.Selection as Range;
+            if (seleRg != null)
+            {
+                seleRg = seleRg.Areas[1];
+                seleRg = seleRg.Ex_ShrinkeRange();
+                // 
+                StaticUtils.ConvertStationFromString(app, seleRg);
+
+            }
+            app.ScreenUpdating = true;
         }
         #endregion
 
+        /// <summary> 提取C++文档信息 </summary>
+        private void btn_ExtractCppDoc_Click(object sender, RibbonControlEventArgs e)
+        {
+            Application app = Globals.ThisAddIn.Application;
+            //
+
+            var ps = new CppDoc.CppDocExtracter();
+            AddinManagerDebuger.ExecuteInRibbon(ps.ExtractCppDoc
+                , app, ref _errorMessage, ref _errorRange);
+        }
     }
 }

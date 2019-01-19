@@ -76,7 +76,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\eZvso.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
@@ -107,10 +108,6 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="eZstd, Version=2.0.0.0, Culture=neutral, PublicKeyToken=1050b0febcfcb8d2, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\eZstd\bin\eZstd.dll</HintPath>
-    </Reference>
     <Reference Include="eZvso_AddinManager">
       <HintPath>..\eZvso_AddinManager\bin\Debug\eZvso_AddinManager.dll</HintPath>
     </Reference>
@@ -240,6 +237,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\eZstd\Projects\eZstd\eZstd.csproj">
+      <Project>{fb9b6528-5424-4b7a-aeba-6733450dc44b}</Project>
+      <Name>eZstd</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

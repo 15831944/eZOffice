@@ -56,10 +56,14 @@ namespace eZx.PrintingFormat
             sht.Rows[titleRowNum + 6].RowHeight = 15;
             // 正文所在行
             var firstContentRowNum = titleRowNum + 7;
-            for (int r = firstContentRowNum; r < firstContentRowNum + 29; r++)
+            var lastContentRowNum = firstContentRowNum + 28;
+
+            for (int r = firstContentRowNum; r <= lastContentRowNum; r++)
             {
                 sht.Rows[r].RowHeight = 20;
             }
+            // 选择表格所在的行
+            sht.Rows[$"{titleRowNum}:{lastContentRowNum}"].Select();
         }
     }
 }

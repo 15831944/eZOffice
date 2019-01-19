@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using eZstd.Miscellaneous;
+using eZstd.Table;
 using eZx_API.Entities;
 using Microsoft.Office.Interop.Excel;
 using Application = Microsoft.Office.Interop.Excel.Application;

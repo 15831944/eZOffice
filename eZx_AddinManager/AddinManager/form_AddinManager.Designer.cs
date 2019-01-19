@@ -49,7 +49,7 @@
             this.treeView1.ItemHeight = 18;
             this.treeView1.Location = new System.Drawing.Point(13, 13);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(319, 174);
+            this.treeView1.Size = new System.Drawing.Size(319, 313);
             this.treeView1.TabIndex = 0;
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.ShowExCommandDescription);
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -57,7 +57,7 @@
             // buttonLoad
             // 
             this.buttonLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonLoad.Location = new System.Drawing.Point(94, 226);
+            this.buttonLoad.Location = new System.Drawing.Point(94, 365);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(75, 23);
             this.buttonLoad.TabIndex = 1;
@@ -68,7 +68,7 @@
             // buttonRemove
             // 
             this.buttonRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonRemove.Location = new System.Drawing.Point(256, 226);
+            this.buttonRemove.Location = new System.Drawing.Point(256, 365);
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(75, 23);
             this.buttonRemove.TabIndex = 1;
@@ -80,7 +80,7 @@
             // buttonRun
             // 
             this.buttonRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonRun.Location = new System.Drawing.Point(12, 226);
+            this.buttonRun.Location = new System.Drawing.Point(12, 365);
             this.buttonRun.Name = "buttonRun";
             this.buttonRun.Size = new System.Drawing.Size(75, 23);
             this.buttonRun.TabIndex = 1;
@@ -93,7 +93,7 @@
             this.label_Description.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label_Description.AutoSize = true;
             this.label_Description.ForeColor = System.Drawing.Color.Gray;
-            this.label_Description.Location = new System.Drawing.Point(12, 200);
+            this.label_Description.Location = new System.Drawing.Point(12, 339);
             this.label_Description.Name = "label_Description";
             this.label_Description.Size = new System.Drawing.Size(41, 12);
             this.label_Description.TabIndex = 2;
@@ -101,7 +101,8 @@
             // 
             // button_Reload
             // 
-            this.button_Reload.Location = new System.Drawing.Point(175, 226);
+            this.button_Reload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button_Reload.Location = new System.Drawing.Point(175, 365);
             this.button_Reload.Name = "button_Reload";
             this.button_Reload.Size = new System.Drawing.Size(75, 23);
             this.button_Reload.TabIndex = 3;
@@ -114,7 +115,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 261);
+            this.ClientSize = new System.Drawing.Size(344, 400);
             this.Controls.Add(this.button_Reload);
             this.Controls.Add(this.label_Description);
             this.Controls.Add(this.buttonRun);

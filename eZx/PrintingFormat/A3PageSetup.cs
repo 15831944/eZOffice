@@ -28,11 +28,28 @@ namespace eZx.PrintingFormat
         {
             _excelApp = excelApp;
             excelApp.ScreenUpdating = false;
+            var wkbk = excelApp.ActiveWorkbook;
+            // 设置工作簿的“常规”样式，以确定单元格的行高
+            SetupWkbkNormalStyle(wkbk);
+
+            // 设置表格的打印样式
             var sht = excelApp.ActiveSheet as Worksheet;
             SetupSheetForPrint(sht.PageSetup, setRightHeader: true);
             return ExternalCommandResult.Succeeded;
         }
-        
+
+        private void SetupWkbkNormalStyle(Workbook wkbk)
+        {
+            var style = wkbk.Styles["Normal"];
+            var font = style.Font;
+            font.Name = "宋体";
+            font.Size = 12;
+            font.Bold = false;
+            font.Italic = false;
+            font.Underline = XlUnderlineStyle.xlUnderlineStyleNone;
+            font.Strikethrough = false;
+        }
+
         /// <summary> 设置 A3 表格的打印格式 </summary>
         private void SetupSheetForPrint(PageSetup ps, bool setRightHeader)
         {

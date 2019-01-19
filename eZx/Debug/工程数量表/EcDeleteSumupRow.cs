@@ -11,7 +11,7 @@ using Application = Microsoft.Office.Interop.Excel.Application;
 namespace eZx.Debug
 {
     [EcDescription("将同一Sheet中的多个工程量表进行合并，即删除小计行，并将多个表格中的数据合并")]
-    class EcMergeSumupRow : IExcelExCommand
+    class EcDeleteSumupRow : IExcelExCommand
     {
         public ExternalCommandResult Execute(Application excelApp, ref string errorMessage, ref Range errorRange)
         {
@@ -26,6 +26,10 @@ namespace eZx.Debug
             {
                 errorMessage = ex.Message + "\r\n\r\n" + ex.StackTrace;
                 return ExternalCommandResult.Failed;
+            }
+            finally
+            {
+                excelApp.ScreenUpdating = true;
             }
         }
 

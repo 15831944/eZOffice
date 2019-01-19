@@ -108,13 +108,12 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="eZstd, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\eZstd\bin\eZstd.dll</HintPath>
-    </Reference>
     <Reference Include="eZx_AddinManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\eZx_AddinManager\bin\Debug\eZx_AddinManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Tools.Applications.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -128,9 +127,6 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Tools.v4.0.Framework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.Tools.Applications.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Office.Tools, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -181,7 +177,9 @@
     <Compile Include="Database\Form_ConstructDatabase.Designer.cs">
       <DependentUpon>Form_ConstructDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Debug\工程数量表\EcMergeSumupRow.cs" />
+    <Compile Include="Debug\CppDoc\CppDocExtracter.cs" />
+    <Compile Include="Debug\CppDoc\CppDocMember.cs" />
+    <Compile Include="Debug\工程数量表\EcDeleteSumupRow.cs" />
     <Compile Include="Debug\工程数量表\EcInsertSumupRow.cs" />
     <Compile Include="PrintingFormat\A3Page.cs" />
     <Compile Include="PrintingFormat\RowHeightSetter.cs" />
@@ -259,7 +257,9 @@
     <Compile Include="RibbonHandler\SlopeProtection\SlopeUtils.cs" />
     <Compile Include="RibbonHandler\SpeedModeHandler.cs" />
     <Compile Include="RibbonHandler\StaticUtils.cs" />
-    <Compile Include="RibbonHandler\SumRowHandler.cs" />
+    <Compile Include="RibbonHandler\工程量表\SepFilesHandler.cs" />
+    <Compile Include="RibbonHandler\工程量表\SheetLocker.cs" />
+    <Compile Include="RibbonHandler\工程量表\SumRowHandler.cs" />
     <Compile Include="Ribbon_eZx.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -287,6 +287,10 @@
     <Content Include="Resources\Interpolation.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\eZstd\Projects\eZstd\eZstd.csproj">
+      <Project>{fb9b6528-5424-4b7a-aeba-6733450dc44b}</Project>
+      <Name>eZstd</Name>
+    </ProjectReference>
     <ProjectReference Include="..\eZx_API\eZx_API.csproj">
       <Project>{60bf7d52-330a-4ed2-9632-4efb8fb6f231}</Project>
       <Name>eZx_API</Name>

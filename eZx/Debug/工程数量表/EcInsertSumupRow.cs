@@ -27,6 +27,10 @@ namespace eZx.Debug
                 errorMessage = ex.Message + "\r\n\r\n" + ex.StackTrace;
                 return ExternalCommandResult.Failed;
             }
+            finally
+            {
+                excelApp.ScreenUpdating = true;
+            }
         }
 
         #region ---   具体的调试操作

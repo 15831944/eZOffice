@@ -40,6 +40,7 @@
             this.Group_DataBase = this.Factory.CreateRibbonGroup();
             this.btn_DataRange = this.Factory.CreateRibbonButton();
             this.ButtonValue = this.Factory.CreateRibbonButton();
+            this.btn_ToText = this.Factory.CreateRibbonButton();
             this.btnConstructDatabase = this.Factory.CreateRibbonButton();
             this.btnEditDatabase = this.Factory.CreateRibbonButton();
             this.Group1 = this.Factory.CreateRibbonGroup();
@@ -60,30 +61,36 @@
             this.EditBox_p2 = this.Factory.CreateRibbonEditBox();
             this.EditBox_p3 = this.Factory.CreateRibbonEditBox();
             this.group5 = this.Factory.CreateRibbonGroup();
-            this.btn_fitToPrint = this.Factory.CreateRibbonButton();
-            this.btn_Station = this.Factory.CreateRibbonButton();
             this.button_A3PageSetup = this.Factory.CreateRibbonButton();
             this.button_ContentRowHeight = this.Factory.CreateRibbonButton();
+            this.btn_fitToPrint = this.Factory.CreateRibbonButton();
+            this.btn_LockSheet = this.Factory.CreateRibbonButton();
+            this.btn_UnLockSheet = this.Factory.CreateRibbonButton();
+            this.group6 = this.Factory.CreateRibbonGroup();
+            this.btn_SumupInsertRow = this.Factory.CreateRibbonButton();
+            this.btn_DeleteSumRow = this.Factory.CreateRibbonButton();
+            this.btn_SepFiles = this.Factory.CreateRibbonButton();
             this.group_slopeProtection = this.Factory.CreateRibbonGroup();
             this.checkBox_ContainsHeader = this.Factory.CreateRibbonCheckBox();
             this.btn_SectionInterp = this.Factory.CreateRibbonButton();
             this.btn_AreaSumup = this.Factory.CreateRibbonButton();
-            this.group6 = this.Factory.CreateRibbonGroup();
-            this.btn_SumupInsertRow = this.Factory.CreateRibbonButton();
-            this.btn_MergeSumRow = this.Factory.CreateRibbonButton();
             this.group4 = this.Factory.CreateRibbonGroup();
+            this.btn_Station1 = this.Factory.CreateRibbonButton();
+            this.btn_Station2 = this.Factory.CreateRibbonButton();
             this.Tab2 = this.Factory.CreateRibbonTab();
             this.Group_Help = this.Factory.CreateRibbonGroup();
             this.btn_ExcelHelp = this.Factory.CreateRibbonButton();
             this.btn_OfficeHelp = this.Factory.CreateRibbonButton();
+            this.btn_ExtractCppDoc = this.Factory.CreateRibbonButton();
             this.Tab1.SuspendLayout();
             this.Group_DataBase.SuspendLayout();
             this.Group1.SuspendLayout();
             this.Group2.SuspendLayout();
             this.Group3.SuspendLayout();
             this.group5.SuspendLayout();
-            this.group_slopeProtection.SuspendLayout();
             this.group6.SuspendLayout();
+            this.group_slopeProtection.SuspendLayout();
+            this.group4.SuspendLayout();
             this.Tab2.SuspendLayout();
             this.Group_Help.SuspendLayout();
             this.SuspendLayout();
@@ -95,8 +102,8 @@
             this.Tab1.Groups.Add(this.Group2);
             this.Tab1.Groups.Add(this.Group3);
             this.Tab1.Groups.Add(this.group5);
-            this.Tab1.Groups.Add(this.group_slopeProtection);
             this.Tab1.Groups.Add(this.group6);
+            this.Tab1.Groups.Add(this.group_slopeProtection);
             this.Tab1.Groups.Add(this.group4);
             this.Tab1.Label = "eZx";
             this.Tab1.Name = "Tab1";
@@ -105,6 +112,7 @@
             // 
             this.Group_DataBase.Items.Add(this.btn_DataRange);
             this.Group_DataBase.Items.Add(this.ButtonValue);
+            this.Group_DataBase.Items.Add(this.btn_ToText);
             this.Group_DataBase.Items.Add(this.btnConstructDatabase);
             this.Group_DataBase.Items.Add(this.btnEditDatabase);
             this.Group_DataBase.Label = "数据库";
@@ -126,10 +134,21 @@
             this.ButtonValue.Image = ((System.Drawing.Image)(resources.GetObject("ButtonValue.Image")));
             this.ButtonValue.Label = "转换为值";
             this.ButtonValue.Name = "ButtonValue";
-            this.ButtonValue.ScreenTip = "Range.Value = Range.Value";
+            this.ButtonValue.ScreenTip = "Range.Formula = Range.Formula";
             this.ButtonValue.ShowImage = true;
             this.ButtonValue.SuperTip = "这一操作会将选中的单元格中的公式转化为对应的值，而且，将#DIV/0!、#VALUE!等错误转换为Integer.MinValue";
             this.ButtonValue.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ButtonValue_Click);
+            // 
+            // btn_ToText
+            // 
+            this.btn_ToText.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.btn_ToText.Image = ((System.Drawing.Image)(resources.GetObject("btn_ToText.Image")));
+            this.btn_ToText.Label = "转换为字符";
+            this.btn_ToText.Name = "btn_ToText";
+            this.btn_ToText.ScreenTip = "将表格中的值转换为字符";
+            this.btn_ToText.ShowImage = true;
+            this.btn_ToText.SuperTip = "通过在单元格的值前面添加一个“\'”，来将任意类型的值转换为固定格式的字符。此功能在将表格中的内容粘贴到AutoCAD中的表格时非常有用";
+            this.btn_ToText.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Btn_ToText_Click);
             // 
             // btnConstructDatabase
             // 
@@ -304,39 +323,23 @@
             this.EditBox_p2.Name = "EditBox_p2";
             this.EditBox_p2.ScreenTip = "其他命令的基本参数";
             this.EditBox_p2.SuperTip = "文本框中的数据类型为Object";
-            this.EditBox_p2.Text = "4";
+            this.EditBox_p2.Text = "0";
             // 
             // EditBox_p3
             // 
             this.EditBox_p3.Label = "P3";
             this.EditBox_p3.Name = "EditBox_p3";
-            this.EditBox_p3.Text = "False";
+            this.EditBox_p3.Text = "false";
             // 
             // group5
             // 
-            this.group5.Items.Add(this.btn_fitToPrint);
-            this.group5.Items.Add(this.btn_Station);
             this.group5.Items.Add(this.button_A3PageSetup);
             this.group5.Items.Add(this.button_ContentRowHeight);
+            this.group5.Items.Add(this.btn_fitToPrint);
+            this.group5.Items.Add(this.btn_LockSheet);
+            this.group5.Items.Add(this.btn_UnLockSheet);
             this.group5.Label = "表格规范";
             this.group5.Name = "group5";
-            // 
-            // btn_fitToPrint
-            // 
-            this.btn_fitToPrint.Label = "对齐打印";
-            this.btn_fitToPrint.Name = "btn_fitToPrint";
-            this.btn_fitToPrint.ScreenTip = "对齐指定列的边界， 以适应图纸的打印区域";
-            this.btn_fitToPrint.SuperTip = "打印右边界的定位值由参数 P1 指定，下边界的定位值由参数 P2 指定，单位为 厘米。\r\n    如果某参数值不大于0，则保持其原定位。\r\n    由于Excel" +
-    "中对于列宽的设置是以字符宽度为基准，其值是离散的，所以最终得到的列宽可能与设置的列宽有微小的差别。";
-            this.btn_fitToPrint.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_fitToPrint_Click);
-            // 
-            // btn_Station
-            // 
-            this.btn_Station.Label = "桩号字符";
-            this.btn_Station.Name = "btn_Station";
-            this.btn_Station.ScreenTip = "将桩号数值转换为字符";
-            this.btn_Station.SuperTip = "转换字符的最大小数位数由参数 P2 指定";
-            this.btn_Station.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_Station_Click);
             // 
             // button_A3PageSetup
             // 
@@ -350,7 +353,65 @@
             this.button_ContentRowHeight.Label = "正文行高";
             this.button_ContentRowHeight.Name = "button_ContentRowHeight";
             this.button_ContentRowHeight.ScreenTip = "A3表格的数据正文的行高设置";
+            this.button_ContentRowHeight.SuperTip = "从选定的单元格开始，往下设置一个工作量表的行高";
             this.button_ContentRowHeight.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button_ContentRowHeight_Click);
+            // 
+            // btn_fitToPrint
+            // 
+            this.btn_fitToPrint.Label = "对齐打印";
+            this.btn_fitToPrint.Name = "btn_fitToPrint";
+            this.btn_fitToPrint.ScreenTip = "对齐指定列的边界， 以适应图纸的打印区域";
+            this.btn_fitToPrint.SuperTip = "打印右边界的定位值由参数 P1 指定，下边界的定位值由参数 P2 指定，单位为 厘米。\r\n    如果某参数值不大于0，则保持其原定位。\r\n    由于Excel" +
+    "中对于列宽的设置是以字符宽度为基准，其值是离散的，所以最终得到的列宽可能与设置的列宽有微小的差别。";
+            this.btn_fitToPrint.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_fitToPrint_Click);
+            // 
+            // btn_LockSheet
+            // 
+            this.btn_LockSheet.Label = "锁定表格";
+            this.btn_LockSheet.Name = "btn_LockSheet";
+            this.btn_LockSheet.ScreenTip = "锁定表格";
+            this.btn_LockSheet.SuperTip = "如果P3参数为True，则将所有表格锁定";
+            this.btn_LockSheet.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_LockSheet_Click);
+            // 
+            // btn_UnLockSheet
+            // 
+            this.btn_UnLockSheet.Label = "解锁表格";
+            this.btn_UnLockSheet.Name = "btn_UnLockSheet";
+            this.btn_UnLockSheet.ScreenTip = "解锁表格";
+            this.btn_UnLockSheet.SuperTip = "如果P3参数为True，则将所有表格解锁";
+            this.btn_UnLockSheet.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_UnLockSheet_Click);
+            // 
+            // group6
+            // 
+            this.group6.Items.Add(this.btn_SumupInsertRow);
+            this.group6.Items.Add(this.btn_DeleteSumRow);
+            this.group6.Items.Add(this.btn_SepFiles);
+            this.group6.Label = "工程量表";
+            this.group6.Name = "group6";
+            // 
+            // btn_SumupInsertRow
+            // 
+            this.btn_SumupInsertRow.Label = "插入小计";
+            this.btn_SumupInsertRow.Name = "btn_SumupInsertRow";
+            this.btn_SumupInsertRow.ScreenTip = "插入小计行";
+            this.btn_SumupInsertRow.SuperTip = "对于有很多行数据的工程量表，自动将多数据行进行分隔，并插入小计行";
+            this.btn_SumupInsertRow.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_SumupInsertRow_Click);
+            // 
+            // btn_DeleteSumRow
+            // 
+            this.btn_DeleteSumRow.Label = "删除小计";
+            this.btn_DeleteSumRow.Name = "btn_DeleteSumRow";
+            this.btn_DeleteSumRow.ScreenTip = "将同一Sheet中的多个工程量表进行合并";
+            this.btn_DeleteSumRow.SuperTip = "删除小计行，并将多个表格中的数据合并";
+            this.btn_DeleteSumRow.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_MergeSumRow_Click);
+            // 
+            // btn_SepFiles
+            // 
+            this.btn_SepFiles.Label = "拆分归档";
+            this.btn_SepFiles.Name = "btn_SepFiles";
+            this.btn_SepFiles.ScreenTip = "将本工作簿中的多个工程量表拆分为单独的工作簿";
+            this.btn_SepFiles.SuperTip = "将本工作簿中的多个工程量表拆分为单独的工作簿";
+            this.btn_SepFiles.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_SepFiles_Click);
             // 
             // group_slopeProtection
             // 
@@ -359,6 +420,7 @@
             this.group_slopeProtection.Items.Add(this.btn_AreaSumup);
             this.group_slopeProtection.Label = "边坡防护";
             this.group_slopeProtection.Name = "group_slopeProtection";
+            this.group_slopeProtection.Visible = false;
             // 
             // checkBox_ContainsHeader
             // 
@@ -380,33 +442,28 @@
             this.btn_AreaSumup.ScreenTip = "对某一种防护方式的面积进行汇总";
             this.btn_AreaSumup.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AreaSumup_Click);
             // 
-            // group6
-            // 
-            this.group6.Items.Add(this.btn_SumupInsertRow);
-            this.group6.Items.Add(this.btn_MergeSumRow);
-            this.group6.Label = "工程量表";
-            this.group6.Name = "group6";
-            // 
-            // btn_SumupInsertRow
-            // 
-            this.btn_SumupInsertRow.Label = "插入小计";
-            this.btn_SumupInsertRow.Name = "btn_SumupInsertRow";
-            this.btn_SumupInsertRow.ScreenTip = "插入小计行";
-            this.btn_SumupInsertRow.SuperTip = "对于有很多行数据的工程量表，自动将多数据行进行分隔，并插入小计行";
-            this.btn_SumupInsertRow.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_SumupInsertRow_Click);
-            // 
-            // btn_MergeSumRow
-            // 
-            this.btn_MergeSumRow.Label = "删除小计";
-            this.btn_MergeSumRow.Name = "btn_MergeSumRow";
-            this.btn_MergeSumRow.ScreenTip = "将同一Sheet中的多个工程量表进行合并";
-            this.btn_MergeSumRow.SuperTip = "删除小计行，并将多个表格中的数据合并";
-            this.btn_MergeSumRow.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_MergeSumRow_Click);
-            // 
             // group4
             // 
+            this.group4.Items.Add(this.btn_Station1);
+            this.group4.Items.Add(this.btn_Station2);
+            this.group4.Items.Add(this.btn_ExtractCppDoc);
             this.group4.Label = "其他操作";
             this.group4.Name = "group4";
+            // 
+            // btn_Station1
+            // 
+            this.btn_Station1.Label = "桩号值符";
+            this.btn_Station1.Name = "btn_Station1";
+            this.btn_Station1.ScreenTip = "将桩号数值转换为字符";
+            this.btn_Station1.SuperTip = "转换字符的最大小数位数由参数 P2 指定";
+            this.btn_Station1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_Station_Click);
+            // 
+            // btn_Station2
+            // 
+            this.btn_Station2.Label = "桩号符值";
+            this.btn_Station2.Name = "btn_Station2";
+            this.btn_Station2.ScreenTip = "将桩号字符转换为数值";
+            this.btn_Station2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_Station2_Click);
             // 
             // Tab2
             // 
@@ -438,7 +495,15 @@
             this.btn_OfficeHelp.Name = "btn_OfficeHelp";
             this.btn_OfficeHelp.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_OfficeHelp_Click);
             // 
-            // Ribbon_eZx
+            // btn_ExtractCppDoc
+            // 
+            this.btn_ExtractCppDoc.Label = "C++ 文档提取";
+            this.btn_ExtractCppDoc.Name = "btn_ExtractCppDoc";
+            this.btn_ExtractCppDoc.ScreenTip = "提取C++文档信息";
+            this.btn_ExtractCppDoc.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_ExtractCppDoc_Click);
+            // 
+            
+                // Ribbon_eZx
             // 
             this.Name = "Ribbon_eZx";
             this.RibbonType = "Microsoft.Excel.Workbook";
@@ -457,10 +522,12 @@
             this.Group3.PerformLayout();
             this.group5.ResumeLayout(false);
             this.group5.PerformLayout();
-            this.group_slopeProtection.ResumeLayout(false);
-            this.group_slopeProtection.PerformLayout();
             this.group6.ResumeLayout(false);
             this.group6.PerformLayout();
+            this.group_slopeProtection.ResumeLayout(false);
+            this.group_slopeProtection.PerformLayout();
+            this.group4.ResumeLayout(false);
+            this.group4.PerformLayout();
             this.Tab2.ResumeLayout(false);
             this.Tab2.PerformLayout();
             this.Group_Help.ResumeLayout(false);
@@ -505,13 +572,19 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_AreaSumup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_fitToPrint;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group4;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_Station;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_Station1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group5;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button_A3PageSetup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button_ContentRowHeight;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_SumupInsertRow;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group6;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_MergeSumRow;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_DeleteSumRow;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_SepFiles;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ToText;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_Station2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_LockSheet;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_UnLockSheet;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ExtractCppDoc;
     }
 
     partial class ThisRibbonCollection
